@@ -1,0 +1,80 @@
+@model AppointmentViewModel
+@{
+    ViewData["Title"] = "Randevu Al";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Randevu Oluştur</h4>
+                    
+                    <form asp-action="Book" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Appointment.DoctorId" class="form-label">Doktor</label>
+                            <select asp-for="Appointment.DoctorId" class="form-select">
+                                <option value="">Doktor Seçiniz</option>
+                                @if (Model?.Doctors != null)
+                                {
+                                    @foreach (var doctor in Model.Doctors)
+                                    {
+                                        <option value="@doctor.Id">@doctor.Name - @doctor.Specialty</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Appointment.Date" class="form-label">Tarih</label>
+                                <input asp-for="Appointment.Date" type="date" class="form-control" />
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Appointment.Time" class="form-label">Saat</label>
+                                <select asp-for="Appointment.Time" class="form-select">
+                                    <option value="09:00:00">09:00</option>
+                                    <option value="09:30:00">09:30</option>
+                                    <option value="10:00:00">10:00</option>
+                                    <option value="10:30:00">10:30</option>
+                                    <option value="11:00:00">11:00</option>
+                                    <option value="11:30:00">11:30</option>
+                                    <option value="13:00:00">13:00</option>
+                                    <option value="13:30:00">13:30</option>
+                                    <option value="14:00:00">14:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Appointment.PatientName" class="form-label">Ad Soyad</label>
+                            <input asp-for="Appointment.PatientName" class="form-control" />
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Appointment.PatientPhone" class="form-label">Telefon</label>
+                                <input asp-for="Appointment.PatientPhone" type="tel" class="form-control" />
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Appointment.PatientEmail" class="form-label">E-posta</label>
+                                <input asp-for="Appointment.PatientEmail" type="email" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Appointment.Notes" class="form-label">Notlar</label>
+                            <textarea asp-for="Appointment.Notes" class="form-control" rows="3"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

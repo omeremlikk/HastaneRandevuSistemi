@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Randevu Sistemi";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Randevu Sistemi</h1>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-calendar-check fa-4x mb-3 text-primary"></i>
+                    <h3>Randevu Al</h3>
+                    <p>Doktorlarımızdan randevu almak için tıklayın.</p>
+                    <a asp-action="Book" class="btn btn-primary">Randevu Al</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-md fa-4x mb-3 text-primary"></i>
+                    <h3>Doktorlarımız</h3>
+                    <p>Uzman doktorlarımız hakkında bilgi edinmek için tıklayın.</p>
+                    <a asp-action="Doctors" class="btn btn-primary">Doktorları Gör</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-hospital fa-4x mb-3 text-primary"></i>
+                    <h3>Bölümlerimiz</h3>
+                    <p>Hastane bölümlerimiz hakkında bilgi edinmek için tıklayın.</p>
+                    <a asp-action="Departments" class="btn btn-primary">Bölümleri Gör</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-info-circle fa-4x mb-3 text-primary"></i>
+                    <h3>Yardım</h3>
+                    <p>Randevu sistemi hakkında yardım almak için tıklayın.</p>
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-primary">Yardım</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

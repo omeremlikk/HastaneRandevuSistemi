@@ -1,0 +1,367 @@
+:root {
+  --bs-primary: #0077cc;
+  --primary: #0077cc;
+  --primary-light: #e6f2ff;
+  --primary-dark: #005fa3;
+  --secondary: #6c757d;
+  --dark: #343a40;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 60px;
+}
+
+/* Basit ve temiz görünüm için genel stiller */
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary);
+}
+
+/* Anasayfa hero section */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/img/hero-bg.jpg') center center;
+  background-size: cover;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,77,153,0.8) 0%, rgba(0,38,102,0.8) 100%);
+  z-index: 1;
+}
+
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+.z-3 {
+  z-index: 3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  max-width: 600px;
+}
+
+/* Doktor ve Departman kartları */
+.doctor-card img, .department-card img {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+}
+
+/* İçerik padding */
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Hero Section */
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,119,204,0.9) 0%, rgba(0,56,168,0.85) 100%);
+  z-index: 0;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+.min-vh-50 {
+  min-height: 50vh;
+}
+
+/* Feature Icons */
+.feature-icon {
+  width: 70px;
+  height: 70px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+/* Department Cards */
+.department-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.department-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.department-card:hover .card-img-wrapper img {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,119,204,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.department-card:hover .card-overlay {
+  opacity: 1;
+}
+
+/* Doctor Cards */
+.doctor-card {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.doctor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.doctor-image-container {
+  height: 280px;
+  overflow: hidden;
+}
+
+.doctor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.doctor-card:hover .doctor-image {
+  transform: scale(1.1);
+}
+
+.doctor-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,77,153,0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.doctor-card:hover .doctor-overlay {
+  opacity: 1;
+}
+
+.doctor-social {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.doctor-card:hover .doctor-social {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Appointment Sidebar */
+.appointment-sidebar {
+  background: linear-gradient(135deg, #0077cc 0%, #0038a8 100%);
+}
+
+.sidebar-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* Footer */
+.footer {
+  background-color: #1a1a1a;
+  margin-top: auto !important;
+}
+
+.footer-link {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.3s;
+  display: block;
+  padding: 5px 0;
+}
+
+.footer-link:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+.social-icons a {
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: var(--primary) !important;
+}
+
+/* Animation */
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Badges */
+.bg-primary-subtle {
+  background-color: var(--primary-light);
+}
+
+/* Buttons */
+.btn {
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .hero-section {
+    min-height: 450px;
+    text-align: center;
+  }
+  
+  .feature-card, .doctor-card {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-section {
+    min-height: 350px;
+  }
+}
+
+/* İstatistikler bölümü */
+.stat-item {
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.counter {
+  font-weight: 700;
+}
+
+/* Yuvarlatılmış köşeler */
+.rounded-4 {
+  border-radius: 1rem;
+}
+
+/* İkon stil düzenlemeleri */
+.btn .fas, .btn .fab {
+  vertical-align: middle;
+}
+
+/* Kart gölge efektleri */
+.shadow-hover:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}

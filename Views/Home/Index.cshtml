@@ -1,0 +1,50 @@
+﻿@model List<hastane.Models.Department>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="display-4 fw-bold text-white">Sağlığınız İçin</h1>
+            <p class="lead text-white">Uzman doktorlarımızla randevu alın, sağlığınıza kavuşun.</p>
+            <a href="/Appointment/Book" class="btn btn-light">
+                <i class="fas fa-calendar-alt me-2"></i>Randevu Al
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Özellikler -->
+<div class="container">
+    <div class="row mt-5 g-4">
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-user-md text-primary fa-3x mb-3"></i>
+                    <h5>Uzman Doktorlar</h5>
+                    <p>Alanında uzman doktorlarımızla sağlığınız güvende.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-heartbeat text-primary fa-3x mb-3"></i>
+                    <h5>Modern Ekipmanlar</h5>
+                    <p>En son teknoloji tıbbi cihazlarla hizmetinizdeyiz.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="fas fa-clock text-primary fa-3x mb-3"></i>
+                    <h5>7/24 Hizmet</h5>
+                    <p>Acil durumlarda her zaman yanınızdayız.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
