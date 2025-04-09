@@ -1,0 +1,320 @@
+:root {
+  --bs-primary: #1a73e8;
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --primary-dark: #0d47a1;
+  --secondary: #5f6368;
+  --dark: #202124;
+  --light: #f8f9fa;
+  --gray: #5f6368;
+  --success: #34a853;
+  --danger: #ea4335;
+  --warning: #fbbc04;
+  --info: #4285f4;
+  
+  --font-primary: 'Poppins', sans-serif;
+  --border-radius: 10px;
+  --box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --transition: all 0.3s ease;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: var(--font-primary);
+  margin-bottom: 60px;
+  color: #333;
+  background-color: #fafafa;
+}
+
+/* Kartlar */
+.card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  border: none;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Butonlar */
+.btn {
+  border-radius: 50px;
+  padding: 0.6rem 1.8rem;
+  font-weight: 500;
+  transition: var(--transition);
+  text-transform: capitalize;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('/img/hero-bg.jpg') center center;
+  background-size: cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  max-width: 600px;
+  animation: fadeInUp 1s ease;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-content .btn {
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+/* Doktor Kartları */
+.doctor-card {
+  transition: var(--transition);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+}
+
+.doctor-image-container {
+  height: 320px;
+  overflow: hidden;
+}
+
+.doctor-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.doctor-card:hover .doctor-image {
+  transform: scale(1.05);
+}
+
+.doctor-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(26,115,232,0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.doctor-card:hover .doctor-overlay {
+  opacity: 1;
+}
+
+.doctor-social {
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.doctor-card:hover .doctor-social {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.doctor-card .card-body {
+  padding: 2rem;
+}
+
+.doctor-card .card-title {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+/* Animasyonlar */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+.navbar-scrolled {
+  background-color: white !important;
+  padding: 0.7rem 0;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary) !important;
+}
+
+.nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.2rem;
+  border-radius: 5px;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  background-color: var(--primary-light);
+  color: var(--primary) !important;
+}
+
+/* Randevu Formu */
+.appointment-form {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.appointment-form h4 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.appointment-form h4:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.form-control {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--dark);
+  color: #fff;
+  padding: 3rem 0 1rem;
+}
+
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-title:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* Responsive ayarlamalar */
+@media (max-width: 991.98px) {
+  .hero-section {
+    height: 70vh;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-section {
+    height: 60vh;
+    text-align: center;
+  }
+  
+  .hero-content {
+    margin: 0 auto;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+} 

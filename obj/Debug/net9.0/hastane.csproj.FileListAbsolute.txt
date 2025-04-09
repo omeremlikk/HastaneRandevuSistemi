@@ -94,4 +94,4 @@ C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\hastane.pdb
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\hastane.genruntimeconfig.cache
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\ref\hastane.dll
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\compressed\729773x4n0-wnferw8m5p.gz
-C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\compressed\4iwsffodhg-d4hjfzhft5.gz
+C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\compressed\4iwsffodhg-eam57wnbup.gz

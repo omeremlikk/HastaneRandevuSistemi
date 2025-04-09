@@ -68,5 +68,19 @@ namespace hastane.Controllers
             var doctor = doctors.Find(d => d.Id == id);
             return View(doctor);
         }
+
+        public IActionResult Schedule()
+        {
+            // Örnek olarak doktorları ve onların randevu durumlarını gösterelim
+            var doctors = new List<Doctor>
+            {
+                new Doctor { Id = 1, Name = "Dr. Ahmet Yılmaz", Specialty = "Kardiyoloji", ImageUrl = "/img/doctors/doctor1.jpg", Description = "Kalp ve damar hastalıkları uzmanı" },
+                new Doctor { Id = 2, Name = "Dr. Ayşe Kaya", Specialty = "Nöroloji", ImageUrl = "/img/doctors/doctor2.jpg", Description = "Sinir sistemi hastalıkları uzmanı" },
+                new Doctor { Id = 3, Name = "Dr. Mehmet Demir", Specialty = "Ortopedi", ImageUrl = "/img/doctors/doctor3.jpg", Description = "Kas ve iskelet sistemi hastalıkları uzmanı" },
+                new Doctor { Id = 4, Name = "Dr. Zeynep Aksoy", Specialty = "Göz Hastalıkları", ImageUrl = "/img/doctors/doctor4.jpg", Description = "Göz hastalıkları uzmanı" },
+            };
+
+            return View(doctors);
+        }
     }
 } 
