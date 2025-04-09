@@ -3,76 +3,490 @@
     ViewData["Title"] = "Doktorlarımız";
 }
 
-<section class="doctors-header text-center py-5 bg-primary text-white">
-    <div class="container mt-5">
-        <h1 class="fw-bold">Uzman Doktorlarımız</h1>
-        <p class="lead">Alanında tecrübeli uzman kadromuzla hizmetinizdeyiz</p>
+<!-- Yeni Modern Hero Section -->
+<section class="doctors-hero position-relative overflow-hidden">
+    <!-- Arka plan deseni -->
+    <div class="hero-pattern"></div>
+    
+    <!-- Dalga şekli -->
+    <div class="wave-shape">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#f8f9fa" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
     </div>
-</section>
-
-<div class="container py-5">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="doctors-filter mb-5 d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
-                <div class="mb-3 mb-md-0">
-                    <h5 class="fw-bold mb-0">Tüm Doktorlarımız</h5>
-                    <p class="text-muted mb-0">Toplam @Model.Count doktor listeleniyor</p>
+    
+    <div class="container position-relative py-5 mt-5">
+        <div class="row min-vh-60 align-items-center py-5">
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left" data-aos-delay="200">
+                <div class="doctor-hero-image position-relative">
+                    <div class="floating-badge badge-experience">
+                        <span><i class="fas fa-award"></i> 25+ Yıl Deneyim</span>
+                    </div>
+                    <div class="floating-badge badge-doctors">
+                        <span><i class="fas fa-user-md"></i> @Model.Count Uzman Doktor</span>
+                    </div>
+                    <div class="floating-badge badge-satisfaction">
+                        <span><i class="fas fa-heart"></i> %98 Hasta Memnuniyeti</span>
+                    </div>
+                    <img src="/img/hero-doctor.png" alt="Doktor" class="img-fluid hero-doctor-image">
+                    <div class="img-blob-shape"></div>
                 </div>
-                <div class="d-flex">
-                    <div class="dropdown me-3">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="departmentFilter" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-filter me-2"></i>Bölüm
-                        </button>
-                        <ul class="dropdown-menu shadow-sm rounded-3" aria-labelledby="departmentFilter">
-                            <li><a class="dropdown-item" href="#">Tümü</a></li>
-                            <li><a class="dropdown-item" href="#">Kardiyoloji</a></li>
-                            <li><a class="dropdown-item" href="#">Nöroloji</a></li>
-                            <li><a class="dropdown-item" href="#">Ortopedi</a></li>
-                            <li><a class="dropdown-item" href="#">Göz Hastalıkları</a></li>
-                        </ul>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="form-control rounded-start-pill" placeholder="Doktor ara...">
-                        <button class="btn btn-primary rounded-end-pill" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+            </div>
+            <div class="col-lg-6 order-lg-1 py-4" data-aos="fade-right">
+                <div class="section-badge mb-3" data-aos="fade-up" data-aos-delay="100">
+                    <span><i class="fas fa-stethoscope"></i> Profesyonel Doktor Kadrosu</span>
+                </div>
+                <h1 class="display-4 fw-bold mb-4 text-gradient" data-aos="fade-up" data-aos-delay="200">
+                    Sağlığınız İçin<br>Uzman <span class="highlight-text">Doktorlarımız</span>
+                </h1>
+                <p class="lead mb-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
+                    Alanında tecrübeli, uzman doktor kadromuz ile sağlığınız için en iyi hizmeti sunuyoruz. 
+                    Modern tıbbi teknolojiler ve kişiselleştirilmiş tedavi yaklaşımlarımız ile yanınızdayız.
+                </p>
+                <div class="d-flex gap-3 mt-5 hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#doctors-section" class="btn btn-primary btn-lg rounded-pill px-4 py-3 shadow-primary">
+                        <i class="fas fa-user-md me-2"></i>Doktorlarımızı Keşfedin
+                    </a>
+                    <a href="/Appointment/Book" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3">
+                        <i class="fas fa-calendar-check me-2"></i>Randevu Al
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="row g-4">
-        @foreach (var doctor in Model)
-        {
-            <div class="col-md-6 col-lg-4">
-                <div class="doctor-card border-0 rounded-4 shadow-sm h-100 position-relative overflow-hidden">
-                    <div class="position-absolute top-0 end-0 p-3 badge bg-primary-subtle text-primary">Uzman Hekim</div>
-                    <div class="doctor-image-container position-relative">
-                        <img src="@doctor.ImageUrl" class="doctor-image" alt="@doctor.Name" onerror="this.src='/img/placeholder-doctor.jpg'">
-                        <div class="doctor-overlay d-flex align-items-center justify-content-center">
-                            <div class="doctor-social d-flex gap-2">
-                                <a href="#" class="btn btn-sm btn-light rounded-circle"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="btn btn-sm btn-light rounded-circle"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="btn btn-sm btn-light rounded-circle"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
+<!-- Main Section -->
+<section id="doctors-section" class="py-5 bg-light position-relative">
+    <!-- Süsleme elemanları -->
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-square"></div>
+    
+    <div class="container py-5">
+        <!-- Başlık -->
+        <div class="row mb-5">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="section-badge mb-3 mx-auto d-inline-block" data-aos="fade-up">
+                    <span><i class="fas fa-user-md"></i> Uzman Doktorlarımız</span>
+                </div>
+                <h2 class="section-title text-center mb-3" data-aos="fade-up" data-aos-delay="100">Deneyimli Kadromuz</h2>
+                <p class="text-secondary" data-aos="fade-up" data-aos-delay="200">Sağlığınız için titizlikle seçilmiş, alanında uzman doktorlarımızla tanışın</p>
+            </div>
+        </div>
+        
+        <!-- Filtreleme ve Arama -->
+        <div class="row mb-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="doctors-filter mb-4 p-4 bg-white rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-4">
+                            <h5 class="fw-bold mb-1">Doktor Arama</h5>
+                            <p class="text-muted mb-0 small">Toplam @Model.Count uzman doktor</p>
                         </div>
-                    </div>
-                    <div class="card-body p-4">
-                        <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">@doctor.Specialty</span>
-                        <h4 class="card-title mb-3">@doctor.Name</h4>
-                        <p class="card-text text-muted mb-4">@doctor.Description</p>
-                        <div class="d-grid gap-2">
-                            <a asp-action="Book" asp-route-doctorId="@doctor.Id" class="btn btn-primary rounded-pill">
-                                <i class="fas fa-calendar-alt me-2"></i>Randevu Al
-                            </a>
-                            <a asp-action="DoctorDetails" asp-route-id="@doctor.Id" class="btn btn-outline-secondary rounded-pill">
-                                <i class="fas fa-user-md me-2"></i>Profili Görüntüle
-                            </a>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-lg border-0 bg-light shadow-none">
+                                        <option selected>Tüm Bölümler</option>
+                                        <option>Kardiyoloji</option>
+                                        <option>Nöroloji</option>
+                                        <option>Ortopedi</option>
+                                        <option>Göz Hastalıkları</option>
+                                        <option>Dahiliye</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-lg border-0 bg-light shadow-none" placeholder="Doktor ara...">
+                                        <button class="btn btn-primary px-4" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        }
+        </div>
+
+        <!-- Doktor Kartları -->
+        <div class="row g-4">
+            @foreach (var doctor in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="@(Model.IndexOf(doctor) * 100)">
+                    <div class="doctor-card border-0 rounded-4 shadow-sm h-100 position-relative overflow-hidden bg-white doctor-card-hover">
+                        <div class="position-absolute top-0 end-0 m-3 z-index-1">
+                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-normal">
+                                <i class="fas fa-certificate me-1"></i>Uzman Hekim
+                            </span>
+                        </div>
+                        <div class="doctor-image-container position-relative">
+                            <img src="@doctor.ImageUrl" class="doctor-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
+                            <div class="doctor-overlay d-flex align-items-center justify-content-center">
+                                <div class="doctor-social d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="doctor-specialty">
+                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">
+                                    <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
+                                </span>
+                            </div>
+                            <h4 class="card-title mb-3">@doctor.Name</h4>
+                            <p class="card-text text-secondary mb-4">@doctor.Description</p>
+                            <hr class="my-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="doctor-rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                    <span class="ms-1 small text-muted">(4.8)</span>
+                                </div>
+                                <div class="doctor-experience">
+                                    <span class="badge bg-light text-secondary px-3 py-2 rounded-pill">
+                                        <i class="fas fa-calendar-alt me-1"></i>10+ Yıl Deneyim
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mt-4">
+                                <a asp-action="Book" asp-route-doctorId="@doctor.Id" class="btn btn-primary rounded-pill btn-shine">
+                                    <i class="fas fa-calendar-check me-2"></i>Randevu Al
+                                </a>
+                                <a asp-action="DoctorDetails" asp-route-id="@doctor.Id" class="btn btn-outline-primary rounded-pill">
+                                    <i class="fas fa-info-circle me-2"></i>Detaylı Bilgi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <!-- Pagination -->
+        <div class="row mt-5">
+            <div class="col-12 d-flex justify-content-center" data-aos="fade-up">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<!-- CSS Eklemeleri -->
+<style>
+    /* Hero Section Yeni Stil */
+    .doctors-hero {
+        background: linear-gradient(135deg, #f5f9ff 0%, #ecf5ff 100%);
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        padding-top: 80px;
+        overflow: hidden;
+    }
+    
+    .min-vh-60 {
+        min-height: 60vh;
+    }
+    
+    .text-gradient {
+        background: linear-gradient(90deg, #333 0%, #0056b3 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+    
+    .highlight-text {
+        position: relative;
+        display: inline-block;
+        color: var(--primary);
+        z-index: 1;
+    }
+    
+    .highlight-text:after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background-color: rgba(37, 99, 235, 0.15);
+        z-index: -1;
+        transform: rotate(-1deg);
+    }
+    
+    .hero-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.7;
+    }
+    
+    .wave-shape {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    
+    .doctor-hero-image {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero-doctor-image {
+        position: relative;
+        z-index: 2;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .img-blob-shape {
+        position: absolute;
+        top: 10%;
+        left: -5%;
+        right: -5%;
+        bottom: 0;
+        background-color: rgba(37, 99, 235, 0.1);
+        border-radius: 60% 40% 50% 50% / 60% 50% 50% 40%;
+        z-index: 1;
+        animation: blob 8s ease-in-out infinite alternate;
+    }
+    
+    .floating-badge {
+        position: absolute;
+        background: white;
+        padding: 10px 15px;
+        border-radius: 50px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        z-index: 3;
+        animation: float 5s ease-in-out infinite;
+    }
+    
+    .badge-experience {
+        top: 20%;
+        left: 0;
+        animation-delay: 0.5s;
+    }
+    
+    .badge-doctors {
+        top: 50%;
+        right: 0;
+        animation-delay: 1s;
+    }
+    
+    .badge-satisfaction {
+        bottom: 25%;
+        left: 10%;
+        animation-delay: 1.5s;
+    }
+    
+    .floating-badge i {
+        color: var(--primary);
+        margin-right: 5px;
+    }
+    
+    .section-badge {
+        display: inline-block;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 14px;
+        padding: 8px 16px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+    }
+    
+    .section-badge i {
+        margin-right: 6px;
+    }
+    
+    .shadow-primary {
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25) !important;
+    }
+    
+    /* Decorative elements */
+    .decoration-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0) 100%);
+        opacity: 0.6;
+    }
+    
+    .circle-1 {
+        width: 300px;
+        height: 300px;
+        top: 10%;
+        left: -150px;
+    }
+    
+    .circle-2 {
+        width: 200px;
+        height: 200px;
+        bottom: 10%;
+        right: -100px;
+    }
+    
+    .decoration-square {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: rgba(37, 99, 235, 0.05);
+        transform: rotate(45deg);
+        top: 40%;
+        right: 10%;
+    }
+    
+    /* Enhanced card styles */
+    .doctor-card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        border: 2px solid transparent !important;
+    }
+    
+    .doctor-card-hover:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary) !important;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.1) !important;
+    }
+    
+    .btn-shine {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-shine::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to right, 
+            rgba(255, 255, 255, 0) 0%, 
+            rgba(255, 255, 255, 0.3) 50%, 
+            rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(45deg);
+        transition: all 0.5s;
+        opacity: 0;
+    }
+    
+    .btn-shine:hover::after {
+        left: 100%;
+        opacity: 1;
+        transition: all 0.8s;
+    }
+    
+    /* Animations */
+    @@keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+    
+    @@keyframes blob {
+        0% {
+            border-radius: 60% 40% 50% 50% / 60% 50% 50% 40%;
+        }
+        50% {
+            border-radius: 50% 60% 40% 60% / 50% 60% 40% 60%;
+        }
+        100% {
+            border-radius: 40% 50% 60% 40% / 40% 50% 60% 40%;
+        }
+    }
+    
+    .bg-primary-subtle {
+        background-color: var(--primary-light);
+    }
+    
+    .z-index-1 {
+        z-index: 1;
+    }
+    
+    .page-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        border-radius: 50% !important;
+        border: none;
+        color: var(--dark);
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .page-item.active .page-link {
+        background-color: var(--primary);
+        color: white;
+    }
+    
+    /* Responsive */
+    @@media (max-width: 991px) {
+        .doctors-hero {
+            min-height: auto;
+            padding-bottom: 40px;
+        }
+        .order-lg-1 {
+            order: 1;
+        }
+        .order-lg-2 {
+            order: 2;
+        }
+        .floating-badge {
+            display: none;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Doktor kartlarını filtreleme fonksiyonu (örnek)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtreleme seçenekleri için
+            const departmentSelect = document.querySelector('.form-select');
+            const searchInput = document.querySelector('.form-control');
+            
+            if (departmentSelect && searchInput) {
+                // Gelecekte filtreleme işlevselliği eklenebilir
+            }
+        });
+    </script>
+}
