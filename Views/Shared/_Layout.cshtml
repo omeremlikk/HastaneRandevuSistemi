@@ -24,11 +24,11 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
                 <i class="fas fa-heartbeat me-2"></i>
-                <span>MediVita</span>
+                <span>Randevu Sistemi</span>
             </a>
             <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     
-                    <!-- Giriş Yap / Üye Ol Dropdown -->
+                    <!-- Giriş Yap Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" 
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,14 +73,14 @@
                     
                     <!-- Üye Ol Butonu -->
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-light btn-sm" href="/Account/Register">
+                        <a class="btn btn-light rounded-pill btn-sm" href="/Account/Register">
                             <i class="fas fa-user-plus me-1"></i> Üye Ol
                         </a>
                     </li>
                     
                     <!-- Randevu Al Butonu -->
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-primary btn-sm" asp-controller="Appointment" asp-action="Book">
+                        <a class="btn btn-primary rounded-pill btn-sm" asp-controller="Appointment" asp-action="Book">
                             <i class="fas fa-calendar-check me-1"></i> Randevu Al
                         </a>
                     </li>

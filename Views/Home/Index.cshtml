@@ -3,15 +3,159 @@
     ViewData["Title"] = "Ana Sayfa";
 }
 
-<!-- Hero Section -->
-<div class="hero-section">
-    <div class="container">
-        <div class="hero-content">
-            <h1 class="display-4 fw-bold text-white">Sağlığınız İçin</h1>
-            <p class="lead text-white">Uzman doktorlarımızla randevu alın, sağlığınıza kavuşun.</p>
-            <a href="/Appointment/Book" class="btn btn-light">
-                <i class="fas fa-calendar-alt me-2"></i>Randevu Al
-            </a>
+<!-- Slider/Carousel Hero Section -->
+<div class="hero-slider-section">
+    <!-- Animasyonlu daire süslemeler -->
+    <div class="circle-decoration circle-1"></div>
+    <div class="circle-decoration circle-2"></div>
+    <div class="circle-decoration circle-3"></div>
+    
+    <div class="slider-container">
+        <!-- Sol ok -->
+        <button class="slider-arrow slider-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <!-- Slaytlar -->
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <!-- Hastane Tanıtımı -->
+                <div class="slider-slide" id="slide-1">
+                    <div class="slide-content">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="slide-badge">
+                                    <i class="fas fa-hospital"></i>
+                                    <span>Hastanemiz</span>
+                                </div>
+                                <h2 class="slide-title">Modern Tıbbi Hizmet</h2>
+                                <p class="slide-text">Hastanemiz, en son teknolojik ekipmanlar ve alanında uzman sağlık personeli ile hastalarımıza kaliteli sağlık hizmeti sunmaktadır. Amacımız, sağlığınızı korumanız ve iyileşmeniz için en iyi olanakları sağlamaktır.</p>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-info-circle me-2"></i>Hakkımızda
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="hospital-image-container">
+                                    <div class="placeholder-image">
+                                        <div class="overlay-text">Hastane Görseli</div>
+                                        <i class="fas fa-hospital fa-4x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poliklinik Yönlendirme -->
+                <div class="slider-slide" id="slide-2">
+                    <div class="slide-content">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 order-lg-2">
+                                <div class="slide-badge">
+                                    <i class="fas fa-robot"></i>
+                                    <span>Akıllı Yönlendirme</span>
+                                </div>
+                                <h2 class="slide-title">Yapay Zeka Destekli Poliklinik Yönlendirme</h2>
+                                <p class="slide-text">Şikayetlerinize göre hangi bölüme gitmeniz gerektiğini belirleyen yapay zeka sistemimiz, size en hızlı ve doğru şekilde yardımcı olmak için tasarlandı.</p>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-stethoscope me-2"></i>Poliklinik Bul
+                                </a>
+                            </div>
+                            <div class="col-lg-6 order-lg-1">
+                                <div class="ai-image-container">
+                                    <div class="ai-illustration">
+                                        <i class="fas fa-brain fa-3x"></i>
+                                        <div class="ai-lines"></div>
+                                        <i class="fas fa-hospital-user fa-3x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Randevu -->
+                <div class="slider-slide" id="slide-3">
+                    <div class="slide-content">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="slide-badge">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Online Randevu</span>
+                                </div>
+                                <h2 class="slide-title">Hızlı ve Kolay Randevu Sistemi</h2>
+                                <p class="slide-text">Zaman ve mekandan bağımsız olarak, istediğiniz doktordan kolayca randevu alabilirsiniz. Sadece birkaç dakikanızı ayırarak sağlık hizmetimize erişin.</p>
+                                <a href="/Appointment/Book" class="btn btn-primary">
+                                    <i class="fas fa-calendar-alt me-2"></i>Randevu Al
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="calendar-container">
+                                    <div class="calendar-illustration">
+                                        <div class="calendar-header">
+                                            <span>Mayıs 2023</span>
+                                        </div>
+                                        <div class="calendar-body">
+                                            <div class="calendar-day selected">15</div>
+                                            <div class="calendar-day">16</div>
+                                            <div class="calendar-day">17</div>
+                                            <div class="calendar-day">18</div>
+                                            <div class="calendar-day">19</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doktorlar -->
+                <div class="slider-slide" id="slide-4">
+                    <div class="slide-content">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 order-lg-2">
+                                <div class="slide-badge">
+                                    <i class="fas fa-user-md"></i>
+                                    <span>Uzman Kadro</span>
+                                </div>
+                                <h2 class="slide-title">Alanında Uzman Doktorlar</h2>
+                                <p class="slide-text">Meslek etiğini ilke edinmiş, deneyimli ve alanında uzman doktor kadromuzla sağlığınız için en iyi hizmeti sunuyoruz. Eğitim ve tecrübelerimiz ile hastaların tedavi süreçlerinde yanlarındayız.</p>
+                                <a href="/Appointment/Doctors" class="btn btn-primary">
+                                    <i class="fas fa-user-md me-2"></i>Doktorlarımız
+                                </a>
+                            </div>
+                            <div class="col-lg-6 order-lg-1">
+                                <div class="doctors-container">
+                                    <div class="doctors-illustration">
+                                        <div class="doctor-icon">
+                                            <i class="fas fa-user-md fa-3x"></i>
+                                        </div>
+                                        <div class="doctor-icon">
+                                            <i class="fas fa-user-md fa-3x"></i>
+                                        </div>
+                                        <div class="doctor-icon">
+                                            <i class="fas fa-user-md fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ ok -->
+        <button class="slider-arrow slider-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Sayfa göstergesi noktalari -->
+        <div class="slider-pagination">
+            <button class="pagination-dot active" data-slide="0"></button>
+            <button class="pagination-dot" data-slide="1"></button>
+            <button class="pagination-dot" data-slide="2"></button>
+            <button class="pagination-dot" data-slide="3"></button>
         </div>
     </div>
 </div>
@@ -48,3 +192,112 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.slider-track');
+            const slides = document.querySelectorAll('.slider-slide');
+            const nextButton = document.querySelector('.slider-next');
+            const prevButton = document.querySelector('.slider-prev');
+            const dots = document.querySelectorAll('.pagination-dot');
+            
+            let currentIndex = 0;
+            const slideWidth = 100; // 100%
+            const slidesCount = slides.length;
+            
+            // Sayfa yüklendiğinde ilk slaytı görünür yap
+            updateSlider();
+            
+            // Slayt geçişini güncelle
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+                
+                // Aktif noktayı güncelle
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Sonraki slayta geç
+            function nextSlide() {
+                if (currentIndex < slidesCount - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Başa dön
+                }
+                updateSlider();
+            }
+            
+            // Önceki slayta geç
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slidesCount - 1; // Sona git
+                }
+                updateSlider();
+            }
+            
+            // Buton tıklamaları
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+            
+            // Noktalara tıklama
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+            });
+            
+            // Dokunma olayları için (mobil cihazlar)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const slider = document.querySelector('.slider-wrapper');
+            
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            slider.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50; // Piksel
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Sola kaydırma
+                    nextSlide();
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    // Sağa kaydırma
+                    prevSlide();
+                }
+            }
+            
+            // Otomatik geçiş için zamanlayıcı
+            const autoSlideInterval = setInterval(nextSlide, 6000); // 6 saniyede bir otomatik geçiş yap
+            
+            // Kullanıcı etkileşimde bulunduğunda otomatik geçişi durdur
+            slider.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            // Klavye ile gezinme
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                }
+            });
+        });
+    </script>
+}

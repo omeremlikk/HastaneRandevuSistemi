@@ -13,26 +13,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\departments\\cardiology.jpg",
-      "PackagePath": "staticwebassets\\img\\departments\\cardiology.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\departments\\eye.jpg",
-      "PackagePath": "staticwebassets\\img\\departments\\eye.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\departments\\internal.jpg",
-      "PackagePath": "staticwebassets\\img\\departments\\internal.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\departments\\neurology.jpg",
-      "PackagePath": "staticwebassets\\img\\departments\\neurology.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\departments\\orthopedics.jpg",
-      "PackagePath": "staticwebassets\\img\\departments\\orthopedics.jpg"
-    },
-    {
       "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor1.jpg",
       "PackagePath": "staticwebassets\\img\\doctors\\doctor1.jpg"
     },

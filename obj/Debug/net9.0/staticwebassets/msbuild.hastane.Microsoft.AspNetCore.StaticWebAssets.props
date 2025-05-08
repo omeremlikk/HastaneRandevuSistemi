@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>eam57wnbup</Fingerprint>
-      <Integrity>FheliLNFpkoyLiGTmwc3QYfWAnvsGCpM35YZvT3eX38=</Integrity>
+      <Fingerprint>pk61lb1lhc</Fingerprint>
+      <Integrity>iWh7Em0VQeJ0QztAa9HKf5RUa5a1mLNo/G2nxRa23No=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -54,96 +54,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\hastane.v1xf71e4qn.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\cardiology.jpg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>hastane</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/hastane</BasePath>
-      <RelativePath>img/departments/cardiology.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\cardiology.jpg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\eye.jpg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>hastane</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/hastane</BasePath>
-      <RelativePath>img/departments/eye.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\eye.jpg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\internal.jpg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>hastane</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/hastane</BasePath>
-      <RelativePath>img/departments/internal.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\internal.jpg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\neurology.jpg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>hastane</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/hastane</BasePath>
-      <RelativePath>img/departments/neurology.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\neurology.jpg'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\orthopedics.jpg'))">
-      <SourceType>Package</SourceType>
-      <SourceId>hastane</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/hastane</BasePath>
-      <RelativePath>img/departments/orthopedics.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\departments\orthopedics.jpg'))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>hastane</SourceId>
@@ -156,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
+      <Fingerprint>1vlubmvtmo</Fingerprint>
+      <Integrity>0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor1.jpg'))</OriginalItemSpec>
@@ -174,8 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
+      <Fingerprint>yh5ycnvqm2</Fingerprint>
+      <Integrity>VgjU7Q4rOXIK9GTmtqPjt2h82n7KrN4VNuslVVAwEgA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor2.jpg'))</OriginalItemSpec>
@@ -192,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
+      <Fingerprint>h4snmytmg2</Fingerprint>
+      <Integrity>IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor3.jpg'))</OriginalItemSpec>
@@ -210,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vfdpfh5713</Fingerprint>
-      <Integrity>tYwc1KIXy0LO1YPBSyUZs2/+P9fLdYuK4Feq+M411vw=</Integrity>
+      <Fingerprint>d9y6ahz9er</Fingerprint>
+      <Integrity>D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor4.jpg'))</OriginalItemSpec>
