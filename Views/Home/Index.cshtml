@@ -20,7 +20,7 @@
         <div class="slider-wrapper">
             <div class="slider-track">
                 <!-- Hastane Tanıtımı -->
-                <div class="slider-slide" id="slide-1">
+                <div class="slider-slide active" id="slide-1">
                     <div class="slide-content">
                         <div class="row align-items-center">
                             <div class="col-lg-6">
@@ -36,9 +36,17 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="hospital-image-container">
-                                    <div class="placeholder-image">
-                                        <div class="overlay-text">Hastane Görseli</div>
-                                        <i class="fas fa-hospital fa-4x"></i>
+                                    <!-- Eski placeholder yerine modern hastane grafik tasarımı -->
+                                    <div class="modern-hospital-graphic">
+                                        <div class="hospital-icon">
+                                            <i class="fas fa-hospital-alt fa-4x"></i>
+                                        </div>
+                                        <div class="hospital-circles"></div>
+                                        <div class="hospital-detail-icons">
+                                            <div class="detail-icon"><i class="fas fa-user-md"></i></div>
+                                            <div class="detail-icon"><i class="fas fa-heartbeat"></i></div>
+                                            <div class="detail-icon"><i class="fas fa-procedures"></i></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +83,7 @@
                 </div>
 
                 <!-- Randevu -->
-                <div class="slider-slide" id="slide-3">
+                <div class="slider-slide" id="slide-3" data-slide-type="calendar-slide">
                     <div class="slide-content">
                         <div class="row align-items-center">
                             <div class="col-lg-6">
@@ -91,16 +99,78 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="calendar-container">
-                                    <div class="calendar-illustration">
+                                    <div class="modern-calendar">
                                         <div class="calendar-header">
-                                            <span>Mayıs 2023</span>
+                                            <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                                            <h3>Haziran 2025</h3>
+                                            <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
                                         </div>
-                                        <div class="calendar-body">
-                                            <div class="calendar-day selected">15</div>
-                                            <div class="calendar-day">16</div>
-                                            <div class="calendar-day">17</div>
-                                            <div class="calendar-day">18</div>
-                                            <div class="calendar-day">19</div>
+                                        <div class="calendar-weekdays">
+                                            <div>Pt</div>
+                                            <div>Sa</div>
+                                            <div>Ça</div>
+                                            <div>Pe</div>
+                                            <div>Cu</div>
+                                            <div>Ct</div>
+                                            <div>Pz</div>
+                                        </div>
+                                        <div class="calendar-days">
+                                            <div class="prev-month">26</div>
+                                            <div class="prev-month">27</div>
+                                            <div class="prev-month">28</div>
+                                            <div class="prev-month">29</div>
+                                            <div class="prev-month">30</div>
+                                            <div class="prev-month">31</div>
+                                            <div>1</div>
+                                            <div>2</div>
+                                            <div>3</div>
+                                            <div>4</div>
+                                            <div>5</div>
+                                            <div>6</div>
+                                            <div>7</div>
+                                            <div>8</div>
+                                            <div>9</div>
+                                            <div>10</div>
+                                            <div>11</div>
+                                            <div>12</div>
+                                            <div>13</div>
+                                            <div>14</div>
+                                            <div class="today">15</div>
+                                            <div class="available">16</div>
+                                            <div class="available">17</div>
+                                            <div class="available">18</div>
+                                            <div class="available">19</div>
+                                            <div>20</div>
+                                            <div>21</div>
+                                            <div>22</div>
+                                            <div class="booked">23</div>
+                                            <div class="booked">24</div>
+                                            <div>25</div>
+                                            <div>26</div>
+                                            <div>27</div>
+                                            <div>28</div>
+                                            <div>29</div>
+                                            <div>30</div>
+                                            <div class="next-month">1</div>
+                                            <div class="next-month">2</div>
+                                            <div class="next-month">3</div>
+                                            <div class="next-month">4</div>
+                                            <div class="next-month">5</div>
+                                            <div class="next-month">6</div>
+                                        </div>
+                                        <div class="calendar-legend">
+                                            <div class="legend-item">
+                                                <span class="legend-color today"></span>
+                                                <span>Bugün</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <span class="legend-color available"></span>
+                                                <span>Müsait</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <span class="legend-color booked"></span>
+                                                <span>Dolu</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -201,10 +271,21 @@
             const nextButton = document.querySelector('.slider-next');
             const prevButton = document.querySelector('.slider-prev');
             const dots = document.querySelectorAll('.pagination-dot');
+            const calendarSlide = document.querySelector('[data-slide-type="calendar-slide"]');
             
             let currentIndex = 0;
             const slideWidth = 100; // 100%
             const slidesCount = slides.length;
+            
+            // İlk yüklemede takvimi gizle (eğer aktif değilse)
+            if (calendarSlide && !calendarSlide.classList.contains('active')) {
+                const calendar = calendarSlide.querySelector('.modern-calendar');
+                if (calendar) {
+                    calendar.style.display = 'none';
+                    calendar.style.opacity = '0';
+                    calendar.style.visibility = 'hidden';
+                }
+            }
             
             // Sayfa yüklendiğinde ilk slaytı görünür yap
             updateSlider();
@@ -219,6 +300,37 @@
                         dot.classList.add('active');
                     } else {
                         dot.classList.remove('active');
+                    }
+                });
+
+                // Aktif slaytı güncelle (takvim çift görünümü için)
+                slides.forEach((slide, index) => {
+                    if (index === currentIndex) {
+                        slide.classList.add('active');
+                        
+                        // Eğer bu takvim slaytı ise takvimi göster
+                        if (slide.hasAttribute('data-slide-type') && 
+                            slide.getAttribute('data-slide-type') === 'calendar-slide') {
+                            const calendar = slide.querySelector('.modern-calendar');
+                            if (calendar) {
+                                calendar.style.display = 'block';
+                                calendar.style.opacity = '1';
+                                calendar.style.visibility = 'visible';
+                            }
+                        }
+                    } else {
+                        slide.classList.remove('active');
+                        
+                        // Eğer bu takvim slaytı ise takvimi gizle
+                        if (slide.hasAttribute('data-slide-type') && 
+                            slide.getAttribute('data-slide-type') === 'calendar-slide') {
+                            const calendar = slide.querySelector('.modern-calendar');
+                            if (calendar) {
+                                calendar.style.display = 'none';
+                                calendar.style.opacity = '0';
+                                calendar.style.visibility = 'hidden';
+                            }
+                        }
                     }
                 });
             }
@@ -297,6 +409,11 @@
                 } else if (e.key === 'ArrowRight') {
                     nextSlide();
                 }
+            });
+
+            // Sayfa yüklendiğinde veya yeniden boyutlandığında takvim görünümü düzeltme
+            window.addEventListener('resize', function() {
+                updateSlider();
             });
         });
     </script>
