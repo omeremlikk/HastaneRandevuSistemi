@@ -23,7 +23,7 @@
                 <div class="slider-slide active" id="slide-1">
                     <div class="slide-content">
                         <div class="row align-items-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 order-lg-1">
                                 <div class="slide-badge">
                                     <i class="fas fa-hospital"></i>
                                     <span>Hastanemiz</span>
@@ -34,7 +34,7 @@
                                     <i class="fas fa-info-circle me-2"></i>Hakkımızda
                                 </a>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 order-lg-2">
                                 <div class="hospital-image-container">
                                     <!-- Eski placeholder yerine modern hastane grafik tasarımı -->
                                     <div class="modern-hospital-graphic">
@@ -58,7 +58,7 @@
                 <div class="slider-slide" id="slide-2">
                     <div class="slide-content">
                         <div class="row align-items-center">
-                            <div class="col-lg-6 order-lg-2">
+                            <div class="col-lg-6 order-lg-1">
                                 <div class="slide-badge">
                                     <i class="fas fa-robot"></i>
                                     <span>Akıllı Yönlendirme</span>
@@ -69,12 +69,16 @@
                                     <i class="fas fa-stethoscope me-2"></i>Poliklinik Bul
                                 </a>
                             </div>
-                            <div class="col-lg-6 order-lg-1">
+                            <div class="col-lg-6 order-lg-2">
                                 <div class="ai-image-container">
                                     <div class="ai-illustration">
-                                        <i class="fas fa-brain fa-3x"></i>
+                                        <i class="fas fa-brain"></i>
                                         <div class="ai-lines"></div>
-                                        <i class="fas fa-hospital-user fa-3x"></i>
+                                        <i class="fas fa-hospital-user"></i>
+                                        <!-- Dekoratif AI elementler -->
+                                        <div class="ai-decoration ai-pulse-1"></div>
+                                        <div class="ai-decoration ai-pulse-2"></div>
+                                        <div class="ai-decoration ai-pulse-3"></div>
                                     </div>
                                 </div>
                             </div>
@@ -86,90 +90,94 @@
                 <div class="slider-slide" id="slide-3" data-slide-type="calendar-slide">
                     <div class="slide-content">
                         <div class="row align-items-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 order-lg-1">
                                 <div class="slide-badge">
                                     <i class="fas fa-calendar-check"></i>
                                     <span>Online Randevu</span>
                                 </div>
                                 <h2 class="slide-title">Hızlı ve Kolay Randevu Sistemi</h2>
                                 <p class="slide-text">Zaman ve mekandan bağımsız olarak, istediğiniz doktordan kolayca randevu alabilirsiniz. Sadece birkaç dakikanızı ayırarak sağlık hizmetimize erişin.</p>
-                                <a href="/Appointment/Book" class="btn btn-primary">
-                                    <i class="fas fa-calendar-alt me-2"></i>Randevu Al
-                                </a>
+                                <div class="action-buttons">
+                                    <a href="/Appointment/Book" class="btn btn-primary btn-randevu">
+                                        <i class="fas fa-calendar-alt me-2"></i>Randevu Al
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="calendar-container">
-                                    <div class="modern-calendar">
-                                        <div class="calendar-header">
-                                            <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                                            <h3>Haziran 2025</h3>
-                                            <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
-                                        </div>
-                                        <div class="calendar-weekdays">
-                                            <div>Pt</div>
-                                            <div>Sa</div>
-                                            <div>Ça</div>
-                                            <div>Pe</div>
-                                            <div>Cu</div>
-                                            <div>Ct</div>
-                                            <div>Pz</div>
-                                        </div>
-                                        <div class="calendar-days">
-                                            <div class="prev-month">26</div>
-                                            <div class="prev-month">27</div>
-                                            <div class="prev-month">28</div>
-                                            <div class="prev-month">29</div>
-                                            <div class="prev-month">30</div>
-                                            <div class="prev-month">31</div>
-                                            <div>1</div>
-                                            <div>2</div>
-                                            <div>3</div>
-                                            <div>4</div>
-                                            <div>5</div>
-                                            <div>6</div>
-                                            <div>7</div>
-                                            <div>8</div>
-                                            <div>9</div>
-                                            <div>10</div>
-                                            <div>11</div>
-                                            <div>12</div>
-                                            <div>13</div>
-                                            <div>14</div>
-                                            <div class="today">15</div>
-                                            <div class="available">16</div>
-                                            <div class="available">17</div>
-                                            <div class="available">18</div>
-                                            <div class="available">19</div>
-                                            <div>20</div>
-                                            <div>21</div>
-                                            <div>22</div>
-                                            <div class="booked">23</div>
-                                            <div class="booked">24</div>
-                                            <div>25</div>
-                                            <div>26</div>
-                                            <div>27</div>
-                                            <div>28</div>
-                                            <div>29</div>
-                                            <div>30</div>
-                                            <div class="next-month">1</div>
-                                            <div class="next-month">2</div>
-                                            <div class="next-month">3</div>
-                                            <div class="next-month">4</div>
-                                            <div class="next-month">5</div>
-                                            <div class="next-month">6</div>
-                                        </div>
-                                        <div class="calendar-legend">
-                                            <div class="legend-item">
-                                                <span class="legend-color today"></span>
-                                                <span>Bugün</span>
+                            <div class="col-lg-6 order-lg-2">
+                                <div class="calendar-wrapper">
+                                    <div class="calendar-container">
+                                        <div class="modern-calendar">
+                                            <div class="calendar-header">
+                                                <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                                                <h3>Haziran 2025</h3>
+                                                <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
                                             </div>
-                                            <div class="legend-item">
-                                                <span class="legend-color available"></span>
-                                                <span>Müsait</span>
+                                            <div class="calendar-weekdays">
+                                                <div>Pt</div>
+                                                <div>Sa</div>
+                                                <div>Ça</div>
+                                                <div>Pe</div>
+                                                <div>Cu</div>
+                                                <div>Ct</div>
+                                                <div>Pz</div>
                                             </div>
-                                            <div class="legend-item">
-                                                <span class="legend-color booked"></span>
-                                                <span>Dolu</span>
+                                            <div class="calendar-days">
+                                                <div class="prev-month">26</div>
+                                                <div class="prev-month">27</div>
+                                                <div class="prev-month">28</div>
+                                                <div class="prev-month">29</div>
+                                                <div class="prev-month">30</div>
+                                                <div class="prev-month">31</div>
+                                                <div>1</div>
+                                                <div>2</div>
+                                                <div>3</div>
+                                                <div>4</div>
+                                                <div>5</div>
+                                                <div>6</div>
+                                                <div>7</div>
+                                                <div>8</div>
+                                                <div>9</div>
+                                                <div>10</div>
+                                                <div>11</div>
+                                                <div>12</div>
+                                                <div>13</div>
+                                                <div>14</div>
+                                                <div class="today">15</div>
+                                                <div class="available">16</div>
+                                                <div class="available">17</div>
+                                                <div class="available">18</div>
+                                                <div class="available">19</div>
+                                                <div>20</div>
+                                                <div>21</div>
+                                                <div>22</div>
+                                                <div class="booked">23</div>
+                                                <div class="booked">24</div>
+                                                <div>25</div>
+                                                <div>26</div>
+                                                <div>27</div>
+                                                <div>28</div>
+                                                <div>29</div>
+                                                <div>30</div>
+                                                <div class="next-month">1</div>
+                                                <div class="next-month">2</div>
+                                                <div class="next-month">3</div>
+                                                <div class="next-month">4</div>
+                                                <div class="next-month">5</div>
+                                                <div class="next-month">6</div>
+                                            </div>
+                                            <div class="calendar-legend">
+                                                <div class="legend-item">
+                                                    <span class="legend-color today"></span>
+                                                    <span>Bugün</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color available"></span>
+                                                    <span>Müsait</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color booked"></span>
+                                                    <span>Dolu</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +191,7 @@
                 <div class="slider-slide" id="slide-4">
                     <div class="slide-content">
                         <div class="row align-items-center">
-                            <div class="col-lg-6 order-lg-2">
+                            <div class="col-lg-6 order-lg-1">
                                 <div class="slide-badge">
                                     <i class="fas fa-user-md"></i>
                                     <span>Uzman Kadro</span>
@@ -194,7 +202,7 @@
                                     <i class="fas fa-user-md me-2"></i>Doktorlarımız
                                 </a>
                             </div>
-                            <div class="col-lg-6 order-lg-1">
+                            <div class="col-lg-6 order-lg-2">
                                 <div class="doctors-container">
                                     <div class="doctors-illustration">
                                         <div class="doctor-icon">

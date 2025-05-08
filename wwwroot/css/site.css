@@ -278,6 +278,18 @@ section {
   flex: 0 0 100%;
   position: relative;
   z-index: 1;
+  height: 550px; /* Tüm kartlar için sabit yükseklik */
+}
+
+.slider-slide .slide-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider-slide .row {
+  height: 100%;
 }
 
 /* Slide içeriği düzeltmeleri */
@@ -379,325 +391,217 @@ section {
 .ai-illustration {
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.85));
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
-  box-shadow: 0 10px 25px rgba(26, 115, 232, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+  padding: 2rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  gap: 3rem;
 }
 
 .ai-illustration i {
-  color: #1a73e8;
+  color: #2563eb;
+  font-size: 4rem !important;
   z-index: 2;
+  filter: drop-shadow(0 4px 6px rgba(37, 99, 235, 0.2));
 }
 
-.calendar-illustration {
-  width: 100%;
-  max-width: 350px;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(26, 115, 232, 0.1);
-  transition: all 0.3s ease;
-}
-
-.doctors-illustration {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.doctor-icon {
-  width: 100px;
-  height: 100px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ai-illustration::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 50%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  box-shadow: 0 10px 25px rgba(26, 115, 232, 0.1);
-  color: #1a73e8;
-  transition: all 0.3s ease;
+  z-index: 1;
 }
 
-/* Responsive düzeltmeler */
-@media (max-width: 991.98px) {
-  /* Genel düzenlemeler */
-  .slide-content {
-    padding: 1.5rem;
+.ai-lines {
+  position: absolute;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ai-lines::before, .ai-lines::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.3);
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulse 2s infinite;
+}
+
+.ai-lines::before {
+  left: 20%;
+}
+
+.ai-lines::after {
+  right: 20%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.7;
   }
-  
+  50% {
+    transform: translateY(-50%) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* Tüm kartların görsellerini büyütme */
+.ai-illustration,
+.modern-hospital-graphic,
+.doctors-illustration,
+.calendar-wrapper {
+  height: 350px !important;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buton ve yazı stillerini modernleştirme */
+.btn {
+  border-radius: 12px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* Daha büyük ve modern slide başlıkları */
+.slide-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.slide-text {
+  font-size: 1.25rem;
+  color: #475569;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+/* Mobil görünüm düzeltmeleri */
+@media (max-width: 991.98px) {
   .slide-title {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 2.25rem;
   }
   
   .slide-text {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  /* Görsel konteynerleri düzenlemesi */
-  .hospital-image-container, 
-  .ai-image-container, 
-  .calendar-container, 
-  .doctors-container {
-    margin-top: 2rem;
-    max-height: 250px;
-  }
-  
-  /* Takvim düzenlemesi */
-  .modern-calendar {
-    max-width: 100%;
-    transform: scale(1);
-    margin-bottom: 1rem;
-  }
-  
-  .calendar-days div {
-    font-size: 0.7rem;
-  }
-  
-  /* Simge boyutları küçültme */
-  .doctor-icon {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .doctor-icon i {
-    font-size: 1.5rem !important;
-  }
-  
-  .slider-arrow {
-    width: 35px;
-    height: 35px;
+    font-size: 1.15rem;
   }
 }
 
 @media (max-width: 767.98px) {
-  /* Daha küçük ekranlarda düzenlemeler */
-  .hero-slider-section {
-    min-height: auto;
-    max-height: none;
-    height: auto;
-    overflow: hidden;
+  .ai-illustration i {
+    font-size: 3.5rem !important;
   }
   
-  .slider-wrapper {
-    overflow: hidden;
-    margin-bottom: 40px;
-  }
-  
-  .slider-track {
-    min-height: 450px;  /* Minimum yükseklik tanımlama */
-  }
-  
-  .slider-slide {
-    min-height: 450px;
-    overflow: hidden;
+  .ai-illustration {
+    gap: 2rem;
   }
   
   .slide-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
   
   .slide-text {
-    font-size: 0.9rem;
-  }
-  
-  .slide-badge {
-    font-size: 0.9rem !important;
-    padding: 0.5rem 1rem !important;
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 1.2rem;
-    background: rgba(65, 105, 225, 0.15);
-    border-radius: 50px;
-  }
-  
-  .slide-badge i {
-    margin-right: 10px;
     font-size: 1.1rem;
-  }
-  
-  /* Takvim düzenlemesi */
-  .modern-calendar {
-    transform: scale(0.9);
-    max-width: 280px;
-    margin: 0 auto;
-  }
-  
-  .calendar-weekdays div {
-    font-size: 0.65rem;
-    padding: 5px 0;
-  }
-  
-  .calendar-days div {
-    font-size: 0.65rem;
-  }
-  
-  .calendar-header h3 {
-    font-size: 0.9rem;
-  }
-  
-  .calendar-legend {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  /* Yatay düzen sorunlarını düzeltme */
-  .row.align-items-center {
-    text-align: center;
-  }
-  
-  .order-lg-1 {
-    order: 2;
-  }
-  
-  .order-lg-2 {
-    order: 1;
     margin-bottom: 1.5rem;
   }
   
-  /* Slider okları düzenlemesi */
-  .slider-arrow {
-    width: 30px;
-    height: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    bottom: auto;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  .btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
   }
   
-  .slider-prev {
-    left: 10px;
-  }
-  
-  .slider-next {
-    right: 10px;
-  }
-  
-  /* Takvim konteynerin yükseklik sorunu düzeltme */
-  .calendar-container {
-    height: auto !important;
-    min-height: 320px;
-    margin: 0 auto;
-    position: relative;
-    max-width: 320px;
-  }
-  
-  /* Takvimin mobil görünümde daha iyi yerleşmesi için */
-  .slider-slide#slide-3 .col-lg-6:last-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Slider içeriğindeki görüntü sorunlarını düzeltme */
-  .slider-slide {
-    overflow: visible; /* Taşmaları önlemek için */
+  /* Kartların görsellerini küçültme */
+  .ai-illustration,
+  .modern-hospital-graphic,
+  .doctors-illustration,
+  .calendar-wrapper {
+    height: 300px !important;
+    max-width: 400px;
   }
 }
 
 @media (max-width: 575.98px) {
-  /* En küçük ekranlar için düzenlemeler */
-  .slide-content {
-    padding: 1rem;
+  .ai-illustration i {
+    font-size: 3rem !important;
+  }
+  
+  .ai-illustration {
+    gap: 1.5rem;
   }
   
   .slide-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
   }
   
-  /* Takvim en küçük ekranlarda */
-  .modern-calendar {
-    transform: scale(0.85);
-    max-width: 250px;
+  .slide-text {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
   }
   
-  .calendar-days {
-    padding: 5px;
+  .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
   }
   
-  .calendar-days div {
-    margin: 1px;
-    min-width: 25px;
-    min-height: 25px;
-  }
-  
-  .legend-item {
-    font-size: 0.6rem;
-  }
-  
-  /* Görsel-yazı düzenleme */
-  .hospital-image-container, 
-  .ai-image-container, 
-  .calendar-container, 
-  .doctors-container {
-    margin-top: 1.5rem;
-    max-height: 200px;
-  }
-  
-  /* Doktor ikonları */
-  .doctors-illustration {
-    gap: 0.8rem;
-  }
-  
-  .doctor-icon {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .doctor-icon i {
-    font-size: 1.2rem !important;
-  }
-  
-  /* Slider okları ve pagination düzenlemesi */
-  .slider-pagination {
-    position: relative;
-    bottom: 10px;
-    margin-top: 0;
-    padding-top: 10px;
-  }
-  
-  .pagination-dot {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .slider-arrow {
-    width: 28px;
-    height: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .slider-prev {
-    left: 5px;
-  }
-  
-  .slider-next {
-    right: 5px;
-  }
-  
-  .slider-track,
-  .slider-slide {
-    min-height: 500px;  /* Daha küçük ekranlarda daha fazla alan */
-  }
-  
-  /* İçerik taşma problemini önleme */
-  .slide-content {
-    overflow: visible;
-    height: 100%;
+  /* Kartların görsellerini küçültme */
+  .ai-illustration,
+  .modern-hospital-graphic,
+  .doctors-illustration,
+  .calendar-wrapper {
+    height: 250px !important;
+    max-width: 320px;
   }
 }
 
@@ -725,26 +629,162 @@ section {
   height: auto;
 }
 
-/* Modern takvim kenar boşluklarını düzenleme */
+/* Takvim sarmalayıcı */
+.calendar-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.85));
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Takvim görsel efekti için arka plan elementi */
+.calendar-wrapper:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), rgba(59, 130, 246, 0.08));
+  z-index: -1;
+}
+
+/* Takvim görsel efekti için dekoratif elementler */
+.calendar-wrapper:after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.08);
+  z-index: -1;
+}
+
+/* Takvim konteyneri için düzeltme */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 25px rgba(31, 38, 135, 0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 15px;
+}
+
+/* Modern takvim düzenlemesi */
 .modern-calendar {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03) !important;
   margin: 0 auto;
   position: relative;
   z-index: 10;
 }
 
-/* Position relative ekleme (absolute konumlandırma için parent) */
-.calendar-days div {
-  position: relative;
+/* Takvim başlık alanı */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 8px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.15);
 }
 
-/* Görsel ve yazı hizalama düzeltmeleri */
-@media (max-width: 991.98px) {
-  .row.align-items-center > [class*="col-"] {
-    margin-bottom: 1.5rem;
+/* Ay ve yıl başlığı */
+.calendar-header h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+/* Takvim başlık alanı için gezinme düğmeleri */
+.calendar-nav-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #2563eb;
+}
+
+.calendar-nav-btn:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* Mobil görünüm */
+@media (max-width: 767.98px) {
+  .calendar-wrapper {
+    padding: 15px;
   }
   
-  .row.align-items-center > [class*="col-"]:last-child {
-    margin-bottom: 0;
+  .calendar-wrapper:after {
+    top: 15px;
+    right: 15px;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .calendar-header {
+    padding: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .calendar-nav-btn {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .calendar-header h3 {
+    font-size: 0.85rem;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .calendar-wrapper {
+    padding: 10px;
+  }
+  
+  .calendar-header {
+    padding: 5px;
+    margin-bottom: 8px;
+  }
+  
+  .calendar-nav-btn {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .calendar-header h3 {
+    font-size: 0.8rem;
+    padding: 2px 5px;
   }
 }
 
@@ -824,32 +864,26 @@ section {
 .slide-badge {
   display: inline-flex;
   align-items: center;
-  background: rgba(65, 105, 225, 0.1);
-  color: #4169E1;
-  font-weight: 500;
-  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.2));
+  color: #2563eb;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
   border-radius: 50px;
   margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
 }
 
 .slide-badge i {
-  margin-right: 8px;
-}
-
-/* Başlık düzeltmesi */
-.slide-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #202124;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.slide-text {
-  font-size: 1.1rem;
-  color: #5f6368;
-  margin-bottom: 2rem;
-  line-height: 1.7;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  background: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.15);
 }
 
 /* Modern hastane grafiği stilleri */
@@ -953,257 +987,6 @@ section {
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* Modern takvim stilleri */
-.modern-calendar {
-  width: 100%;
-  max-width: 300px;
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
-  margin: 0 auto;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(37, 99, 235, 0.1);
-  font-family: 'Poppins', sans-serif;
-  transform: scale(0.9);
-}
-
-.modern-calendar:hover {
-  transform: scale(0.93);
-  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
-}
-
-.calendar-header {
-  background: linear-gradient(45deg, #4776E6, #8E54E9);
-  color: white;
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 3px solid #f0f4ff;
-}
-
-.calendar-header h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.calendar-header h3::before {
-  content: "📅 ";
-  margin-right: 3px;
-}
-
-.calendar-nav-btn {
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.7rem;
-}
-
-.calendar-nav-btn:hover {
-  background: rgba(255,255,255,0.4);
-  transform: scale(1.1);
-}
-
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.calendar-weekdays div {
-  text-align: center;
-  padding: 6px 0;
-  font-weight: 600;
-  font-size: 0.7rem;
-  color: #8E54E9;
-}
-
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 2px;
-  background: #fff;
-  padding: 8px;
-}
-
-.calendar-days div {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  border-radius: 50%;
-  margin: 1px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.calendar-days div:hover:not(.prev-month):not(.next-month) {
-  background: rgba(142, 84, 233, 0.1);
-  color: #8E54E9;
-  transform: scale(1.1);
-}
-
-.calendar-days .prev-month,
-.calendar-days .next-month {
-  color: #ddd;
-  cursor: default;
-  font-size: 0.65rem;
-}
-
-.calendar-days .today {
-  background: linear-gradient(45deg, #4776E6, #8E54E9);
-  color: white;
-  font-weight: 700;
-  box-shadow: 0 2px 5px rgba(142, 84, 233, 0.3);
-}
-
-.calendar-days .available {
-  color: #4776E6;
-  border: 1.5px dashed #4776E6;
-  font-weight: 600;
-}
-
-.calendar-days .available::after {
-  content: "✓";
-  font-size: 0.5rem;
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: #4776E6;
-}
-
-.calendar-days .booked {
-  background: rgba(255, 107, 129, 0.1);
-  color: #FF6B81;
-  text-decoration: line-through;
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.calendar-days .booked::after {
-  content: "✕";
-  font-size: 0.5rem;
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: #FF6B81;
-}
-
-.calendar-legend {
-  padding: 8px 12px;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid #e9ecef;
-  background: #f8f9fa;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  font-size: 0.65rem;
-}
-
-.legend-color {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 4px;
-  display: inline-block;
-}
-
-.legend-color.today {
-  background: linear-gradient(45deg, #4776E6, #8E54E9);
-  box-shadow: 0 1px 3px rgba(142, 84, 233, 0.3);
-}
-
-.legend-color.available {
-  background: white;
-  border: 1.5px dashed #4776E6;
-}
-
-.legend-color.booked {
-  background: rgba(255, 107, 129, 0.1);
-  border: 1px solid #FF6B81;
-}
-
-/* Özellikle "Akıllı Yönlendirme" badge'i için daha belirgin stil */
-.fas.fa-robot + span {
-  font-weight: 600;
-}
-
-/* Slider içerikleri dikey hizalama düzeltmesi */
-.slider-slide .slide-content {
-  padding-bottom: 40px; /* Pagination noktalara yer bırakmak için */
-}
-
-@media (max-width: 767.98px) {
-  /* Slider içeriği dikey hizalama */
-  .slide-content {
-    padding-top: 20px;
-    padding-bottom: 50px;
-  }
-  
-  /* Slider okları için z-index ayarı */
-  .slider-arrow {
-    z-index: 200;
-  }
-  
-  /* Slider butonları yüksek kontrast için güncelleme */
-  .slider-pagination {
-    z-index: 150;
-    position: absolute;
-    bottom: 15px;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 8px 0;
-    border-radius: 30px;
-    width: 80%;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 575.98px) {
-  /* En küçük ekranlar için ekstra alan ve düzenlemeler */
-  .hero-slider-section {
-    padding-top: 70px;
-  }
-  
-  .slide-content {
-    padding-top: 15px;
-    padding-bottom: 60px;
-  }
-  
-  /* Tüm slider içeriğinin üst kısma yakın durması */
-  .row.align-items-center {
-    margin-top: -20px;
-  }
-  
-  /* Slider okları daha görünür olmalı */
-  .slider-arrow {
-    opacity: 0.9;
-  }
-  
-  /* Pagination daha altta ve görünür */
-  .slider-pagination {
-    bottom: 10px;
   }
 }
 
@@ -1556,5 +1339,508 @@ section {
   .btn {
     padding: 8px 16px;
     font-size: 0.9rem;
+  }
+}
+
+/* Görsel animasyonlarını devre dışı bırakma ve boyutları düzeltme */
+.modern-hospital-graphic,
+.ai-illustration,
+.modern-calendar,
+.doctors-illustration,
+.hospital-image-container,
+.ai-image-container,
+.calendar-container,
+.doctors-container {
+  transform: none !important;
+  transition: box-shadow 0.3s ease !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Hover efektleri yerine daha profesyonel gölge efekti */
+.modern-hospital-graphic:hover,
+.ai-illustration:hover,
+.modern-calendar:hover,
+.doctors-illustration:hover {
+  transform: none !important;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Mobil görünüm düzeltmeleri */
+@media (max-width: 991.98px) {
+  .slider-slide {
+    height: auto;
+    min-height: 650px;
+  }
+  
+  .ai-illustration,
+  .modern-hospital-graphic,
+  .doctors-illustration,
+  .calendar-wrapper {
+    height: 280px !important;
+    max-width: 380px;
+  }
+  
+  .calendar-container {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .slider-slide {
+    min-height: 700px;
+  }
+  
+  .ai-illustration,
+  .modern-hospital-graphic,
+  .doctors-illustration,
+  .calendar-wrapper {
+    height: 250px !important;
+    max-width: 320px;
+  }
+  
+  .calendar-container {
+    max-width: 300px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .slider-slide {
+    min-height: 750px;
+  }
+  
+  .ai-illustration,
+  .modern-hospital-graphic,
+  .doctors-illustration,
+  .calendar-wrapper {
+    height: 220px !important;
+    max-width: 280px;
+  }
+  
+  .calendar-container {
+    max-width: 260px;
+    padding: 8px;
+  }
+}
+
+/* Haftanın günleri başlıkları */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  padding: 8px 0;
+}
+
+/* Günler grid düzeni */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+/* Günler stil */
+.calendar-days div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  color: #1e293b;
+  transition: all 0.2s;
+}
+
+.calendar-days div:hover:not(.prev-month):not(.next-month) {
+  background: #f1f5f9;
+}
+
+/* Önceki ve sonraki ayların günleri */
+.calendar-days .prev-month,
+.calendar-days .next-month {
+  color: #cbd5e1;
+  cursor: default;
+}
+
+/* Bugünün tarihi */
+.calendar-days .today {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+/* Müsait günler */
+.calendar-days .available {
+  color: #047857;
+  font-weight: 600;
+  background: rgba(4, 120, 87, 0.1);
+  border: 1px solid rgba(4, 120, 87, 0.2);
+}
+
+.calendar-days .available:hover {
+  background: rgba(4, 120, 87, 0.15);
+}
+
+/* Dolu günler */
+.calendar-days .booked {
+  color: #dc2626;
+  font-weight: 600;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.calendar-days .booked:hover {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+/* Takvim açıklaması */
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+/* Açıklama öğeleri */
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: #64748b;
+}
+
+/* Açıklama renk işaretleri */
+.legend-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Bugün rengi */
+.legend-color.today {
+  background: rgba(37, 99, 235, 0.6);
+}
+
+/* Müsait rengi */
+.legend-color.available {
+  background: rgba(4, 120, 87, 0.6);
+}
+
+/* Dolu rengi */
+.legend-color.booked {
+  background: rgba(220, 38, 38, 0.6);
+}
+
+/* Yeni eklenen action-buttons sınıfı için stiller */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Randevu button stili */
+.btn-randevu {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border: none;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-randevu:hover {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* AI button stili */
+.btn-ai {
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.btn-ai:hover {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.8);
+}
+
+/* Mobil düzenlemeler için ek stiller */
+@media (max-width: 767.98px) {
+  .action-buttons {
+    justify-content: center;
+  }
+  
+  .calendar-weekdays div {
+    font-size: 0.65rem;
+    padding: 5px 0;
+  }
+  
+  .calendar-days div {
+    height: 28px;
+    font-size: 0.7rem;
+  }
+  
+  .legend-item {
+    font-size: 0.6rem;
+  }
+  
+  .slider-slide#slide-3 .order-lg-2 {
+    order: 2 !important;
+  }
+  
+  .slider-slide#slide-3 .order-lg-1 {
+    order: 1 !important;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .btn-randevu, .btn-ai {
+    width: 100%;
+    margin-bottom: 8px;
+    text-align: center;
+    padding: 10px 15px;
+  }
+  
+  .action-buttons {
+    gap: 5px;
+  }
+  
+  .calendar-days div {
+    margin: 1px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 0.7rem;
+  }
+  
+  .modern-calendar {
+    padding: 10px;
+  }
+}
+
+/* Doctors-illustration için modern görünüm */
+.doctors-illustration {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.85));
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+  padding: 2rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.doctor-icon {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+  color: #2563eb;
+  position: relative;
+  transition: all 0.3s ease;
+  transform-origin: bottom center;
+}
+
+.doctor-icon:hover {
+  transform: translateY(-10px) rotate(5deg);
+}
+
+.doctor-icon i {
+  font-size: 2.5rem !important;
+}
+
+.doctor-icon::after {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  border: 2px dashed rgba(37, 99, 235, 0.2);
+  border-radius: 50%;
+  animation: spin 15s linear infinite;
+}
+
+/* Mobil görünümde yazı ve butonlar düzeltmesi */
+@media (max-width: 767.98px) {
+  .slider-slide#slide-3 .order-lg-2 {
+    order: 2 !important;
+  }
+  
+  .slider-slide#slide-3 .order-lg-1 {
+    order: 1 !important;
+    margin-bottom: 2rem;
+  }
+  
+  .doctor-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .doctor-icon i {
+    font-size: 2rem !important;
+  }
+  
+  .slide-badge {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .slide-badge i {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .doctor-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .doctor-icon i {
+    font-size: 1.5rem !important;
+  }
+  
+  .doctors-illustration {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .slide-badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .slide-badge i {
+    width: 22px;
+    height: 22px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+  }
+}
+
+/* Slider yüksekliği için düzeltmeler */
+.slider-slide {
+  height: auto;
+  min-height: 650px;
+}
+
+@media (max-width: 767.98px) {
+  .slider-slide {
+    min-height: 800px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .slider-slide {
+    min-height: 850px;
+  }
+}
+
+/* Yapay Zeka dekoratif elementleri */
+.ai-decoration {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.15);
+  z-index: 1;
+}
+
+.ai-pulse-1 {
+  width: 60px;
+  height: 60px;
+  top: 20%;
+  left: 15%;
+  animation: ai-pulse 4s infinite ease-in-out;
+}
+
+.ai-pulse-2 {
+  width: 40px;
+  height: 40px;
+  bottom: 20%;
+  right: 15%;
+  animation: ai-pulse 3s infinite ease-in-out 1s;
+}
+
+.ai-pulse-3 {
+  width: 25px;
+  height: 25px;
+  top: 65%;
+  left: 30%;
+  animation: ai-pulse 2.5s infinite ease-in-out 0.5s;
+}
+
+@keyframes ai-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* Yapay Zeka illüstrasyonunda animasyonlar */
+.ai-illustration i.fas.fa-brain {
+  animation: brain-pulse 3s infinite alternate;
+}
+
+.ai-illustration i.fas.fa-hospital-user {
+  animation: user-pulse 3s infinite alternate-reverse;
+}
+
+@keyframes brain-pulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 6px rgba(37, 99, 235, 0.2));
+  }
+  100% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 8px 15px rgba(37, 99, 235, 0.3));
+  }
+}
+
+@keyframes user-pulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 6px rgba(37, 99, 235, 0.2));
+  }
+  100% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 8px 15px rgba(37, 99, 235, 0.3));
   }
 }
