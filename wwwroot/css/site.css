@@ -631,161 +631,321 @@ section {
 
 /* Takvim sarmalayıcı */
 .calendar-wrapper {
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.85));
-  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-/* Takvim görsel efekti için arka plan elementi */
-.calendar-wrapper:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), rgba(59, 130, 246, 0.08));
-  z-index: -1;
-}
-
-/* Takvim görsel efekti için dekoratif elementler */
-.calendar-wrapper:after {
-  content: '';
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(37, 99, 235, 0.08);
-  z-index: -1;
+    position: relative;
+    z-index: 1;
+    padding: 15px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    max-width: 320px; /* Web görünümünde genişliği azaltıldı */
 }
 
 /* Takvim konteyneri için düzeltme */
 .calendar-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 25px rgba(31, 38, 135, 0.12);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    width: 100%;
 }
 
-/* Modern takvim düzenlemesi */
+/* Modern Takvim Bileşeni - Minimal Tasarım */
 .modern-calendar {
-  width: 100%;
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03) !important;
-  margin: 0 auto;
-  position: relative;
-  z-index: 10;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: none;
+    transition: all 0.3s ease;
 }
 
-/* Takvim başlık alanı */
 .calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  padding: 8px;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8fafc;
+    border-bottom: 1px solid #f1f5f9;
 }
 
-/* Ay ve yıl başlığı */
 .calendar-header h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: white;
-  margin: 0;
-  padding: 5px 10px;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 600;
 }
 
-/* Takvim başlık alanı için gezinme düğmeleri */
 .calendar-nav-btn {
-  width: 28px;
-  height: 28px;
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #2563eb;
+    border: none;
+    background: #f1f5f9;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: all 0.2s ease;
 }
 
 .calendar-nav-btn:hover {
-  background: white;
-  transform: scale(1.05);
+    background: #e2e8f0;
+    color: #1e293b;
 }
 
-/* Mobil görünüm */
-@media (max-width: 767.98px) {
-  .calendar-wrapper {
-    padding: 15px;
-  }
-  
-  .calendar-wrapper:after {
-    top: 15px;
-    right: 15px;
-    width: 25px;
-    height: 25px;
-  }
-  
-  .calendar-header {
-    padding: 6px;
-    margin-bottom: 10px;
-  }
-  
-  .calendar-nav-btn {
-    width: 24px;
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 8px 10px 5px;
+    background: white;
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #64748b;
+    padding: 3px 0;
+}
+
+/* Günler grid düzeni */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    padding: 5px 10px 10px;
+}
+
+/* Günler stil */
+.calendar-days div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
     height: 24px;
-  }
-  
-  .calendar-header h3 {
-    font-size: 0.85rem;
-    padding: 2px 6px;
-  }
+    width: 24px;
+    margin: 0 auto;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #1e293b;
+    transition: all 0.2s;
+}
+
+.calendar-days div:hover:not(.prev-month):not(.next-month) {
+    background: #f1f5f9;
+}
+
+/* Önceki ve sonraki ayların günleri */
+.calendar-days .prev-month,
+.calendar-days .next-month {
+    color: #cbd5e1;
+    cursor: default;
+}
+
+/* Bugünün tarihi */
+.calendar-days .today {
+    background: #e0e7ff;
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+/* Müsait günler */
+.calendar-days .available {
+    color: #047857;
+    font-weight: 600;
+    background: #ecfdf5;
+}
+
+/* Dolu günler */
+.calendar-days .booked {
+    color: #dc2626;
+    font-weight: 600;
+    background: #fef2f2;
+}
+
+/* Takvim açıklaması */
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 8px 10px 5px;
+    padding: 6px;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+/* Açıklama öğeleri */
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.6rem;
+    color: #64748b;
+}
+
+/* Açıklama renk işaretleri */
+.legend-color {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* Bugün rengi */
+.legend-color.today {
+    background: #4f46e5;
+}
+
+/* Müsait rengi */
+.legend-color.available {
+    background: #047857;
+}
+
+/* Dolu rengi */
+.legend-color.booked {
+    background: #dc2626;
+}
+
+@media (max-width: 991.98px) {
+    .calendar-wrapper {
+        max-width: 320px;
+        padding: 12px;
+    }
+    
+    .calendar-container {
+        max-width: 300px;
+    }
+}
+
+/* Mobil görünüm için modern ve profesyonel tasarım */
+@media (max-width: 767.98px) {
+    .calendar-wrapper {
+        max-width: 290px;
+        padding: 12px;
+        margin-top: 10px !important;
+        border-radius: 14px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        background: linear-gradient(to bottom, #ffffff, #fafafa);
+        border: none;
+    }
+    
+    .calendar-container {
+        max-width: 270px;
+        border-radius: 10px;
+    }
+    
+    .modern-calendar {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .calendar-header {
+        background: linear-gradient(to right, #f1f5f9, #f8fafc);
+        padding: 10px 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .calendar-header h3 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #334155;
+        letter-spacing: -0.3px;
+    }
+    
+    .calendar-nav-btn {
+        width: 24px;
+        height: 24px;
+        background: white;
+        color: #475569;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .calendar-weekdays {
+        padding: 8px 8px 4px;
+        background: #fafafa;
+    }
+    
+    .calendar-weekdays div {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: -0.3px;
+    }
+    
+    .calendar-days {
+        padding: 4px 8px 8px;
+        gap: 2px;
+    }
+    
+    .calendar-days div {
+        height: 22px;
+        width: 22px;
+        font-size: 0.65rem;
+        font-weight: 500;
+    }
+    
+    .calendar-days .today {
+        background: #4f46e5;
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 2px 5px rgba(79, 70, 229, 0.3);
+    }
+    
+    .calendar-days .available {
+        background: #10b981;
+        color: white;
+        box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
+    }
+    
+    .calendar-days .booked {
+        background: #ef4444;
+        color: white;
+        box-shadow: 0 2px 5px rgba(239, 68, 68, 0.2);
+    }
+    
+    .calendar-legend {
+        margin: 8px 8px 4px;
+        padding: 6px 8px;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    .legend-item {
+        font-size: 0.55rem;
+        font-weight: 500;
+        color: #475569;
+    }
 }
 
 @media (max-width: 575.98px) {
-  .calendar-wrapper {
-    padding: 10px;
-  }
-  
-  .calendar-header {
-    padding: 5px;
-    margin-bottom: 8px;
-  }
-  
-  .calendar-nav-btn {
-    width: 22px;
-    height: 22px;
-  }
-  
-  .calendar-header h3 {
-    font-size: 0.8rem;
-    padding: 2px 5px;
-  }
+    .calendar-wrapper {
+        max-width: 260px;
+        padding: 10px;
+    }
+    
+    .calendar-container {
+        max-width: 240px;
+    }
+    
+    .calendar-days div {
+        height: 20px;
+        width: 20px;
+        font-size: 0.6rem;
+    }
+    
+    .calendar-header h3 {
+        font-size: 0.8rem;
+    }
 }
 
 /* Eski stillerden kalanların düzeltilmesi */
@@ -898,7 +1058,7 @@ section {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.1);
   padding: 2rem;
   transition: all 0.5s ease;
 }
@@ -1173,10 +1333,6 @@ section {
   .ai-image-container,
   .calendar-container,
   .doctors-container {
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 20px;
   }
   
@@ -1597,6 +1753,7 @@ section {
   
   .calendar-days div {
     height: 28px;
+    width: 28px;
     font-size: 0.7rem;
   }
   
