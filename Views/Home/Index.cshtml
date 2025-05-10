@@ -4,7 +4,7 @@
 }
 
 <!-- Slider/Carousel Hero Section -->
-<div class="hero-slider-section">
+<div class="hero-slider-section" style="padding-top: 60px;">
     <!-- Animasyonlu daire süslemeler -->
     <div class="circle-decoration circle-1"></div>
     <div class="circle-decoration circle-2"></div>
@@ -21,21 +21,23 @@
             <div class="slider-track">
                 <!-- Hastane Tanıtımı -->
                 <div class="slider-slide active" id="slide-1">
-                    <div class="slide-content">
-                        <div class="row align-items-center">
+                    <div class="slide-content" style="padding: 15px;">
+                        <div class="row align-items-center g-2">
                             <div class="col-lg-6 order-lg-1">
-                                <div class="slide-badge">
+                                <div class="slide-badge mb-2">
                                     <i class="fas fa-hospital"></i>
                                     <span>Hastanemiz</span>
                                 </div>
-                                <h2 class="slide-title">Modern Tıbbi Hizmet</h2>
-                                <p class="slide-text">Hastanemiz, en son teknolojik ekipmanlar ve alanında uzman sağlık personeli ile hastalarımıza kaliteli sağlık hizmeti sunmaktadır. Amacımız, sağlığınızı korumanız ve iyileşmeniz için en iyi olanakları sağlamaktır.</p>
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-info-circle me-2"></i>Hakkımızda
-                                </a>
+                                <h2 class="slide-title mb-2">Modern Tıbbi Hizmet</h2>
+                                <p class="slide-text mb-3">Hastanemiz, en son teknolojik ekipmanlar ve alanında uzman sağlık personeli ile hastalarımıza kaliteli sağlık hizmeti sunmaktadır. Amacımız, sağlığınızı korumanız ve iyileşmeniz için en iyi olanakları sağlamaktır.</p>
+                                <div class="btn-container d-none d-md-block">
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-info-circle me-2"></i>Hakkımızda
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-lg-6 order-lg-2">
-                                <div class="hospital-image-container">
+                                <div class="hospital-image-container mt-2">
                                     <!-- Eski placeholder yerine modern hastane grafik tasarımı -->
                                     <div class="modern-hospital-graphic">
                                         <div class="hospital-icon">
@@ -49,6 +51,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mobile-btn-container d-md-none text-center mt-3">
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-info-circle me-2"></i>Hakkımızda
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,21 +63,23 @@
 
                 <!-- Poliklinik Yönlendirme -->
                 <div class="slider-slide" id="slide-2">
-                    <div class="slide-content">
-                        <div class="row align-items-center">
+                    <div class="slide-content" style="padding: 15px;">
+                        <div class="row align-items-center g-2">
                             <div class="col-lg-6 order-lg-1">
-                                <div class="slide-badge">
+                                <div class="slide-badge mb-2">
                                     <i class="fas fa-robot"></i>
                                     <span>Akıllı Yönlendirme</span>
                                 </div>
-                                <h2 class="slide-title">Yapay Zeka Destekli Poliklinik Yönlendirme</h2>
-                                <p class="slide-text">Şikayetlerinize göre hangi bölüme gitmeniz gerektiğini belirleyen yapay zeka sistemimiz, size en hızlı ve doğru şekilde yardımcı olmak için tasarlandı.</p>
-                                <a href="#" class="btn btn-primary">
-                                    <i class="fas fa-stethoscope me-2"></i>Poliklinik Bul
-                                </a>
+                                <h2 class="slide-title mb-2">Yapay Zeka Destekli Poliklinik Yönlendirme</h2>
+                                <p class="slide-text mb-3">Şikayetlerinize göre hangi bölüme gitmeniz gerektiğini belirleyen yapay zeka sistemimiz, size en hızlı ve doğru şekilde yardımcı olmak için tasarlandı.</p>
+                                <div class="btn-container d-none d-md-block">
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-stethoscope me-2"></i>Poliklinik Bul
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-lg-6 order-lg-2">
-                                <div class="ai-image-container">
+                                <div class="ai-image-container mt-2">
                                     <div class="ai-illustration">
                                         <i class="fas fa-brain"></i>
                                         <div class="ai-lines"></div>
@@ -81,6 +90,11 @@
                                         <div class="ai-decoration ai-pulse-3"></div>
                                     </div>
                                 </div>
+                                <div class="mobile-btn-container d-md-none text-center mt-3">
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-stethoscope me-2"></i>Poliklinik Bul
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,23 +102,23 @@
 
                 <!-- Randevu -->
                 <div class="slider-slide" id="slide-3" data-slide-type="calendar-slide">
-                    <div class="slide-content">
-                        <div class="row align-items-center">
+                    <div class="slide-content" style="padding: 15px;">
+                        <div class="row align-items-center g-2">
                             <div class="col-lg-6 order-lg-1">
-                                <div class="slide-badge">
+                                <div class="slide-badge mb-2">
                                     <i class="fas fa-calendar-check"></i>
                                     <span>Online Randevu</span>
                                 </div>
-                                <h2 class="slide-title">Hızlı ve Kolay Randevu Sistemi</h2>
-                                <p class="slide-text">Zaman ve mekandan bağımsız olarak, istediğiniz doktordan kolayca randevu alabilirsiniz. Sadece birkaç dakikanızı ayırarak sağlık hizmetimize erişin.</p>
-                                <div class="action-buttons">
+                                <h2 class="slide-title mb-2">Hızlı ve Kolay Randevu Sistemi</h2>
+                                <p class="slide-text mb-3">Zaman ve mekandan bağımsız olarak, istediğiniz doktordan kolayca randevu alabilirsiniz. Sadece birkaç dakikanızı ayırarak sağlık hizmetimize erişin.</p>
+                                <div class="btn-container d-none d-md-block">
                                     <a href="/Appointment/Book" class="btn btn-primary btn-randevu">
                                         <i class="fas fa-calendar-alt me-2"></i>Randevu Al
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6 order-lg-2">
-                                <div class="calendar-wrapper">
+                                <div class="calendar-wrapper mt-2">
                                     <div class="calendar-container">
                                         <div class="modern-calendar">
                                             <div class="calendar-header">
@@ -182,6 +196,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mobile-btn-container d-md-none text-center mt-3">
+                                    <a href="/Appointment/Book" class="btn btn-primary btn-randevu">
+                                        <i class="fas fa-calendar-alt me-2"></i>Randevu Al
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,21 +208,23 @@
 
                 <!-- Doktorlar -->
                 <div class="slider-slide" id="slide-4">
-                    <div class="slide-content">
-                        <div class="row align-items-center">
+                    <div class="slide-content" style="padding: 15px;">
+                        <div class="row align-items-center g-2">
                             <div class="col-lg-6 order-lg-1">
-                                <div class="slide-badge">
+                                <div class="slide-badge mb-2">
                                     <i class="fas fa-user-md"></i>
                                     <span>Uzman Kadro</span>
                                 </div>
-                                <h2 class="slide-title">Alanında Uzman Doktorlar</h2>
-                                <p class="slide-text">Meslek etiğini ilke edinmiş, deneyimli ve alanında uzman doktor kadromuzla sağlığınız için en iyi hizmeti sunuyoruz. Eğitim ve tecrübelerimiz ile hastaların tedavi süreçlerinde yanlarındayız.</p>
-                                <a href="/Appointment/Doctors" class="btn btn-primary">
-                                    <i class="fas fa-user-md me-2"></i>Doktorlarımız
-                                </a>
+                                <h2 class="slide-title mb-2">Alanında Uzman Doktorlar</h2>
+                                <p class="slide-text mb-3">Meslek etiğini ilke edinmiş, deneyimli ve alanında uzman doktor kadromuzla sağlığınız için en iyi hizmeti sunuyoruz. Eğitim ve tecrübelerimiz ile hastaların tedavi süreçlerinde yanlarındayız.</p>
+                                <div class="btn-container d-none d-md-block">
+                                    <a href="/Appointment/Doctors" class="btn btn-primary">
+                                        <i class="fas fa-user-md me-2"></i>Doktorlarımız
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-lg-6 order-lg-2">
-                                <div class="doctors-container">
+                                <div class="doctors-container mt-2">
                                     <div class="doctors-illustration">
                                         <div class="doctor-icon">
                                             <i class="fas fa-user-md fa-3x"></i>
@@ -215,6 +236,11 @@
                                             <i class="fas fa-user-md fa-3x"></i>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="mobile-btn-container d-md-none text-center mt-3">
+                                    <a href="/Appointment/Doctors" class="btn btn-primary">
+                                        <i class="fas fa-user-md me-2"></i>Doktorlarımız
+                                    </a>
                                 </div>
                             </div>
                         </div>

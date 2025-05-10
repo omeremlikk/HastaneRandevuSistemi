@@ -990,126 +990,7 @@ section {
   }
 }
 
-/* Mobil görünümde sıralama düzeltmesi - daha spesifik ve güçlü seçicilerle */
-@media (max-width: 767.98px) {
-  /* Tüm slider-slide'larda row içeriğini flex-column yapalım ve sırayı tersine çevirelim */
-  .slider-slide .row {
-    flex-direction: column !important;
-  }
-  
-  /* Her bir slider-slide için özel sıralama */
-  .slider-slide#slide-1 .row > div:nth-child(1),
-  .slider-slide#slide-2 .row > div:nth-child(1),
-  .slider-slide#slide-3 .row > div:nth-child(1),
-  .slider-slide#slide-4 .row > div:nth-child(1) {
-    order: 0 !important; /* Metin içeriği en üstte */
-  }
-  
-  .slider-slide#slide-1 .row > div:nth-child(2),
-  .slider-slide#slide-2 .row > div:nth-child(2),
-  .slider-slide#slide-3 .row > div:nth-child(2),
-  .slider-slide#slide-4 .row > div:nth-child(2) {
-    order: 1 !important; /* Görsel orta kısımda */
-    margin-top: 2rem !important;
-    margin-bottom: 2rem !important;
-  }
-  
-  /* Buton konteynerleri için daha belirgin aralık */
-  .action-buttons,
-  .slider-slide .btn {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-  
-  /* Görsel konteynerleri için en iyi görünüm */
-  .hospital-image-container, 
-  .ai-image-container, 
-  .calendar-wrapper, 
-  .doctors-container {
-    max-height: 250px !important;
-    min-height: auto !important;
-  }
-  
-  /* İçerik alanı padding ve margin ayarları */
-  .slide-content {
-    padding: 1.5rem !important;
-  }
-  
-  /* Daha iyi bir orantı için slide yüksekliği */
-  .slider-slide {
-    min-height: auto !important;
-    height: auto !important;
-    padding: 2rem 0;
-  }
-}
-
-/* Mobil görünümde sıralama düzeltmesi - daha spesifik ve güçlü seçicilerle */
-@media (max-width: 767.98px) {
-  /* Tüm slider-slide'larda row içeriğini flex-column yapalım */
-  .slider-slide .row {
-    flex-direction: column !important;
-    padding-top: 0 !important;
-  }
-  
-  /* Yazılar en üstte */
-  .slider-slide#slide-1 .row > div:nth-child(1),
-  .slider-slide#slide-2 .row > div:nth-child(1),
-  .slider-slide#slide-3 .row > div:nth-child(1),
-  .slider-slide#slide-4 .row > div:nth-child(1) {
-    order: 0 !important; 
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
-  
-  /* Butonları ortaya koyalım */
-  .slider-slide .btn,
-  .slider-slide .action-buttons {
-    order: 1 !important;
-    margin-top: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
-  /* Görselleri en alta koyalım */
-  .slider-slide#slide-1 .row > div:nth-child(2),
-  .slider-slide#slide-2 .row > div:nth-child(2),
-  .slider-slide#slide-3 .row > div:nth-child(2),
-  .slider-slide#slide-4 .row > div:nth-child(2) {
-    order: 2 !important; 
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  
-  /* Yazıların üstte olmasını sağlamak için ayarlamalar */
-  .slide-content {
-    padding-top: 0.5rem !important;
-    margin-top: 0 !important;
-  }
-  
-  /* Slide başlığı üstündeki boşluğu azaltalım */
-  .slide-badge {
-    margin-bottom: 0.8rem !important;
-  }
-  
-  .slide-title {
-    margin-top: 0 !important;
-    margin-bottom: 0.8rem !important;
-  }
-  
-  /* Butonlar için düzenleme */
-  .slider-slide .btn {
-    display: block !important;
-    width: 75% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-  
-  /* Slider yüksekliğini azaltalım */
-  .slider-slide {
-    padding-top: 0.5rem !important;
-  }
-}
-
-/* Modern Mobil Görünüm İyileştirmeleri - eski stiller */
+/* Modern Mobil Görünüm İyileştirmeleri */
 @media (max-width: 767.98px) {
   /* Genel Mobil Stillemeler */
   body {
@@ -1142,6 +1023,98 @@ section {
     margin-right: 6px;
   }
   
+  /* Mobil Slider İyileştirmeleri */
+  .slider-slide {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+  }
+  
+  .slider-wrapper {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .slide-content {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.95) 100%);
+    border-radius: 20px;
+    margin: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    padding: 25px;
+    position: relative;
+  }
+  
+  .slide-badge {
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.2));
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #2563eb;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.1);
+  }
+  
+  .slide-badge i {
+    font-size: 1rem;
+    margin-right: 8px;
+    background: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.15);
+    color: #2563eb;
+  }
+  
+  .slide-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+  
+  .slide-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #64748b;
+    margin-bottom: 20px;
+  }
+  
+  /* Buton İyileştirmeleri */
+  .btn {
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  }
+  
+  .btn-primary {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    border: none;
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+  
+  .btn i {
+    font-size: 0.9rem;
+  }
+
   /* Slider Nav İyileştirmeleri */
   .slider-arrow {
     width: 38px;
@@ -1193,6 +1166,55 @@ section {
     width: 20px;
     border-radius: 10px;
     background: #2563eb;
+  }
+  
+  /* İllüstrasyonlar ve Görsel İçerikler */
+  .hospital-image-container,
+  .ai-image-container,
+  .calendar-container,
+  .doctors-container {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .modern-hospital-graphic,
+  .ai-illustration,
+  .modern-calendar,
+  .doctors-illustration {
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.1);
+    border-radius: 16px;
+  }
+  
+  /* Takvim İyileştirmeleri */
+  .modern-calendar {
+    border: none;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+  }
+  
+  .calendar-header {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    padding: 15px;
+  }
+  
+  .calendar-weekdays {
+    background: #f8fafc;
+  }
+  
+  .calendar-days {
+    gap: 2px;
+    padding: 12px;
+  }
+  
+  .calendar-days .today {
+    background: linear-gradient(45deg, #2563eb, #3b82f6);
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.2);
   }
   
   /* Kart Stilleri */
@@ -1821,4 +1843,85 @@ section {
     transform: scale(1.15);
     filter: drop-shadow(0 8px 15px rgba(37, 99, 235, 0.3));
   }
+}
+
+/* Mobil düzenlemeler */
+@media screen and (max-width: 767px) {
+    .hero-slider-section {
+        padding-top: 20px !important;
+        margin-top: 0 !important;
+    }
+
+    .slider-slide {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 15px 0 !important;
+    }
+
+    .slider-slide .slide-content {
+        padding: 15px !important;
+        margin-top: 0 !important;
+    }
+
+    .slider-slide .slide-badge {
+        margin-bottom: 10px !important;
+    }
+
+    .slider-slide .slide-title {
+        margin-bottom: 12px !important;
+        font-size: 24px !important;
+    }
+
+    .slider-slide .slide-text {
+        margin-bottom: 15px !important;
+        font-size: 14px !important;
+    }
+
+    .slider-slide .hospital-image-container,
+    .slider-slide .ai-image-container,
+    .slider-slide .calendar-wrapper,
+    .slider-slide .doctors-container {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        padding: 10px !important;
+        height: 220px !important;
+    }
+
+    .slider-slide .mobile-btn-container {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .slider-slide .row > [class*='col-'] {
+        padding: 8px !important;
+    }
+
+    .modern-hospital-graphic,
+    .ai-illustration,
+    .modern-calendar,
+    .doctors-illustration {
+        height: 220px !important;
+        margin: 5px auto !important;
+        padding: 15px !important;
+    }
+
+    .slider-wrapper {
+        margin: 0 !important;
+        padding: 5px !important;
+    }
+
+    .slider-container {
+        margin: 0 !important;
+        padding: 5px !important;
+    }
+
+    .slider-slide .row {
+        margin: 0 -8px !important;
+    }
+
+    .hospital-icon,
+    .ai-illustration i,
+    .doctors-illustration .doctor-icon {
+        transform: scale(0.85) !important;
+    }
 }
