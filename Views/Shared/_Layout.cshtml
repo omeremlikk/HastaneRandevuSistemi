@@ -94,62 +94,115 @@
         @RenderBody()
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row gy-4">
-                <div class="col-lg-5">
-                    <div class="mb-3">
-                        <h4 class="footer-title">MediVita Sağlık Merkezi</h4>
-                        <p class="text-white-50">Uzman doktor kadromuz ve modern tıbbi teknolojimizle sağlığınız için en iyi hizmeti sunuyoruz.</p>
-                        <div class="social-icons">
-                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div>
-                        <h4 class="footer-title">Hızlı Erişim</h4>
-                        <a href="/" class="footer-link">Ana Sayfa</a>
-                        <a href="/Appointment/Doctors" class="footer-link">Doktorlarımız</a>
-                        <a href="/Appointment/Book" class="footer-link">Randevu Al</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div>
-                        <h4 class="footer-title">İletişim</h4>
-                        <div class="footer-contact">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="footer-contact-text">
-                                Atatürk Caddesi No:123, Şişli / İstanbul
+    <!-- Yeni Footer Bölümü -->
+    <footer class="site-footer pt-5">
+        <!-- Üst Footer Alanı -->
+        <div class="footer-top pb-4">
+            <div class="container">
+                <div class="row g-4">
+                    <!-- Logo ve Kısa Bilgi -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <div class="footer-logo mb-3">
+                                <a href="/" class="d-flex align-items-center text-decoration-none">
+                                    <i class="fas fa-heartbeat text-primary me-2 fa-2x"></i>
+                                    <span class="h3 fw-bold text-white mb-0">MediVita</span>
+                                </a>
+                            </div>
+                            <p class="mb-4 text-white-50">
+                                MediVita Sağlık Merkezi olarak 25 yıldır sağlığınız için en iyi hizmeti sunuyoruz. Uzman doktor kadromuz ve modern tıbbi teknolojimizle yanınızdayız.
+                            </p>
+                            <div class="footer-social-icons d-flex gap-3">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
-                        <div class="footer-contact">
-                            <i class="fas fa-phone-alt"></i>
-                            <div class="footer-contact-text">
-                                (0212) 123 45 67
-                            </div>
+                    </div>
+                    
+                    <!-- Hızlı Bağlantılar -->
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-widget-title">Hızlı Erişim</h4>
+                            <ul class="footer-links">
+                                <li><a href="/"><i class="fas fa-chevron-right"></i> Ana Sayfa</a></li>
+                                <li><a href="/Appointment/Doctors"><i class="fas fa-chevron-right"></i> Doktorlarımız</a></li>
+                                <li><a href="/Appointment/Book"><i class="fas fa-chevron-right"></i> Randevu Al</a></li>
+                                <li><a href="/Account/PatientLogin"><i class="fas fa-chevron-right"></i> Giriş Yap</a></li>
+                                <li><a href="/Account/Register"><i class="fas fa-chevron-right"></i> Üye Ol</a></li>
+                            </ul>
                         </div>
-                        <div class="footer-contact">
-                            <i class="fas fa-envelope"></i>
-                            <div class="footer-contact-text">
-                                info@medivita.com
+                    </div>
+                    
+                    <!-- Hizmetlerimiz -->
+                    <div class="col-lg-2 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-widget-title">Hizmetlerimiz</h4>
+                            <ul class="footer-links">
+                                <li><a href="#"><i class="fas fa-chevron-right"></i> Kardiyoloji</a></li>
+                                <li><a href="#"><i class="fas fa-chevron-right"></i> Nöroloji</a></li>
+                                <li><a href="#"><i class="fas fa-chevron-right"></i> Ortopedi</a></li>
+                                <li><a href="#"><i class="fas fa-chevron-right"></i> Göz Hastalıkları</a></li>
+                                <li><a href="#"><i class="fas fa-chevron-right"></i> Dahiliye</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- İletişim Bilgileri -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="footer-widget-title">İletişim Bilgileri</h4>
+                            <div class="footer-contact-info">
+                                <div class="footer-contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>Atatürk Caddesi No:123, Şişli / İstanbul</p>
+                                </div>
+                                <div class="footer-contact-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <p>
+                                        <a href="tel:+902121234567" class="text-decoration-none text-white-50">+90 (212) 123 45 67</a>
+                                    </p>
+                                </div>
+                                <div class="footer-contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <p>
+                                        <a href="mailto:info@medivita.com" class="text-decoration-none text-white-50">info@medivita.com</a>
+                                    </p>
+                                </div>
+                                <div class="footer-contact-item">
+                                    <i class="fas fa-clock"></i>
+                                    <p>Pazartesi - Cumartesi: 08:00 - 20:00</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="row footer-bottom">
-                <div class="col-md-12 text-center">
-                    <p class="mb-0 text-white-50">&copy; 2023 MediVita Sağlık Merkezi. Tüm hakları saklıdır.</p>
+        </div>
+        
+        <!-- Alt Footer Alanı -->
+        <div class="footer-bottom py-3">
+            <div class="container">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0 text-white-50">&copy; @DateTime.Now.Year MediVita Sağlık Merkezi. Tüm hakları saklıdır.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <ul class="footer-bottom-links">
+                            <li><a href="#">Gizlilik Politikası</a></li>
+                            <li><a href="#">Kullanım Şartları</a></li>
+                            <li><a href="#">Çerez Politikası</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Üst Çık Butonu -->
+        <div class="back-to-top" id="backToTop">
+            <i class="fas fa-arrow-up"></i>
         </div>
     </footer>
 
@@ -190,6 +243,28 @@
                     }
                 }
             });
+            
+            // Üst Çık Butonu 
+            const backToTopButton = document.getElementById('backToTop');
+            
+            if (backToTopButton) {
+                // Scroll kontrolü
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('show');
+                    } else {
+                        backToTopButton.classList.remove('show');
+                    }
+                });
+                
+                // Buton tıklama işlevi
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         });
     </script>
     
