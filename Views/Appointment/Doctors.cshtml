@@ -89,11 +89,17 @@
                                 <div class="col-md-6">
                                     <select class="form-select form-select-lg border-0 bg-light shadow-none">
                                         <option selected>Tüm Bölümler</option>
-                                        <option>Kardiyoloji</option>
-                                        <option>Nöroloji</option>
-                                        <option>Ortopedi</option>
-                                        <option>Göz Hastalıkları</option>
                                         <option>Dahiliye</option>
+                                        <option>KBB</option>
+                                        <option>Kardiyoloji</option>
+                                        <option>Dermatoloji</option>
+                                        <option>Göz Hastalıkları</option>
+                                        <option>Ortopedi</option>
+                                        <option>Nöroloji</option>
+                                        <option>Psikiyatri</option>
+                                        <option>Üroloji</option>
+                                        <option>Kadın Hastalıkları ve Doğum</option>
+                                        <option>Endokrinoloji</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -115,7 +121,7 @@
         <div class="row g-4">
             @foreach (var doctor in Model)
             {
-                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="@(Model.IndexOf(doctor) * 100)">
+                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="@(Math.Min(50, Model.IndexOf(doctor) * 25))">
                     <div class="doctor-card modern-card h-100 position-relative bg-white overflow-hidden">
                         <!-- Doktor Görsel Bölümü -->
                         <div class="doctor-banner-container">
