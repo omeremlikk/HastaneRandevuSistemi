@@ -47,7 +47,7 @@
                     <a href="#doctors-section" class="btn btn-primary btn-lg rounded-pill px-4 py-3 shadow-primary">
                         <i class="fas fa-user-md me-2"></i>Doktorlarımızı Keşfedin
                     </a>
-                    <a href="/Appointment/Book" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3">
+                    <a href="/Appointment/Randevu" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3">
                         <i class="fas fa-calendar-check me-2"></i>Randevu Al
                     </a>
                 </div>
@@ -111,56 +111,56 @@
             </div>
         </div>
 
-        <!-- Doktor Kartları -->
+        <!-- Doktor Kartları - Yeni Modern Tasarım -->
         <div class="row g-4">
             @foreach (var doctor in Model)
             {
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="@(Model.IndexOf(doctor) * 100)">
-                    <div class="doctor-card border-0 rounded-4 shadow-sm h-100 position-relative overflow-hidden bg-white doctor-card-hover">
-                        <div class="position-absolute top-0 end-0 m-3 z-index-1">
-                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-normal">
-                                <i class="fas fa-certificate me-1"></i>Uzman Hekim
-                            </span>
-                        </div>
-                        <div class="doctor-image-container position-relative">
-                            <img src="@doctor.ImageUrl" class="doctor-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
-                            <div class="doctor-overlay d-flex align-items-center justify-content-center">
-                                <div class="doctor-social d-flex gap-2">
-                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-twitter"></i></a>
-                                    <a href="#" class="btn btn-sm btn-light rounded-circle shadow-sm"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
+                    <div class="doctor-card modern-card h-100 position-relative bg-white overflow-hidden">
+                        <!-- Doktor Görsel Bölümü -->
+                        <div class="doctor-banner-container">
+                            <div class="doctor-specialty-badge">
+                                <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
+                            </div>
+                            <div class="doctor-image-wrapper">
+                                <img src="@doctor.ImageUrl" class="doctor-profile-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
                             </div>
                         </div>
-                        <div class="card-body p-4">
-                            <div class="doctor-specialty">
-                                <span class="badge bg-primary-subtle text-primary rounded-pill mb-3 px-3 py-2">
-                                    <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
-                                </span>
-                            </div>
-                            <h4 class="card-title mb-3">@doctor.Name</h4>
-                            <p class="card-text text-secondary mb-4">@doctor.Description</p>
-                            <hr class="my-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="doctor-rating">
+                        <!-- Doktor Bilgileri -->
+                        <div class="doctor-content p-4">
+                            <div class="doctor-credentials">
+                                <h4 class="doctor-name mb-2">@doctor.Name</h4>
+                                <div class="doctor-rating mb-3">
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star text-warning"></i>
                                     <i class="fas fa-star-half-alt text-warning"></i>
-                                    <span class="ms-1 small text-muted">(4.8)</span>
-                                </div>
-                                <div class="doctor-experience">
-                                    <span class="badge bg-light text-secondary px-3 py-2 rounded-pill">
-                                        <i class="fas fa-calendar-alt me-1"></i>10+ Yıl Deneyim
-                                    </span>
+                                    <span class="ms-1 rating-score">4.8</span>
                                 </div>
                             </div>
-                            <div class="d-grid gap-2 mt-4">
-                                <a asp-action="Book" asp-route-doctorId="@doctor.Id" class="btn btn-primary rounded-pill btn-shine">
-                                    <i class="fas fa-calendar-check me-2"></i>Randevu Al
-                                </a>
-                                <a asp-action="DoctorDetails" asp-route-id="@doctor.Id" class="btn btn-outline-primary rounded-pill">
+                            <p class="doctor-description mb-4">@doctor.Description</p>
+                            <div class="doctor-meta">
+                                <div class="doctor-meta-item">
+                                    <i class="fas fa-calendar-alt text-primary"></i>
+                                    <span>10+ Yıl Deneyim</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fas fa-user-graduate text-primary"></i>
+                                    <span>Uzman Hekim</span>
+                                </div>
+                                <div class="doctor-meta-item">
+                                    <i class="fas fa-comment-medical text-primary"></i>
+                                    <span>200+ Hasta</span>
+                                </div>
+                            </div>
+                            <div class="doctor-social-links mt-3 mb-4">
+                                <a href="#" class="doctor-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="doctor-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="doctor-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                            <div class="mt-auto">
+                                <a asp-action="DoctorDetails" asp-route-id="@doctor.Id" class="btn btn-outline-primary btn-details w-100">
                                     <i class="fas fa-info-circle me-2"></i>Detaylı Bilgi
                                 </a>
                             </div>
@@ -190,6 +190,54 @@
                         </li>
                     </ul>
                 </nav>
+            </div>
+        </div>
+        
+        <!-- Randevu Butonu - Yeni Modern Tasarım -->
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                <div class="card border-0 shadow-lg rounded-4 p-0 appointment-cta-card overflow-hidden">
+                    <!-- Dekoratif Elementler -->
+                    <div class="appointment-card-circles"></div>
+                    <div class="appointment-card-pattern"></div>
+                    
+                    <div class="card-body p-5 position-relative">
+                        <div class="cta-badge mx-auto mb-4">
+                            <i class="fas fa-calendar-alt me-2"></i>Online Randevu
+                        </div>
+                        <h3 class="cta-title mb-3">Doktorlarımızdan Randevu Almak İster Misiniz?</h3>
+                        <p class="cta-description mb-4">
+                            Uzman doktor kadromuzdan randevu almak için aşağıdaki butona tıklayarak randevu sayfamıza gidebilirsiniz.
+                            Size en uygun gün ve saatte randevunuzu oluşturabilirsiniz.
+                        </p>
+                        
+                        <div class="cta-features row mb-4 text-start">
+                            <div class="col-md-4">
+                                <div class="cta-feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Hızlı Randevu</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="cta-feature-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Esnek Takvim</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="cta-feature-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>SMS Hatırlatma</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="/Appointment/Randevu" class="btn-randevu">
+                            <span class="btn-randevu-text">Randevu Al</span>
+                            <i class="fas fa-chevron-right btn-randevu-icon"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -365,48 +413,161 @@
         right: 10%;
     }
     
-    /* Doktor kart ve resim stili */
-    .doctor-card-hover {
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        border: 2px solid transparent !important;
-    }
-    
-    .doctor-card-hover:hover {
-        transform: translateY(-10px);
-        border-color: var(--primary) !important;
-        box-shadow: 0 20px 30px rgba(0,0,0,0.1) !important;
-    }
-    
-    .doctor-image-container {
-        position: relative;
-        height: 160px;
+    /* Modern Doktor Kart Tasarımı */
+    .modern-card {
+        border-radius: 16px;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
-        border-top-left-radius: var(--border-radius);
-        border-top-right-radius: var(--border-radius);
-        background-color: #f5f7fa;
+        position: relative;
     }
     
-    .doctor-image {
+    .modern-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border-color: rgba(37, 99, 235, 0.3);
+    }
+    
+    .doctor-banner-container {
+        position: relative;
+        background: linear-gradient(120deg, #e0f2fe, #dbeafe);
+        padding: 1.5rem;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .doctor-specialty-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.4rem 1rem;
+        border-radius: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    }
+    
+    .doctor-image-wrapper {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: white;
+        padding: 5px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        border: 3px solid white;
+        overflow: hidden;
+    }
+    
+    .doctor-profile-image {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        background-color: #f5f7fa;
-        padding: 5px;
+        object-fit: cover;
+        border-radius: 50%;
         transition: transform 0.5s ease;
     }
     
-    .doctor-card-hover:hover .doctor-image {
-        transform: scale(1.05);
+    .modern-card:hover .doctor-profile-image {
+        transform: scale(1.08);
     }
     
-    .doctor-overlay {
-        background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+    .doctor-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding-top: 30px !important;
     }
     
-    .doctor-card-hover:hover .doctor-overlay {
-        opacity: 1;
+    .doctor-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+    
+    .doctor-rating {
+        display: flex;
+        align-items: center;
+    }
+    
+    .rating-score {
+        color: #666;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    
+    .doctor-description {
+        color: #666;
+        line-height: 1.6;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 1rem;
+    }
+    
+    .doctor-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .doctor-meta-item {
+        display: flex;
+        align-items: center;
+        background: rgba(37, 99, 235, 0.05);
+        padding: 6px 12px;
+        border-radius: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .doctor-meta-item i {
+        margin-right: 6px;
+    }
+    
+    .doctor-social-links {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .doctor-social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        transition: all 0.3s ease;
+    }
+    
+    .doctor-social-link:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    .btn-details {
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-details:hover {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
     }
     
     .btn-shine {
@@ -490,6 +651,14 @@
         color: white;
     }
     
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    }
+    
+    .text-white-50 {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    
     /* Responsive */
     @@media (max-width: 991px) {
         .doctors-hero {
@@ -504,6 +673,224 @@
         }
         .floating-badge {
             display: none;
+        }
+    }
+    
+    @@media (max-width: 767px) {
+        .doctor-banner-container {
+            height: 150px;
+        }
+        
+        .doctor-image-wrapper {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .doctor-meta {
+            flex-direction: column;
+        }
+    }
+    
+    /* Yeni Randevu CTA Bölümü Stilleri */
+    .appointment-cta-card {
+        background: linear-gradient(135deg, #f8faff 0%, #f1f6ff 100%);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        transform: translateY(0);
+        transition: all 0.4s ease;
+        border: 1px solid rgba(37, 99, 235, 0.1);
+    }
+    
+    .appointment-cta-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15) !important;
+    }
+    
+    .appointment-card-circles {
+        pointer-events: none;
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+        z-index: -1;
+    }
+    
+    .appointment-card-circles::before {
+        content: '';
+        position: absolute;
+        bottom: -80px;
+        left: -160px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.03) 100%);
+    }
+    
+    .appointment-card-pattern {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        z-index: -1;
+    }
+    
+    .cta-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.2) 100%);
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 14px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+        position: relative;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(37, 99, 235, 0.1);
+    }
+    
+    .cta-badge i {
+        font-size: 16px;
+    }
+    
+    .appointment-cta-card:hover .cta-badge {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    
+    .cta-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary) 0%, rgba(37, 99, 235, 0.3) 100%);
+        border-radius: 10px;
+    }
+    
+    .cta-description {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 80%;
+        margin: 0 auto 2rem;
+    }
+    
+    .cta-features {
+        margin-bottom: 30px;
+    }
+    
+    .cta-feature-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(37, 99, 235, 0.05);
+    }
+    
+    .cta-feature-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(37, 99, 235, 0.1);
+        background: white;
+    }
+    
+    .cta-feature-item i {
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-right: 10px;
+        width: 24px;
+        text-align: center;
+    }
+    
+    .cta-feature-item span {
+        font-weight: 600;
+        color: #555;
+    }
+    
+    .btn-randevu {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 40px;
+        background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        border-radius: 50px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        border: none;
+        z-index: 1;
+    }
+    
+    .btn-randevu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e40af 0%, var(--primary) 100%);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.4s ease;
+    }
+    
+    .btn-randevu:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+        color: white;
+    }
+    
+    .btn-randevu:hover::before {
+        opacity: 1;
+    }
+    
+    .btn-randevu-text {
+        margin-right: 10px;
+    }
+    
+    .btn-randevu-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-randevu:hover .btn-randevu-icon {
+        transform: translateX(4px);
+    }
+    
+    @@media (max-width: 767px) {
+        .cta-description {
+            max-width: 100%;
+        }
+        
+        .cta-feature-item {
+            margin-bottom: 10px;
         }
     }
 </style>
