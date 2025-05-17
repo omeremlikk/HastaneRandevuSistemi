@@ -1,1 +1,355 @@
- 
+@model List<Doctor>
+@{
+    ViewData["Title"] = "Randevu Takvimi";
+}
+
+<!-- Hero Section -->
+<section class="schedule-hero position-relative overflow-hidden" style="background: linear-gradient(135deg, #f5f9ff 0%, #ecf5ff 100%); min-height: 60vh; display: flex; align-items: center; padding-top: 80px; overflow: hidden;">
+    <!-- Arka plan deseni -->
+    <div class="hero-pattern"></div>
+    
+    <!-- Dalga şekli -->
+    <div class="wave-shape">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#f8f9fa" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </div>
+    
+    <div class="container position-relative py-5 mt-5">
+        <div class="row min-vh-40 align-items-center py-4">
+            <div class="col-lg-6 order-lg-1 py-4" data-aos="fade-right">
+                <div class="section-badge mb-3" data-aos="fade-up" data-aos-delay="100">
+                    <span><i class="fas fa-calendar-alt"></i> Randevu Takvimi</span>
+                </div>
+                <h1 class="display-4 fw-bold mb-4 text-gradient" data-aos="fade-up" data-aos-delay="200">
+                    Doktor <span class="highlight-text">Randevularını</span><br>Görüntüleyin
+                </h1>
+                <p class="lead mb-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
+                    Doktorlarımızın müsait olduğu saatleri görüntüleyebilir ve size en uygun zamanda randevu alabilirsiniz.
+                </p>
+                <div class="d-flex gap-3 mt-4 hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#schedule-section" class="btn btn-primary btn-lg rounded-pill px-4 py-3 shadow-primary">
+                        <i class="fas fa-calendar-check me-2"></i>Randevuları Görüntüle
+                    </a>
+                    <a href="/Appointment/Book" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3">
+                        <i class="fas fa-plus-circle me-2"></i>Yeni Randevu Al
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left" data-aos-delay="200">
+                <div class="schedule-hero-image position-relative">
+                    <div class="floating-badge badge-calendar" style="position: absolute; background: white; padding: 10px 15px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 14px; font-weight: 500; color: #333; z-index: 3; top: 15%; left: 5%;">
+                        <span><i class="fas fa-calendar-alt"></i> Kolay Randevu</span>
+                    </div>
+                    <div class="floating-badge badge-notification" style="position: absolute; background: white; padding: 10px 15px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 14px; font-weight: 500; color: #333; z-index: 3; top: 40%; right: 5%;">
+                        <span><i class="fas fa-bell"></i> Randevu Hatırlatmaları</span>
+                    </div>
+                    <div class="floating-badge badge-online" style="position: absolute; background: white; padding: 10px 15px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-size: 14px; font-weight: 500; color: #333; z-index: 3; bottom: 20%; left: 10%;">
+                        <span><i class="fas fa-globe"></i> Online Erişim</span>
+                    </div>
+                    <div class="calendar-illustration" style="background-color: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; width: 100%; max-width: 400px; margin: 0 auto;">
+                        <div class="calendar-header" style="background: var(--primary); color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 18px;">
+                            <span>Haziran 2025</span>
+                        </div>
+                        <div class="calendar-body" style="padding: 15px;">
+                            <div class="calendar-weekdays" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: bold; margin-bottom: 10px;">
+                                <div>Pt</div>
+                                <div>Sa</div>
+                                <div>Ça</div>
+                                <div>Pe</div>
+                                <div>Cu</div>
+                                <div>Ct</div>
+                                <div>Pz</div>
+                            </div>
+                            <div class="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;">
+                                <div class="prev-month" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; color: #ccc;">29</div>
+                                <div class="prev-month" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; color: #ccc;">30</div>
+                                <div class="prev-month" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; color: #ccc;">31</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">1</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">2</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">3</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">4</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">5</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">6</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">7</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">8</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">9</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">10</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">11</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">12</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">13</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">14</div>
+                                <div class="today" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; background-color: var(--primary); color: white;">15</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">16</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">17</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">18</div>
+                                <div class="available" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; background-color: rgba(40, 167, 69, 0.2); color: #28a745;">19</div>
+                                <div class="available" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; background-color: rgba(40, 167, 69, 0.2); color: #28a745;">20</div>
+                                <div class="booked" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; background-color: rgba(220, 53, 69, 0.2); color: #dc3545;">21</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">22</div>
+                                <div class="available" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; background-color: rgba(40, 167, 69, 0.2); color: #28a745;">23</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">24</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">25</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">26</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">27</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">28</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">29</div>
+                                <div style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;">30</div>
+                                <div class="next-month" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; color: #ccc;">1</div>
+                                <div class="next-month" style="height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; color: #ccc;">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Section -->
+<section id="schedule-section" class="py-5 bg-light position-relative">
+    <!-- Süsleme elemanları -->
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-square"></div>
+    
+    <div class="container py-5">
+        <!-- Başlık -->
+        <div class="row mb-5">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="section-badge mb-3 mx-auto d-inline-block" data-aos="fade-up">
+                    <span><i class="fas fa-calendar-alt"></i> Doktor Randevuları</span>
+                </div>
+                <h2 class="section-title text-center mb-3" data-aos="fade-up" data-aos-delay="100">Randevu Programı</h2>
+                <p class="text-secondary" data-aos="fade-up" data-aos-delay="200">Doktorlarımızın randevu programlarını görüntüleyebilir ve uygun bir zamanda randevu alabilirsiniz</p>
+            </div>
+        </div>
+        
+        <!-- Filtreleme ve Arama -->
+        <div class="row mb-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="schedule-filter mb-4 p-4 bg-white rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-4">
+                            <h5 class="fw-bold mb-1">Randevu Filtrele</h5>
+                            <p class="text-muted mb-0 small">Toplam @Model.Count doktor</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-md-5">
+                                    <select class="form-select form-select-lg border-0 bg-light shadow-none">
+                                        <option selected>Tüm Bölümler</option>
+                                        <option>Kardiyoloji</option>
+                                        <option>Nöroloji</option>
+                                        <option>Ortopedi</option>
+                                        <option>Göz Hastalıkları</option>
+                                        <option>Dahiliye</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control form-control-lg border-0 bg-light shadow-none">
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary w-100 btn-lg">
+                                        <i class="fas fa-search me-2"></i>Ara
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doktor Randevu Tabloları -->
+        @foreach (var doctor in Model)
+        {
+            <div class="row mb-5" data-aos="fade-up" data-aos-delay="@(Model.IndexOf(doctor) * 100)">
+                <div class="col-12">
+                    <div class="doctor-schedule-card bg-white rounded-4 shadow-sm overflow-hidden" style="transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div class="doctor-schedule-header p-4 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="doctor-avatar me-3">
+                                    <img src="@doctor.ImageUrl" class="rounded-circle" width="60" height="60" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'" style="object-fit: cover; border: 3px solid var(--primary);">
+                                </div>
+                                <div>
+                                    <h4 class="mb-1">@doctor.Name</h4>
+                                    <p class="mb-0 text-primary">
+                                        <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-none d-md-block">
+                                <a href="/Appointment/Book?doctorId=@doctor.Id" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-calendar-plus me-2"></i>Randevu Al
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="doctor-schedule-body p-4">
+                            <h5 class="mb-3">Bugünkü Randevular</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Saat</th>
+                                            <th>Durum</th>
+                                            <th class="d-none d-md-table-cell">Hasta</th>
+                                            <th class="d-none d-lg-table-cell">İşlem</th>
+                                            <th class="text-end">Randevu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>09:00</td>
+                                            <td><span class="badge bg-success">Müsait</span></td>
+                                            <td class="d-none d-md-table-cell">-</td>
+                                            <td class="d-none d-lg-table-cell">-</td>
+                                            <td class="text-end">
+                                                <a href="/Appointment/Book?doctorId=@doctor.Id&time=09:00" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                    <i class="fas fa-calendar-plus me-1"></i>Randevu Al
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>09:30</td>
+                                            <td><span class="badge bg-danger">Dolu</span></td>
+                                            <td class="d-none d-md-table-cell">Ahmet Y.</td>
+                                            <td class="d-none d-lg-table-cell">Kontrol</td>
+                                            <td class="text-end">
+                                                <button class="btn btn-sm btn-outline-secondary rounded-pill" disabled>
+                                                    <i class="fas fa-lock me-1"></i>Dolu
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>10:00</td>
+                                            <td><span class="badge bg-success">Müsait</span></td>
+                                            <td class="d-none d-md-table-cell">-</td>
+                                            <td class="d-none d-lg-table-cell">-</td>
+                                            <td class="text-end">
+                                                <a href="/Appointment/Book?doctorId=@doctor.Id&time=10:00" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                    <i class="fas fa-calendar-plus me-1"></i>Randevu Al
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>10:30</td>
+                                            <td><span class="badge bg-danger">Dolu</span></td>
+                                            <td class="d-none d-md-table-cell">Zeynep K.</td>
+                                            <td class="d-none d-lg-table-cell">İlk Muayene</td>
+                                            <td class="text-end">
+                                                <button class="btn btn-sm btn-outline-secondary rounded-pill" disabled>
+                                                    <i class="fas fa-lock me-1"></i>Dolu
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>11:00</td>
+                                            <td><span class="badge bg-success">Müsait</span></td>
+                                            <td class="d-none d-md-table-cell">-</td>
+                                            <td class="d-none d-lg-table-cell">-</td>
+                                            <td class="text-end">
+                                                <a href="/Appointment/Book?doctorId=@doctor.Id&time=11:00" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                    <i class="fas fa-calendar-plus me-1"></i>Randevu Al
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-grid d-md-none mt-3">
+                                <a href="/Appointment/Book?doctorId=@doctor.Id" class="btn btn-primary rounded-pill">
+                                    <i class="fas fa-calendar-plus me-2"></i>Randevu Al
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <!-- Pagination -->
+        <div class="row mt-5">
+            <div class="col-12 d-flex justify-content-center" data-aos="fade-up">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // AOS animasyonları için
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Takvim günlerini tıklanabilir yap
+        const calendarDays = document.querySelectorAll('.calendar-days div');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', function() {
+                if (!this.classList.contains('prev-month') && !this.classList.contains('next-month')) {
+                    alert('Seçilen tarih: Haziran ' + this.textContent + ', 2025');
+                }
+            });
+        });
+        
+        // Doktor kartları için hover efekti
+        const doctorCards = document.querySelectorAll('.doctor-schedule-card');
+        doctorCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)';
+            });
+        });
+        
+        // Mobil görünüm için
+        function adjustMobileView() {
+            if (window.innerWidth <= 767) {
+                const calendarIllustration = document.querySelector('.calendar-illustration');
+                if (calendarIllustration) {
+                    calendarIllustration.style.maxWidth = '300px';
+                }
+                
+                const calendarDays = document.querySelectorAll('.calendar-days div');
+                calendarDays.forEach(day => {
+                    day.style.height = '25px';
+                    day.style.fontSize = '12px';
+                });
+                
+                const floatingBadges = document.querySelectorAll('.floating-badge');
+                floatingBadges.forEach(badge => {
+                    badge.style.padding = '8px 12px';
+                    badge.style.fontSize = '12px';
+                });
+            }
+        }
+        
+        // Sayfa yüklendiğinde ve boyut değiştiğinde çalıştır
+        adjustMobileView();
+        window.addEventListener('resize', adjustMobileView);
+    });
+</script>
