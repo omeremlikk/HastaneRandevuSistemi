@@ -69,7 +69,7 @@ namespace hastane.Controllers
             return View(doctor);
         }
 
-        public IActionResult Schedule()
+        public IActionResult Randevu()
         {
             // Örnek olarak doktorları ve onların randevu durumlarını gösterelim
             var doctors = new List<Doctor>

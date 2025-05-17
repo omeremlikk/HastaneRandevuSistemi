@@ -2450,19 +2450,20 @@ section {
   position: relative;
   z-index: 1;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
 }
 
 .footer-widget {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .footer-widget-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   color: white;
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 .footer-widget-title::after {
@@ -2507,7 +2508,7 @@ section {
 }
 
 .footer-links li {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .footer-links li a {
@@ -2540,12 +2541,12 @@ section {
 .footer-contact-item {
   display: flex;
   gap: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .footer-contact-item i {
-  min-width: 40px;
-  height: 40px;
+  min-width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
@@ -2563,6 +2564,7 @@ section {
   background: rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1;
+  padding: 10px 0;
 }
 
 .footer-bottom-links {
