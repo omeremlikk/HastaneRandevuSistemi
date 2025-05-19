@@ -37,7 +37,7 @@
 <!-- Main Section -->
 <section class="py-5 bg-light position-relative">
     <div class="container py-4">
-        <div class="row">
+    <div class="row">
             <!-- Doktor ve Takvim Bölümü -->
             <div class="col-lg-4 mb-4">
                 @{
@@ -58,7 +58,7 @@
                                          alt="@selectedDoctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'" 
                                          style="object-fit: cover; border: 3px solid var(--primary);">
                                     <p class="card-text mb-4">@selectedDoctor.Description</p>
-                                    
+                    
                                     <!-- Müsaitlik Bilgisi -->
                                     <div class="availability-info mt-4">
                                         <h6 class="text-start mb-3"><i class="fas fa-calendar-check me-2"></i>Müsaitlik Durumu</h6>
@@ -160,7 +160,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    }
+                                }
                                 </div>
                             </div>
                         </div>
@@ -186,29 +186,29 @@
                                     <div class="invalid-feedback">
                                         Lütfen geçerli bir tarih seçin
                                     </div>
-                                </div>
-                                
+                            </div>
+                            
                                 <div class="col-md-6">
                                     <label asp-for="Appointment.Time" class="form-label">Randevu Saati<span class="text-danger">*</span></label>
                                     <select asp-for="Appointment.Time" class="form-select form-select-lg border-0 bg-light shadow-none" required>
                                         <option value="">Saat Seçin</option>
-                                        <option value="09:00:00">09:00</option>
-                                        <option value="09:30:00">09:30</option>
-                                        <option value="10:00:00">10:00</option>
-                                        <option value="10:30:00">10:30</option>
-                                        <option value="11:00:00">11:00</option>
-                                        <option value="11:30:00">11:30</option>
-                                        <option value="13:00:00">13:00</option>
-                                        <option value="13:30:00">13:30</option>
-                                        <option value="14:00:00">14:00</option>
+                                    <option value="09:00:00">09:00</option>
+                                    <option value="09:30:00">09:30</option>
+                                    <option value="10:00:00">10:00</option>
+                                    <option value="10:30:00">10:30</option>
+                                    <option value="11:00:00">11:00</option>
+                                    <option value="11:30:00">11:30</option>
+                                    <option value="13:00:00">13:00</option>
+                                    <option value="13:30:00">13:30</option>
+                                    <option value="14:00:00">14:00</option>
                                         <option value="14:30:00">14:30</option>
                                         <option value="15:00:00">15:00</option>
-                                    </select>
+                                </select>
                                     <div class="invalid-feedback">
                                         Lütfen bir saat seçin
-                                    </div>
-                                </div>
-                                
+                            </div>
+                        </div>
+                        
                                 <div class="col-12">
                                     <hr class="my-3">
                                     <h5 class="mb-3">Kişisel Bilgiler</h5>
@@ -220,8 +220,8 @@
                                     <div class="invalid-feedback">
                                         Ad soyad girmelisiniz
                                     </div>
-                                </div>
-                                
+                        </div>
+                        
                                 <div class="col-md-6">
                                     <label asp-for="Appointment.PatientPhone" class="form-label">Telefon<span class="text-danger">*</span></label>
                                     <input asp-for="Appointment.PatientPhone" type="tel" class="form-control form-control-lg border-0 bg-light shadow-none" required 
@@ -229,32 +229,32 @@
                                     <div class="invalid-feedback">
                                         Geçerli bir telefon numarası girin (5XX XXX XX XX)
                                     </div>
-                                </div>
-                                
+                            </div>
+                            
                                 <div class="col-md-6">
-                                    <label asp-for="Appointment.PatientEmail" class="form-label">E-posta</label>
+                                <label asp-for="Appointment.PatientEmail" class="form-label">E-posta</label>
                                     <input asp-for="Appointment.PatientEmail" type="email" class="form-control form-control-lg border-0 bg-light shadow-none" 
                                            placeholder="ornek@email.com" />
                                     <div class="invalid-feedback">
                                         Geçerli bir e-posta adresi girin
-                                    </div>
-                                </div>
-                                
+                            </div>
+                        </div>
+                        
                                 <div class="col-12">
                                     <label asp-for="Appointment.Notes" class="form-label">Randevu Notları</label>
                                     <textarea asp-for="Appointment.Notes" class="form-control form-control-lg border-0 bg-light shadow-none" 
                                               rows="3" placeholder="Şikayetleriniz, belirtiler veya diğer önemli bilgiler..."></textarea>
-                                </div>
-                                
+                        </div>
+                        
                                 <div class="col-12 mt-4">
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3">
-                                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
-                                        </button>
+                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
+                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                    </form>
                     </div>
                 </div>
             </div>
