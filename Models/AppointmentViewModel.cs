@@ -5,8 +5,13 @@ namespace hastane.Models
 {
     public class AppointmentViewModel
     {
+        public AppointmentViewModel()
+        {
+            Doctor = new Doctor();
+            Appointment = new Appointment();
+        }
+
+        public Doctor Doctor { get; set; }
         public Appointment Appointment { get; set; }
-        public List<Doctor> Doctors { get; set; }
-        public List<Department> Departments { get; set; }
     }
 } 

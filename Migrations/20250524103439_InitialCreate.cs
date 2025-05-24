@@ -20,8 +20,8 @@ namespace hastane.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,12 +36,18 @@ namespace hastane.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Specialty = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
+                    DepartmentId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Doctors_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -51,20 +57,43 @@ namespace hastane.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DoctorId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Time = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    AppointmentDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     PatientName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    PatientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    PatientEmail = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<int>(type: "INTEGER", nullable: false)
+                    PatientPhone = table.Column<string>(type: "TEXT", nullable: false),
+                    PatientEmail = table.Column<string>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Appointments_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DoctorAvailability",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DoctorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    StartTime = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    EndTime = table.Column<TimeSpan>(type: "TEXT", nullable: false),
+                    DayOfWeek = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AppointmentDuration = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorAvailability", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DoctorAvailability_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
@@ -91,26 +120,36 @@ namespace hastane.Migrations
 
             migrationBuilder.InsertData(
                 table: "Doctors",
-                columns: new[] { "Id", "Description", "ImageUrl", "Name", "Specialty" },
+                columns: new[] { "Id", "DepartmentId", "Description", "ImageUrl", "Name", "Specialty" },
                 values: new object[,]
                 {
-                    { 1, "İç hastalıkları alanında 12 yıllık deneyime sahip uzman doktor", "/img/doctors/doctor1.jpg", "Dr. Ahmet Yılmaz", "Dahiliye" },
-                    { 2, "Kulak, burun, boğaz hastalıkları konusunda deneyimli uzman", "/img/doctors/doctor3.jpg", "Dr. Mehmet Kaya", "KBB" },
-                    { 3, "Kalp ve damar hastalıkları konusunda 15 yıllık deneyim", "/img/doctors/doctor2.jpg", "Dr. Ali Öztürk", "Kardiyoloji" },
-                    { 4, "Cilt hastalıkları ve estetik dermatoloji konusunda uzman", "/img/doctors/doctor7.jpg", "Dr. Can Yücel", "Dermatoloji" },
-                    { 5, "Retina hastalıkları ve çocuk göz sağlığı konusunda uzmanlaşmış göz doktoru", "/img/doctors/doctor9.jpg", "Dr. Ece Şahin", "Göz Hastalıkları" },
-                    { 6, "Eklem hastalıkları ve spor yaralanmaları konusunda uzman ortopedist", "/img/doctors/doctor11.jpg", "Dr. Gamze Özkan", "Ortopedi" },
-                    { 7, "Baş ağrısı ve migren konusunda uzmanlaşmış nörolog", "/img/doctors/doctor13.jpg", "Dr. İrem Doğan", "Nöroloji" },
-                    { 8, "Depresyon ve anksiyete bozuklukları tedavisi konusunda uzman psikiyatrist", "/img/doctors/doctor15.jpg", "Dr. Kemal Tunç", "Psikiyatri" },
-                    { 9, "Prostat hastalıkları ve erkek üreme sağlığı konusunda uzman ürolog", "/img/doctors/doctor17.jpg", "Dr. Murat Ersoy", "Üroloji" },
-                    { 10, "Normal doğum ve riskli gebelik konusunda uzman jinekolog", "/img/doctors/doctor19.jpg", "Dr. Osman Kara", "Kadın Hastalıkları ve Doğum" },
-                    { 11, "Diyabet ve tiroid hastalıkları tedavisi konusunda uzman endokrinolog", "/img/doctors/doctor21.jpg", "Dr. Rıza Altın", "Endokrinoloji" }
+                    { 1, null, "", "/img/doctors/doctor1.jpg", "Dr. Ahmet Yılmaz", "Dahiliye" },
+                    { 2, null, "", "/img/doctors/doctor3.jpg", "Dr. Mehmet Kaya", "KBB" },
+                    { 3, null, "", "/img/doctors/doctor2.jpg", "Dr. Ali Öztürk", "Kardiyoloji" },
+                    { 4, null, "", "/img/doctors/doctor7.jpg", "Dr. Can Yücel", "Dermatoloji" },
+                    { 5, null, "", "/img/doctors/doctor9.jpg", "Dr. Ece Şahin", "Göz Hastalıkları" },
+                    { 6, null, "", "/img/doctors/doctor11.jpg", "Dr. Gamze Özkan", "Ortopedi" },
+                    { 7, null, "", "/img/doctors/doctor13.jpg", "Dr. İrem Doğan", "Nöroloji" },
+                    { 8, null, "", "/img/doctors/doctor15.jpg", "Dr. Kemal Tunç", "Psikiyatri" },
+                    { 9, null, "", "/img/doctors/doctor17.jpg", "Dr. Murat Ersoy", "Üroloji" },
+                    { 10, null, "", "/img/doctors/doctor19.jpg", "Dr. Osman Kara", "Kadın Hastalıkları ve Doğum" },
+                    { 11, null, "", "/img/doctors/doctor21.jpg", "Dr. Rıza Altın", "Endokrinoloji" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId",
                 table: "Appointments",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoctorAvailability_DoctorId",
+                table: "DoctorAvailability",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Doctors_DepartmentId",
+                table: "Doctors",
+                column: "DepartmentId");
         }
 
         /// <inheritdoc />
@@ -120,10 +159,13 @@ namespace hastane.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "DoctorAvailability");
 
             migrationBuilder.DropTable(
                 name: "Doctors");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
         }
     }
 }

@@ -11,8 +11,8 @@ using hastane.Data;
 namespace hastane.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250517141738_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250524104434_SimplifiedAppointmentModel")]
+    partial class SimplifiedAppointmentModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,40 +26,14 @@ namespace hastane.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("AppointmentDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PatientEmail")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PatientName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PatientPhone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<TimeSpan>("Time")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -76,12 +50,10 @@ namespace hastane.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -179,6 +151,9 @@ namespace hastane.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -186,7 +161,6 @@ namespace hastane.Migrations
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -201,13 +175,15 @@ namespace hastane.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Doctors");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Description = "İç hastalıkları alanında 12 yıllık deneyime sahip uzman doktor",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor1.jpg",
                             Name = "Dr. Ahmet Yılmaz",
                             Specialty = "Dahiliye"
@@ -215,7 +191,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "Kulak, burun, boğaz hastalıkları konusunda deneyimli uzman",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor3.jpg",
                             Name = "Dr. Mehmet Kaya",
                             Specialty = "KBB"
@@ -223,7 +199,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Kalp ve damar hastalıkları konusunda 15 yıllık deneyim",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor2.jpg",
                             Name = "Dr. Ali Öztürk",
                             Specialty = "Kardiyoloji"
@@ -231,7 +207,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "Cilt hastalıkları ve estetik dermatoloji konusunda uzman",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor7.jpg",
                             Name = "Dr. Can Yücel",
                             Specialty = "Dermatoloji"
@@ -239,7 +215,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 5,
-                            Description = "Retina hastalıkları ve çocuk göz sağlığı konusunda uzmanlaşmış göz doktoru",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor9.jpg",
                             Name = "Dr. Ece Şahin",
                             Specialty = "Göz Hastalıkları"
@@ -247,7 +223,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 6,
-                            Description = "Eklem hastalıkları ve spor yaralanmaları konusunda uzman ortopedist",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor11.jpg",
                             Name = "Dr. Gamze Özkan",
                             Specialty = "Ortopedi"
@@ -255,7 +231,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 7,
-                            Description = "Baş ağrısı ve migren konusunda uzmanlaşmış nörolog",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor13.jpg",
                             Name = "Dr. İrem Doğan",
                             Specialty = "Nöroloji"
@@ -263,7 +239,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 8,
-                            Description = "Depresyon ve anksiyete bozuklukları tedavisi konusunda uzman psikiyatrist",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor15.jpg",
                             Name = "Dr. Kemal Tunç",
                             Specialty = "Psikiyatri"
@@ -271,7 +247,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 9,
-                            Description = "Prostat hastalıkları ve erkek üreme sağlığı konusunda uzman ürolog",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor17.jpg",
                             Name = "Dr. Murat Ersoy",
                             Specialty = "Üroloji"
@@ -279,7 +255,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 10,
-                            Description = "Normal doğum ve riskli gebelik konusunda uzman jinekolog",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor19.jpg",
                             Name = "Dr. Osman Kara",
                             Specialty = "Kadın Hastalıkları ve Doğum"
@@ -287,11 +263,45 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 11,
-                            Description = "Diyabet ve tiroid hastalıkları tedavisi konusunda uzman endokrinolog",
+                            Description = "",
                             ImageUrl = "/img/doctors/doctor21.jpg",
                             Name = "Dr. Rıza Altın",
                             Specialty = "Endokrinoloji"
                         });
+                });
+
+            modelBuilder.Entity("hastane.Models.DoctorAvailability", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppointmentDuration")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorAvailability");
                 });
 
             modelBuilder.Entity("hastane.Models.Appointment", b =>
@@ -307,7 +317,32 @@ namespace hastane.Migrations
 
             modelBuilder.Entity("hastane.Models.Doctor", b =>
                 {
+                    b.HasOne("hastane.Models.Department", null)
+                        .WithMany("Doctors")
+                        .HasForeignKey("DepartmentId");
+                });
+
+            modelBuilder.Entity("hastane.Models.DoctorAvailability", b =>
+                {
+                    b.HasOne("hastane.Models.Doctor", "Doctor")
+                        .WithMany("Availabilities")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("hastane.Models.Department", b =>
+                {
+                    b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("hastane.Models.Doctor", b =>
+                {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Availabilities");
                 });
 #pragma warning restore 612, 618
         }

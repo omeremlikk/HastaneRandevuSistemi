@@ -1,22 +1,32 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace hastane.Models
 {
     public class Department
     {
+        public Department()
+        {
+            Name = string.Empty;
+            Description = string.Empty;
+            ImageUrl = string.Empty;
+            Doctors = new List<Doctor>();
+        }
+
         [Key]
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Bölüm adı zorunludur")]
+        [Required]
         [StringLength(100)]
         public string Name { get; set; }
         
-        [StringLength(500)]
+        [Required]
         public string Description { get; set; }
         
-        [StringLength(200)]
         public string ImageUrl { get; set; }
+        
+        public virtual ICollection<Doctor> Doctors { get; set; }
     }
 } 

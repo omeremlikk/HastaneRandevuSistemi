@@ -127,7 +127,7 @@
                         <div class="doctor-banner-container">
                             <div class="doctor-specialty-badge">
                                 <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
-                            </div>
+                        </div>
                             <div class="doctor-image-wrapper">
                                 <img src="@doctor.ImageUrl" class="doctor-profile-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
                             </div>
@@ -353,6 +353,35 @@
         </div>
     </div>
 </section>
+
+<!-- Randevu Modal -->
+<div class="modal fade" id="appointmentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0 bg-primary text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-calendar-alt me-2"></i>Randevu Durumu
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <h6 class="mb-4">Tarih Seçin</h6>
+                <div class="calendar-wrapper">
+                    <div class="calendar-nav d-flex align-items-center justify-content-between mb-3">
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="previousWeek()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div id="currentMonthYear" class="fw-bold"></div>
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="nextWeek()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="calendar-days d-flex gap-2 overflow-auto pb-2" id="calendarDays"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- CSS Eklemeleri -->
 <style>
@@ -780,7 +809,7 @@
             margin-bottom: 1rem;
         }
     }
-
+    
     /* Responsive */
     @@media (max-width: 991px) {
         .doctors-hero {
@@ -1046,8 +1075,8 @@
     
     .modal.show .modal-dialog {
         transform: scale(1);
-    }
-
+            }
+            
     /* Gradient Background */
     .bg-gradient-primary {
         background: linear-gradient(135deg, var(--primary) 0%, #2b5be0 100%);
@@ -1068,17 +1097,17 @@
         height: 100%;
         background-color: var(--primary);
         opacity: 0.2;
-    }
+                }
 
     .timeline-item:last-child:before {
-        display: none;
-    }
-
+                    display: none;
+                }
+                
     /* Work Hours Styling */
     .work-hours {
-        transition: all 0.3s ease;
-    }
-
+                    transition: all 0.3s ease;
+                }
+                
     .work-hours:hover {
         background-color: var(--primary) !important;
         color: white;
@@ -1096,207 +1125,123 @@
     @@media (max-width: 768px) {
         .modal-body {
             padding: 1.5rem;
-        }
-        
+                }
+                
         .work-hours {
             margin-bottom: 1rem;
         }
+    }
+
+    .calendar-day {
+        min-width: 100px;
+        padding: 10px;
+                    text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+                }
+                
+    .calendar-day:hover:not(.disabled) {
+        background-color: #e9ecef;
+    }
+
+    .calendar-day.active {
+        background-color: var(--bs-primary);
+        color: white;
+        border-color: var(--bs-primary);
+                }
+
+    .calendar-day.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #f8f9fa;
+    }
+
+    .calendar-days {
+        scrollbar-width: thin;
+        scrollbar-color: var(--bs-primary) #f1f1f1;
+    }
+
+    .calendar-days::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .calendar-days::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    .calendar-days::-webkit-scrollbar-thumb {
+        background: var(--bs-primary);
+        border-radius: 3px;
     }
 </style>
 
 @section Scripts {
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOM yüklendi, filtreleme kodu çalışıyor...");
-            
-            // AOS animasyonlarını devre dışı bırak - doktorların hepsi görünür olsun
-            if (typeof AOS !== 'undefined') {
-                // AOS özelliklerini sıfırla, animasyonları kaldır
-                document.querySelectorAll('[data-aos]').forEach(element => {
-                    // AOS'u kaldır ama orijinal sınıfları koru
-                    element.classList.add('aos-animate');
-                    // element.removeAttribute('data-aos');
-                    // element.removeAttribute('data-aos-delay');
-                });
-                console.log("AOS animasyonları sıfırlandı, tüm elemanlar görünür yapıldı");
-            }
-            
-            // DOM elemanlarını seç
-            const departmentSelect = document.querySelector('.form-select');
-            const searchInput = document.querySelector('.form-control');
-            const searchButton = document.querySelector('.btn-primary');
-            const doctorCards = document.querySelectorAll('.modern-card');
-            const resultContainer = document.querySelector('.row.g-4');
-            const resultText = document.querySelector('.text-muted.mb-0.small');
-            
-            console.log("Bulunan doktor sayısı:", doctorCards.length);
-            
-            if (!departmentSelect || !searchInput || !searchButton || !resultContainer) {
-                console.error("Filtreleme için gerekli DOM elemanları bulunamadı!");
-                return;
-            }
-            
-            // Tüm doktor kartlarını sayfa yüklendiğinde görünür hale getir
-            doctorCards.forEach(card => {
-                const container = card.closest('.col-md-6');
-                if (container) {
-                    container.style.display = 'block';
-                    container.classList.add('aos-animate');
-                }
+        let currentDate = new Date();
+        let selectedDoctorId = null;
+
+        function showAppointmentModal(doctorId) {
+            selectedDoctorId = doctorId;
+            currentDate = new Date(); // Reset to today
+            updateCalendar();
+            $('#appointmentModal').modal('show');
+        }
+
+        function updateCalendar() {
+            const calendarDays = $('#calendarDays');
+            calendarDays.empty();
+                    
+            // Ay ve yıl gösterimi
+            const monthYear = currentDate.toLocaleDateString('tr-TR', { 
+                month: 'long', 
+                year: 'numeric' 
             });
-            
-            // Hızlı CSS stili ekleme
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .doctor-card-hidden {
-                    opacity: 0;
-                    transform: translateY(10px);
-                    pointer-events: none;
-                    display: none;
-                }
+            $('#currentMonthYear').text(monthYear);
+
+            // 7 günlük takvim oluştur
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(currentDate);
+                date.setDate(date.getDate() + i);
+
+                const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+                const isPastDate = date < new Date().setHours(0,0,0,0);
+                const isAvailable = !isWeekend && !isPastDate;
+
+                const dayElement = $('<div>', {
+                    class: `calendar-day ${!isAvailable ? 'disabled' : ''} ${isWeekend ? 'text-danger' : ''}`,
+                    'data-date': date.toISOString().split('T')[0]
+                }).html(`
+                    <div class="day-name small">${date.toLocaleDateString('tr-TR', { weekday: 'long' })}</div>
+                    <div class="day-number fw-bold">${date.getDate()}</div>
+                    <div class="month-name small">${date.toLocaleDateString('tr-TR', { month: 'long' })}</div>
+                    <div class="availability-badge small ${isAvailable ? 'text-success' : 'text-danger'}">
+                        ${isAvailable ? '<i class="fas fa-check-circle"></i> Müsait' : '<i class="fas fa-times-circle"></i> Kapalı'}
+                    </div>
+                `);
                 
-                .doctor-card-visible {
-                    opacity: 1;
-                    transform: translateY(0);
-                    transition: all 0.3s ease;
-                }
-                
-                .highlight {
-                    background-color: rgba(37, 99, 235, 0.15);
-                    border-radius: 2px;
-                    padding: 0 2px;
-                }
-                
-                .no-results {
-                    background-color: #f8f9fa;
-                    padding: 30px;
-                    border-radius: 10px;
-                    text-align: center;
-                    margin: 20px 0;
-                    display: none;
-                }
-                
-                /* Sayfa yüklenirken tüm doktorların görünür olmasını sağla */
-                [data-aos] {
-                    opacity: 1 !important;
-                    transform: none !important;
-                    visibility: visible !important;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Sonuç bulunamadı elemanını ekle
-            const noResults = document.createElement('div');
-            noResults.className = 'no-results col-12';
-            noResults.innerHTML = `
-                <div class="py-5">
-                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
-                    <h4>Sonuç Bulunamadı</h4>
-                    <p class="text-muted">Arama kriterlerinize uygun doktor bulunamadı.</p>
-                    <button id="resetFilters" class="btn btn-outline-primary mt-2">
-                        <i class="fas fa-redo me-2"></i>Filtreleri Sıfırla
-                    </button>
-                </div>
-            `;
-            resultContainer.appendChild(noResults);
-            
-            // Filtreleme işlevi
-            function filterDoctors() {
-                const searchTerm = searchInput.value.trim().toLowerCase();
-                const department = departmentSelect.value;
-                
-                console.log("Filtreleme: Arama=", searchTerm, "Bölüm=", department);
-                
-                let visibleCount = 0;
-                
-                // Tüm doktor kartlarını kontrol et - AOS durumuna bakılmaksızın
-                doctorCards.forEach(card => {
-                    // Gerekli metinleri al
-                    const name = card.querySelector('.doctor-name')?.textContent.toLowerCase() || "";
-                    const specialty = card.querySelector('.doctor-specialty-badge')?.textContent.toLowerCase() || "";
-                    const description = card.querySelector('.doctor-description')?.textContent.toLowerCase() || "";
-                    
-                    // Filtreleme kuralları uygula
-                    let showBySearch = true;
-                    let showByDepartment = true;
-                    
-                    // Arama filtresi
-                    if (searchTerm) {
-                        showBySearch = name.includes(searchTerm) || 
-                                      specialty.includes(searchTerm) || 
-                                      description.includes(searchTerm);
-                    }
-                    
-                    // Bölüm filtresi
-                    if (department !== "Tüm Bölümler") {
-                        showByDepartment = specialty.includes(department.toLowerCase());
-                    }
-                    
-                    // Kart konteynerini bul
-                    const container = card.closest('.col-md-6');
-                    
-                    // Gösterme veya gizleme
-                    if (showBySearch && showByDepartment) {
-                        container.style.display = 'block';
-                        visibleCount++;
-                    } else {
-                        container.style.display = 'none';
-                    }
-                });
-                
-                // Sonuç bulunamadı gösterimi
-                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-                
-                // Sonuç sayısını göster
-                if (resultText) {
-                    resultText.textContent = `Toplam ${visibleCount}/${doctorCards.length} uzman doktor gösteriliyor`;
-                }
-                
-                console.log("Filtreleme sonucu:", visibleCount, "doktor gösteriliyor");
-            }
-            
-            // Filtreleri sıfırla
-            function resetFilters() {
-                searchInput.value = '';
-                departmentSelect.selectedIndex = 0;
-                
-                doctorCards.forEach(card => {
-                    const container = card.closest('.col-md-6');
-                    container.style.display = 'block';
-                });
-                
-                noResults.style.display = 'none';
-                
-                if (resultText) {
-                    resultText.textContent = `Toplam ${doctorCards.length}/${doctorCards.length} uzman doktor gösteriliyor`;
-                }
-                
-                console.log("Filtreler sıfırlandı");
-            }
-            
-            // Olay dinleyicileri ekle
-            searchButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                filterDoctors();
+                if (isAvailable) {
+                    dayElement.click(function() {
+                        $('.calendar-day').removeClass('active');
+                        $(this).addClass('active');
+                        window.location.href = `/Appointment/Book/${selectedDoctorId}?date=${$(this).data('date')}`;
             });
-            
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    filterDoctors();
                 }
-            });
-            
-            departmentSelect.addEventListener('change', filterDoctors);
-            
-            document.getElementById('resetFilters').addEventListener('click', resetFilters);
-            
-            // Sayfa yüklendiğinde sonuç sayısını göster
-            if (resultText) {
-                resultText.textContent = `Toplam ${doctorCards.length}/${doctorCards.length} uzman doktor gösteriliyor`;
+
+                calendarDays.append(dayElement);
             }
-            
-            console.log("Filtreleme kodu hazır");
-        });
+        }
+
+        function previousWeek() {
+            currentDate.setDate(currentDate.getDate() - 7);
+            updateCalendar();
+        }
+
+        function nextWeek() {
+            currentDate.setDate(currentDate.getDate() + 7);
+            updateCalendar();
+        }
     </script>
 }

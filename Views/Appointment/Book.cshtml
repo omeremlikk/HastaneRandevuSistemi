@@ -1,362 +1,364 @@
 @model AppointmentViewModel
 @{
     ViewData["Title"] = "Randevu Al";
+    var today = DateTime.Now;
+    var currentMonth = today.ToString("MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"));
 }
 
-<!-- Hero Section -->
-<section class="book-hero position-relative overflow-hidden" style="background: linear-gradient(135deg, #f5f9ff 0%, #ecf5ff 100%); min-height: 40vh; display: flex; align-items: center; padding-top: 80px; overflow: hidden;">
-    <!-- Dalga şekli -->
-    <div class="wave-shape">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#f8f9fa" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-    </div>
-    
-    <div class="container position-relative py-4">
-        <div class="row align-items-center">
-            <div class="col-lg-6 py-4" data-aos="fade-right">
-                <div class="section-badge mb-3" data-aos="fade-up" data-aos-delay="100">
-                    <span><i class="fas fa-calendar-plus"></i> Randevu Al</span>
-                </div>
-                <h1 class="display-4 fw-bold mb-4 text-gradient" data-aos="fade-up" data-aos-delay="200">
-                    Randevunuzu <span class="highlight-text">Hemen</span><br>Oluşturun
-                </h1>
-                <p class="lead mb-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
-                    Aşağıdaki formu doldurarak kolayca randevu alabilirsiniz. Doktorumuzun müsait olduğu saatleri görerek size en uygun zamanı seçebilirsiniz.
-                </p>
-            </div>
-            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                <div class="book-hero-image position-relative text-center">
-                    <img src="/img/appointment.svg" alt="Randevu" class="img-fluid" style="max-height: 300px;" onerror="this.src='/img/doctors/doctor1.jpg'; this.style.maxHeight='200px'; this.style.borderRadius='15px';">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Main Section -->
-<section class="py-5 bg-light position-relative">
-    <div class="container py-4">
+<div class="container py-5">
     <div class="row">
-            <!-- Doktor ve Takvim Bölümü -->
-            <div class="col-lg-4 mb-4">
-                @{
-                    int? selectedDoctorId = null;
-                    if (Context.Request.Query.ContainsKey("doctorId") && int.TryParse(Context.Request.Query["doctorId"], out int doctorId))
-                    {
-                        selectedDoctorId = doctorId;
-                        var selectedDoctor = Model.Doctors.FirstOrDefault(d => d.Id == doctorId);
-                        if (selectedDoctor != null)
-                        {
-                            <div class="card shadow-sm rounded-4 border-0 h-100">
-                                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-                                    <h5 class="card-title mb-0">@selectedDoctor.Name</h5>
-                                    <p class="mb-0">@selectedDoctor.Specialty</p>
-                                </div>
-                                <div class="card-body p-4 text-center">
-                                    <img src="@selectedDoctor.ImageUrl" class="rounded-circle mb-3" width="120" height="120" 
-                                         alt="@selectedDoctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'" 
-                                         style="object-fit: cover; border: 3px solid var(--primary);">
-                                    <p class="card-text mb-4">@selectedDoctor.Description</p>
-                    
-                                    <!-- Müsaitlik Bilgisi -->
-                                    <div class="availability-info mt-4">
-                                        <h6 class="text-start mb-3"><i class="fas fa-calendar-check me-2"></i>Müsaitlik Durumu</h6>
-                                        <div class="date-selector mb-3">
-                                            <div class="date-scroller d-flex gap-2 overflow-auto pb-2">
-                                                @for (int i = 0; i < 5; i++)
-                                                {
-                                                    string dateClass = i == 0 ? "active bg-primary text-white" : "";
-                                                    <div class="date-item text-center @dateClass p-2 rounded" style="min-width: 70px; cursor: pointer; border: 1px solid #dee2e6;">
-                                                        <div class="date-weekday small">@(new[] { "Pzt", "Sal", "Çar", "Per", "Cum" }[i])</div>
-                                                        <div class="date-day fs-5 fw-bold">@(DateTime.Now.AddDays(i).Day)</div>
-                                                        <div class="date-month small">@(DateTime.Now.AddDays(i).ToString("MMM"))</div>
-                                                    </div>
-                                                }
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Müsait Saatler -->
-                                        <div class="available-slots">
-                                            <h6 class="text-start mb-2">Müsait Saatler</h6>
-                                            <div class="row row-cols-3 g-2 mb-3">
-                                                @{
-                                                    var timeSlots = new[] { "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "13:30", "14:00", "14:30", "15:00" };
-                                                    var available = new[] { true, false, true, false, true, true, true, false, true, true };
-                                                }
-                                                
-                                                @for (int i = 0; i < timeSlots.Length; i++)
-                                                {
-                                                    bool isAvailable = available[i];
-                                                    string slotClass = isAvailable ? "bg-light" : "bg-light text-muted";
-                                                    string slotDisabled = isAvailable ? "" : "disabled";
-                                                    
-                                                    <div class="col">
-                                                        <div class="time-slot p-2 text-center rounded @slotClass" 
-                                                             style="cursor: pointer; border: 1px solid #dee2e6;" @slotDisabled>
-                                                            <span class="small">@timeSlots[i]</span>
-                                                            @if (!isAvailable)
-                                                            {
-                                                                <i class="fas fa-lock ms-1 small"></i>
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="card shadow-sm rounded-4 border-0 mb-4">
-                                <div class="card-body p-4">
-                                    <h5 class="mb-3">Doktor Seçin</h5>
-                                    <p class="text-muted">Randevu almak istediğiniz doktoru seçerek müsaitlik durumunu görüntüleyebilirsiniz.</p>
-                                    <div class="row row-cols-1 g-3">
-                                        @foreach (var doctor in Model.Doctors)
-                                        {
-                                            <div class="col">
-                                                <a href="/Appointment/Book?doctorId=@doctor.Id" class="text-decoration-none">
-                                                    <div class="doctor-select-item d-flex align-items-center p-3 rounded-3 bg-white shadow-sm" 
-                                                         style="transition: all 0.3s ease;">
-                                                        <img src="@doctor.ImageUrl" class="rounded-circle me-3" width="50" height="50" 
-                                                             alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'" 
-                                                             style="object-fit: cover; border: 2px solid var(--primary);">
-                                                        <div>
-                                                            <h6 class="mb-0">@doctor.Name</h6>
-                                                            <p class="mb-0 small text-muted">@doctor.Specialty</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="card shadow-sm rounded-4 border-0 mb-4">
-                            <div class="card-body p-4">
-                                <h5 class="mb-3">Doktor Seçin</h5>
-                                <p class="text-muted">Randevu almak istediğiniz doktoru seçerek müsaitlik durumunu görüntüleyebilirsiniz.</p>
-                                <div class="row row-cols-1 g-3">
-                                    @foreach (var doctor in Model.Doctors)
-                                    {
-                                        <div class="col">
-                                            <a href="/Appointment/Book?doctorId=@doctor.Id" class="text-decoration-none">
-                                                <div class="doctor-select-item d-flex align-items-center p-3 rounded-3 bg-white shadow-sm" 
-                                                     style="transition: all 0.3s ease;">
-                                                    <img src="@doctor.ImageUrl" class="rounded-circle me-3" width="50" height="50" 
-                                                         alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'" 
-                                                         style="object-fit: cover; border: 2px solid var(--primary);">
-                                                    <div>
-                                                        <h6 class="mb-0">@doctor.Name</h6>
-                                                        <p class="mb-0 small text-muted">@doctor.Specialty</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                }
-                                </div>
-                            </div>
+        <!-- Sol Taraf - Doktor Bilgileri -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <img src="@Model.Doctor.ImageUrl" alt="@Model.Doctor.Name" 
+                         class="rounded-circle mb-3" 
+                         style="width: 120px; height: 120px; object-fit: cover;">
+                    <h4 class="mb-2">@Model.Doctor.Name</h4>
+                    <p class="text-muted">@Model.Doctor.Specialty</p>
+                    <hr>
+                    <div class="text-start">
+                        <h6 class="mb-3"><i class="fas fa-clock me-2"></i>Çalışma Saatleri</h6>
+                        <div class="mb-2 d-flex justify-content-between">
+                            <span>Pazartesi - Cuma</span>
+                            <span class="text-primary">09:00 - 17:00</span>
                         </div>
-                    }
-                }
-            </div>
-            
-            <!-- Randevu Formu -->
-            <div class="col-lg-8">
-                <div class="card shadow-sm rounded-4 border-0">
-                    <div class="card-body p-4">
-                        <h4 class="card-title mb-4 border-start border-4 border-primary ps-3">Randevu Bilgileri</h4>
-                        
-                        <form asp-action="Book" method="post" class="needs-validation" novalidate>
-                            <input type="hidden" asp-for="Appointment.DoctorId" 
-                                   value="@(selectedDoctorId ?? 0)" />
-                            
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label asp-for="Appointment.Date" class="form-label">Randevu Tarihi<span class="text-danger">*</span></label>
-                                    <input asp-for="Appointment.Date" type="date" class="form-control form-control-lg border-0 bg-light shadow-none" required 
-                                           min="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                                    <div class="invalid-feedback">
-                                        Lütfen geçerli bir tarih seçin
-                                    </div>
-                            </div>
-                            
-                                <div class="col-md-6">
-                                    <label asp-for="Appointment.Time" class="form-label">Randevu Saati<span class="text-danger">*</span></label>
-                                    <select asp-for="Appointment.Time" class="form-select form-select-lg border-0 bg-light shadow-none" required>
-                                        <option value="">Saat Seçin</option>
-                                    <option value="09:00:00">09:00</option>
-                                    <option value="09:30:00">09:30</option>
-                                    <option value="10:00:00">10:00</option>
-                                    <option value="10:30:00">10:30</option>
-                                    <option value="11:00:00">11:00</option>
-                                    <option value="11:30:00">11:30</option>
-                                    <option value="13:00:00">13:00</option>
-                                    <option value="13:30:00">13:30</option>
-                                    <option value="14:00:00">14:00</option>
-                                        <option value="14:30:00">14:30</option>
-                                        <option value="15:00:00">15:00</option>
-                                </select>
-                                    <div class="invalid-feedback">
-                                        Lütfen bir saat seçin
-                            </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Cumartesi - Pazar</span>
+                            <span class="text-danger">Kapalı</span>
                         </div>
-                        
-                                <div class="col-12">
-                                    <hr class="my-3">
-                                    <h5 class="mb-3">Kişisel Bilgiler</h5>
-                                </div>
-                                
-                                <div class="col-md-12">
-                                    <label asp-for="Appointment.PatientName" class="form-label">Ad Soyad<span class="text-danger">*</span></label>
-                                    <input asp-for="Appointment.PatientName" class="form-control form-control-lg border-0 bg-light shadow-none" required />
-                                    <div class="invalid-feedback">
-                                        Ad soyad girmelisiniz
-                                    </div>
-                        </div>
-                        
-                                <div class="col-md-6">
-                                    <label asp-for="Appointment.PatientPhone" class="form-label">Telefon<span class="text-danger">*</span></label>
-                                    <input asp-for="Appointment.PatientPhone" type="tel" class="form-control form-control-lg border-0 bg-light shadow-none" required 
-                                           pattern="[0-9]{10}" placeholder="5XX XXX XX XX" />
-                                    <div class="invalid-feedback">
-                                        Geçerli bir telefon numarası girin (5XX XXX XX XX)
-                                    </div>
-                            </div>
-                            
-                                <div class="col-md-6">
-                                <label asp-for="Appointment.PatientEmail" class="form-label">E-posta</label>
-                                    <input asp-for="Appointment.PatientEmail" type="email" class="form-control form-control-lg border-0 bg-light shadow-none" 
-                                           placeholder="ornek@email.com" />
-                                    <div class="invalid-feedback">
-                                        Geçerli bir e-posta adresi girin
-                            </div>
-                        </div>
-                        
-                                <div class="col-12">
-                                    <label asp-for="Appointment.Notes" class="form-label">Randevu Notları</label>
-                                    <textarea asp-for="Appointment.Notes" class="form-control form-control-lg border-0 bg-light shadow-none" 
-                                              rows="3" placeholder="Şikayetleriniz, belirtiler veya diğer önemli bilgiler..."></textarea>
-                        </div>
-                        
-                                <div class="col-12 mt-4">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3">
-                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
-                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
+        <!-- Sağ Taraf - Randevu Formu -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="mb-4">Randevu Bilgileri</h4>
+                    <form asp-action="Create" method="post" id="appointmentForm">
+                        <input type="hidden" asp-for="Appointment.DoctorId" value="@Model.Doctor.Id" />
+                        <input type="hidden" name="Appointment.AppointmentDateTime" id="selectedDateTime" />
+
+                        <!-- Takvim -->
+                        <div class="mb-4">
+                            <label class="form-label">Randevu Tarihi</label>
+                            <div class="simple-calendar bg-white border rounded p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button type="button" class="btn btn-sm btn-light" id="prevMonth">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <h6 class="mb-0" id="currentMonthYear">@currentMonth</h6>
+                                    <button type="button" class="btn btn-sm btn-light" id="nextMonth">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <table class="table table-calendar mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Pt</th>
+                                            <th>Sa</th>
+                                            <th>Ça</th>
+                                            <th>Pe</th>
+                                            <th>Cu</th>
+                                            <th>Ct</th>
+                                            <th>Pa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="calendarDays"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Saat Seçimi -->
+                        <div class="mb-4">
+                            <label class="form-label">Randevu Saati</label>
+                            <div class="time-slots d-flex flex-wrap gap-2" id="timeSlots"></div>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100" id="submitButton" disabled>
+                                <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.table-calendar {
+    table-layout: fixed;
+}
+
+.table-calendar th {
+    text-align: center;
+    font-weight: 500;
+    color: #666;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.table-calendar td {
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.calendar-day {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.calendar-day:not(.disabled):hover {
+    background-color: #e9ecef;
+}
+
+.calendar-day.selected {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.calendar-day.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--bs-primary);
+}
+
+.time-slot {
+    padding: 8px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.time-slot:not(.disabled):hover {
+    border-color: var(--bs-primary);
+    background-color: #e9ecef;
+}
+
+.time-slot.selected {
+    background-color: var(--bs-primary);
+    color: white;
+    border-color: var(--bs-primary);
+}
+
+.time-slot.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
+
+@section Scripts {
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // AOS animasyonları
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 800,
-                once: true
-            });
+    let currentDate = new Date();
+    let selectedDate = null;
+    let selectedTime = null;
+    const submitButton = document.getElementById('submitButton');
+    const calendarDays = document.getElementById('calendarDays');
+    const timeSlots = document.getElementById('timeSlots');
+    const currentMonthYear = document.getElementById('currentMonthYear');
+    const selectedDateTime = document.getElementById('selectedDateTime');
+    const appointmentForm = document.getElementById('appointmentForm');
+
+    // Form submit işlemi
+    appointmentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!selectedDate || !selectedTime) {
+            alert('Lütfen tarih ve saat seçiniz.');
+            return;
         }
+
+        // Seçilen tarih ve saati birleştir
+        const [hours, minutes] = selectedTime.split(':');
+        const appointmentDateTime = new Date(selectedDate);
+        appointmentDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
         
-        // Form doğrulama
-        const forms = document.querySelectorAll('.needs-validation');
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
+        // Hidden input'a değeri set et
+        selectedDateTime.value = appointmentDateTime.toISOString();
+
+        // Form verilerini topla
+        const formData = new FormData(this);
+
+        // Anti-forgery token'ı al
+        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
         
-        // Tarih seçici
-        const dateItems = document.querySelectorAll('.date-item');
-        dateItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Aktif sınıfını kaldır
-                dateItems.forEach(el => {
-                    el.classList.remove('active');
-                    el.classList.remove('bg-primary');
-                    el.classList.remove('text-white');
-                });
-                
-                // Seçilen öğeyi aktif yap
-                this.classList.add('active');
-                this.classList.add('bg-primary');
-                this.classList.add('text-white');
-                
-                // Tarih değerini form'a ekle
-                const day = this.querySelector('.date-day').textContent;
-                const month = this.querySelector('.date-month').textContent;
-                const year = new Date().getFullYear();
-                
-                // Ay adını ayın sayısal değerine dönüştür
-                const monthNames = ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
-                const monthIndex = monthNames.indexOf(month);
-                const formattedDate = `${year}-${(monthIndex + 1).toString().padStart(2, '0')}-${day.padStart(2, '0')}`;
-                
-                document.querySelector('input[type="date"]').value = formattedDate;
-            });
-        });
-        
-        // Saat seçici
-        const timeSlots = document.querySelectorAll('.time-slot:not([disabled])');
-        timeSlots.forEach(slot => {
-            slot.addEventListener('click', function() {
-                // Aktif sınıfını kaldır
-                timeSlots.forEach(el => {
-                    el.classList.remove('bg-primary');
-                    el.classList.remove('text-white');
-                });
-                
-                // Seçilen öğeyi aktif yap
-                this.classList.add('bg-primary');
-                this.classList.add('text-white');
-                
-                // Saat değerini form'a ekle
-                const time = this.querySelector('span').textContent.trim();
-                const formattedTime = `${time}:00`;
-                
-                // Select içinde bu değeri ara ve seç
-                const timeSelect = document.querySelector('select[name="Appointment.Time"]');
-                for (let i = 0; i < timeSelect.options.length; i++) {
-                    if (timeSelect.options[i].text === time) {
-                        timeSelect.selectedIndex = i;
-                        break;
-                    }
-                }
-            });
-        });
-        
-        // Doktor seçim kartı için hover efekti
-        const doctorItems = document.querySelectorAll('.doctor-select-item');
-        doctorItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px)';
-                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                this.style.backgroundColor = '#f8f9fa';
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)';
-                this.style.backgroundColor = '#fff';
-            });
+        // AJAX isteği gönder
+        fetch('/Appointment/Create', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'RequestVerificationToken': token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert('Bir hata oluştu. Lütfen tekrar deneyin.');
         });
     });
+
+    function updateCalendar() {
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const startingDay = (firstDay.getDay() + 6) % 7; // Pazartesi = 0
+        
+        currentMonthYear.textContent = currentDate.toLocaleString('tr-TR', { month: 'long', year: 'numeric' });
+        calendarDays.innerHTML = '';
+
+        let currentRow = document.createElement('tr');
+        
+        // Önceki ayın günleri
+        for (let i = 0; i < startingDay; i++) {
+            const prevDate = new Date(firstDay);
+            prevDate.setDate(prevDate.getDate() - (startingDay - i));
+            const td = createDayCell(prevDate, true);
+            currentRow.appendChild(td);
+        }
+
+        // Bu ayın günleri
+        for (let i = 1; i <= lastDay.getDate(); i++) {
+            if ((i + startingDay - 1) % 7 === 0 && i !== 1) {
+                calendarDays.appendChild(currentRow);
+                currentRow = document.createElement('tr');
+            }
+
+            const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+            const td = createDayCell(date);
+            currentRow.appendChild(td);
+        }
+
+        // Sonraki ayın günleri
+        const remainingCells = 7 - currentRow.children.length;
+        if (remainingCells < 7) {
+            for (let i = 1; i <= remainingCells; i++) {
+                const nextDate = new Date(lastDay);
+                nextDate.setDate(nextDate.getDate() + i);
+                const td = createDayCell(nextDate, true);
+                currentRow.appendChild(td);
+            }
+        }
+
+        calendarDays.appendChild(currentRow);
+    }
+
+    function createDayCell(date, isOtherMonth = false) {
+        const td = document.createElement('td');
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        dayDiv.textContent = date.getDate();
+        
+        const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+        const isPast = date < new Date().setHours(0,0,0,0);
+        const isToday = date.toDateString() === new Date().toDateString();
+        const isSelected = selectedDate?.toDateString() === date.toDateString();
+
+        if (isOtherMonth || isWeekend || isPast) {
+            dayDiv.classList.add('disabled');
+        } else {
+            dayDiv.addEventListener('click', () => selectDate(date));
+        }
+
+        if (isToday) dayDiv.classList.add('today');
+        if (isSelected) dayDiv.classList.add('selected');
+
+        td.appendChild(dayDiv);
+        return td;
+    }
+
+    function selectDate(date) {
+        selectedDate = date;
+        selectedTime = null;
+        document.querySelectorAll('.calendar-day').forEach(day => day.classList.remove('selected'));
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            if (parseInt(day.textContent) === date.getDate() && !day.classList.contains('disabled')) {
+                day.classList.add('selected');
+            }
+        });
+        updateTimeSlots();
+        checkFormValidity();
+    }
+
+    function updateTimeSlots() {
+        if (!selectedDate) return;
+
+        const doctorId = document.querySelector('input[name="Appointment.DoctorId"]').value;
+        
+        fetch(`/Appointment/GetAvailableSlots?doctorId=${doctorId}&date=${selectedDate.toISOString()}`)
+            .then(response => response.json())
+            .then(data => {
+                timeSlots.innerHTML = '';
+                
+                data.forEach(slot => {
+                    const slotDiv = document.createElement('div');
+                    slotDiv.className = `time-slot ${!slot.available ? 'disabled' : ''}`;
+                    slotDiv.textContent = slot.time;
+                    
+                    if (slot.available) {
+                        slotDiv.addEventListener('click', () => selectTime(slot.time, slotDiv));
+                    }
+                    
+                    if (selectedTime === slot.time) {
+                        slotDiv.classList.add('selected');
+                    }
+                    
+                    timeSlots.appendChild(slotDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Saat bilgileri alınırken hata oluştu:', error);
+            });
+    }
+
+    function selectTime(time, element) {
+        selectedTime = time;
+        document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
+        element.classList.add('selected');
+        checkFormValidity();
+    }
+
+    function checkFormValidity() {
+        submitButton.disabled = !(selectedDate && selectedTime);
+    }
+
+    // Ay değiştirme butonları
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateCalendar();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateCalendar();
+    });
+
+    // Başlangıçta takvimi göster
+    updateCalendar();
+    });
 </script>
+}

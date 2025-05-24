@@ -28,13 +28,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\hastane.v1xf71e4qn.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1125"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 14:39:58 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1125"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 May 2025 10:51:35 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/hastane/hastane.v1xf71e4qn.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\hastane.v1xf71e4qn.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"v1xf71e4qn"},{"Name":"integrity","Value":"sha256-E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc="},{"Name":"label","Value":"_content/hastane/hastane.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1125"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 14:39:58 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1125"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022E0BbtpXwDTp/BRWfJaDk9AU/lOoFNXHqNDqHpBFlltc=\u0022"},{"Name":"Last-Modified","Value":"Sat, 24 May 2025 10:51:35 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/hastane/img/doctors/doctor1.1vlubmvtmo.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\doctors\doctor1.jpg'))</AssetFile>
