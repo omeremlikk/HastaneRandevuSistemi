@@ -5,6 +5,16 @@ namespace hastane.Models
 {
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            FullName = string.Empty;
+            IdentityNumber = string.Empty;
+            Email = string.Empty;
+            Phone = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
+        }
+
         [Required(ErrorMessage = "Ad Soyad zorunludur")]
         [Display(Name = "Ad Soyad")]
         public string FullName { get; set; }

@@ -5,6 +5,12 @@ namespace hastane.Models
 {
     public class LoginViewModel
     {
+        public LoginViewModel()
+        {
+            Email = string.Empty;
+            Password = string.Empty;
+        }
+
         [Required(ErrorMessage = "E-posta adresi zorunludur")]
         [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi giriniz")]
         [Display(Name = "E-posta")]

@@ -21,6 +21,16 @@ namespace hastane.Models
 
     public class Appointment
     {
+        public Appointment()
+        {
+            PatientName = string.Empty;
+            PatientPhone = string.Empty;
+            PatientEmail = string.Empty;
+            Notes = string.Empty;
+            CreatedAt = DateTime.Now;
+            Status = AppointmentStatus.Pending;
+        }
+
         [Key]
         public int Id { get; set; }
         

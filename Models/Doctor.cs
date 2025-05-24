@@ -7,6 +7,15 @@ namespace hastane.Models
 {
     public class Doctor
     {
+        public Doctor()
+        {
+            Name = string.Empty;
+            Specialty = string.Empty;
+            ImageUrl = string.Empty;
+            Description = string.Empty;
+            Appointments = new List<Appointment>();
+        }
+
         [Key]
         public int Id { get; set; }
         
