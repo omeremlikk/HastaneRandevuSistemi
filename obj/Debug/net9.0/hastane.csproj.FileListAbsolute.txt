@@ -220,3 +220,5 @@ C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\refint\hastane.dll
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\hastane.pdb
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\hastane.genruntimeconfig.cache
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\ref\hastane.dll
+C:\Users\Ömer\Desktop\hastane\bin\Debug\net9.0\PolTahmin\olusturulanveri.json
+C:\Users\Ömer\Desktop\hastane\bin\Debug\net9.0\PolTahmin\veri.json

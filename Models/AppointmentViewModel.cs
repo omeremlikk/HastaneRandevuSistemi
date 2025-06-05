@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace hastane.Models
 {
@@ -11,7 +11,9 @@ namespace hastane.Models
             Appointment = new Appointment();
         }
 
-        public Doctor Doctor { get; set; }
+        public Doctor? Doctor { get; set; }
+        
+        [Required(ErrorMessage = "Randevu bilgileri gereklidir.")]
         public Appointment Appointment { get; set; }
     }
 } 

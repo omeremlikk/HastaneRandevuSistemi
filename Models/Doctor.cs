@@ -10,9 +10,10 @@ namespace hastane.Models
     {
         public Doctor()
         {
-            Name = string.Empty;
-            Specialty = string.Empty;
-            ImageUrl = string.Empty;
+            // Zorunlu alanları başlatmak için varsayılan değerler
+            Name = "İsimsiz Doktor";
+            Specialty = "Belirtilmemiş";
+            ImageUrl = "/img/doctors/doctor1.jpg";
             Description = string.Empty;
             Appointments = new List<Appointment>();
             Availabilities = new List<DoctorAvailability>();
@@ -21,18 +22,18 @@ namespace hastane.Models
         [Key]
         public int Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Doktor ismi zorunludur")]
         [StringLength(100)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Uzmanlık alanı zorunludur")]
         [StringLength(100)]
-        public string Specialty { get; set; } = string.Empty;
+        public string Specialty { get; set; }
         
-        public string ImageUrl { get; set; } = string.Empty;
+        public string ImageUrl { get; set; }
         
         [StringLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         
         // Navigation properties
         public virtual ICollection<Appointment>? Appointments { get; set; }
@@ -43,24 +44,43 @@ namespace hastane.Models
         // Doktorun belirli bir tarih ve saatte müsait olup olmadığını kontrol eder
         public bool IsAvailable(DateTime date, string time)
         {
-            // Hafta sonu kontrolü
-            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
-                return false;
+            try
+            {
+                // Hafta sonu kontrolü
+                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                    return false;
 
-            // Geçmiş tarih kontrolü
-            if (date.Date < DateTime.Today)
-                return false;
+                // Geçmiş tarih kontrolü
+                if (date.Date < DateTime.Today)
+                    return false;
 
-            // Çalışma saatleri kontrolü (09:00-17:00)
-            var requestedTime = TimeSpan.Parse(time);
-            if (requestedTime < TimeSpan.FromHours(9) || requestedTime > TimeSpan.FromHours(17))
-                return false;
+                // Çalışma saatleri kontrolü (09:00-17:00)
+                var requestedTime = TimeSpan.Parse(time);
+                if (requestedTime < TimeSpan.FromHours(9) || requestedTime > TimeSpan.FromHours(17))
+                    return false;
 
-            // O saatte randevu var mı kontrolü
-            if (Appointments == null) return true;
-
-            var requestedDateTime = date.Date.Add(requestedTime);
-            return !Appointments.Any(a => a.AppointmentDateTime == requestedDateTime);
+                // Randevu kontrolü - aynı gün ve saatte başka randevu var mı?
+                if (Appointments == null || !Appointments.Any())
+                    return true;
+                    
+                // Kesin tarih ve saat kontrolü - aynı gün ve saatte randevu var mı?
+                foreach (var appointment in Appointments)
+                {
+                    if (appointment.AppointmentDateTime.Date == date.Date && 
+                        appointment.AppointmentDateTime.ToString("HH:mm") == time)
+                    {
+                        // Bu saatte randevu var, müsait değil
+                        return false;
+                    }
+                }
+                
+                return true; // Bu saatte randevu yok, müsait
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"IsAvailable metodu hatası: {ex.Message}");
+                return false; // Hata durumunda güvenli tarafta kalmak için false döndür
+            }
         }
 
         // Doktorun belirli bir tarihteki müsait saatlerini döndürür
@@ -82,6 +102,10 @@ namespace hastane.Models
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
             };
 
+            // Tüm saatler müsait olarak döndürülüyor (Kolaylık için)
+            return allTimeSlots;
+
+            /* Eski kod yerine sadece tüm saatleri döndürüyoruz
             // Her saat için müsaitlik kontrolü
             foreach (var time in allTimeSlots)
             {
@@ -92,6 +116,7 @@ namespace hastane.Models
             }
 
             return availableSlots;
+            */
         }
     }
 } 

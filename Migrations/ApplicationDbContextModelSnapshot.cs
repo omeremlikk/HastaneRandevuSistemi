@@ -152,7 +152,6 @@ namespace hastane.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
@@ -180,7 +179,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "",
+                            Description = "Dahiliye uzmanı olarak 10 yılı aşkın deneyime sahip",
                             ImageUrl = "/img/doctors/doctor1.jpg",
                             Name = "Dr. Ahmet Yılmaz",
                             Specialty = "Dahiliye"
@@ -188,7 +187,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "",
+                            Description = "Kulak Burun Boğaz hastalıkları konusunda uzman hekim",
                             ImageUrl = "/img/doctors/doctor3.jpg",
                             Name = "Dr. Mehmet Kaya",
                             Specialty = "KBB"
@@ -196,7 +195,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "",
+                            Description = "Kalp ve damar hastalıkları konusunda deneyimli uzman",
                             ImageUrl = "/img/doctors/doctor2.jpg",
                             Name = "Dr. Ali Öztürk",
                             Specialty = "Kardiyoloji"
@@ -204,7 +203,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "",
+                            Description = "Cilt hastalıkları ve estetik dermatoloji uzmanı",
                             ImageUrl = "/img/doctors/doctor7.jpg",
                             Name = "Dr. Can Yücel",
                             Specialty = "Dermatoloji"
@@ -212,7 +211,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 5,
-                            Description = "",
+                            Description = "Göz hastalıkları ve cerrahi operasyonlar konusunda uzman",
                             ImageUrl = "/img/doctors/doctor9.jpg",
                             Name = "Dr. Ece Şahin",
                             Specialty = "Göz Hastalıkları"
@@ -220,7 +219,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 6,
-                            Description = "",
+                            Description = "Ortopedi ve travmatoloji uzmanı",
                             ImageUrl = "/img/doctors/doctor11.jpg",
                             Name = "Dr. Gamze Özkan",
                             Specialty = "Ortopedi"
@@ -228,7 +227,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 7,
-                            Description = "",
+                            Description = "Nörolojik hastalıklar konusunda deneyimli uzman",
                             ImageUrl = "/img/doctors/doctor13.jpg",
                             Name = "Dr. İrem Doğan",
                             Specialty = "Nöroloji"
@@ -236,7 +235,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 8,
-                            Description = "",
+                            Description = "Psikiyatri ve psikoterapi konusunda uzman hekim",
                             ImageUrl = "/img/doctors/doctor15.jpg",
                             Name = "Dr. Kemal Tunç",
                             Specialty = "Psikiyatri"
@@ -244,7 +243,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 9,
-                            Description = "",
+                            Description = "Üroloji ve androloji uzmanı",
                             ImageUrl = "/img/doctors/doctor17.jpg",
                             Name = "Dr. Murat Ersoy",
                             Specialty = "Üroloji"
@@ -252,7 +251,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 10,
-                            Description = "",
+                            Description = "Kadın hastalıkları ve doğum uzmanı",
                             ImageUrl = "/img/doctors/doctor19.jpg",
                             Name = "Dr. Osman Kara",
                             Specialty = "Kadın Hastalıkları ve Doğum"
@@ -260,7 +259,7 @@ namespace hastane.Migrations
                         new
                         {
                             Id = 11,
-                            Description = "",
+                            Description = "Endokrinoloji ve metabolizma hastalıkları uzmanı",
                             ImageUrl = "/img/doctors/doctor21.jpg",
                             Name = "Dr. Rıza Altın",
                             Specialty = "Endokrinoloji"

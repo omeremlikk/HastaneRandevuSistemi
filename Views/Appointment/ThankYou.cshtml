@@ -1,59 +1,26 @@
 @{
-    ViewData["Title"] = "Randevu Onayı";
+    ViewData["Title"] = "Randevu Başarıyla Oluşturuldu";
 }
 
-<section class="thank-you-section py-5 bg-light" style="margin-top: 80px;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="thank-you-card bg-white p-5 rounded-4 shadow-sm text-center" data-aos="zoom-in" style="transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                    <div class="success-icon mb-4" style="display: inline-block; position: relative;">
-                        <i class="fas fa-check-circle text-success fa-5x"></i>
-                        <span style="content: ''; position: absolute; width: 100px; height: 100px; background-color: rgba(40, 167, 69, 0.1); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1;"></span>
-                    </div>
-                    
-                    <h2 class="section-title mb-4">Randevunuz Başarıyla Oluşturuldu!</h2>
-                    
-                    <p class="lead text-muted mb-4">
-                        Randevu talebiniz başarıyla alınmıştır. Randevu detaylarınız e-posta adresinize gönderilecektir.
-                    </p>
-                    
-                    <div class="appointment-details p-4 mb-4 bg-light rounded-3" style="border-left: 4px solid var(--primary);">
-                        <div class="row g-3">
-                            <div class="col-md-6 text-md-start text-center">
-                                <p class="mb-1 text-muted small">Randevu Numarası</p>
-                                <p class="fw-bold mb-0">APT-@(new Random().Next(10000, 99999))</p>
-                            </div>
-                            <div class="col-md-6 text-md-end text-center">
-                                <p class="mb-1 text-muted small">Tarih</p>
-                                <p class="fw-bold mb-0">@DateTime.Now.AddDays(5).ToString("dd.MM.yyyy")</p>
-                            </div>
-                            <div class="col-12">
-                                <hr class="my-2">
-                            </div>
-                            <div class="col-md-6 text-md-start text-center">
-                                <p class="mb-1 text-muted small">Doktor</p>
-                                <p class="fw-bold mb-0">Dr. Ahmet Yılmaz</p>
-                            </div>
-                            <div class="col-md-6 text-md-end text-center">
-                                <p class="mb-1 text-muted small">Bölüm</p>
-                                <p class="fw-bold mb-0">Kardiyoloji</p>
-                            </div>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <div class="d-inline-flex justify-content-center align-items-center bg-success bg-opacity-10 rounded-circle mb-3"
+                             style="width: 100px; height: 100px;">
+                            <i class="fas fa-check-circle text-success fa-4x"></i>
                         </div>
+                        <h2 class="fw-bold mb-3">Randevunuz Başarıyla Oluşturuldu!</h2>
+                        <p class="text-muted">Randevu detaylarınız e-posta adresinize gönderilecektir.</p>
                     </div>
                     
-                    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
-                        <i class="fas fa-info-circle me-3 fa-lg"></i>
-                        <div>
-                            Randevunuzdan 15 dakika önce hastanede olmanız gerekmektedir. Lütfen kimlik kartınızı ve sağlık sigortası bilgilerinizi yanınızda bulundurunuz.
-                        </div>
-                    </div>
-                    
-                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
-                        <a href="/Appointment/Randevu" class="btn btn-primary rounded-pill px-4 py-2">
-                            <i class="fas fa-calendar-alt me-2"></i>Randevularım
+                    <div class="d-flex flex-column gap-3">
+                        <a href="/Appointment/Randevu" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>Yeni Randevu Al
                         </a>
-                        <a href="/" class="btn btn-outline-secondary rounded-pill px-4 py-2">
+                        <a href="/" class="btn btn-outline-secondary">
                             <i class="fas fa-home me-2"></i>Ana Sayfaya Dön
                         </a>
                     </div>
@@ -61,35 +28,9 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Hover efekti için
-        const card = document.querySelector('.thank-you-card');
-        if (card) {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-                this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.1)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)';
-            });
-        }
-        
-        // Mobil görünüm için
-        function adjustPadding() {
-            if (window.innerWidth <= 767 && card) {
-                card.style.padding = '2rem';
-            } else if (card) {
-                card.style.padding = '3rem';
-            }
-        }
-        
-        // Sayfa yüklendiğinde ve boyut değiştiğinde çalıştır
-        adjustPadding();
-        window.addEventListener('resize', adjustPadding);
-    });
+    // ThankYou sayfasından geri döndüğünde randevu sayfasını yenilemek için
+    sessionStorage.setItem('refreshNeeded', 'true');
 </script>

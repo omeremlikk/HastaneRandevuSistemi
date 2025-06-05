@@ -42,17 +42,83 @@ namespace hastane.Data
 
             // Seed Doctors
             modelBuilder.Entity<Doctor>().HasData(
-                new Doctor { Id = 1, Name = "Dr. Ahmet Yılmaz", Specialty = "Dahiliye", ImageUrl = "/img/doctors/doctor1.jpg" },
-                new Doctor { Id = 2, Name = "Dr. Mehmet Kaya", Specialty = "KBB", ImageUrl = "/img/doctors/doctor3.jpg" },
-                new Doctor { Id = 3, Name = "Dr. Ali Öztürk", Specialty = "Kardiyoloji", ImageUrl = "/img/doctors/doctor2.jpg" },
-                new Doctor { Id = 4, Name = "Dr. Can Yücel", Specialty = "Dermatoloji", ImageUrl = "/img/doctors/doctor7.jpg" },
-                new Doctor { Id = 5, Name = "Dr. Ece Şahin", Specialty = "Göz Hastalıkları", ImageUrl = "/img/doctors/doctor9.jpg" },
-                new Doctor { Id = 6, Name = "Dr. Gamze Özkan", Specialty = "Ortopedi", ImageUrl = "/img/doctors/doctor11.jpg" },
-                new Doctor { Id = 7, Name = "Dr. İrem Doğan", Specialty = "Nöroloji", ImageUrl = "/img/doctors/doctor13.jpg" },
-                new Doctor { Id = 8, Name = "Dr. Kemal Tunç", Specialty = "Psikiyatri", ImageUrl = "/img/doctors/doctor15.jpg" },
-                new Doctor { Id = 9, Name = "Dr. Murat Ersoy", Specialty = "Üroloji", ImageUrl = "/img/doctors/doctor17.jpg" },
-                new Doctor { Id = 10, Name = "Dr. Osman Kara", Specialty = "Kadın Hastalıkları ve Doğum", ImageUrl = "/img/doctors/doctor19.jpg" },
-                new Doctor { Id = 11, Name = "Dr. Rıza Altın", Specialty = "Endokrinoloji", ImageUrl = "/img/doctors/doctor21.jpg" }
+                new Doctor { 
+                    Id = 1, 
+                    Name = "Dr. Ahmet Yılmaz", 
+                    Specialty = "Dahiliye", 
+                    ImageUrl = "/img/doctors/doctor1.jpg",
+                    Description = "Dahiliye uzmanı olarak 10 yılı aşkın deneyime sahip"
+                },
+                new Doctor { 
+                    Id = 2, 
+                    Name = "Dr. Mehmet Kaya", 
+                    Specialty = "KBB", 
+                    ImageUrl = "/img/doctors/doctor3.jpg",
+                    Description = "Kulak Burun Boğaz hastalıkları konusunda uzman hekim"
+                },
+                new Doctor { 
+                    Id = 3, 
+                    Name = "Dr. Ali Öztürk", 
+                    Specialty = "Kardiyoloji", 
+                    ImageUrl = "/img/doctors/doctor2.jpg",
+                    Description = "Kalp ve damar hastalıkları konusunda deneyimli uzman"
+                },
+                new Doctor { 
+                    Id = 4, 
+                    Name = "Dr. Can Yücel", 
+                    Specialty = "Dermatoloji", 
+                    ImageUrl = "/img/doctors/doctor7.jpg",
+                    Description = "Cilt hastalıkları ve estetik dermatoloji uzmanı"
+                },
+                new Doctor { 
+                    Id = 5, 
+                    Name = "Dr. Ece Şahin", 
+                    Specialty = "Göz Hastalıkları", 
+                    ImageUrl = "/img/doctors/doctor9.jpg",
+                    Description = "Göz hastalıkları ve cerrahi operasyonlar konusunda uzman"
+                },
+                new Doctor { 
+                    Id = 6, 
+                    Name = "Dr. Gamze Özkan", 
+                    Specialty = "Ortopedi", 
+                    ImageUrl = "/img/doctors/doctor11.jpg",
+                    Description = "Ortopedi ve travmatoloji uzmanı"
+                },
+                new Doctor { 
+                    Id = 7, 
+                    Name = "Dr. İrem Doğan", 
+                    Specialty = "Nöroloji", 
+                    ImageUrl = "/img/doctors/doctor13.jpg",
+                    Description = "Nörolojik hastalıklar konusunda deneyimli uzman"
+                },
+                new Doctor { 
+                    Id = 8, 
+                    Name = "Dr. Kemal Tunç", 
+                    Specialty = "Psikiyatri", 
+                    ImageUrl = "/img/doctors/doctor15.jpg",
+                    Description = "Psikiyatri ve psikoterapi konusunda uzman hekim"
+                },
+                new Doctor { 
+                    Id = 9, 
+                    Name = "Dr. Murat Ersoy", 
+                    Specialty = "Üroloji", 
+                    ImageUrl = "/img/doctors/doctor17.jpg",
+                    Description = "Üroloji ve androloji uzmanı"
+                },
+                new Doctor { 
+                    Id = 10, 
+                    Name = "Dr. Osman Kara", 
+                    Specialty = "Kadın Hastalıkları ve Doğum", 
+                    ImageUrl = "/img/doctors/doctor19.jpg",
+                    Description = "Kadın hastalıkları ve doğum uzmanı"
+                },
+                new Doctor { 
+                    Id = 11, 
+                    Name = "Dr. Rıza Altın", 
+                    Specialty = "Endokrinoloji", 
+                    ImageUrl = "/img/doctors/doctor21.jpg",
+                    Description = "Endokrinoloji ve metabolizma hastalıkları uzmanı"
+                }
             );
         }
     }

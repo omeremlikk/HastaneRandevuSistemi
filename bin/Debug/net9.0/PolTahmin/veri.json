@@ -1,0 +1,67 @@
+{
+    "Dahiliye": [
+        "Halsizlik", "Ateş", "Mide Bulantısı", "Karın Ağrısı", "İshal", "Kabızlık", "Baş Ağrısı", "Titreme",
+        "Kilo Kaybı", "İştahsızlık", "Karın Şişliği", "Yutma Güçlüğü", "Gaz", "Terleme", "Çarpıntı", "Mide Yanması",
+        "Cilt Solgunluğu", "Nefes Darlığı", "Bulanık Görme", "El ve Ayaklarda Şişlik", "Ciltte Morarma", "İştah Artışı",
+        "Gözde Kızarıklık", "Bacaklarda Ödem", "Kilo Artışı", "Zihinsel Yavaşlık", "Ağızda Kuruluk", "Yüksek Tansiyon"
+    ],
+    "KBB": [
+        "Burun Tıkanıklığı", "Boğaz Ağrısı", "Kulak Çınlaması", "Baş Dönmesi", "Burun Akıntısı", "Sinüzit",
+        "Ses Kısıklığı", "Yutkunma Güçlüğü", "Kulak Ağrısı", "Ağız Kokusu", "Öksürük", "Kulak Akıntısı",
+        "Horlama", "Tat Kaybı", "Koku Kaybı", "Burun Kanaması", "Boğazda Kaşıntı", "Ses Kısıklığı", "Tükürük Salgısı",
+        "Kulak Tıkanıklığı", "Yüzde Ağrı", "Boğazda Şişlik"
+    ],
+    "Kardiyoloji": [
+        "Göğüs Ağrısı", "Çarpıntı", "Nefes Darlığı", "Yorgunluk", "Ayak Şişmesi", "Bayılma", "Baş Dönmesi",
+        "Kalp Çarpıntısı", "Sol Kol Ağrısı", "Terleme", "Hızlı Nabız", "Göğüste Sıkışma", "Kan Basıncı Dengesizliği", 
+        "Kalp Çarpıntısı", "Kanama", "Yüksek Tansiyon", "Bacaklarda Ağrı", "Tansiyon Düşüklüğü", "Karın Ağrısı",
+        "Daha Zayıf Egzersiz Toleransı"
+    ],
+    "Dermatoloji": [
+        "Kaşıntı", "Döküntü", "Deri Lekesi", "Saç Dökülmesi", "Sivilce", "Egzama", "Mantar Enfeksiyonu",
+        "Cilt Kuruluğu", "Cilt Kızarıklığı", "Cilt Soyulması", "Tırnak Değişiklikleri", "Deride Şişlik",
+        "Ciltte Yanma Hissi", "Güneş Lekesi", "Alerjik Reaksiyon", "Ciltte Kanama", "Beyaz Cilt Lekeleri", 
+        "Çatlamış Dudaklar", "Vücutta Morarma", "İnce Cilt", "Deri Altı Kanamalar"
+    ],
+    "Göz Hastalıkları": [
+        "Göz Ağrısı", "Görme Kaybı", "Kızarıklık", "Göz Kuruluğu", "Işığa Hassasiyet", "Göz Kaşıntısı",
+        "Çift Görme", "Göz Sulanması", "Gözde Şişlik", "Göz Kapağı Düşüklüğü", "Göz Kanlanması", "Görmede Bulanıklık",
+        "Göz Çapaklanması", "Ani Görme Kaybı", "Gözde Uyuşma", "Lens Takma Zorluğu", "Gözde Ağrı", "Yavaş Görme",
+        "Gözde Zayıf Görme", "Renk Körlüğü"
+    ],
+    "Ortopedi": [
+        "Eklem Ağrısı", "Kırık", "Çıkık", "Kas Zayıflığı", "Bel Ağrısı", "Boyun Ağrısı", "Kas Zedelenmesi",
+        "Kas Tutulması", "Diz Ağrısı", "Omuz Ağrısı", "Ayak Bileği Şişmesi", "Kireçlenme", "Kas Seğirmesi",
+        "Eklem Şişliği", "Yürüme Zorluğu", "Bacaklarda Ağrı", "Sırt Ağrısı", "Omurga Şişmesi", "İçsel Yaralanmalar"
+    ],
+    "Nöroloji": [
+        "Baş Ağrısı", "Uyuşma", "Unutkanlık", "Felç", "El Titremesi", "Kasılma", "Baş Dönmesi", "Konuşma Bozukluğu",
+        "Şiddetli Migren", "Bilincin Kapanması", "Uykusuzluk", "Epilepsi", "Sinir Ağrısı",
+        "Hareket Bozukluğu", "Duyusal Kaybı", "Bacaklarda Titreme", "Göz Dönmesi", "Bilinç Kapanması", "Denetim Kaybı"
+    ],
+    "Psikiyatri": [
+        "Depresyon", "Anksiyete", "Uyku Problemi", "Duygu Durumu Değişiklikleri", "Stres", "Panik Atak",
+        "Sinirlilik", "İçe Kapanıklık", "Konsantrasyon Eksikliği", "İştahta Değişiklik", "Yorgunluk", "Motivasyon Kaybı",
+        "Fobiler", "Travma Sonrası Stres Bozukluğu", "Obsesif Düşünceler", "Bipolar Bozukluk", "Kendine Zarar Verme",
+        "Sosyal Kaygı", "Özgüven Eksikliği", "Depersonalizasyon", "Ağlamaya Eğilim", "Endişe"
+    ],
+    "Üroloji": [
+        "İdrar Yanması", "Sık İdrara Çıkma", "Böbrek Ağrısı", "İdrar Kaçırma", "İdrarda Kan", "Mesane Ağrısı",
+        "Gece İdrar Yapma", "İdrar Yaparken Zorlanma", "Testis Ağrısı", "Alt Karın Ağrısı", "Cinsel Fonksiyon Bozukluğu", 
+        "Prostat Şikayetleri", "Penis Ağrısı", "İdrar Kesesi Şişliği", "İdrar Renk Değişikliği", "Cinsel İstek Azalması",
+        "Erektil Disfonksiyon", "Böbrek Taşı", "Sperma Azalması", "Kanlı İdrar", "İdrar Güçlükleri"
+    ],
+    "Kadın Hastalıkları ve Doğum": [
+        "Adet Düzensizliği", "Pelvik Ağrı", "Hamilelik", "Kısırlık", "Vajinal Akıntı", "Adet Öncesi Ağrı",
+        "Menopoz Belirtileri", "Karın Şişliği", "Cinsel Ağrı", "Kanama Problemleri", "Rahim Ağrısı", "Yumurtalık Kistleri",
+        "Doğum Sonrası Ağrı", "Cinsel İsteksizlik", "Meme Hassasiyeti", "Vajinal Kuruluk", "Yumurtalık Kanseri",
+        "Kistik Değişiklikler", "Sık Gebelik Kaybı", "Geç Dönem Gebelik", "Fazla Adet Kanaması", "Adet Kanaması Düşüklüğü"
+    ],
+    "Endokrinoloji": [
+        "Aşırı Susama", "Sık İdrara Çıkma", "Kilo Kaybı veya Kilo Artışı", "Aşırı Yorgunluk", "Terleme", "Cilt Kuruluğu",
+        "Şeker Hastalığı Belirtileri (Diyabet)", "Halsizlik", "Sinirlilik", "Saç Dökülmesi", "Zihinsel Bulanıklık",
+        "Aşırı Hızlı veya Yavaş Kalp Atışı", "Adet Düzensizlikleri", "Kas Zayıflığı", "Duygu Durumu Değişiklikleri",
+        "Ciltte Siyahlaşma (Akanthosis Nigricans)", "El ve Ayaklarda Titreme", "Yüksek Tansiyon", "Düşük Kan Şekeri",
+        "Yavaş Metabolizma", "Daha Sık Uykusuzluk"
+    ]
+}

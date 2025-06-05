@@ -22,20 +22,20 @@
                         <div class="mb-2 d-flex justify-content-between">
                             <span>Pazartesi - Cuma</span>
                             <span class="text-primary">09:00 - 17:00</span>
-                        </div>
+                                </div>
                         <div class="d-flex justify-content-between">
                             <span>Cumartesi - Pazar</span>
                             <span class="text-danger">Kapalı</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
         <!-- Sağ Taraf - Randevu Formu -->
         <div class="col-md-8">
             <div class="card border-0 shadow-sm">
-                <div class="card-body p-4">
+                                <div class="card-body p-4">
                     <h4 class="mb-4">Randevu Bilgileri</h4>
                     <form asp-action="Create" method="post" id="appointmentForm">
                         <input type="hidden" asp-for="Appointment.DoctorId" value="@Model.Doctor.Id" />
@@ -70,24 +70,24 @@
                                 </table>
                             </div>
                         </div>
-
+                        
                         <!-- Saat Seçimi -->
                         <div class="mb-4">
                             <label class="form-label">Randevu Saati</label>
                             <div class="time-slots d-flex flex-wrap gap-2" id="timeSlots"></div>
                         </div>
-
-                        <div class="col-12">
+                        
+                                <div class="col-12">
                             <button type="submit" class="btn btn-primary w-100" id="submitButton" disabled>
-                                <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
-                            </button>
-                        </div>
+                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
+                        </button>
+                            </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <style>
 .table-calendar {
@@ -232,7 +232,7 @@
         calendarDays.innerHTML = '';
 
         let currentRow = document.createElement('tr');
-        
+                
         // Önceki ayın günleri
         for (let i = 0; i < startingDay; i++) {
             const prevDate = new Date(firstDay);
@@ -328,7 +328,7 @@
                     }
                     
                     timeSlots.appendChild(slotDiv);
-                });
+            });
             })
             .catch(error => {
                 console.error('Saat bilgileri alınırken hata oluştu:', error);
@@ -350,8 +350,8 @@
     document.getElementById('prevMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         updateCalendar();
-    });
-
+            });
+            
     document.getElementById('nextMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         updateCalendar();
