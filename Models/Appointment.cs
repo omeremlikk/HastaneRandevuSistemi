@@ -27,11 +27,22 @@ namespace hastane.Models
         public int DoctorId { get; set; }
         
         [Required]
+        public int PatientId { get; set; }
+        
+        [Required]
         public DateTime AppointmentDateTime { get; set; }
         
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         
-        [ForeignKey("DoctorId")]
-        public virtual Doctor? Doctor { get; set; }
+        public bool IsCancelled { get; set; } = false;
+        
+        public bool IsCompleted { get; set; } = false;
+        
+        public string? Notes { get; set; }
+        
+        // İlişkiler
+        public virtual Doctor Doctor { get; set; }
+        
+        public virtual Patient Patient { get; set; }
     }
 }

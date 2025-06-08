@@ -6,6 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Oturum yönetimini ekle
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(2);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // SQLite veritabanı servisini ekle
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=hastane.db";
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -22,11 +31,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+// Oturum middleware'ini ekle
+app.UseSession();
 
 // Veritabanını oluştur
 using (var scope = app.Services.CreateScope())
@@ -48,6 +59,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

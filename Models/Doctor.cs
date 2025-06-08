@@ -11,10 +11,12 @@ namespace hastane.Models
         public Doctor()
         {
             // Zorunlu alanları başlatmak için varsayılan değerler
-            Name = "İsimsiz Doktor";
-            Specialty = "Belirtilmemiş";
-            ImageUrl = "/img/doctors/doctor1.jpg";
+            Name = string.Empty;
             Description = string.Empty;
+            Specialty = string.Empty;
+            ImageUrl = string.Empty;
+            Email = string.Empty;
+            Password = string.Empty;
             Appointments = new List<Appointment>();
             Availabilities = new List<DoctorAvailability>();
         }
@@ -22,7 +24,7 @@ namespace hastane.Models
         [Key]
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Doktor ismi zorunludur")]
+        [Required(ErrorMessage = "İsim zorunludur")]
         [StringLength(100)]
         public string Name { get; set; }
         
@@ -34,6 +36,14 @@ namespace hastane.Models
         
         [StringLength(500)]
         public string? Description { get; set; }
+        
+        // Giriş bilgileri
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        
+        [Required]
+        public string Password { get; set; }
         
         // Navigation properties
         public virtual ICollection<Appointment>? Appointments { get; set; }

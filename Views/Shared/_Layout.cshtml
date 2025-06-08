@@ -23,6 +23,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
+    @{
+        var isLoggedIn = Context.Session.GetString("UserRole") != null;
+        var userRole = Context.Session.GetString("UserRole");
+        var userName = Context.Session.GetString(userRole + "Name");
+    }
+    
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container">
@@ -51,32 +57,79 @@
                         </a>
                     </li>
                     
-                    <!-- Giriş Yap Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" 
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-sign-in-alt me-1"></i> Giriş Yap
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="loginDropdown">
-                            <li>
-                                <a class="dropdown-item" href="/Account/DoctorLogin">
-                                    <i class="fas fa-user-md me-2 text-primary"></i> Doktor Girişi
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="/Account/PatientLogin">
-                                    <i class="fas fa-user me-2 text-primary"></i> Hasta Girişi
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <!-- Üye Ol Butonu -->
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-light rounded-pill btn-sm" href="/Account/Register">
-                            <i class="fas fa-user-plus me-1"></i> Üye Ol
-                        </a>
-                    </li>
+                    @if (!isLoggedIn)
+                    {
+                        <!-- Giriş Yap Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-sign-in-alt me-1"></i> Giriş Yap
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="loginDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/Account/DoctorLogin">
+                                        <i class="fas fa-user-md me-2 text-primary"></i> Doktor Girişi
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/Account/PatientLogin">
+                                        <i class="fas fa-user me-2 text-primary"></i> Hasta Girişi
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Üye Ol Butonu -->
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-light rounded-pill btn-sm" href="/Account/Register">
+                                <i class="fas fa-user-plus me-1"></i> Üye Ol
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- Kullanıcı Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle me-1"></i> @userName
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                                @if (userRole == "Patient")
+                                {
+                                    <li>
+                                        <a class="dropdown-item" href="/Appointment/MyAppointments">
+                                            <i class="fas fa-calendar-check me-2 text-primary"></i> Randevularım
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/Account/Profile">
+                                            <i class="fas fa-user-edit me-2 text-primary"></i> Profilim
+                                        </a>
+                                    </li>
+                                }
+                                else if (userRole == "Doctor")
+                                {
+                                    <li>
+                                        <a class="dropdown-item" href="/Doctor/Dashboard">
+                                            <i class="fas fa-chart-line me-2 text-primary"></i> Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/Doctor/Appointments">
+                                            <i class="fas fa-calendar-week me-2 text-primary"></i> Randevularım
+                                        </a>
+                                    </li>
+                                }
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="/Account/Logout">
+                                        <i class="fas fa-sign-out-alt me-2 text-danger"></i> Çıkış Yap
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
                     
                     <!-- Randevu Al Butonu -->
                     <li class="nav-item ms-lg-2">

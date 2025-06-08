@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hastane.Data;
 
@@ -10,9 +11,11 @@ using hastane.Data;
 namespace hastane.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607213724_AddUserAuthentication")]
+    partial class AddUserAuthentication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -187,8 +190,11 @@ namespace hastane.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Salt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Specialty")
@@ -213,7 +219,7 @@ namespace hastane.Migrations
                             Email = "ahmet.yilmaz@medivita.com",
                             ImageUrl = "/img/doctors/doctor1.jpg",
                             Name = "Dr. Ahmet Yılmaz",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Dahiliye"
                         },
                         new
@@ -223,7 +229,7 @@ namespace hastane.Migrations
                             Email = "mehmet.kaya@medivita.com",
                             ImageUrl = "/img/doctors/doctor3.jpg",
                             Name = "Dr. Mehmet Kaya",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "KBB"
                         },
                         new
@@ -233,7 +239,7 @@ namespace hastane.Migrations
                             Email = "ali.ozturk@medivita.com",
                             ImageUrl = "/img/doctors/doctor2.jpg",
                             Name = "Dr. Ali Öztürk",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Kardiyoloji"
                         },
                         new
@@ -243,7 +249,7 @@ namespace hastane.Migrations
                             Email = "can.yucel@medivita.com",
                             ImageUrl = "/img/doctors/doctor7.jpg",
                             Name = "Dr. Can Yücel",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Dermatoloji"
                         },
                         new
@@ -253,7 +259,7 @@ namespace hastane.Migrations
                             Email = "ece.sahin@medivita.com",
                             ImageUrl = "/img/doctors/doctor9.jpg",
                             Name = "Dr. Ece Şahin",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Göz Hastalıkları"
                         },
                         new
@@ -263,7 +269,7 @@ namespace hastane.Migrations
                             Email = "gamze.ozkan@medivita.com",
                             ImageUrl = "/img/doctors/doctor11.jpg",
                             Name = "Dr. Gamze Özkan",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Ortopedi"
                         },
                         new
@@ -273,7 +279,7 @@ namespace hastane.Migrations
                             Email = "irem.dogan@medivita.com",
                             ImageUrl = "/img/doctors/doctor13.jpg",
                             Name = "Dr. İrem Doğan",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Nöroloji"
                         },
                         new
@@ -283,7 +289,7 @@ namespace hastane.Migrations
                             Email = "kemal.tunc@medivita.com",
                             ImageUrl = "/img/doctors/doctor15.jpg",
                             Name = "Dr. Kemal Tunç",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Psikiyatri"
                         },
                         new
@@ -293,7 +299,7 @@ namespace hastane.Migrations
                             Email = "murat.ersoy@medivita.com",
                             ImageUrl = "/img/doctors/doctor17.jpg",
                             Name = "Dr. Murat Ersoy",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Üroloji"
                         },
                         new
@@ -303,7 +309,7 @@ namespace hastane.Migrations
                             Email = "osman.kara@medivita.com",
                             ImageUrl = "/img/doctors/doctor19.jpg",
                             Name = "Dr. Osman Kara",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Kadın Hastalıkları ve Doğum"
                         },
                         new
@@ -313,7 +319,7 @@ namespace hastane.Migrations
                             Email = "riza.altin@medivita.com",
                             ImageUrl = "/img/doctors/doctor21.jpg",
                             Name = "Dr. Rıza Altın",
-                            Password = "test123",
+                            PasswordHash = "test123",
                             Specialty = "Endokrinoloji"
                         });
                 });
@@ -371,7 +377,7 @@ namespace hastane.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -380,6 +386,9 @@ namespace hastane.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Salt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -13,6 +13,7 @@ namespace hastane.Data
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Patient> Patients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,26 @@ namespace hastane.Data
                 .WithMany(d => d.Appointments)
                 .HasForeignKey(a => a.DoctorId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Hasta-Randevu ilişkisi
+            modelBuilder.Entity<Appointment>()
+                .HasOne<Patient>()
+                .WithMany(p => p.Appointments)
+                .HasForeignKey("PatientId")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // TC Kimlik ve Email benzersiz olmalı
+            modelBuilder.Entity<Patient>()
+                .HasIndex(p => p.IdentityNumber)
+                .IsUnique();
+
+            modelBuilder.Entity<Patient>()
+                .HasIndex(p => p.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Doctor>()
+                .HasIndex(d => d.Email)
+                .IsUnique();
 
             // Seed Departments
             modelBuilder.Entity<Department>().HasData(
@@ -47,77 +68,99 @@ namespace hastane.Data
                     Name = "Dr. Ahmet Yılmaz", 
                     Specialty = "Dahiliye", 
                     ImageUrl = "/img/doctors/doctor1.jpg",
-                    Description = "Dahiliye uzmanı olarak 10 yılı aşkın deneyime sahip"
+                    Description = "Dahiliye uzmanı olarak 10 yılı aşkın deneyime sahip",
+                    Email = "ahmet.yilmaz@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 2, 
                     Name = "Dr. Mehmet Kaya", 
                     Specialty = "KBB", 
                     ImageUrl = "/img/doctors/doctor3.jpg",
-                    Description = "Kulak Burun Boğaz hastalıkları konusunda uzman hekim"
+                    Description = "Kulak Burun Boğaz hastalıkları konusunda uzman hekim",
+                    Email = "mehmet.kaya@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 3, 
                     Name = "Dr. Ali Öztürk", 
                     Specialty = "Kardiyoloji", 
                     ImageUrl = "/img/doctors/doctor2.jpg",
-                    Description = "Kalp ve damar hastalıkları konusunda deneyimli uzman"
+                    Description = "Kalp ve damar hastalıkları konusunda deneyimli uzman",
+                    Email = "ali.ozturk@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 4, 
                     Name = "Dr. Can Yücel", 
                     Specialty = "Dermatoloji", 
                     ImageUrl = "/img/doctors/doctor7.jpg",
-                    Description = "Cilt hastalıkları ve estetik dermatoloji uzmanı"
+                    Description = "Cilt hastalıkları ve estetik dermatoloji uzmanı",
+                    Email = "can.yucel@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 5, 
                     Name = "Dr. Ece Şahin", 
                     Specialty = "Göz Hastalıkları", 
                     ImageUrl = "/img/doctors/doctor9.jpg",
-                    Description = "Göz hastalıkları ve cerrahi operasyonlar konusunda uzman"
+                    Description = "Göz hastalıkları ve cerrahi operasyonlar konusunda uzman",
+                    Email = "ece.sahin@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 6, 
                     Name = "Dr. Gamze Özkan", 
                     Specialty = "Ortopedi", 
                     ImageUrl = "/img/doctors/doctor11.jpg",
-                    Description = "Ortopedi ve travmatoloji uzmanı"
+                    Description = "Ortopedi ve travmatoloji uzmanı",
+                    Email = "gamze.ozkan@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 7, 
                     Name = "Dr. İrem Doğan", 
                     Specialty = "Nöroloji", 
                     ImageUrl = "/img/doctors/doctor13.jpg",
-                    Description = "Nörolojik hastalıklar konusunda deneyimli uzman"
+                    Description = "Nörolojik hastalıklar konusunda deneyimli uzman",
+                    Email = "irem.dogan@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 8, 
                     Name = "Dr. Kemal Tunç", 
                     Specialty = "Psikiyatri", 
                     ImageUrl = "/img/doctors/doctor15.jpg",
-                    Description = "Psikiyatri ve psikoterapi konusunda uzman hekim"
+                    Description = "Psikiyatri ve psikoterapi konusunda uzman hekim",
+                    Email = "kemal.tunc@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 9, 
                     Name = "Dr. Murat Ersoy", 
                     Specialty = "Üroloji", 
                     ImageUrl = "/img/doctors/doctor17.jpg",
-                    Description = "Üroloji ve androloji uzmanı"
+                    Description = "Üroloji ve androloji uzmanı",
+                    Email = "murat.ersoy@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 10, 
                     Name = "Dr. Osman Kara", 
                     Specialty = "Kadın Hastalıkları ve Doğum", 
                     ImageUrl = "/img/doctors/doctor19.jpg",
-                    Description = "Kadın hastalıkları ve doğum uzmanı"
+                    Description = "Kadın hastalıkları ve doğum uzmanı",
+                    Email = "osman.kara@medivita.com",
+                    Password = "test123"
                 },
                 new Doctor { 
                     Id = 11, 
                     Name = "Dr. Rıza Altın", 
                     Specialty = "Endokrinoloji", 
                     ImageUrl = "/img/doctors/doctor21.jpg",
-                    Description = "Endokrinoloji ve metabolizma hastalıkları uzmanı"
+                    Description = "Endokrinoloji ve metabolizma hastalıkları uzmanı",
+                    Email = "riza.altin@medivita.com",
+                    Password = "test123"
                 }
             );
         }
