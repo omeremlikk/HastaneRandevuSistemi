@@ -1,0 +1,279 @@
+@model hastane.Models.Patient
+@{
+    ViewData["Title"] = "Profil Bilgileri";
+    var patientName = Context.Session.GetString("PatientName");
+}
+
+<div class="container mt-5 pt-5" style="min-height: 100vh; margin-bottom: 100px;">
+    <div class="row mb-3">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profil Bilgileri</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="section-title mb-0">Profil Bilgileri</h2>
+                
+                @if (ViewBag.ProfileImage != null)
+                {
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.ProfileImage" alt="Profil Fotoğrafı" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+                        <span class="ms-2 fw-bold">@patientName</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                            @if (!string.IsNullOrEmpty(patientName))
+                            {
+                                @patientName[0]
+                            }
+                            else
+                            {
+                                <i class="fas fa-user"></i>
+                            }
+                        </div>
+                        <span class="ms-2 fw-bold">@patientName</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Sekmeli Navigasyon -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill bg-white rounded shadow-sm p-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Appointment/MyAppointments">
+                        <i class="fas fa-calendar-check me-1"></i> Randevularım
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Account/Profile">
+                        <i class="fas fa-user-circle me-1"></i> Profil Bilgileri
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Account/ChangePassword">
+                        <i class="fas fa-lock me-1"></i> Şifre Değiştir
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="/Account/Logout">
+                        <i class="fas fa-sign-out-alt me-1"></i> Çıkış Yap
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-5 mb-4">
+            <!-- Profil Özet Kartı -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center">
+                    <div class="avatar-circle mb-3 mx-auto">
+                        @if (ViewBag.ProfileImage != null)
+                        {
+                            <img src="@ViewBag.ProfileImage" alt="Profil Fotoğrafı" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="text-center p-4 rounded-circle bg-primary text-white mx-auto" style="width: 150px; height: 150px; font-size: 4rem; line-height: 2.5;">
+                                @if (!string.IsNullOrEmpty(patientName))
+                                {
+                                    @patientName[0]
+                                }
+                                else
+                                {
+                                    <i class="fas fa-user"></i>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <h5 class="card-title">@patientName</h5>
+                    <p class="text-muted small">Hasta</p>
+                    <button type="button" class="btn btn-outline-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#profilePhotoModal">
+                        <i class="fas fa-camera me-2"></i> Fotoğraf Değiştir
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-md-7">
+            <!-- Profil Düzenleme Formu -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4">
+                        <i class="fas fa-user-edit me-2 text-primary"></i>Kişisel Bilgileriniz
+                    </h4>
+                    
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                        </div>
+                    }
+                    
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+                        </div>
+                    }
+                    
+                    <form asp-controller="Account" asp-action="UpdateProfile" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="FullName" class="form-label">Ad Soyad</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input asp-for="FullName" class="form-control" />
+                                </div>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="IdentityNumber" class="form-label">TC Kimlik No</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                    <input asp-for="IdentityNumber" class="form-control" readonly />
+                                </div>
+                                <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label">E-posta</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input asp-for="Email" class="form-control" type="email" readonly />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Phone" class="form-label">Telefon</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    <input asp-for="Phone" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Kayıt Tarihi</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                    <input asp-for="RegisterDate" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fas fa-save me-2"></i> Bilgileri Güncelle
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profil Fotoğrafı Modal -->
+<div class="modal fade" id="profilePhotoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="photoModalLabel">Profil Fotoğrafı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Account" asp-action="UploadProfilePhoto" method="post" enctype="multipart/form-data" id="photoUploadForm">
+                    <div class="text-center mb-4">
+                        <div id="imagePreviewContainer" class="mb-3 d-none">
+                            <img id="imagePreview" src="#" alt="Önizleme" class="img-fluid rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" id="profilePhotoInput" name="profilePhoto" accept="image/*" required />
+                            <label class="input-group-text" for="profilePhotoInput">Seç</label>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <small><i class="fas fa-info-circle me-1"></i> Lütfen JPG, PNG veya GIF formatında bir fotoğraf seçin. Maksimum dosya boyutu 2MB.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-danger" id="removePhotoBtn">
+                            <i class="fas fa-trash-alt me-1"></i> Fotoğrafı Kaldır
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="uploadPhotoBtn">
+                            <i class="fas fa-upload me-1"></i> Fotoğrafı Yükle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function() {
+            // Resim önizleme
+            $("#profilePhotoInput").change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#imagePreview").attr("src", e.target.result);
+                        $("#imagePreviewContainer").removeClass("d-none");
+                    }
+                    reader.readAsDataURL(file);
+                    $("#uploadPhotoBtn").prop("disabled", false);
+                } else {
+                    $("#imagePreviewContainer").addClass("d-none");
+                    $("#uploadPhotoBtn").prop("disabled", true);
+                }
+            });
+            
+            // Fotoğraf kaldırma
+            $("#removePhotoBtn").click(function() {
+                if (confirm("Profil fotoğrafınızı kaldırmak istediğinize emin misiniz?")) {
+                    $.post("/Account/RemoveProfilePhoto", function(data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert("Fotoğraf kaldırılırken bir hata oluştu: " + data.message);
+                        }
+                    });
+                }
+            });
+            
+            // Form submiti öncesi doğrulama
+            $("#photoUploadForm").submit(function(e) {
+                var fileInput = $("#profilePhotoInput")[0];
+                if (fileInput.files.length > 0) {
+                    var fileSize = fileInput.files[0].size / 1024 / 1024; // MB cinsinden
+                    if (fileSize > 2) {
+                        alert("Lütfen 2MB'dan küçük bir dosya seçin.");
+                        e.preventDefault();
+                    }
+                }
+            });
+        });
+    </script>
+}

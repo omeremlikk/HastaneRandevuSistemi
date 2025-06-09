@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TxIEcLOUffginGtN1TV0Qad0IyQ3Vr3NWKotLv82Z3o=",
+  "Hash": "4bC7MmL7+m98jn6QZ1muRPyBPtMnZ3IsU4hOkkHy0Dw=",
   "Source": "hastane",
   "BasePath": "_content/hastane",
   "Mode": "Default",
@@ -2850,6 +2850,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
+      "SourceId": "hastane",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\",
+      "BasePath": "_content/hastane",
+      "RelativePath": "uploads/profiles/patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "g1k3vr8xyh",
+      "Integrity": "zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg"
     }
   ],
   "Endpoints": [
@@ -22496,6 +22517,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.g1k3vr8xyh.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134826"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 17:13:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1k3vr8xyh"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profiles/patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134826"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 17:13:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
         }
       ]
     }

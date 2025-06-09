@@ -1,0 +1,266 @@
+@{
+    ViewData["Title"] = "Randevularım";
+    var patientId = Context.Session.GetInt32("PatientId");
+    var patientName = Context.Session.GetString("PatientName");
+}
+
+<div class="container mt-5 pt-5" style="min-height: 100vh; margin-bottom: 100px;">
+    <div class="row mb-3">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Randevularım</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="section-title mb-0">Randevularım</h2>
+                
+                @if (ViewBag.ProfileImage != null)
+                {
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.ProfileImage" alt="Profil Fotoğrafı" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+                        <span class="ms-2 fw-bold">@patientName</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                            @if (!string.IsNullOrEmpty(patientName))
+                            {
+                                @patientName[0]
+                            }
+                            else
+                            {
+                                <i class="fas fa-user"></i>
+                            }
+                        </div>
+                        <span class="ms-2 fw-bold">@patientName</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Sekmeli Navigasyon -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill bg-white rounded shadow-sm p-1">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Appointment/MyAppointments">
+                        <i class="fas fa-calendar-check me-1"></i> Randevularım
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Account/Profile">
+                        <i class="fas fa-user-circle me-1"></i> Profil Bilgileri
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Account/ChangePassword">
+                        <i class="fas fa-lock me-1"></i> Şifre Değiştir
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="/Account/Logout">
+                        <i class="fas fa-sign-out-alt me-1"></i> Çıkış Yap
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Tab Menü -->
+    <ul class="nav nav-pills mb-4" id="appointmentsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="upcoming-tab" data-bs-toggle="pill" data-bs-target="#upcoming" type="button" role="tab">
+                <i class="fas fa-calendar-day me-1"></i> Yaklaşan Randevular
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="past-tab" data-bs-toggle="pill" data-bs-target="#past" type="button" role="tab">
+                <i class="fas fa-history me-1"></i> Geçmiş Randevular
+            </button>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-12">
+            <!-- Tab İçerikleri -->
+            <div class="tab-content" id="appointmentsTabsContent">
+                <!-- Yaklaşan Randevular -->
+                <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                    @if (Model != null && Model.UpcomingAppointments != null && Model.UpcomingAppointments.Count > 0)
+                    {
+                        <div class="row">
+                            @foreach (var appointment in Model.UpcomingAppointments)
+                            {
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-primary rounded-pill">
+                                                <i class="fas fa-calendar me-1"></i>
+                                                @appointment.AppointmentDateTime.ToString("dd.MM.yyyy")
+                                            </span>
+                                            <span class="badge bg-info rounded-pill">
+                                                <i class="fas fa-clock me-1"></i>
+                                                @appointment.AppointmentDateTime.ToString("HH:mm")
+                                            </span>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="flex-shrink-0">
+                                                    <img src="@appointment.Doctor.ImageUrl" alt="@appointment.Doctor.Name" class="rounded-circle" width="50" height="50">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="card-title mb-0">@appointment.Doctor.Name</h5>
+                                                    <p class="text-muted small mb-0">@appointment.Doctor.Specialty</p>
+                                                </div>
+                                            </div>
+                                            <p class="card-text small text-muted mb-3">
+                                                <i class="fas fa-stethoscope me-2"></i>@appointment.Doctor.Description
+                                            </p>
+                                        </div>
+                                        <div class="card-footer bg-white border-0 pt-0">
+                                            <button class="btn btn-danger btn-sm cancel-appointment" data-id="@appointment.Id">
+                                                <i class="fas fa-times-circle me-1"></i> İptal Et
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <div class="text-center py-4">
+                                <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
+                                <h5>Yaklaşan randevunuz bulunmamaktadır</h5>
+                                <p>Yeni bir randevu almak için aşağıdaki butona tıklayabilirsiniz</p>
+                                <a href="/Appointment/Randevu" class="btn btn-primary">
+                                    <i class="fas fa-calendar-plus me-2"></i> Randevu Al
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Geçmiş Randevular -->
+                <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+                    @if (Model != null && Model.PastAppointments != null && Model.PastAppointments.Count > 0)
+                    {
+                        <div class="row">
+                            @foreach (var appointment in Model.PastAppointments)
+                            {
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-secondary rounded-pill">
+                                                <i class="fas fa-calendar me-1"></i>
+                                                @appointment.AppointmentDateTime.ToString("dd.MM.yyyy")
+                                            </span>
+                                            <span class="badge bg-secondary rounded-pill">
+                                                <i class="fas fa-clock me-1"></i>
+                                                @appointment.AppointmentDateTime.ToString("HH:mm")
+                                            </span>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="flex-shrink-0">
+                                                    <img src="@appointment.Doctor.ImageUrl" alt="@appointment.Doctor.Name" class="rounded-circle" width="50" height="50">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="card-title mb-0">@appointment.Doctor.Name</h5>
+                                                    <p class="text-muted small mb-0">@appointment.Doctor.Specialty</p>
+                                                </div>
+                                            </div>
+                                            <p class="card-text small text-muted mb-3">
+                                                <i class="fas fa-stethoscope me-2"></i>@appointment.Doctor.Description
+                                            </p>
+                                            @if (appointment.IsCompleted)
+                                            {
+                                                <div class="alert alert-success py-2 small">
+                                                    <i class="fas fa-check-circle me-1"></i> Randevu tamamlandı
+                                                </div>
+                                            }
+                                            else if (appointment.IsCancelled)
+                                            {
+                                                <div class="alert alert-danger py-2 small">
+                                                    <i class="fas fa-times-circle me-1"></i> Randevu iptal edildi
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <div class="text-center py-4">
+                                <i class="fas fa-history fa-4x mb-3 text-secondary"></i>
+                                <h5>Henüz geçmiş randevunuz bulunmamaktadır</h5>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- İptal Onay Modal -->
+<div class="modal fade" id="cancelAppointmentModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Randevu İptali</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-warning fa-3x mb-3"></i>
+                    <h5>Randevunuzu iptal etmek istediğinize emin misiniz?</h5>
+                    <p class="text-muted">Bu işlem geri alınamaz.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <form id="cancelForm" method="post" action="/Appointment/CancelAppointment">
+                    <input type="hidden" id="appointmentId" name="appointmentId" value="" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times-circle me-1"></i> Randevuyu İptal Et
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function() {
+            // İptal modal tetikleyicileri
+            $('.cancel-appointment').click(function() {
+                var id = $(this).data('id');
+                $('#appointmentId').val(id);
+                $('#cancelAppointmentModal').modal('show');
+            });
+            
+            // Tab geçişlerinde URL güncelleme
+            $('#appointmentsTabs button').on('click', function (e) {
+                history.replaceState(null, null, '#' + $(this).attr('id'));
+            });
+            
+            // Sayfa yüklendiğinde URL hash kontrolü
+            var hash = window.location.hash;
+            if (hash) {
+                $('#appointmentsTabs button[id="' + hash.substr(1) + '"]').tab('show');
+            }
+        });
+    </script>
+}

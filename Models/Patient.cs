@@ -13,6 +13,7 @@ namespace hastane.Models
             Email = string.Empty;
             Phone = string.Empty;
             Password = string.Empty;
+            ProfilePhoto = null;
             Appointments = new List<Appointment>();
         }
 
@@ -35,6 +36,8 @@ namespace hastane.Models
         
         [Required]
         public string Password { get; set; }
+        
+        public string? ProfilePhoto { get; set; }
         
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         
