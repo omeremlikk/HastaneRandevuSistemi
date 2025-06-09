@@ -42,6 +42,6 @@ namespace hastane.Models
         public DateTime RegisterDate { get; set; } = DateTime.Now;
         
         // İlişkiler
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public ICollection<Appointment> Appointments { get; set; }
     }
 } 

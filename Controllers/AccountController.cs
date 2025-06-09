@@ -63,6 +63,7 @@ namespace hastane.Controllers
                 HttpContext.Session.SetInt32("PatientId", patient.Id);
                 HttpContext.Session.SetString("PatientName", patient.FullName);
                 HttpContext.Session.SetString("UserRole", "Patient");
+                HttpContext.Session.SetString("UserEmail", patient.Email);
                 
                 return RedirectToAction("RegistrationSuccess");
             }
@@ -94,7 +95,7 @@ namespace hastane.Controllers
                     HttpContext.Session.SetString("DoctorName", doctor.Name);
                     HttpContext.Session.SetString("UserRole", "Doctor");
                     
-                    return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
                 }
                 
                 // Hata durumunda uyarı göster
@@ -131,8 +132,9 @@ namespace hastane.Controllers
                     HttpContext.Session.SetInt32("PatientId", patient.Id);
                     HttpContext.Session.SetString("PatientName", patient.FullName);
                     HttpContext.Session.SetString("UserRole", "Patient");
+                    HttpContext.Session.SetString("UserEmail", patient.Email);
                     
-                    return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
                 }
                 
                 // Hata durumunda uyarı göster

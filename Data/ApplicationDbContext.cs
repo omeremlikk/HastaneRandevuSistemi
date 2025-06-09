@@ -28,9 +28,9 @@ namespace hastane.Data
 
             // Hasta-Randevu ilişkisi
             modelBuilder.Entity<Appointment>()
-                .HasOne<Patient>()
+                .HasOne(a => a.Patient)
                 .WithMany(p => p.Appointments)
-                .HasForeignKey("PatientId")
+                .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // TC Kimlik ve Email benzersiz olmalı

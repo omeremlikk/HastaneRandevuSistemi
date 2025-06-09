@@ -188,11 +188,19 @@
 
         // Seçilen tarih ve saati birleştir
         const [hours, minutes] = selectedTime.split(':');
-        const appointmentDateTime = new Date(selectedDate);
-        appointmentDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+        
+        // UTC dönüşümü olmadan, doğrudan tarih ve saat bilgisini string olarak oluştur
+        const year = selectedDate.getFullYear();
+        const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+        const day = String(selectedDate.getDate()).padStart(2, '0');
+        
+        // ISO formatında string olarak tarih ve saati birleştir, UTC dönüşümü yapmadan
+        const appointmentDateStr = `${year}-${month}-${day}T${hours}:${minutes}:00`;
         
         // Hidden input'a değeri set et
-        selectedDateTime.value = appointmentDateTime.toISOString();
+        selectedDateTime.value = appointmentDateStr;
+        
+        console.log(`Randevu alınacak tarih: ${appointmentDateStr} (UTC dönüşümü yapılmadan)`);
 
         // Form verilerini topla
         const formData = new FormData(this);
@@ -309,7 +317,13 @@
 
         const doctorId = document.querySelector('input[name="Appointment.DoctorId"]').value;
         
-        fetch(`/Appointment/GetAvailableSlots?doctorId=${doctorId}&date=${selectedDate.toISOString()}`)
+        // Tarih için UTC dönüşümü yapmadan direkt string olarak gönder
+        const year = selectedDate.getFullYear();
+        const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+        const day = String(selectedDate.getDate()).padStart(2, '0');
+        const dateStr = `${year}-${month}-${day}`;
+        
+        fetch(`/Appointment/GetAvailableSlots?doctorId=${doctorId}&date=${dateStr}`)
             .then(response => response.json())
             .then(data => {
                 timeSlots.innerHTML = '';

@@ -33,4 +33,10 @@
 <script>
     // ThankYou sayfasından geri döndüğünde randevu sayfasını yenilemek için
     sessionStorage.setItem('refreshNeeded', 'true');
+    
+    // Randevu sayfasına 3 saniye sonra otomatik yönlendir
+    setTimeout(() => {
+        // Randevu sayfasına otomatik dön
+        window.location.href = "/Appointment/Randevu";
+    }, 3000);
 </script>

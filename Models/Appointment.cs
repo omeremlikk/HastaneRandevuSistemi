@@ -23,13 +23,10 @@ namespace hastane.Models
     {
         public int Id { get; set; }
         
-        [Required]
         public int DoctorId { get; set; }
         
-        [Required]
         public int PatientId { get; set; }
         
-        [Required]
         public DateTime AppointmentDateTime { get; set; }
         
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -41,8 +38,8 @@ namespace hastane.Models
         public string? Notes { get; set; }
         
         // İlişkiler
-        public virtual Doctor Doctor { get; set; }
+        public Doctor? Doctor { get; set; }
         
-        public virtual Patient Patient { get; set; }
+        public Patient? Patient { get; set; }
     }
 }

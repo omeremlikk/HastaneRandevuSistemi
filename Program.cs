@@ -1,7 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using hastane.Data;
+using System;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Türkiye kültür ayarını yapılandır
+var turkishCulture = new CultureInfo("tr-TR");
+CultureInfo.DefaultThreadCurrentCulture = turkishCulture;
+CultureInfo.DefaultThreadCurrentUICulture = turkishCulture;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -47,6 +54,12 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
         context.Database.EnsureCreated();
+
+        // Uygulama başladığında saat dilimi farkını logla
+        var localNow = DateTime.Now;
+        var utcNow = DateTime.UtcNow;
+        Console.WriteLine($"Uygulama başladı. Yerel saat: {localNow:dd.MM.yyyy HH:mm:ss}, UTC saat: {utcNow:dd.MM.yyyy HH:mm:ss}");
+        Console.WriteLine($"Saat dilimi farkı: {localNow - utcNow}");
     }
     catch (Exception ex)
     {

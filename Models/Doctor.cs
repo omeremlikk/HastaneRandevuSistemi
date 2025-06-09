@@ -46,10 +46,10 @@ namespace hastane.Models
         public string Password { get; set; }
         
         // Navigation properties
-        public virtual ICollection<Appointment>? Appointments { get; set; }
+        public ICollection<Appointment>? Appointments { get; set; }
         
         // Müsaitlik durumları
-        public virtual ICollection<DoctorAvailability> Availabilities { get; set; }
+        public ICollection<DoctorAvailability> Availabilities { get; set; }
 
         // Doktorun belirli bir tarih ve saatte müsait olup olmadığını kontrol eder
         public bool IsAvailable(DateTime date, string time)
@@ -72,7 +72,7 @@ namespace hastane.Models
                 // Randevu kontrolü - aynı gün ve saatte başka randevu var mı?
                 if (Appointments == null || !Appointments.Any())
                     return true;
-                    
+
                 // Kesin tarih ve saat kontrolü - aynı gün ve saatte randevu var mı?
                 foreach (var appointment in Appointments)
                 {
