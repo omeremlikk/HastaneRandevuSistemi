@@ -1,4 +1,5 @@
 @using System.Linq
+@model hastane.Models.MyAppointmentsViewModel
 @{
     ViewData["Title"] = "Randevularım";
     var patientId = Context.Session.GetInt32("PatientId");
@@ -111,81 +112,66 @@
         <div class="col-12">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Doktor</th>
-                                    <th>Tarih</th>
-                                    <th>Saat</th>
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>47</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="/img/doctors/doctor1.jpg" alt="Dr. Ahmet Yılmaz" class="rounded-circle me-2" width="30" height="30">
-                                            <span>Dr. Ahmet Yılmaz</span>
-                                        </div>
-                                    </td>
-                                    <td>11.06.2025</td>
-                                    <td>09:30</td>
-                                    <td>
-                                        <form method="post" action="/Appointment/CancelAppointment">
-                                            <input type="hidden" name="appointmentId" value="47" />
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-times-circle me-1"></i> İptal Et
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>48</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="/img/doctors/doctor1.jpg" alt="Dr. Ahmet Yılmaz" class="rounded-circle me-2" width="30" height="30">
-                                            <span>Dr. Ahmet Yılmaz</span>
-                                        </div>
-                                    </td>
-                                    <td>12.06.2025</td>
-                                    <td>09:30</td>
-                                    <td>
-                                        <form method="post" action="/Appointment/CancelAppointment">
-                                            <input type="hidden" name="appointmentId" value="48" />
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-times-circle me-1"></i> İptal Et
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>49</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="/img/doctors/doctor1.jpg" alt="Dr. Ahmet Yılmaz" class="rounded-circle me-2" width="30" height="30">
-                                            <span>Dr. Ahmet Yılmaz</span>
-                                        </div>
-                                    </td>
-                                    <td>13.06.2025</td>
-                                    <td>10:00</td>
-                                    <td>
-                                        <form method="post" action="/Appointment/CancelAppointment">
-                                            <input type="hidden" name="appointmentId" value="49" />
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-times-circle me-1"></i> İptal Et
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    @if (Model != null && Model.UpcomingAppointments != null && Model.UpcomingAppointments.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Doktor</th>
+                                        <th>Tarih</th>
+                                        <th>Saat</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var appointment in Model.UpcomingAppointments)
+                                    {
+                                        <tr>
+                                            <td>@appointment.Id</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    @if (appointment.Doctor != null && !string.IsNullOrEmpty(appointment.Doctor.ImageUrl))
+                                                    {
+                                                        <img src="@appointment.Doctor.ImageUrl" alt="@appointment.Doctor.Name" class="rounded-circle me-2" width="30" height="30">
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px;">
+                                                            <i class="fas fa-user-md small"></i>
+                                                        </div>
+                                                    }
+                                                    <span>@(appointment.Doctor?.Name ?? "İsimsiz Doktor")</span>
+                                                </div>
+                                            </td>
+                                            <td>@appointment.AppointmentDateTime.ToString("dd.MM.yyyy")</td>
+                                            <td>@appointment.AppointmentDateTime.ToString("HH:mm")</td>
+                                            <td>
+                                                <form method="post" action="/Appointment/CancelAppointment">
+                                                    <input type="hidden" name="appointmentId" value="@appointment.Id" />
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-times-circle me-1"></i> İptal Et
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <div class="text-center py-4">
+                                <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
+                                <h5>Yaklaşan randevunuz bulunmamaktadır</h5>
+                                <p>Yeni bir randevu almak için aşağıdaki butona tıklayabilirsiniz</p>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
