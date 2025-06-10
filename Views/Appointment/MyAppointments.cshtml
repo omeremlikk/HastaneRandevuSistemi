@@ -7,6 +7,23 @@
 }
 
 <div class="container mt-5 pt-5" style="min-height: 100vh; margin-bottom: 100px;">
+    <!-- Başarı ve Hata Mesajları -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+        </div>
+    }
+    
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+        </div>
+    }
+
     <!-- Debug bilgileri -->
     <div class="alert alert-info">
         <p><strong>Debug Bilgileri:</strong></p>
@@ -148,13 +165,13 @@
                                             <td>@appointment.AppointmentDateTime.ToString("dd.MM.yyyy")</td>
                                             <td>@appointment.AppointmentDateTime.ToString("HH:mm")</td>
                                             <td>
-                                                <form method="post" action="/Appointment/CancelAppointment">
-                                                    <input type="hidden" name="appointmentId" value="@appointment.Id" />
-                                                    @Html.AntiForgeryToken()
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fas fa-times-circle me-1"></i> İptal Et
-                                                    </button>
-                                                </form>
+                                                <button type="button" class="btn btn-danger btn-sm cancel-appointment" 
+                                                        data-id="@appointment.Id" 
+                                                        data-doctor="@(appointment.Doctor?.Name ?? "İsimsiz Doktor")" 
+                                                        data-date="@appointment.AppointmentDateTime.ToString("dd.MM.yyyy")" 
+                                                        data-time="@appointment.AppointmentDateTime.ToString("HH:mm")">
+                                                    <i class="fas fa-times-circle me-1"></i> Sil
+                                                </button>
                                             </td>
                                         </tr>
                                     }
@@ -187,6 +204,39 @@
     </div>
 </div>
 
+<!-- İptal Onay Modal -->
+<div class="modal fade" id="cancelAppointmentModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="cancelModalLabel">Randevu Silme</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-warning fa-4x mb-3"></i>
+                    <h5>Randevunuzu silmek istediğinize emin misiniz?</h5>
+                    <p class="text-muted">Bu işlem geri alınamaz.</p>
+                </div>
+                <div class="appointment-details p-3 mb-3 bg-light rounded">
+                    <h6 class="mb-3 text-primary">Randevu Bilgileri:</h6>
+                    <p><strong><i class="fas fa-user-md me-2"></i>Doktor:</strong> <span id="modalDoctorName"></span></p>
+                    <p><strong><i class="fas fa-calendar-day me-2"></i>Tarih:</strong> <span id="modalDate"></span></p>
+                    <p><strong><i class="fas fa-clock me-2"></i>Saat:</strong> <span id="modalTime"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i> Vazgeç
+                </button>
+                <button type="button" id="confirmCancel" class="btn btn-danger">
+                    <i class="fas fa-trash-alt me-1"></i> Randevuyu Sil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts {
     <script>
         $(function() {
@@ -194,6 +244,128 @@
             console.log("Sayfa yüklendi");
             console.log("Session PatientId: @patientId");
             console.log("Session PatientName: @patientName");
+            
+            console.log("İptal butonlarını kontrol ediyorum...");
+            console.log("İptal butonları sayısı: " + $('.cancel-appointment').length);
+            
+            // İptal modal tetikleyicileri
+            $('.cancel-appointment').on('click', function(e) {
+                console.log("İptal butonuna tıklandı");
+                e.preventDefault();
+                
+                var id = $(this).data('id');
+                var doctorName = $(this).data('doctor');
+                var date = $(this).data('date');
+                var time = $(this).data('time');
+                
+                console.log("Randevu ID: " + id);
+                console.log("Doktor: " + doctorName);
+                console.log("Tarih: " + date);
+                console.log("Saat: " + time);
+                
+                // Modal içeriğini güncelle
+                $('#appointmentId').val(id);
+                $('#modalDoctorName').text(doctorName);
+                $('#modalDate').text(date);
+                $('#modalTime').text(time);
+                
+                // Modalı göster
+                console.log("Modal açılıyor...");
+                var modal = new bootstrap.Modal(document.getElementById('cancelAppointmentModal'));
+                modal.show();
+            });
+            
+            // İptal Onay Butonu Tıklama İşlemi
+            $('#confirmCancel').on('click', function() {
+                console.log("İptal onay butonuna tıklandı");
+                var appointmentId = $('#appointmentId').val();
+                
+                // AJAX ile iptal işlemi
+                $.ajax({
+                    url: '/Appointment/CancelAppointment',
+                    type: 'POST',
+                    data: { 
+                        appointmentId: appointmentId,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        console.log("Silme işlemi başarılı");
+                        console.log("Yanıt:", response);
+                        
+                        // Silinen randevu satırını hemen gizle
+                        var deletedAppointmentRow = $("button.cancel-appointment[data-id='" + appointmentId + "']").closest('tr');
+                        deletedAppointmentRow.fadeOut(300, function() {
+                            // Satır tamamen kaybolduğunda DOM'dan kaldır
+                            $(this).remove();
+                            
+                            // Eğer kalan randevu yoksa, "randevu bulunmamaktadır" mesajını göster
+                            if ($('table tbody tr:visible').length === 0) {
+                                var noAppointmentHtml = '<div class="alert alert-info">' +
+                                    '<div class="text-center py-4">' +
+                                    '<i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>' +
+                                    '<h5>Yaklaşan randevunuz bulunmamaktadır</h5>' +
+                                    '<p>Yeni bir randevu almak için aşağıdaki butona tıklayabilirsiniz</p>' +
+                                    '</div>' +
+                                    '</div>';
+                                
+                                // Tabloyu gizle ve yerine "randevu bulunmamaktadır" mesajını ekle
+                                $('table').closest('.table-responsive').fadeOut(300, function() {
+                                    $(this).html(noAppointmentHtml).fadeIn(300);
+                                });
+                            }
+                        });
+                        
+                        // Modal kapat
+                        var cancelModal = bootstrap.Modal.getInstance(document.getElementById('cancelAppointmentModal'));
+                        cancelModal.hide();
+                        
+                        // İşlem başarılı mesajını göster
+                        Swal.fire({
+                            title: 'Başarılı!',
+                            text: 'Randevunuz başarıyla silindi!',
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("İptal işlemi hatası:", error);
+                        console.error("XHR durum kodu:", xhr.status);
+                        console.error("XHR yanıtı:", xhr.responseText);
+                        
+                        // Hata alerti göster
+                        Swal.fire({
+                            title: 'Hata!',
+                            text: 'Randevu iptal edilirken bir hata oluştu: ' + error,
+                            icon: 'error',
+                            confirmButtonText: 'Tamam'
+                        });
+                    }
+                });
+            });
+            
+            // Başarı mesajı varsa toast göster
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                    // Sayfayı görüntüledikten hemen sonra toast mesajı göster
+                    setTimeout(function() {
+                        Swal.fire({
+                            title: 'Başarılı!',
+                            text: '@TempData["SuccessMessage"]',
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            showConfirmButton: false
+                        });
+                    }, 500);
+                </text>
+            }
             
             // Debugging amaçlı AJAX çağrısı
             $.ajax({
@@ -209,3 +381,7 @@
         });
     </script>
 }
+
+<!-- Gizli Anti-Forgery Token -->
+@Html.AntiForgeryToken()
+<input type="hidden" id="appointmentId" value="" />
