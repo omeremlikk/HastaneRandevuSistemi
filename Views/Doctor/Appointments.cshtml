@@ -3,6 +3,7 @@
     ViewData["Title"] = "Tüm Randevular";
     var doctorId = Context.Session.GetInt32("DoctorId");
     var doctorName = Context.Session.GetString("DoctorName");
+    var activeTab = ViewBag.ActiveTab ?? "today"; // Varsayılan olarak bugün
 }
 
 <div class="container mt-5 pt-5" style="min-height: 100vh; margin-bottom: 100px;">
@@ -19,6 +20,14 @@
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+        </div>
+    }
+
+    @if (TempData["InfoMessage"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle me-2"></i> @TempData["InfoMessage"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
         </div>
     }
@@ -66,40 +75,44 @@
         </div>
     </div>
 
-    <!-- Randevu Tabları -->
+    <!-- Randevu Sekmeleri (Link Olarak) -->
     <div class="row mb-4">
         <div class="col-12">
             <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <ul class="nav nav-tabs" id="appointmentTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="today-tab" data-bs-toggle="tab" data-bs-target="#today" type="button" role="tab" aria-controls="today" aria-selected="true">
-                                <i class="fas fa-calendar-day me-1"></i> Bugün 
-                                <span class="badge bg-primary ms-1">@Model.TodayAppointments.Count</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="false">
-                                <i class="fas fa-calendar-alt me-1"></i> Yaklaşan 
-                                <span class="badge bg-success ms-1">@Model.UpcomingAppointments.Count</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">
-                                <i class="fas fa-history me-1"></i> Geçmiş 
-                                <span class="badge bg-secondary ms-1">@Model.PastAppointments.Count</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="cancelled-tab" data-bs-toggle="tab" data-bs-target="#cancelled" type="button" role="tab" aria-controls="cancelled" aria-selected="false">
-                                <i class="fas fa-ban me-1"></i> İptal Edilenler 
-                                <span class="badge bg-danger ms-1">@Model.CancelledAppointments.Count</span>
-                            </button>
-                        </li>
-                    </ul>
-                    <div class="tab-content mt-3" id="appointmentTabsContent">
+                <div class="card-body p-0">
+                    <div class="d-flex flex-wrap" style="border-bottom: 1px solid #eee;">
+                        <a href="/Doctor/Appointments?activeTab=today" class="p-3 text-center flex-grow-1 text-decoration-none @(activeTab == "today" ? "bg-light fw-bold border-bottom border-3 border-primary" : "text-muted")">
+                            <i class="fas fa-calendar-day me-1"></i> Bugün 
+                            <span class="badge bg-primary ms-1">@Model.TodayAppointments.Count</span>
+                        </a>
+                        <a href="/Doctor/Appointments?activeTab=upcoming" class="p-3 text-center flex-grow-1 text-decoration-none @(activeTab == "upcoming" ? "bg-light fw-bold border-bottom border-3 border-success" : "text-muted")">
+                            <i class="fas fa-calendar-alt me-1"></i> Yaklaşan 
+                            <span class="badge bg-success ms-1">@Model.UpcomingAppointments.Count</span>
+                        </a>
+                        <a href="/Doctor/Appointments?activeTab=completed" class="p-3 text-center flex-grow-1 text-decoration-none @(activeTab == "completed" ? "bg-light fw-bold border-bottom border-3 border-success" : "text-muted")">
+                            <i class="fas fa-check-circle me-1"></i> Tamamlanan 
+                            <span class="badge bg-success ms-1">@Model.CompletedAppointments.Count</span>
+                        </a>
+                        <a href="/Doctor/Appointments?activeTab=past" class="p-3 text-center flex-grow-1 text-decoration-none @(activeTab == "past" ? "bg-light fw-bold border-bottom border-3 border-secondary" : "text-muted")">
+                            <i class="fas fa-history me-1"></i> Geçmiş 
+                            <span class="badge bg-secondary ms-1">@Model.PastAppointments.Count</span>
+                        </a>
+                        <a href="/Doctor/Appointments?activeTab=cancelled" class="p-3 text-center flex-grow-1 text-decoration-none @(activeTab == "cancelled" ? "bg-light fw-bold border-bottom border-3 border-danger" : "text-muted")">
+                            <i class="fas fa-ban me-1"></i> İptal Edilenler 
+                            <span class="badge bg-danger ms-1">@Model.CancelledAppointments.Count</span>
+                        </a>
+                    </div>
+                    
+                    <div class="p-4">
                         <!-- Bugünkü Randevular -->
-                        <div class="tab-pane fade show active" id="today" role="tabpanel" aria-labelledby="today-tab">
+                        @if (activeTab == "today")
+                        {
+                            <h5 class="mb-4 d-flex align-items-center">
+                                <i class="fas fa-calendar-day me-2 text-primary"></i> 
+                                <span>Bugünkü Randevular</span>
+                                <span class="badge bg-primary ms-2">@Model.TodayAppointments.Count</span>
+                            </h5>
+                            
                             @if (Model.TodayAppointments.Count > 0)
                             {
                                 <div class="table-responsive">
@@ -176,10 +189,17 @@
                                     </div>
                                 </div>
                             }
-                        </div>
+                        }
                         
                         <!-- Yaklaşan Randevular -->
-                        <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                        @if (activeTab == "upcoming")
+                        {
+                            <h5 class="mb-4 d-flex align-items-center">
+                                <i class="fas fa-calendar-alt me-2 text-success"></i> 
+                                <span>Yaklaşan Randevular</span>
+                                <span class="badge bg-success ms-2">@Model.UpcomingAppointments.Count</span>
+                            </h5>
+                            
                             @if (Model.UpcomingAppointments.Count > 0)
                             {
                                 <div class="table-responsive">
@@ -247,10 +267,101 @@
                                     </div>
                                 </div>
                             }
-                        </div>
+                        }
+                        
+                        <!-- Tamamlanan Randevular -->
+                        @if (activeTab == "completed")
+                        {
+                            <h5 class="mb-4 d-flex align-items-center">
+                                <i class="fas fa-check-circle me-2 text-success"></i> 
+                                <span>Tamamlanan Randevular</span>
+                                <span class="badge bg-success ms-2">@Model.CompletedAppointments.Count</span>
+                            </h5>
+                            
+                            @if (Model.CompletedAppointments.Count > 0)
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Tarih</th>
+                                                <th>Saat</th>
+                                                <th>Hasta Adı</th>
+                                                <th>Notlar</th>
+                                                <th>İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var appointment in Model.CompletedAppointments.OrderByDescending(a => a.AppointmentDateTime))
+                                            {
+                                                <tr>
+                                                    <td>@appointment.AppointmentDateTime.ToString("dd.MM.yyyy")</td>
+                                                    <td>@appointment.AppointmentDateTime.ToString("HH:mm")</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            @if (appointment.Patient != null)
+                                                            {
+                                                                if (!string.IsNullOrEmpty(appointment.Patient.ProfilePhoto))
+                                                                {
+                                                                    <img src="@appointment.Patient.ProfilePhoto" alt="@appointment.Patient.FullName" class="rounded-circle me-2" width="30" height="30">
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px;">
+                                                                        <i class="fas fa-user small"></i>
+                                                                    </div>
+                                                                }
+                                                                <span>@appointment.Patient.FullName</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span>Hasta bilgisi bulunamadı</span>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (!string.IsNullOrEmpty(appointment.Notes))
+                                                        {
+                                                            <span class="text-truncate d-inline-block" style="max-width: 150px;" title="@appointment.Notes">
+                                                                @appointment.Notes
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="text-muted">Not girilmemiş</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-eye me-1"></i> Detay
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <div class="text-center py-4">
+                                        <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
+                                        <h5>Tamamlanan randevunuz bulunmamaktadır</h5>
+                                    </div>
+                                </div>
+                            }
+                        }
                         
                         <!-- Geçmiş Randevular -->
-                        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+                        @if (activeTab == "past")
+                        {
+                            <h5 class="mb-4 d-flex align-items-center">
+                                <i class="fas fa-history me-2 text-secondary"></i> 
+                                <span>Geçmiş Randevular</span>
+                                <span class="badge bg-secondary ms-2">@Model.PastAppointments.Count</span>
+                            </h5>
+                            
                             @if (Model.PastAppointments.Count > 0)
                             {
                                 <div class="table-responsive">
@@ -322,10 +433,17 @@
                                     </div>
                                 </div>
                             }
-                        </div>
+                        }
                         
                         <!-- İptal Edilen Randevular -->
-                        <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+                        @if (activeTab == "cancelled")
+                        {
+                            <h5 class="mb-4 d-flex align-items-center">
+                                <i class="fas fa-ban me-2 text-danger"></i> 
+                                <span>İptal Edilen Randevular</span>
+                                <span class="badge bg-danger ms-2">@Model.CancelledAppointments.Count</span>
+                            </h5>
+                            
                             @if (Model.CancelledAppointments.Count > 0)
                             {
                                 <div class="table-responsive">
@@ -390,7 +508,7 @@
                                     </div>
                                 </div>
                             }
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -400,14 +518,17 @@
 
 @section Scripts {
     <script>
-        $(function() {
-            console.log("Doktor tüm randevular sayfası yüklendi");
+        $(document).ready(function() {
+            console.log("Randevular sayfası yüklendi");
+            console.log("Aktif tab: @activeTab");
+            console.log("Tamamlanan randevu sayısı: " + @Model.CompletedAppointments.Count);
             
-            // URL'de tab parametresi varsa ilgili tab'ı aktif et
-            var urlParams = new URLSearchParams(window.location.search);
-            var tab = urlParams.get('tab');
-            if (tab) {
-                $('#appointmentTabs button[data-bs-target="#' + tab + '"]').tab('show');
+            // Sayfa yüklendikten sonra, bir randevu tamamlandıysa sayfanın tepesine scroll yap
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                window.scrollTo(0, 0);
+                </text>
             }
         });
     </script>

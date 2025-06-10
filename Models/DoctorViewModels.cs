@@ -26,11 +26,13 @@ namespace hastane.Models
             UpcomingAppointments = new List<Appointment>();
             PastAppointments = new List<Appointment>();
             CancelledAppointments = new List<Appointment>();
+            CompletedAppointments = new List<Appointment>();
         }
 
         public List<Appointment> TodayAppointments { get; set; }
         public List<Appointment> UpcomingAppointments { get; set; }
         public List<Appointment> PastAppointments { get; set; }
         public List<Appointment> CancelledAppointments { get; set; }
+        public List<Appointment> CompletedAppointments { get; set; }
     }
 } 

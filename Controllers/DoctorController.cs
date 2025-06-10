@@ -79,7 +79,7 @@ namespace hastane.Controllers
         }
 
         // Tüm randevuları listele
-        public async Task<IActionResult> Appointments()
+        public async Task<IActionResult> Appointments(string activeTab = null)
         {
             if (!IsDoctorAuthorized())
             {
@@ -90,6 +90,9 @@ namespace hastane.Controllers
 
             try
             {
+                // Aktif tab kontrolü
+                ViewBag.ActiveTab = activeTab ?? (TempData["ActiveTab"]?.ToString() ?? "today");
+                
                 // Doktorun tüm randevularını getir
                 var appointments = await _context.Appointments
                     .Include(a => a.Patient)
@@ -97,14 +100,29 @@ namespace hastane.Controllers
                     .OrderByDescending(a => a.AppointmentDateTime)
                     .ToListAsync();
 
+                // Tamamlanan randevuları test için log kayıtları oluştur
+                var completedAppointments = appointments.Where(a => a.IsCompleted).ToList();
+                System.Diagnostics.Debug.WriteLine($"Tamamlanan randevu sayısı: {completedAppointments.Count}");
+                foreach (var app in completedAppointments)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Tamamlanan randevu: ID: {app.Id}, Hasta: {app.Patient?.FullName}, Tarih: {app.AppointmentDateTime}, IsCompleted: {app.IsCompleted}");
+                }
+                
+                // Test için tamamlanan randevu oluştur
+                if (completedAppointments.Count == 0 && appointments.Count > 0)
+                {
+                    TempData["InfoMessage"] = "Tamamlanan randevu bulunamadı. Test için en az bir randevuyu manuel olarak tamamlamanız gerekiyor.";
+                }
+
                 // Randevuları gruplandır: Gelecek, Bugün, Geçmiş, İptal Edilenler
                 var today = DateTime.Today;
                 var viewModel = new DoctorAppointmentsViewModel
                 {
-                    UpcomingAppointments = appointments.Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled).ToList(),
-                    TodayAppointments = appointments.Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled).ToList(),
-                    PastAppointments = appointments.Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled).ToList(),
-                    CancelledAppointments = appointments.Where(a => a.IsCancelled).ToList()
+                    UpcomingAppointments = appointments.Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    TodayAppointments = appointments.Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    PastAppointments = appointments.Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    CancelledAppointments = appointments.Where(a => a.IsCancelled).ToList(),
+                    CompletedAppointments = completedAppointments
                 };
 
                 return View(viewModel);
@@ -163,6 +181,7 @@ namespace hastane.Controllers
             try
             {
                 var appointment = await _context.Appointments
+                    .Include(a => a.Patient)
                     .FirstOrDefaultAsync(a => a.Id == appointmentId && a.DoctorId == doctorId);
 
                 if (appointment == null)
@@ -176,13 +195,45 @@ namespace hastane.Controllers
                 
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Randevu başarıyla tamamlandı olarak işaretlendi.";
-                return RedirectToAction("Appointments");
+                TempData["SuccessMessage"] = "Randevu başarıyla tamamlandı olarak işaretlendi. Notlar hasta ile paylaşıldı.";
+                
+                // Doğrudan CompletedAppointments sayfasına yönlendir
+                return RedirectToAction("CompletedAppointments");
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "Randevu güncellenirken bir hata oluştu: " + ex.Message;
                 return RedirectToAction("Appointments");
+            }
+        }
+
+        // Test: Sadece tamamlanan randevuları görüntüle
+        public async Task<IActionResult> CompletedAppointments()
+        {
+            if (!IsDoctorAuthorized())
+            {
+                return RedirectToAction("DoctorLogin", "Account");
+            }
+
+            var doctorId = HttpContext.Session.GetInt32("DoctorId");
+
+            try
+            {
+                // Sadece tamamlanan randevuları getir
+                var completedAppointments = await _context.Appointments
+                    .Include(a => a.Patient)
+                    .Where(a => a.DoctorId == doctorId && a.IsCompleted)
+                    .OrderByDescending(a => a.AppointmentDateTime)
+                    .ToListAsync();
+
+                ViewBag.CompletedCount = completedAppointments.Count;
+
+                return View(completedAppointments);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Randevular yüklenirken bir hata oluştu: " + ex.Message;
+                return View(new List<Appointment>());
             }
         }
     }
