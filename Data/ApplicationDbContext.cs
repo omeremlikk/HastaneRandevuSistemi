@@ -76,7 +76,7 @@ namespace hastane.Data
                     Id = 2, 
                     Name = "Dr. Mehmet Kaya", 
                     Specialty = "KBB", 
-                    ImageUrl = "/img/doctors/doctor3.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Kulak Burun Boğaz hastalıkları konusunda uzman hekim",
                     Email = "mehmet.kaya@medivita.com",
                     Password = "test123"
@@ -85,7 +85,7 @@ namespace hastane.Data
                     Id = 3, 
                     Name = "Dr. Ali Öztürk", 
                     Specialty = "Kardiyoloji", 
-                    ImageUrl = "/img/doctors/doctor2.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Kalp ve damar hastalıkları konusunda deneyimli uzman",
                     Email = "ali.ozturk@medivita.com",
                     Password = "test123"
@@ -94,7 +94,7 @@ namespace hastane.Data
                     Id = 4, 
                     Name = "Dr. Can Yücel", 
                     Specialty = "Dermatoloji", 
-                    ImageUrl = "/img/doctors/doctor7.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Cilt hastalıkları ve estetik dermatoloji uzmanı",
                     Email = "can.yucel@medivita.com",
                     Password = "test123"
@@ -103,7 +103,7 @@ namespace hastane.Data
                     Id = 5, 
                     Name = "Dr. Ece Şahin", 
                     Specialty = "Göz Hastalıkları", 
-                    ImageUrl = "/img/doctors/doctor9.jpg",
+                    ImageUrl = "/img/doctors/doctor2.jpg",
                     Description = "Göz hastalıkları ve cerrahi operasyonlar konusunda uzman",
                     Email = "ece.sahin@medivita.com",
                     Password = "test123"
@@ -112,7 +112,7 @@ namespace hastane.Data
                     Id = 6, 
                     Name = "Dr. Gamze Özkan", 
                     Specialty = "Ortopedi", 
-                    ImageUrl = "/img/doctors/doctor11.jpg",
+                    ImageUrl = "/img/doctors/doctor2.jpg",
                     Description = "Ortopedi ve travmatoloji uzmanı",
                     Email = "gamze.ozkan@medivita.com",
                     Password = "test123"
@@ -121,7 +121,7 @@ namespace hastane.Data
                     Id = 7, 
                     Name = "Dr. İrem Doğan", 
                     Specialty = "Nöroloji", 
-                    ImageUrl = "/img/doctors/doctor13.jpg",
+                    ImageUrl = "/img/doctors/doctor2.jpg",
                     Description = "Nörolojik hastalıklar konusunda deneyimli uzman",
                     Email = "irem.dogan@medivita.com",
                     Password = "test123"
@@ -130,7 +130,7 @@ namespace hastane.Data
                     Id = 8, 
                     Name = "Dr. Kemal Tunç", 
                     Specialty = "Psikiyatri", 
-                    ImageUrl = "/img/doctors/doctor15.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Psikiyatri ve psikoterapi konusunda uzman hekim",
                     Email = "kemal.tunc@medivita.com",
                     Password = "test123"
@@ -139,7 +139,7 @@ namespace hastane.Data
                     Id = 9, 
                     Name = "Dr. Murat Ersoy", 
                     Specialty = "Üroloji", 
-                    ImageUrl = "/img/doctors/doctor17.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Üroloji ve androloji uzmanı",
                     Email = "murat.ersoy@medivita.com",
                     Password = "test123"
@@ -148,7 +148,7 @@ namespace hastane.Data
                     Id = 10, 
                     Name = "Dr. Osman Kara", 
                     Specialty = "Kadın Hastalıkları ve Doğum", 
-                    ImageUrl = "/img/doctors/doctor19.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Kadın hastalıkları ve doğum uzmanı",
                     Email = "osman.kara@medivita.com",
                     Password = "test123"
@@ -157,7 +157,7 @@ namespace hastane.Data
                     Id = 11, 
                     Name = "Dr. Rıza Altın", 
                     Specialty = "Endokrinoloji", 
-                    ImageUrl = "/img/doctors/doctor21.jpg",
+                    ImageUrl = "/img/doctors/doctor1.jpg",
                     Description = "Endokrinoloji ve metabolizma hastalıkları uzmanı",
                     Email = "riza.altin@medivita.com",
                     Password = "test123"

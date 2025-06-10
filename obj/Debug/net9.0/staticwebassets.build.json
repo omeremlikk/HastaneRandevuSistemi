@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4bC7MmL7+m98jn6QZ1muRPyBPtMnZ3IsU4hOkkHy0Dw=",
+  "Hash": "ZO30kirvlao53jtgXT3PxMxkBsxJ/ljDLZhZgMfA4BI=",
   "Source": "hastane",
   "BasePath": "_content/hastane",
   "Mode": "Default",
@@ -1459,8 +1459,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1vlubmvtmo",
-      "Integrity": "0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac=",
+      "Fingerprint": "h4snmytmg2",
+      "Integrity": "IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\doctors\\doctor1.jpg"
@@ -1485,48 +1485,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\doctors\\doctor2.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor3.jpg",
-      "SourceId": "hastane",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\",
-      "BasePath": "_content/hastane",
-      "RelativePath": "img/doctors/doctor3#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "h4snmytmg2",
-      "Integrity": "IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\doctors\\doctor3.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor4.jpg",
-      "SourceId": "hastane",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\",
-      "BasePath": "_content/hastane",
-      "RelativePath": "img/doctors/doctor4#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "d9y6ahz9er",
-      "Integrity": "D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\doctors\\doctor4.jpg"
     },
     {
       "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\hero-bg.jpg",
@@ -2852,6 +2810,27 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg",
+      "SourceId": "hastane",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\",
+      "BasePath": "_content/hastane",
+      "RelativePath": "uploads/profiles/patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "g1k3vr8xyh",
+      "Integrity": "zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\profiles\\patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
       "SourceId": "hastane",
       "SourceType": "Discovered",
@@ -4067,7 +4046,7 @@
       ]
     },
     {
-      "Route": "img/doctors/doctor1.1vlubmvtmo.jpg",
+      "Route": "img/doctors/doctor1.h4snmytmg2.jpg",
       "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor1.jpg",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4077,7 +4056,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24265"
+          "Value": "12192"
         },
         {
           "Name": "Content-Type",
@@ -4085,11 +4064,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac=\""
+          "Value": "\"IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:41 GMT"
+          "Value": "Wed, 09 Apr 2025 16:48:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4099,7 +4078,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "1vlubmvtmo"
+          "Value": "h4snmytmg2"
         },
         {
           "Name": "label",
@@ -4107,7 +4086,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac="
+          "Value": "sha256-IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc="
         }
       ]
     },
@@ -4122,7 +4101,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24265"
+          "Value": "12192"
         },
         {
           "Name": "Content-Type",
@@ -4130,11 +4109,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac=\""
+          "Value": "\"IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:41 GMT"
+          "Value": "Wed, 09 Apr 2025 16:48:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4144,7 +4123,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0wLAikJUzgymzurLoKxMOn+dx46Vp9bvnfLpN0qHjac="
+          "Value": "sha256-IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc="
         }
       ]
     },
@@ -4227,170 +4206,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-VgjU7Q4rOXIK9GTmtqPjt2h82n7KrN4VNuslVVAwEgA="
-        }
-      ]
-    },
-    {
-      "Route": "img/doctors/doctor3.h4snmytmg2.jpg",
-      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor3.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12192"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "h4snmytmg2"
-        },
-        {
-          "Name": "label",
-          "Value": "img/doctors/doctor3.jpg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc="
-        }
-      ]
-    },
-    {
-      "Route": "img/doctors/doctor3.jpg",
-      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor3.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12192"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:39 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-IdxU1Yw1EIMABqVjo30UUeoweMzm3NFCyhZHLJG51hc="
-        }
-      ]
-    },
-    {
-      "Route": "img/doctors/doctor4.d9y6ahz9er.jpg",
-      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor4.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "14615"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "d9y6ahz9er"
-        },
-        {
-          "Name": "label",
-          "Value": "img/doctors/doctor4.jpg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ="
-        }
-      ]
-    },
-    {
-      "Route": "img/doctors/doctor4.jpg",
-      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\img\\doctors\\doctor4.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "14615"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 09 Apr 2025 16:48:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-D29cVnF7ZQ2xlQsXZbI5R8kE3VVNP0C++SOymQ8+qIQ="
         }
       ]
     },
@@ -22517,6 +22332,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.g1k3vr8xyh.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134826"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 09 Jun 2025 19:04:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1k3vr8xyh"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profiles/patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134826"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 09 Jun 2025 19:04:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
         }
       ]
     },
