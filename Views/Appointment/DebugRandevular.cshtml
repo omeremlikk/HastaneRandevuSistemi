@@ -1,0 +1,178 @@
+@model Dictionary<string, object>
+@{
+    ViewData["Title"] = "Debug Randevular";
+}
+
+<div class="container my-4">
+    <h1 class="mb-4">Debug Bilgileri</h1>
+
+    <div class="alert alert-info">
+        <h5>Session Bilgileri</h5>
+        <p>PatientId: @(Model["SessionPatientId"] ?? "null")</p>
+        <p>PatientName: @(Model["SessionPatientName"] ?? "null")</p>
+    </div>
+
+    @if (Model.ContainsKey("Error"))
+    {
+        <div class="alert alert-danger">
+            <h5>Hata Oluştu</h5>
+            <p>@Model["Error"]</p>
+            <pre>@Model["StackTrace"]</pre>
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Veritabanı Tabloları</h5>
+        </div>
+        <div class="card-body">
+            <ul>
+                @if (Model.ContainsKey("DatabaseTables"))
+                {
+                    foreach (var table in Model["DatabaseTables"] as List<string>)
+                    {
+                        <li>@table</li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Hasta Bilgileri</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.ContainsKey("Patient") && Model["Patient"] != null)
+            {
+                var patient = Model["Patient"] as hastane.Models.Patient;
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <td>@patient.Id</td>
+                    </tr>
+                    <tr>
+                        <th>İsim</th>
+                        <td>@patient.FullName</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>@patient.Email</td>
+                    </tr>
+                </table>
+            }
+            else
+            {
+                <p class="text-danger">Hasta bulunamadı!</p>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Randevu Bilgileri (@(Model.ContainsKey("TotalAppointments") ? Model["TotalAppointments"] : "0") adet)</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.ContainsKey("Appointments") && (Model["Appointments"] as List<hastane.Models.Appointment>).Count > 0)
+            {
+                var appointments = Model["Appointments"] as List<hastane.Models.Appointment>;
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Doktor</th>
+                            <th>Hasta</th>
+                            <th>Tarih</th>
+                            <th>İptal</th>
+                            <th>Tamamlandı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointment in appointments)
+                        {
+                            <tr>
+                                <td>@appointment.Id</td>
+                                <td>
+                                    @if (appointment.Doctor != null)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img src="@appointment.Doctor.ImageUrl" alt="@appointment.Doctor.Name" class="rounded-circle" width="30" height="30">
+                                            </div>
+                                            <div class="ms-2">
+                                                @appointment.Doctor.Name
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Doktor bulunamadı (ID: @appointment.DoctorId)</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (appointment.Patient != null)
+                                    {
+                                        @appointment.Patient.FullName
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Hasta bulunamadı (ID: @appointment.PatientId)</span>
+                                    }
+                                </td>
+                                <td>@appointment.AppointmentDateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>
+                                    @if (appointment.IsCancelled)
+                                    {
+                                        <span class="badge bg-danger">İptal</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Aktif</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (appointment.IsCompleted)
+                                    {
+                                        <span class="badge bg-info">Tamamlandı</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Beklemede</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <p>Randevu bulunamadı!</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Doktor Bilgileri (@(Model.ContainsKey("TotalDoctors") ? Model["TotalDoctors"] : "0") adet)</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.ContainsKey("TotalDoctors") && (int)Model["TotalDoctors"] > 0)
+            {
+                <p>Sistemde @Model["TotalDoctors"] adet doktor bulunmaktadır.</p>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <p>Doktor bulunamadı!</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/Appointment/MyAppointments" class="btn btn-primary">Randevularım Sayfasına Dön</a>
+    </div>
+</div> 
