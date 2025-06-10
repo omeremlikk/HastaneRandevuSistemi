@@ -95,7 +95,7 @@ namespace hastane.Controllers
                     HttpContext.Session.SetString("DoctorName", doctor.Name);
                     HttpContext.Session.SetString("UserRole", "Doctor");
                     
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "Doctor");
                 }
                 
                 // Hata durumunda uyarı göster

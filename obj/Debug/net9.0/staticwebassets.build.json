@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZO30kirvlao53jtgXT3PxMxkBsxJ/ljDLZhZgMfA4BI=",
+  "Hash": "16OeSMrwe8mKu5v4pWFWFedl8bWSczvDZLr5AQJjh1I=",
   "Source": "hastane",
   "BasePath": "_content/hastane",
   "Mode": "Default",
@@ -2829,6 +2829,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\profiles\\patient_1_6a8cb085-163c-42c0-9115-4e8cec1b2c30.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg",
+      "SourceId": "hastane",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\",
+      "BasePath": "_content/hastane",
+      "RelativePath": "uploads/profiles/patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "p0pxxyyrns",
+      "Integrity": "6WWHQ+sF1PYDwDuTn672nAjVbjk/wm08zVpW6U3Zpfw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\profiles\\patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg"
     },
     {
       "Identity": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg",
@@ -22414,6 +22435,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29640"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6WWHQ+sF1PYDwDuTn672nAjVbjk/wm08zVpW6U3Zpfw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 10 Jun 2025 21:18:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6WWHQ+sF1PYDwDuTn672nAjVbjk/wm08zVpW6U3Zpfw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.p0pxxyyrns.jpg",
+      "AssetFile": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29640"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6WWHQ+sF1PYDwDuTn672nAjVbjk/wm08zVpW6U3Zpfw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 10 Jun 2025 21:18:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p0pxxyyrns"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profiles/patient_2_2853d5e6-4cd6-4f7b-a42c-a7ac774ba0e2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6WWHQ+sF1PYDwDuTn672nAjVbjk/wm08zVpW6U3Zpfw="
         }
       ]
     },
