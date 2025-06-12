@@ -28,7 +28,7 @@ namespace hastane.Controllers
         }
 
         // Doktor dashboard sayfası
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(string activeTab = null)
         {
             if (!IsDoctorAuthorized())
             {
@@ -40,6 +40,9 @@ namespace hastane.Controllers
 
             try
             {
+                // Aktif tab kontrolü (dashboard varsayılan)
+                ViewBag.ActiveTab = activeTab ?? "dashboard";
+                
                 // Doktora ait bilgileri getir
                 var doctor = await _context.Doctors.FindAsync(doctorId);
                 if (doctor == null)
@@ -47,29 +50,49 @@ namespace hastane.Controllers
                     TempData["ErrorMessage"] = "Doktor bilgileri bulunamadı.";
                     return RedirectToAction("DoctorLogin", "Account");
                 }
-
-                // Doktorun randevularını getir (bugün ve sonrası için)
-                var today = DateTime.Today;
-                var appointments = await _context.Appointments
-                    .Include(a => a.Patient)
-                    .Where(a => a.DoctorId == doctorId && 
-                                a.AppointmentDateTime >= today && 
-                                !a.IsCancelled)
-                    .OrderBy(a => a.AppointmentDateTime)
-                    .ToListAsync();
-
-                ViewBag.Doctor = doctor;
-                ViewBag.TodayAppointmentsCount = appointments.Count(a => a.AppointmentDateTime.Date == today);
-                ViewBag.UpcomingAppointmentsCount = appointments.Count(a => a.AppointmentDateTime.Date > today);
                 
-                // Bugünün randevularını ve gelecek randevuları ayrı grupla
-                var viewModel = new DoctorDashboardViewModel
+                ViewBag.Doctor = doctor;
+                
+                // Tüm randevuları getir (DoctorAppointmentsViewModel için)
+                var allAppointments = await _context.Appointments
+                    .Include(a => a.Patient)
+                    .Where(a => a.DoctorId == doctorId)
+                    .OrderByDescending(a => a.AppointmentDateTime)
+                    .ToListAsync();
+                
+                // Bugün ve gelecek randevular için (DoctorDashboardViewModel için)
+                var today = DateTime.Today;
+                var currentAndFutureAppointments = allAppointments
+                    .Where(a => a.AppointmentDateTime >= today && !a.IsCancelled)
+                    .OrderBy(a => a.AppointmentDateTime)
+                    .ToList();
+
+                // Dashboard için özet sayılar
+                ViewBag.TodayAppointmentsCount = allAppointments.Count(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted);
+                ViewBag.UpcomingAppointmentsCount = allAppointments.Count(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted);
+                
+                // Appointments sekmesi için tüm randevu türlerini gruplandır
+                var completedAppointments = allAppointments.Where(a => a.IsCompleted).ToList();
+                var appointmentsViewModel = new DoctorAppointmentsViewModel
                 {
-                    TodayAppointments = appointments.Where(a => a.AppointmentDateTime.Date == today).ToList(),
-                    UpcomingAppointments = appointments.Where(a => a.AppointmentDateTime.Date > today).ToList()
+                    UpcomingAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    TodayAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    PastAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    CancelledAppointments = allAppointments.Where(a => a.IsCancelled).ToList(),
+                    CompletedAppointments = completedAppointments
+                };
+                
+                // Her iki model de ViewBag üzerinden erişilebilir
+                ViewBag.AppointmentsViewModel = appointmentsViewModel;
+                
+                // Dashboard ana modeli
+                var dashboardViewModel = new DoctorDashboardViewModel
+                {
+                    TodayAppointments = appointmentsViewModel.TodayAppointments,
+                    UpcomingAppointments = appointmentsViewModel.UpcomingAppointments
                 };
 
-                return View(viewModel);
+                return View(dashboardViewModel);
             }
             catch (Exception ex)
             {
