@@ -27,11 +27,14 @@ namespace hastane.Controllers
                 return;
             }
             
-            // Doktor, Dashboard dışında bir action'a erişmeye çalışıyorsa, Dashboard'a yönlendir
+            // Doktor, belirli action'lar dışında bir action'a erişmeye çalışıyorsa, Dashboard'a yönlendir
             var controllerName = context.RouteData.Values["controller"].ToString();
             var actionName = context.RouteData.Values["action"].ToString();
             
-            if (controllerName == "Doctor" && actionName != "Dashboard")
+            // İzin verilen action'lar listesi
+            var allowedActions = new[] { "Dashboard", "AppointmentDetails", "CompleteAppointment" };
+            
+            if (controllerName == "Doctor" && !allowedActions.Contains(actionName))
             {
                 context.Result = new RedirectToActionResult("Dashboard", "Doctor", null);
             }
