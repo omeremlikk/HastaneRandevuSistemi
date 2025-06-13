@@ -1,6 +1,7 @@
 @model hastane.Models.DoctorDashboardViewModel
 @{
     ViewData["Title"] = "Doktor Paneli";
+    Layout = "_DoctorLayout";
     var doctor = ViewBag.Doctor;
     var activeTab = ViewBag.ActiveTab ?? "dashboard"; // Varsayılan olarak dashboard
     

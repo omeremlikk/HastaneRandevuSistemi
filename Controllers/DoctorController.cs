@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using hastane.Models;
 using hastane.Data;
@@ -10,6 +11,36 @@ using System.Threading.Tasks;
 
 namespace hastane.Controllers
 {
+    // Doktor yetkisi kontrolü için özel filtre
+    public class AuthorizeDoctorAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            var httpContext = context.HttpContext;
+            var userRole = httpContext.Session.GetString("UserRole");
+            var doctorId = httpContext.Session.GetInt32("DoctorId");
+            
+            // Doktor değilse, giriş sayfasına yönlendir
+            if (userRole != "Doctor" || !doctorId.HasValue)
+            {
+                context.Result = new RedirectToActionResult("DoctorLogin", "Account", null);
+                return;
+            }
+            
+            // Doktor, Dashboard dışında bir action'a erişmeye çalışıyorsa, Dashboard'a yönlendir
+            var controllerName = context.RouteData.Values["controller"].ToString();
+            var actionName = context.RouteData.Values["action"].ToString();
+            
+            if (controllerName == "Doctor" && actionName != "Dashboard")
+            {
+                context.Result = new RedirectToActionResult("Dashboard", "Doctor", null);
+            }
+            
+            base.OnActionExecuting(context);
+        }
+    }
+
+    [AuthorizeDoctor]
     public class DoctorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,22 +50,9 @@ namespace hastane.Controllers
             _context = context;
         }
 
-        // Doktor yetkisi kontrolü için özel metot
-        private bool IsDoctorAuthorized()
-        {
-            var doctorId = HttpContext.Session.GetInt32("DoctorId");
-            var userRole = HttpContext.Session.GetString("UserRole");
-            return doctorId.HasValue && userRole == "Doctor";
-        }
-
         // Doktor dashboard sayfası
         public async Task<IActionResult> Dashboard(string activeTab = null)
         {
-            if (!IsDoctorAuthorized())
-            {
-                return RedirectToAction("DoctorLogin", "Account");
-            }
-
             var doctorId = HttpContext.Session.GetInt32("DoctorId");
             var doctorName = HttpContext.Session.GetString("DoctorName");
 
@@ -101,14 +119,9 @@ namespace hastane.Controllers
             }
         }
 
-        // Tüm randevuları listele
+        // Tüm randevuları listele - AuthorizeDoctor filtresi tarafından engellenir
         public async Task<IActionResult> Appointments(string activeTab = null)
         {
-            if (!IsDoctorAuthorized())
-            {
-                return RedirectToAction("DoctorLogin", "Account");
-            }
-
             var doctorId = HttpContext.Session.GetInt32("DoctorId");
 
             try
@@ -157,14 +170,9 @@ namespace hastane.Controllers
             }
         }
 
-        // Randevu detayları
+        // Randevu detayları - AuthorizeDoctor filtresi tarafından engellenir
         public async Task<IActionResult> AppointmentDetails(int id)
         {
-            if (!IsDoctorAuthorized())
-            {
-                return RedirectToAction("DoctorLogin", "Account");
-            }
-
             var doctorId = HttpContext.Session.GetInt32("DoctorId");
 
             try
@@ -189,16 +197,11 @@ namespace hastane.Controllers
             }
         }
 
-        // Randevu tamamlandı olarak işaretle
+        // Randevu tamamlandı olarak işaretle - AuthorizeDoctor filtresi tarafından engellenir
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CompleteAppointment(int appointmentId, string notes)
         {
-            if (!IsDoctorAuthorized())
-            {
-                return RedirectToAction("DoctorLogin", "Account");
-            }
-
             var doctorId = HttpContext.Session.GetInt32("DoctorId");
 
             try
@@ -230,14 +233,9 @@ namespace hastane.Controllers
             }
         }
 
-        // Test: Sadece tamamlanan randevuları görüntüle
+        // Test: Sadece tamamlanan randevuları görüntüle - AuthorizeDoctor filtresi tarafından engellenir
         public async Task<IActionResult> CompletedAppointments()
         {
-            if (!IsDoctorAuthorized())
-            {
-                return RedirectToAction("DoctorLogin", "Account");
-            }
-
             var doctorId = HttpContext.Session.GetInt32("DoctorId");
 
             try

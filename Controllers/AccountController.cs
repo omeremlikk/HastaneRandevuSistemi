@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using hastane.Models;
 using hastane.Data;
@@ -20,6 +21,23 @@ namespace hastane.Controllers
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+        }
+
+        // Tüm controller metotları için çalışacak özel action filtresi
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+
+            // Eğer kullanıcı doktor rolündeyse ve işlem Logout değilse, doktor dashboard'una yönlendir
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole == "Doctor")
+            {
+                var actionName = context.RouteData.Values["action"].ToString();
+                if (actionName != "Logout")
+                {
+                    context.Result = new RedirectToActionResult("Dashboard", "Doctor", null);
+                }
+            }
         }
 
         public IActionResult Register()
@@ -155,6 +173,7 @@ namespace hastane.Controllers
 
         public IActionResult Logout()
         {
+            // Oturum bilgilerini temizle
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }

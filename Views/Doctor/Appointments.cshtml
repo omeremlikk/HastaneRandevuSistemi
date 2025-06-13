@@ -1,6 +1,7 @@
 @model hastane.Models.DoctorAppointmentsViewModel
 @{
-    ViewData["Title"] = "Tüm Randevular";
+    ViewData["Title"] = "Randevularım";
+    Layout = "_DoctorLayout";
     var doctorId = Context.Session.GetInt32("DoctorId");
     var doctorName = Context.Session.GetString("DoctorName");
     var activeTab = ViewBag.ActiveTab ?? "today"; // Varsayılan olarak bugün

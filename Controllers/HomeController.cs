@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using hastane.Models;
 
 namespace hastane.Controllers;
@@ -16,11 +17,21 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        // Doktor giriş yaptıysa Dashboard'a yönlendir
+        if (HttpContext.Session.GetString("UserRole") == "Doctor")
+        {
+            return RedirectToAction("Dashboard", "Doctor");
+        }
         return View();
     }
 
     public IActionResult Privacy()
     {
+        // Doktor giriş yaptıysa Dashboard'a yönlendir
+        if (HttpContext.Session.GetString("UserRole") == "Doctor")
+        {
+            return RedirectToAction("Dashboard", "Doctor");
+        }
         return View();
     }
 

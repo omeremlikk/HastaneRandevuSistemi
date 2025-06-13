@@ -1,6 +1,7 @@
 @model List<hastane.Models.Appointment>
 @{
     ViewData["Title"] = "Tamamlanan Randevular";
+    Layout = "_DoctorLayout";
     var doctorId = Context.Session.GetInt32("DoctorId");
     var doctorName = Context.Session.GetString("DoctorName");
 }
