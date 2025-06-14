@@ -285,6 +285,10 @@
       "PackagePath": "staticwebassets\\uploads\\profiles\\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg"
     },
     {
+      "Id": "C:\\Users\\Ömer\\Desktop\\hastane\\wwwroot\\uploads\\profiles\\patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png",
+      "PackagePath": "staticwebassets\\uploads\\profiles\\patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png"
+    },
+    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.hastane.props",
       "PackagePath": "build\\hastane.props"
     },

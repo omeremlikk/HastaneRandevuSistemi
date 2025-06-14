@@ -56,9 +56,12 @@ namespace hastane.Models
         {
             try
             {
-                // Hafta sonu kontrolü
+                // Hafta sonu kontrolü - Cumartesi veya Pazar ise asla müsait değil
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    Console.WriteLine($"IsAvailable: {date.ToString("yyyy-MM-dd")} tarihi hafta sonu, randevu alınamaz.");
                     return false;
+                }
 
                 // Geçmiş tarih kontrolü
                 if (date.Date < DateTime.Today)
@@ -98,12 +101,17 @@ namespace hastane.Models
         {
             var availableSlots = new List<string>();
 
-            // Hafta sonu veya geçmiş tarih kontrolü
-            if (date.DayOfWeek == DayOfWeek.Saturday || 
-                date.DayOfWeek == DayOfWeek.Sunday || 
-                date.Date < DateTime.Today)
+            // Hafta sonu kontrolü - Cumartesi veya Pazar ise boş liste döndür
+            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
             {
-                return availableSlots;
+                Console.WriteLine($"GetAvailableTimeSlots: {date.ToString("yyyy-MM-dd")} tarihi hafta sonu, müsait saat yok.");
+                return availableSlots; // Boş liste
+            }
+
+            // Geçmiş tarih kontrolü
+            if (date.Date < DateTime.Today)
+            {
+                return availableSlots; // Boş liste
             }
 
             // Tüm saat aralıkları
@@ -112,10 +120,6 @@ namespace hastane.Models
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
             };
 
-            // Tüm saatler müsait olarak döndürülüyor (Kolaylık için)
-            return allTimeSlots;
-
-            /* Eski kod yerine sadece tüm saatleri döndürüyoruz
             // Her saat için müsaitlik kontrolü
             foreach (var time in allTimeSlots)
             {
@@ -126,7 +130,6 @@ namespace hastane.Models
             }
 
             return availableSlots;
-            */
         }
     }
 } 

@@ -1278,5 +1278,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\profiles\patient_2_6dae0478-1aff-42cb-bf1e-3b47e466a588.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\profiles\patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>hastane</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/hastane</BasePath>
+      <RelativePath>uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>8upfyfqgu2</Fingerprint>
+      <Integrity>kM6D1+Efla86p1EcfuuJTfMuQZ3ws7kgxCn6TZsmx/c=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\profiles\patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png'))</OriginalItemSpec>
+    </StaticWebAsset>
   </ItemGroup>
 </Project>

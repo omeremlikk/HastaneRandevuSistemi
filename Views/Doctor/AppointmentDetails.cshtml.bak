@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* Genel Değişkenler */
+    /* Modern UI Değişkenleri */
     :root {
         --primary: #4361ee;
         --primary-light: #4895ef;
@@ -21,139 +21,151 @@
         --light: #f8f9fa;
         --dark: #212529;
         --white: #ffffff;
-        --border-radius: 12px;
-        --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 10px 20px rgba(0,0,0,.05), 0 6px 6px rgba(0,0,0,.03);
+        --radius: 15px;
         --transition: all 0.3s ease;
     }
     
     /* Genel Stiller */
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f0f2f5;
+        background-color: #f5f7fa;
     }
     
     .page-container {
         padding-top: 90px;
-        padding-bottom: 100px;
+        padding-bottom: 120px;
     }
     
-    .card {
+    .app-card {
+        background-color: var(--white);
+        border-radius: var(--radius);
         border: none;
-        border-radius: var(--border-radius);
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--shadow);
         transition: var(--transition);
         overflow: hidden;
-        margin-bottom: 1.5rem;
-        background-color: var(--white);
-    }
-    
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    
-    .card-header {
-        padding: 1.25rem 1.5rem;
-        background-color: var(--white);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        position: relative;
-    }
-    
-    .card-header-gradient {
-        position: relative;
-        overflow: hidden;
-        border-bottom: none;
-    }
-    
-    .card-header-gradient::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        opacity: 1;
-        z-index: 0;
+        margin-bottom: 30px;
     }
     
-    .card-header-gradient h5 {
+    .app-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,.1), 0 8px 10px rgba(0,0,0,.05);
+    }
+    
+    .app-card-header {
+        padding: 20px 25px;
+        border-bottom: 1px solid rgba(0,0,0,.05);
         position: relative;
-        z-index: 1;
-        color: var(--white);
-        margin-bottom: 0;
+    }
+    
+    .app-card-header h5 {
         font-weight: 600;
+        font-size: 16px;
+        color: var(--dark);
+        margin: 0;
         display: flex;
         align-items: center;
     }
     
-    .card-header-gradient h5 i {
+    .app-card-header h5 i {
         margin-right: 10px;
-        font-size: 1.25rem;
+        color: var(--primary);
+        font-size: 18px;
     }
     
-    .card-body {
-        padding: 1.5rem;
+    .app-card-header-gradient {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        color: var(--white);
+        border-bottom: none;
     }
     
-    /* Özel Komponentler */
-    .profile-card {
-        text-align: center;
-        margin-bottom: 1.5rem;
+    .app-card-header-gradient h5 {
+        color: var(--white);
     }
     
-    .profile-avatar {
+    .app-card-header-gradient h5 i {
+        color: var(--white);
+    }
+    
+    .app-card-body {
+        padding: 25px;
+    }
+    
+    /* Animasyonlar */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .animate-delay-1 { animation-delay: 0.1s; }
+    .animate-delay-2 { animation-delay: 0.2s; }
+    .animate-delay-3 { animation-delay: 0.3s; }
+    .animate-delay-4 { animation-delay: 0.4s; }
+    
+    /* Bileşenler */
+    .patient-avatar {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        margin: 0 auto 1rem;
         overflow: hidden;
-        border: 4px solid white;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 0 auto 20px;
+        border: 5px solid #fff;
+        box-shadow: 0 5px 15px rgba(0,0,0,.1);
     }
     
-    .profile-avatar img {
+    .patient-avatar img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
     
-    .profile-avatar-placeholder {
+    .avatar-placeholder {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #f0f2f5 0%, #e6e9ec 100%);
+        background: linear-gradient(to right, #f5f7fa, #e7eaf0);
         color: var(--primary);
-        font-size: 3rem;
+        font-size: 40px;
     }
     
-    .profile-name {
-        font-weight: 700;
-        font-size: 1.5rem;
-        margin-bottom: 0.25rem;
+    .patient-name {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 5px;
         color: var(--dark);
     }
     
-    .profile-id {
+    .patient-id {
         color: #6c757d;
-        font-size: 0.9rem;
-        margin-bottom: 0;
+        font-size: 14px;
+        margin-bottom: 20px;
     }
     
     .info-item {
-        padding: 1rem;
-        border-radius: 10px;
-        background-color: #f8f9fa;
-        margin-bottom: 1rem;
-        transition: var(--transition);
         display: flex;
         align-items: center;
+        padding: 15px;
+        border-radius: 12px;
+        background-color: #f8f9fa;
+        margin-bottom: 15px;
+        transition: var(--transition);
     }
     
     .info-item:hover {
-        background-color: #edf2f7;
+        background-color: #eef1f5;
         transform: translateY(-3px);
     }
     
@@ -164,26 +176,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 1rem;
-        background-color: var(--white);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        background-color: white;
+        margin-right: 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,.1);
+        font-size: 18px;
     }
     
-    .info-icon.primary {
-        color: var(--primary);
-    }
-    
-    .info-icon.success {
-        color: var(--success);
-    }
-    
-    .info-icon.warning {
-        color: var(--warning);
-    }
-    
-    .info-icon.info {
-        color: var(--info);
-    }
+    .info-icon.primary { color: var(--primary); }
+    .info-icon.success { color: var(--success); }
+    .info-icon.warning { color: var(--warning); }
+    .info-icon.info { color: var(--info); }
     
     .info-content {
         flex: 1;
@@ -191,65 +193,161 @@
     
     .info-label {
         color: #6c757d;
-        font-size: 0.8rem;
-        margin-bottom: 0.25rem;
+        font-size: 12px;
+        margin-bottom: 4px;
     }
     
     .info-value {
         font-weight: 600;
+        font-size: 14px;
         color: var(--dark);
-        margin-bottom: 0;
+        margin: 0;
     }
     
     .status-badge {
-        padding: 0.75rem 1.5rem;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 0.8rem;
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 13px;
     }
     
     .status-badge i {
-        margin-right: 0.5rem;
-        font-size: 1rem;
+        margin-right: 8px;
     }
     
-    .status-badge.completed {
+    .status-badge.success {
         background-color: rgba(76, 201, 240, 0.15);
         color: var(--success);
     }
     
-    .status-badge.cancelled {
+    .status-badge.danger {
         background-color: rgba(247, 37, 133, 0.15);
         color: var(--danger);
     }
     
-    .status-badge.upcoming {
+    .status-badge.primary {
         background-color: rgba(67, 97, 238, 0.15);
         color: var(--primary);
     }
     
-    .status-badge.pending {
-        background-color: rgba(247, 127, 0, 0.15);
-        color: #f77f00;
+    .status-badge.warning {
+        background-color: rgba(255, 166, 0, 0.15);
+        color: #ff9800;
+    }
+    
+    .timeline {
+        position: relative;
+        padding-left: 40px;
+    }
+    
+    .timeline-item {
+        position: relative;
+        padding-bottom: 25px;
+    }
+    
+    .timeline-item:last-child {
+        padding-bottom: 0;
+    }
+    
+    .timeline-item:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: -23px;
+        top: 30px;
+        bottom: 0;
+        width: 2px;
+        background-color: #e9ecef;
+    }
+    
+    .timeline-icon {
+        position: absolute;
+        left: -40px;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,.15);
+        z-index: 1;
+        font-size: 12px;
+    }
+    
+    .timeline-icon.primary { color: var(--primary); }
+    .timeline-icon.success { color: var(--success); }
+    .timeline-icon.danger { color: var(--danger); }
+    
+    .timeline-title {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--dark);
+        margin-bottom: 5px;
+    }
+    
+    .timeline-date {
+        color: #6c757d;
+        font-size: 13px;
+    }
+    
+    .btn-app {
+        border-radius: 30px;
+        padding: 10px 24px;
+        font-weight: 500;
+        font-size: 14px;
+        box-shadow: 0 3px 8px rgba(0,0,0,.15);
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .btn-app:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0,0,0,.2);
+    }
+    
+    .btn-app i {
+        margin-right: 8px;
+    }
+    
+    .btn-app-primary {
+        background: linear-gradient(to right, var(--primary), var(--primary-light));
+        border: none;
+        color: white;
+    }
+    
+    .btn-app-light {
+        background: white;
+        border: 1px solid #e0e4e9;
+        color: #495057;
+    }
+    
+    .btn-app-success {
+        background: linear-gradient(to right, var(--success), var(--primary));
+        border: none;
+        color: white;
     }
     
     .page-header {
-        margin-bottom: 2rem;
+        margin-bottom: 30px;
     }
     
     .breadcrumb {
-        margin-bottom: 1rem;
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    
+    .breadcrumb-item {
+        font-size: 14px;
     }
     
     .breadcrumb-item a {
         color: #6c757d;
         text-decoration: none;
-        transition: var(--transition);
     }
     
     .breadcrumb-item a:hover {
@@ -261,174 +359,68 @@
         font-weight: 500;
     }
     
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        color: #6c757d;
+    }
+    
     .page-title {
         font-weight: 700;
-        margin-bottom: 0.5rem;
+        font-size: 24px;
         color: var(--dark);
+        margin-bottom: 5px;
     }
     
     .page-subtitle {
         color: #6c757d;
-        font-size: 1rem;
-        margin-bottom: 0;
+        font-size: 14px;
     }
     
-    .btn-custom {
-        border-radius: 30px;
+    .form-label {
         font-weight: 500;
-        padding: 0.625rem 1.5rem;
+        font-size: 14px;
+        color: var(--dark);
+        margin-bottom: 8px;
+    }
+    
+    .form-text {
+        font-size: 13px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+    
+    .form-control-app {
+        border-radius: 10px;
+        border: 1px solid #e0e4e9;
+        padding: 12px 15px;
+        font-size: 14px;
         transition: var(--transition);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .btn-custom:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .btn-custom i {
-        margin-right: 0.5rem;
-    }
-    
-    .btn-primary-gradient {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-        border: none;
-        color: white;
-    }
-    
-    .btn-light {
         background-color: #f8f9fa;
-        border: 1px solid #e9ecef;
-        color: #495057;
     }
     
-    .btn-success-gradient {
-        background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
-        border: none;
-        color: white;
+    .form-control-app:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        background-color: white;
     }
     
     .divider {
         height: 1px;
         background-color: #e9ecef;
-        margin: 1.5rem 0;
+        margin: 25px 0;
     }
     
-    .timeline {
-        position: relative;
-        padding-left: 45px;
+    /* Responsiveness */
+    @@media (max-width: 991.98px) {
+        .order-first-mobile {
+            order: -1;
+        }
     }
     
-    .timeline-item {
-        position: relative;
-        padding-bottom: 1.5rem;
-    }
-    
-    .timeline-item:last-child {
-        padding-bottom: 0;
-    }
-    
-    .timeline-item:not(:last-child)::before {
-        content: "";
-        position: absolute;
-        left: -30px;
-        top: 24px;
-        bottom: 0;
-        width: 2px;
-        background-color: #e9ecef;
-    }
-    
-    .timeline-icon {
-        position: absolute;
-        left: -45px;
-        top: 0;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 1;
-    }
-    
-    .timeline-icon.primary {
-        color: var(--primary);
-    }
-    
-    .timeline-icon.success {
-        color: var(--success);
-    }
-    
-    .timeline-icon.danger {
-        color: var(--danger);
-    }
-    
-    .timeline-content h6 {
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-        color: var(--dark);
-    }
-    
-    .timeline-content p {
-        color: #6c757d;
-        font-size: 0.85rem;
-        margin-bottom: 0;
-    }
-    
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-    
-    .form-label {
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        color: var(--dark);
-    }
-    
-    .form-helper {
-        font-size: 0.85rem;
-        color: #6c757d;
-        margin-bottom: 0.5rem;
-    }
-    
-    .form-control {
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        border: 1px solid #e9ecef;
-        background-color: #f8f9fa;
-        transition: var(--transition);
-    }
-    
-    .form-control:focus {
-        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        border-color: var(--primary);
-        background-color: white;
-    }
-    
-    /* Footer gizleme */
+    /* Footer Gizleme */
     footer {
         display: none !important;
     }
-    
-    /* Animasyonlar */
-    .fade-in {
-        animation: fadeIn 0.5s ease forwards;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
 </style>
 
 <div class="page-container">
@@ -436,7 +428,7 @@
         <!-- Başarı ve Hata Mesajları -->
         @if (TempData["SuccessMessage"] != null)
         {
-            <div class="alert alert-success alert-dismissible fade show mb-4 shadow-sm border-0 rounded-3" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mb-4 shadow rounded-3 border-0" role="alert">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-check-circle me-3 fs-4"></i>
                     <div>@TempData["SuccessMessage"]</div>
@@ -447,7 +439,7 @@
         
         @if (TempData["ErrorMessage"] != null)
         {
-            <div class="alert alert-danger alert-dismissible fade show mb-4 shadow-sm border-0 rounded-3" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show mb-4 shadow rounded-3 border-0" role="alert">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-exclamation-circle me-3 fs-4"></i>
                     <div>@TempData["ErrorMessage"]</div>
@@ -457,7 +449,7 @@
         }
 
         <!-- Sayfa Başlığı -->
-        <div class="page-header fade-in">
+        <div class="page-header animate-fade-in">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/"><i class="fas fa-home me-1"></i> Ana Sayfa</a></li>
@@ -467,185 +459,55 @@
                 </ol>
             </nav>
             
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <div>
-                    <h4 class="page-title mb-1">Randevu Detayları</h4>
+                    <h1 class="page-title">Randevu Detayları</h1>
                     <p class="page-subtitle">
                         <i class="far fa-calendar-alt me-1"></i> @Model.AppointmentDateTime.ToString("dd MMMM yyyy, dddd")
-                        <span class="mx-1">•</span>
+                        <span class="mx-2">•</span>
                         <i class="far fa-clock me-1"></i> @Model.AppointmentDateTime.ToString("HH:mm")
                     </p>
                 </div>
-                <a href="/Doctor/Appointments" class="btn btn-custom btn-light">
+                <a href="/Doctor/Appointments" class="btn btn-app btn-app-light mt-2 mt-md-0">
                     <i class="fas fa-arrow-left"></i> Randevulara Dön
                 </a>
             </div>
         </div>
         
         <div class="row">
-            <!-- Sol Kolon: Hasta Bilgileri -->
-            <div class="col-lg-4 fade-in delay-1">
-                <div class="card">
-                    <div class="card-header card-header-gradient">
-                        <h5><i class="fas fa-user-circle"></i> Hasta Bilgileri</h5>
-                    </div>
-                    <div class="card-body">
-                        @if (Model.Patient != null)
-                        {
-                            <div class="profile-card">
-                                <div class="profile-avatar">
-                                    @if (!string.IsNullOrEmpty(Model.Patient.ProfilePhoto))
-                                    {
-                                        <img src="@Model.Patient.ProfilePhoto" alt="@Model.Patient.FullName" />
-                                    }
-                                    else
-                                    {
-                                        <div class="profile-avatar-placeholder">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                    }
-                                </div>
-                                <h5 class="profile-name">@Model.Patient.FullName</h5>
-                                <p class="profile-id">Hasta ID: #@Model.Patient.Id</p>
-                            </div>
-                            
-                            <div class="divider"></div>
-                            
-                            <div class="info-item">
-                                <div class="info-icon primary">
-                                    <i class="fas fa-id-card"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p class="info-label">TC Kimlik Numarası</p>
-                                    <p class="info-value">@Model.Patient.IdentityNumber</p>
-                                </div>
-                            </div>
-                            
-                            <div class="info-item">
-                                <div class="info-icon success">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p class="info-label">Telefon</p>
-                                    <a href="tel:@Model.Patient.Phone" class="info-value text-decoration-none">@Model.Patient.Phone</a>
-                                </div>
-                            </div>
-                            
-                            <div class="info-item">
-                                <div class="info-icon info">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p class="info-label">E-posta</p>
-                                    <a href="mailto:@Model.Patient.Email" class="info-value text-decoration-none">@Model.Patient.Email</a>
-                                </div>
-                            </div>
-                            
-                            <div class="info-item">
-                                <div class="info-icon warning">
-                                    <i class="fas fa-calendar-check"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p class="info-label">Üyelik Tarihi</p>
-                                    <p class="info-value">@Model.Patient.RegisterDate.ToString("dd MMMM yyyy")</p>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="alert alert-warning rounded-3 shadow-sm">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-exclamation-triangle fa-2x me-3 text-warning"></i>
-                                    <div>
-                                        <h6 class="fw-bold mb-1">Hasta bilgileri bulunamadı</h6>
-                                        <p class="mb-0 small">Bu randevu için hasta bilgileri sistemde mevcut değil.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-                
-                <!-- İşlem Geçmişi -->
-                <div class="card fade-in delay-3">
-                    <div class="card-header card-header-gradient" style="background: linear-gradient(135deg, #805ad5 0%, #9f7aea 100%);">
-                        <h5><i class="fas fa-history"></i> İşlem Geçmişi</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-icon primary">
-                                    <i class="fas fa-calendar-plus"></i>
-                                </div>
-                                <div class="timeline-content">
-                                    <h6>Randevu oluşturuldu</h6>
-                                    <p>@Model.CreatedAt.ToString("dd MMMM yyyy, HH:mm")</p>
-                                </div>
-                            </div>
-                            
-                            @if (Model.IsCompleted)
-                            {
-                                <div class="timeline-item">
-                                    <div class="timeline-icon success">
-                                        <i class="fas fa-check-circle"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h6>Randevu tamamlandı</h6>
-                                        <p>@DateTime.Now.ToString("dd MMMM yyyy, HH:mm")</p>
-                                    </div>
-                                </div>
-                            }
-                            
-                            @if (Model.IsCancelled)
-                            {
-                                <div class="timeline-item">
-                                    <div class="timeline-icon danger">
-                                        <i class="fas fa-times-circle"></i>
-                                    </div>
-                                    <div class="timeline-content">
-                                        <h6>Randevu iptal edildi</h6>
-                                        <p>@DateTime.Now.ToString("dd MMMM yyyy, HH:mm")</p>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sağ Kolon: Randevu Bilgileri -->
-            <div class="col-lg-8">
+            <!-- Sol Kolon: Randevu Durum Kartı ve Notlar -->
+            <div class="col-lg-8 order-first-mobile">
                 <!-- Randevu Durum Kartı -->
-                <div class="card fade-in delay-2">
-                    <div class="card-body p-0">
+                <div class="app-card animate-fade-in animate-delay-1">
+                    <div class="app-card-body p-0">
                         <div class="d-flex flex-wrap">
-                            <div class="p-4 text-center" style="min-width: 200px; background-color: #f8f9fa; border-radius: var(--border-radius) 0 0 var(--border-radius);">
+                            <div class="p-4 text-center" style="min-width: 180px; background: linear-gradient(to right, #f6f8fb, #edf1f7); border-radius: var(--radius) 0 0 var(--radius);">
                                 @if (Model.IsCompleted)
                                 {
-                                    <div class="status-badge completed mb-3">
+                                    <div class="status-badge success mb-3">
                                         <i class="fas fa-check-circle"></i> Tamamlandı
                                     </div>
                                 }
                                 else if (Model.IsCancelled)
                                 {
-                                    <div class="status-badge cancelled mb-3">
+                                    <div class="status-badge danger mb-3">
                                         <i class="fas fa-times-circle"></i> İptal Edildi
                                     </div>
                                 }
                                 else if (Model.AppointmentDateTime > DateTime.Now)
                                 {
-                                    <div class="status-badge upcoming mb-3">
+                                    <div class="status-badge primary mb-3">
                                         <i class="fas fa-calendar-day"></i> Yaklaşan
                                     </div>
                                 }
                                 else
                                 {
-                                    <div class="status-badge pending mb-3">
+                                    <div class="status-badge warning mb-3">
                                         <i class="fas fa-hourglass-half"></i> Beklemede
                                     </div>
                                 }
                                 
-                                <h5 class="mt-3 mb-0">Randevu #@Model.Id</h5>
+                                <h5 style="font-size: 18px; font-weight: 600; color: #495057;">Randevu #@Model.Id</h5>
                             </div>
                             <div class="p-4 flex-grow-1">
                                 <div class="row g-3">
@@ -689,28 +551,28 @@
                 </div>
                 
                 <!-- Randevu Notları -->
-                <div class="card fade-in delay-3">
-                    <div class="card-header card-header-gradient" style="background: linear-gradient(135deg, #38b2ac 0%, #4fd1c5 100%);">
+                <div class="app-card animate-fade-in animate-delay-2">
+                    <div class="app-card-header app-card-header-gradient" style="background: linear-gradient(to right, #38b2ac, #4fd1c5);">
                         <h5><i class="fas fa-clipboard-list"></i> Muayene & Tedavi Notları</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="app-card-body">
                         @if (!Model.IsCompleted)
                         {
                             <form method="post" action="/Doctor/CompleteAppointment">
                                 <input type="hidden" name="appointmentId" value="@Model.Id" />
                                 @Html.AntiForgeryToken()
                                 
-                                <div class="form-group">
+                                <div class="mb-4">
                                     <label for="notes" class="form-label">Tedavi ve Notlar</label>
-                                    <p class="form-helper">Muayene sonuçlarını ve tedavi notlarını buraya giriniz...</p>
-                                    <textarea class="form-control" id="notes" name="notes" rows="6" style="resize: none;">@Model.Notes</textarea>
+                                    <p class="form-text">Muayene sonuçlarını ve tedavi notlarını buraya giriniz...</p>
+                                    <textarea class="form-control form-control-app" id="notes" name="notes" rows="6" style="resize: none;">@Model.Notes</textarea>
                                 </div>
                                 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-custom btn-light" onclick="window.history.back()">
+                                    <button type="button" class="btn btn-app btn-app-light" onclick="window.history.back()">
                                         <i class="fas fa-arrow-left"></i> Geri Dön
                                     </button>
-                                    <button type="submit" class="btn btn-custom btn-success-gradient">
+                                    <button type="submit" class="btn btn-app btn-app-success">
                                         <i class="fas fa-check-circle"></i> Randevuyu Tamamla
                                     </button>
                                 </div>
@@ -718,43 +580,203 @@
                         }
                         else
                         {
-                            <div class="alert alert-success rounded-3 shadow-sm mb-4">
+                            <div class="alert alert-success rounded-3 shadow-sm mb-4" style="background-color: rgba(76, 201, 240, 0.1); border: none;">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-check-circle fa-2x me-3"></i>
+                                    <i class="fas fa-check-circle fa-2x me-3" style="color: var(--success);"></i>
                                     <div>
-                                        <h6 class="fw-bold mb-1">Bu randevu tamamlanmıştır</h6>
-                                        <p class="mb-0 text-muted">Aşağıda bu randevu için girilen tedavi notlarını görebilirsiniz.</p>
+                                        <h6 style="font-weight: 600; color: var(--dark); margin-bottom: 4px;">Bu randevu tamamlanmıştır</h6>
+                                        <p style="color: #6c757d; margin-bottom: 0; font-size: 14px;">Aşağıda bu randevu için girilen tedavi notlarını görebilirsiniz.</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="card bg-light border-0 rounded-3 mb-4">
-                                <div class="card-body p-4">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <i class="fas fa-notes-medical text-success me-2"></i>
-                                        <h6 class="mb-0 fw-bold">Tedavi Notları</h6>
-                                    </div>
-                                    <div class="mt-3">
-                                        @if (!string.IsNullOrEmpty(Model.Notes))
-                                        {
-                                            <p class="mb-0">@Model.Notes</p>
-                                        }
-                                        else
-                                        {
-                                            <p class="text-muted fst-italic mb-0">Not girilmemiş.</p>
-                                        }
-                                    </div>
+                            <div style="background-color: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-notes-medical me-2" style="color: var(--success);"></i>
+                                    <h6 style="font-weight: 600; margin-bottom: 0; font-size: 15px;">Tedavi Notları</h6>
+                                </div>
+                                <div class="mt-3">
+                                    @if (!string.IsNullOrEmpty(Model.Notes))
+                                    {
+                                        <p style="margin-bottom: 0; font-size: 14px;">@Model.Notes</p>
+                                    }
+                                    else
+                                    {
+                                        <p style="color: #6c757d; font-style: italic; margin-bottom: 0; font-size: 14px;">Not girilmemiş.</p>
+                                    }
                                 </div>
                             </div>
                             
                             <div class="text-end">
-                                <button type="button" class="btn btn-custom btn-primary-gradient" onclick="window.history.back()">
+                                <button type="button" class="btn btn-app btn-app-primary" onclick="window.history.back()">
                                     <i class="fas fa-arrow-left"></i> Geri Dön
                                 </button>
                             </div>
                         }
                     </div>
                 </div>
+            </div>
+            
+            <!-- Sağ Kolon: Hasta Bilgileri ve İşlem Geçmişi -->
+            <div class="col-lg-4">
+                <!-- Hasta Bilgileri -->
+                <div class="app-card animate-fade-in animate-delay-3">
+                    <div class="app-card-header app-card-header-gradient">
+                        <h5><i class="fas fa-user-circle"></i> Hasta Bilgileri</h5>
+                    </div>
+                    <div class="app-card-body">
+                        @if (Model.Patient != null)
+                        {
+                            <div class="text-center">
+                                <div class="patient-avatar">
+                                    @if (!string.IsNullOrEmpty(Model.Patient.ProfilePhoto))
+                                    {
+                                        <img src="@Model.Patient.ProfilePhoto" alt="@Model.Patient.FullName" />
+                                    }
+                                    else
+                                    {
+                                        <div class="avatar-placeholder">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    }
+                                </div>
+                                <h5 class="patient-name">@Model.Patient.FullName</h5>
+                                <p class="patient-id">Hasta ID: #@Model.Patient.Id</p>
+                            </div>
+                            
+                            <div class="divider"></div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon primary">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="info-content">
+                                    <p class="info-label">TC Kimlik Numarası</p>
+                                    <p class="info-value">@Model.Patient.IdentityNumber</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon success">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <p class="info-label">Telefon</p>
+                                    <a href="tel:@Model.Patient.Phone" class="info-value text-decoration-none">@Model.Patient.Phone</a>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon info">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <p class="info-label">E-posta</p>
+                                    <a href="mailto:@Model.Patient.Email" class="info-value text-decoration-none">@Model.Patient.Email</a>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item mb-0">
+                                <div class="info-icon warning">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="info-content">
+                                    <p class="info-label">Üyelik Tarihi</p>
+                                    <p class="info-value">@Model.Patient.RegisterDate.ToString("dd MMMM yyyy")</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning rounded-3 shadow-sm border-0" style="background-color: rgba(255, 166, 0, 0.1);">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-exclamation-triangle fa-2x me-3" style="color: #ff9800;"></i>
+                                    <div>
+                                        <h6 style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">Hasta bilgileri bulunamadı</h6>
+                                        <p style="margin-bottom: 0; font-size: 13px;">Bu randevu için hasta bilgileri sistemde mevcut değil.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                
+                <!-- İşlem Geçmişi -->
+                <div class="app-card animate-fade-in animate-delay-4">
+                    <div class="app-card-header app-card-header-gradient" style="background: linear-gradient(to right, #805ad5, #9f7aea);">
+                        <h5><i class="fas fa-history"></i> İşlem Geçmişi</h5>
+                    </div>
+                    <div class="app-card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-icon primary">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <h6 class="timeline-title">Randevu oluşturuldu</h6>
+                                <p class="timeline-date">@Model.CreatedAt.ToString("dd MMMM yyyy, HH:mm")</p>
+                            </div>
+                            
+                            @if (Model.IsCompleted)
+                            {
+                                <div class="timeline-item">
+                                    <div class="timeline-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h6 class="timeline-title">Randevu tamamlandı</h6>
+                                    <p class="timeline-date">@DateTime.Now.ToString("dd MMMM yyyy, HH:mm")</p>
+                                </div>
+                            }
+                            
+                            @if (Model.IsCancelled)
+                            {
+                                <div class="timeline-item">
+                                    <div class="timeline-icon danger">
+                                        <i class="fas fa-times-circle"></i>
+                                    </div>
+                                    <h6 class="timeline-title">Randevu iptal edildi</h6>
+                                    <p class="timeline-date">@DateTime.Now.ToString("dd MMMM yyyy, HH:mm")</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="completeAppointmentModal" tabindex="-1" aria-labelledby="completeAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="completeAppointmentModalLabel">Randevuyu Tamamla</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <form id="completeAppointmentForm" method="post" action="/Doctor/CompleteAppointment">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="appointmentId" value="@Model.Id" />
+                    
+                    <div class="mb-3">
+                        <p class="text-info">
+                            <strong>Randevu ID:</strong> @Model.Id <br />
+                            <strong>Hasta:</strong> @Model.Patient?.FullName <br />
+                            <strong>Tarih:</strong> @Model.AppointmentDateTime.ToString("dd.MM.yyyy HH:mm") <br />
+                            <strong>Debug Bilgisi:</strong> IsCompleted: @Model.IsCompleted, IsCancelled: @Model.IsCancelled
+                        </p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Muayene Notları</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="5" placeholder="Muayene sonucu, teşhis ve tedavi önerilerinizi yazınız..." required></textarea>
+                        <div class="form-text">Bu notlar hasta ile paylaşılacaktır.</div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check me-2"></i> Tamamla ve Kaydet</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -763,7 +785,7 @@
 @section Scripts {
     <script>
         $(function() {
-            console.log("Randevu detay sayfası yüklendi");
+            console.log("Modern randevu detay sayfası yüklendi");
             
             // Footer'ı tamamen gizle
             $('footer').hide();
@@ -776,15 +798,19 @@
             
             // Animasyon efektleri
             setTimeout(function() {
-                $('.fade-in').each(function(index) {
+                $('.animate-fade-in').each(function(index) {
                     $(this).css({
-                        'animation-name': 'fadeIn',
-                        'animation-duration': '0.5s',
-                        'animation-fill-mode': 'forwards',
-                        'animation-delay': (index * 0.1) + 's'
+                        'opacity': '1',
+                        'transform': 'translateY(0)'
                     });
                 });
             }, 100);
+            
+            // Hover efektleri
+            $('.app-card').hover(
+                function() { $(this).css('transform', 'translateY(-5px)'); },
+                function() { $(this).css('transform', 'translateY(0)'); }
+            );
         });
     </script>
 } 

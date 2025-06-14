@@ -15,16 +15,22 @@
     <!-- Başarı ve Hata Mesajları -->
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show shadow-sm border-0" role="alert">
-            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+        <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 rounded-4" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle fs-4 me-3"></i>
+                <div>@TempData["SuccessMessage"]</div>
+            </div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
         </div>
     }
     
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0" role="alert">
-            <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 rounded-4" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-exclamation-circle fs-4 me-3"></i>
+                <div>@TempData["ErrorMessage"]</div>
+            </div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
         </div>
     }
@@ -32,33 +38,44 @@
     <!-- Doktor Profil Başlığı -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card border-0 shadow-sm bg-gradient rounded-3 mb-4" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);">
+            <div class="card border-0 shadow-sm rounded-4 mb-4" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
                             @if (!string.IsNullOrEmpty(doctor.ImageUrl))
                             {
-                                <img src="@doctor.ImageUrl" alt="Doktor Fotoğrafı" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;" />
+                                <div class="position-relative">
+                                    <img src="@doctor.ImageUrl" alt="Doktor Fotoğrafı" class="rounded-circle shadow-sm" style="width: 90px; height: 90px; object-fit: cover; border: 4px solid white;" />
+                                    <div class="position-absolute bottom-0 end-0 bg-success rounded-circle p-1" style="width: 20px; height: 20px; border: 2px solid white;"></div>
+                                </div>
                             }
                             else
                             {
-                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width: 80px; height: 80px; font-size: 2rem; border: 3px solid white;">
+                                <div class="position-relative">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm" style="width: 90px; height: 90px; font-size: 2.2rem; border: 4px solid white;">
                                     <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="position-absolute bottom-0 end-0 bg-success rounded-circle p-1" style="width: 20px; height: 20px; border: 2px solid white;"></div>
                                 </div>
                             }
-                            <div class="ms-3">
-                                <h3 class="mb-1 fw-bold text-primary">Dr. @doctor.Name</h3>
+                            <div class="ms-4">
+                                <h3 class="mb-1 fw-bold" style="color: #2d3748;">Dr. @doctor.Name</h3>
                                 <p class="mb-0 text-muted">@doctor.Specialty</p>
                             </div>
                         </div>
-                        <!-- Profil düzenleme butonu kaldırıldı -->
+                        <div class="d-none d-md-flex align-items-center">
+                            <div class="text-end me-4">
+                                <p class="mb-0 text-muted"><i class="far fa-calendar-alt me-2"></i>@DateTime.Now.ToString("dd MMMM yyyy, dddd")</p>
+                                <p class="mb-0 text-muted"><i class="far fa-clock me-2"></i>@DateTime.Now.ToString("HH:mm")</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-white p-3 shadow-sm rounded-3 border-0">
+                <ol class="breadcrumb bg-white p-3 shadow-sm rounded-4 border-0">
                     <li class="breadcrumb-item"><a href="/" class="text-decoration-none"><i class="fas fa-home me-1"></i> Ana Sayfa</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Doktor Paneli</li>
                 </ol>
@@ -69,28 +86,28 @@
     <!-- Ana Navigasyon -->
     <div class="row mb-4">
         <div class="col-12">
-            <ul class="nav nav-pills nav-fill bg-white rounded-3 shadow-sm p-2">
+            <ul class="nav nav-pills nav-fill bg-white rounded-4 shadow-sm p-2">
                 <li class="nav-item">
                     <a class="nav-link @(activeTab == "dashboard" ? "active" : "") rounded-pill" href="/Doctor/Dashboard?activeTab=dashboard">
-                        <i class="fas fa-chart-line me-1"></i> Özet
+                        <i class="fas fa-chart-line me-2"></i> Özet
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link @(activeTab == "today" || activeTab == "upcoming" || activeTab == "past" || activeTab == "cancelled" || activeTab == "completed" ? "active" : "") dropdown-toggle rounded-pill" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                        <i class="fas fa-calendar-week me-1"></i> Tüm Randevular
+                        <i class="fas fa-calendar-week me-2"></i> Tüm Randevular
                     </a>
-                    <ul class="dropdown-menu w-100">
-                        <li><a class="dropdown-item @(activeTab == "today" ? "bg-light" : "")" href="/Doctor/Dashboard?activeTab=today"><i class="fas fa-calendar-day me-2 text-primary"></i> Bugünkü Randevular</a></li>
-                        <li><a class="dropdown-item @(activeTab == "upcoming" ? "bg-light" : "")" href="/Doctor/Dashboard?activeTab=upcoming"><i class="fas fa-calendar-alt me-2 text-success"></i> Yaklaşan Randevular</a></li>
-                        <li><a class="dropdown-item @(activeTab == "completed" ? "bg-light" : "")" href="/Doctor/Dashboard?activeTab=completed"><i class="fas fa-check-circle me-2 text-success"></i> Tamamlanan Randevular</a></li>
-                        <li><a class="dropdown-item @(activeTab == "past" ? "bg-light" : "")" href="/Doctor/Dashboard?activeTab=past"><i class="fas fa-history me-2 text-secondary"></i> Geçmiş Randevular</a></li>
-                        <li><a class="dropdown-item @(activeTab == "cancelled" ? "bg-light" : "")" href="/Doctor/Dashboard?activeTab=cancelled"><i class="fas fa-ban me-2 text-danger"></i> İptal Edilenler</a></li>
+                    <ul class="dropdown-menu w-100 shadow-sm border-0 rounded-4 py-2">
+                        <li><a class="dropdown-item @(activeTab == "today" ? "bg-light rounded-3" : "")" href="/Doctor/Dashboard?activeTab=today"><i class="fas fa-calendar-day me-2 text-primary"></i> Bugünkü Randevular</a></li>
+                        <li><a class="dropdown-item @(activeTab == "upcoming" ? "bg-light rounded-3" : "")" href="/Doctor/Dashboard?activeTab=upcoming"><i class="fas fa-calendar-alt me-2 text-success"></i> Yaklaşan Randevular</a></li>
+                        <li><a class="dropdown-item @(activeTab == "completed" ? "bg-light rounded-3" : "")" href="/Doctor/Dashboard?activeTab=completed"><i class="fas fa-check-circle me-2 text-success"></i> Tamamlanan Randevular</a></li>
+                        <li><a class="dropdown-item @(activeTab == "past" ? "bg-light rounded-3" : "")" href="/Doctor/Dashboard?activeTab=past"><i class="fas fa-history me-2 text-secondary"></i> Geçmiş Randevular</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item @(activeTab == "cancelled" ? "bg-light rounded-3" : "")" href="/Doctor/Dashboard?activeTab=cancelled"><i class="fas fa-ban me-2 text-danger"></i> İptal Edilenler</a></li>
                     </ul>
                 </li>
-                <!-- Profil bilgileri menü öğesi kaldırıldı -->
                 <li class="nav-item">
                     <a class="nav-link text-danger rounded-pill" href="/Account/Logout">
-                        <i class="fas fa-sign-out-alt me-1"></i> Çıkış Yap
+                        <i class="fas fa-sign-out-alt me-2"></i> Çıkış Yap
                     </a>
                 </li>
             </ul>
@@ -100,175 +117,195 @@
     <!-- Dashboard içeriği -->
     @if (activeTab == "dashboard")
     {
-        <!-- Özet İstatistikler -->
-        <div class="row mb-5">
-            <!-- Bugünkü Randevular -->
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100 rounded-3 transition-hover" style="transition: all 0.3s ease;">
-                    <div class="card-body p-4 text-center">
-                        <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="fas fa-calendar-day fa-2x text-primary"></i>
-                        </div>
-                        <h3 class="display-4 fw-bold text-primary">@ViewBag.TodayAppointmentsCount</h3>
-                        <p class="text-muted mb-0 fs-5">Bugünkü Randevular</p>
+    <!-- Özet İstatistikler -->
+    <div class="row mb-5">
+        <!-- Bugünkü Randevular -->
+        <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 rounded-4 transition-hover" style="transition: all 0.3s ease;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-calendar-day fa-2x text-primary"></i>
                     </div>
-                    <div class="card-footer bg-transparent border-0 pt-0 pb-3">
-                        <div class="text-center">
-                            <a href="/Doctor/Dashboard?activeTab=today" class="btn btn-sm btn-outline-primary rounded-pill">
-                                <i class="fas fa-arrow-right me-1"></i> Detaylar
-                            </a>
+                            <div class="ms-3">
+                                <h6 class="text-muted mb-1">Bugünkü Randevular</h6>
+                                <h2 class="fw-bold text-primary mb-0">@ViewBag.TodayAppointmentsCount</h2>
+                            </div>
                         </div>
-                    </div>
+                        <div class="progress rounded-pill" style="height: 8px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: @(ViewBag.TodayAppointmentsCount > 0 ? "100" : "0")%"></div>
                 </div>
-            </div>
-            
-            <!-- Gelecek Randevular -->
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100 rounded-3 transition-hover" style="transition: all 0.3s ease;">
-                    <div class="card-body p-4 text-center">
-                        <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="fas fa-calendar-alt fa-2x text-success"></i>
-                        </div>
-                        <h3 class="display-4 fw-bold text-success">@ViewBag.UpcomingAppointmentsCount</h3>
-                        <p class="text-muted mb-0 fs-5">Gelecek Randevular</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0 pt-0 pb-3">
-                        <div class="text-center">
-                            <a href="/Doctor/Dashboard?activeTab=upcoming" class="btn btn-sm btn-outline-success rounded-pill">
-                                <i class="fas fa-arrow-right me-1"></i> Detaylar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tamamlanan Randevular -->
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100 rounded-3 transition-hover" style="transition: all 0.3s ease;">
-                    <div class="card-body p-4 text-center">
-                        <div class="rounded-circle bg-info bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                            <i class="fas fa-check-circle fa-2x text-info"></i>
-                        </div>
-                        <h3 class="display-4 fw-bold text-info">@(hasAppointmentsData ? appointmentsViewModel.CompletedAppointments.Count : 0)</h3>
-                        <p class="text-muted mb-0 fs-5">Tamamlanan Randevular</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0 pt-0 pb-3">
-                        <div class="text-center">
-                            <a href="/Doctor/Dashboard?activeTab=completed" class="btn btn-sm btn-outline-info rounded-pill">
-                                <i class="fas fa-arrow-right me-1"></i> Detaylar
-                            </a>
-                        </div>
+                        <div class="text-end mt-3">
+                            <a href="/Doctor/Dashboard?activeTab=today" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                            <i class="fas fa-arrow-right me-1"></i> Detaylar
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Bugünkü Randevular -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="card border-0 shadow-sm rounded-3">
-                    <div class="card-header bg-primary bg-opacity-10 border-0 py-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0 text-primary fw-bold"><i class="fas fa-calendar-day me-2"></i> Bugünkü Randevular</h5>
-                            <span class="badge bg-primary rounded-pill">@Model.TodayAppointments.Count</span>
-                        </div>
+        
+        <!-- Gelecek Randevular -->
+        <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 rounded-4 transition-hover" style="transition: all 0.3s ease;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                        <i class="fas fa-calendar-alt fa-2x text-success"></i>
                     </div>
-                    <div class="card-body p-0">
-                        @if (Model.TodayAppointments.Count > 0)
-                        {
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th class="border-0 py-3">Saat</th>
-                                            <th class="border-0 py-3">Hasta Adı</th>
-                                            <th class="border-0 py-3">Telefon</th>
-                                            <th class="border-0 py-3">Durum</th>
-                                            <th class="border-0 py-3 text-end">İşlemler</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var appointment in Model.TodayAppointments.OrderBy(a => a.AppointmentDateTime))
-                                        {
-                                            <tr class="align-middle">
-                                                <td class="py-3 fw-bold">@appointment.AppointmentDateTime.ToString("HH:mm")</td>
-                                                <td class="py-3">
-                                                    <div class="d-flex align-items-center">
-                                                        @if (appointment.Patient != null)
+                            <div class="ms-3">
+                                <h6 class="text-muted mb-1">Gelecek Randevular</h6>
+                                <h2 class="fw-bold text-success mb-0">@ViewBag.UpcomingAppointmentsCount</h2>
+                            </div>
+                        </div>
+                        <div class="progress rounded-pill" style="height: 8px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @(ViewBag.UpcomingAppointmentsCount > 0 ? "100" : "0")%"></div>
+                </div>
+                        <div class="text-end mt-3">
+                            <a href="/Doctor/Dashboard?activeTab=upcoming" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                            <i class="fas fa-arrow-right me-1"></i> Detaylar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            <!-- Tamamlanan Randevular -->
+        <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100 rounded-4 transition-hover" style="transition: all 0.3s ease;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-info bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-check-circle fa-2x text-info"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="text-muted mb-1">Tamamlanan Randevular</h6>
+                                <h2 class="fw-bold text-info mb-0">@(hasAppointmentsData ? appointmentsViewModel.CompletedAppointments.Count : 0)</h2>
+                            </div>
+                    </div>
+                        <div class="progress rounded-pill" style="height: 8px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: @(hasAppointmentsData && appointmentsViewModel.CompletedAppointments.Count > 0 ? "100" : "0")%"></div>
+                </div>
+                        <div class="text-end mt-3">
+                            <a href="/Doctor/Dashboard?activeTab=completed" class="btn btn-sm btn-outline-info rounded-pill px-3">
+                                <i class="fas fa-arrow-right me-1"></i> Detaylar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bugünkü Randevular -->
+    <div class="row mb-5">
+        <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-header bg-white border-0 py-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                    <i class="fas fa-calendar-day text-primary"></i>
+                                </div>
+                                <h5 class="mb-0 fw-bold" style="color: #2d3748;">Bugünkü Randevular</h5>
+                            </div>
+                            <span class="badge bg-primary rounded-pill px-3 py-2">@Model.TodayAppointments.Count</span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.TodayAppointments.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="border-0 py-3">Saat</th>
+                                        <th class="border-0 py-3">Hasta Adı</th>
+                                        <th class="border-0 py-3">Telefon</th>
+                                        <th class="border-0 py-3">Durum</th>
+                                        <th class="border-0 py-3 text-end">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var appointment in Model.TodayAppointments.OrderBy(a => a.AppointmentDateTime))
+                                    {
+                                        <tr class="align-middle">
+                                            <td class="py-3 fw-bold">@appointment.AppointmentDateTime.ToString("HH:mm")</td>
+                                            <td class="py-3">
+                                                <div class="d-flex align-items-center">
+                                                    @if (appointment.Patient != null)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(appointment.Patient.ProfilePhoto))
                                                         {
-                                                            if (!string.IsNullOrEmpty(appointment.Patient.ProfilePhoto))
-                                                            {
-                                                                <img src="@appointment.Patient.ProfilePhoto" alt="@appointment.Patient.FullName" class="rounded-circle me-2" width="36" height="36" style="object-fit: cover;">
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px;">
-                                                                    <i class="fas fa-user small"></i>
-                                                                </div>
-                                                            }
-                                                            <div>
-                                                                <p class="mb-0 fw-medium">@appointment.Patient.FullName</p>
-                                                                <p class="mb-0 text-muted small">@appointment.Patient.IdentityNumber</p>
-                                                            </div>
+                                                            <img src="@appointment.Patient.ProfilePhoto" alt="@appointment.Patient.FullName" class="rounded-circle me-2" width="36" height="36" style="object-fit: cover;">
                                                         }
                                                         else
                                                         {
-                                                            <span>Hasta bilgisi bulunamadı</span>
+                                                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px;">
+                                                                <i class="fas fa-user small"></i>
+                                                            </div>
                                                         }
-                                                    </div>
-                                                </td>
-                                                <td class="py-3">
-                                                    @if (appointment.Patient != null)
-                                                    {
-                                                        <a href="tel:@appointment.Patient.Phone" class="text-decoration-none">
-                                                            <i class="fas fa-phone-alt me-1 text-success"></i> @appointment.Patient.Phone
-                                                        </a>
-                                                    }
-                                                </td>
-                                                <td class="py-3">
-                                                    @if (appointment.IsCompleted)
-                                                    {
-                                                        <span class="badge bg-success rounded-pill px-3 py-2">Tamamlandı</span>
+                                                        <div>
+                                                            <p class="mb-0 fw-medium">@appointment.Patient.FullName</p>
+                                                            <p class="mb-0 text-muted small">@appointment.Patient.IdentityNumber</p>
+                                                        </div>
                                                     }
                                                     else
                                                     {
-                                                        <span class="badge bg-warning rounded-pill px-3 py-2">Bekliyor</span>
+                                                        <span>Hasta bilgisi bulunamadı</span>
                                                     }
-                                                </td>
-                                                <td class="py-3 text-end">
-                                                    <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-primary rounded-pill">
-                                                        <i class="fas fa-eye me-1"></i> Detay
+                                                </div>
+                                            </td>
+                                            <td class="py-3">
+                                                @if (appointment.Patient != null)
+                                                {
+                                                    <a href="tel:@appointment.Patient.Phone" class="text-decoration-none">
+                                                        <i class="fas fa-phone-alt me-1 text-success"></i> @appointment.Patient.Phone
                                                     </a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="p-5">
-                                <div class="text-center py-5">
-                                    <div class="mb-4">
-                                        <i class="fas fa-calendar-day fa-4x text-primary opacity-50"></i>
-                                    </div>
-                                    <h5 class="fw-bold text-dark">Bugün için randevunuz bulunmamaktadır</h5>
-                                    <p class="text-muted">Bugün için planlanmış herhangi bir randevu bulunmuyor.</p>
+                                                }
+                                            </td>
+                                            <td class="py-3">
+                                                @if (appointment.IsCompleted)
+                                                {
+                                                    <span class="badge bg-success rounded-pill px-3 py-2">Tamamlandı</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning rounded-pill px-3 py-2">Bekliyor</span>
+                                                }
+                                            </td>
+                                            <td class="py-3 text-end">
+                                                <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-primary rounded-pill">
+                                                    <i class="fas fa-eye me-1"></i> Detay
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-5">
+                            <div class="text-center py-5">
+                                <div class="mb-4">
+                                    <i class="fas fa-calendar-day fa-4x text-primary opacity-50"></i>
                                 </div>
+                                <h5 class="fw-bold text-dark">Bugün için randevunuz bulunmamaktadır</h5>
+                                <p class="text-muted">Bugün için planlanmış herhangi bir randevu bulunmuyor.</p>
                             </div>
-                        }
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
+    </div>
 
     }
     else
     {
         <!-- Appointments Tab İçerikleri için Randevu Sekmeleri -->
         <div class="row mb-4">
-            <div class="col-12">
+        <div class="col-12">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-0">
                         <div class="d-flex flex-wrap" style="border-bottom: 1px solid #eee;">
@@ -382,8 +419,8 @@
                                         <div class="text-center py-4">
                                             <i class="fas fa-calendar-day fa-4x mb-3 text-primary"></i>
                                             <h5>Bugün için randevunuz bulunmamaktadır</h5>
-                                        </div>
-                                    </div>
+                    </div>
+                </div>
                                 }
                             }
                             
@@ -395,58 +432,58 @@
                                     <span class="badge bg-success ms-2">@Model.UpcomingAppointments.Count</span>
                                 </h5>
                                 
-                                @if (Model.UpcomingAppointments.Count > 0)
-                                {
-                                    <div class="table-responsive">
+                    @if (Model.UpcomingAppointments.Count > 0)
+                    {
+                        <div class="table-responsive">
                                         <table class="table table-hover">
-                                            <thead class="table-light">
-                                                <tr>
+                                <thead class="table-light">
+                                    <tr>
                                                     <th>Tarih</th>
                                                     <th>Saat</th>
                                                     <th>Hasta Adı</th>
                                                     <th>Telefon</th>
                                                     <th class="text-end">İşlemler</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                                 @foreach (var appointment in Model.UpcomingAppointments.OrderBy(a => a.AppointmentDateTime))
-                                                {
-                                                    <tr class="align-middle">
+                                    {
+                                        <tr class="align-middle">
                                                         <td>@appointment.AppointmentDateTime.ToString("dd.MM.yyyy")</td>
                                                         <td>@appointment.AppointmentDateTime.ToString("HH:mm")</td>
                                                         <td>
-                                                            <div class="d-flex align-items-center">
-                                                                @if (appointment.Patient != null)
-                                                                {
-                                                                    if (!string.IsNullOrEmpty(appointment.Patient.ProfilePhoto))
-                                                                    {
-                                                                        <img src="@appointment.Patient.ProfilePhoto" alt="@appointment.Patient.FullName" class="rounded-circle me-2" width="36" height="36" style="object-fit: cover;">
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px;">
-                                                                            <i class="fas fa-user small"></i>
-                                                                        </div>
-                                                                    }
-                                                                    <div>
-                                                                        <p class="mb-0 fw-medium">@appointment.Patient.FullName</p>
-                                                                        <p class="mb-0 text-muted small">@appointment.Patient.IdentityNumber</p>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <span>Hasta bilgisi bulunamadı</span>
-                                                                }
+                                                <div class="d-flex align-items-center">
+                                                    @if (appointment.Patient != null)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(appointment.Patient.ProfilePhoto))
+                                                        {
+                                                            <img src="@appointment.Patient.ProfilePhoto" alt="@appointment.Patient.FullName" class="rounded-circle me-2" width="36" height="36" style="object-fit: cover;">
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width: 36px; height: 36px;">
+                                                                <i class="fas fa-user small"></i>
                                                             </div>
-                                                        </td>
+                                                        }
+                                                        <div>
+                                                            <p class="mb-0 fw-medium">@appointment.Patient.FullName</p>
+                                                            <p class="mb-0 text-muted small">@appointment.Patient.IdentityNumber</p>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Hasta bilgisi bulunamadı</span>
+                                                    }
+                                                </div>
+                                            </td>
                                                         <td>
-                                                            @if (appointment.Patient != null)
-                                                            {
-                                                                <a href="tel:@appointment.Patient.Phone" class="text-decoration-none">
-                                                                    <i class="fas fa-phone-alt me-1 text-success"></i> @appointment.Patient.Phone
-                                                                </a>
-                                                            }
-                                                        </td>
+                                                @if (appointment.Patient != null)
+                                                {
+                                                    <a href="tel:@appointment.Patient.Phone" class="text-decoration-none">
+                                                        <i class="fas fa-phone-alt me-1 text-success"></i> @appointment.Patient.Phone
+                                                    </a>
+                                                }
+                                            </td>
                                                         <td class="text-end">
                                                             <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-primary rounded-pill">
                                                                 <i class="fas fa-eye me-1"></i> Detay
@@ -534,15 +571,15 @@
                                                             }
                                                         </td>
                                                         <td class="text-end">
-                                                            <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-primary rounded-pill">
-                                                                <i class="fas fa-eye me-1"></i> Detay
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                <a href="/Doctor/AppointmentDetails/@appointment.Id" class="btn btn-sm btn-primary rounded-pill">
+                                                    <i class="fas fa-eye me-1"></i> Detay
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                                 }
                                 else
                                 {
@@ -635,8 +672,8 @@
                                             <i class="fas fa-history fa-4x mb-3 text-secondary"></i>
                                             <h5>Geçmiş randevunuz bulunmamaktadır</h5>
                                         </div>
-                                    </div>
-                                }
+                            </div>
+                        }
                             }
                             
                             @if (activeTab == "cancelled")
@@ -684,9 +721,9 @@
                                                                         <p class="mb-0 fw-medium">@appointment.Patient.FullName</p>
                                                                         <p class="mb-0 text-muted small">@appointment.Patient.IdentityNumber</p>
                                                                     </div>
-                                                                }
-                                                                else
-                                                                {
+                    }
+                    else
+                    {
                                                                     <span>Hasta bilgisi bulunamadı</span>
                                                                 }
                                                             </div>
@@ -703,7 +740,7 @@
                                                 }
                                             </tbody>
                                         </table>
-                                    </div>
+                                </div>
                                 }
                                 else
                                 {
@@ -711,9 +748,9 @@
                                         <div class="text-center py-4">
                                             <i class="fas fa-ban fa-4x mb-3 text-danger"></i>
                                             <h5>İptal edilen randevunuz bulunmamaktadır</h5>
-                                        </div>
-                                    </div>
-                                }
+                            </div>
+                        </div>
+                    }
                             }
                         </div>
                     </div>

@@ -83,23 +83,46 @@ namespace hastane.Controllers
                 
                 // Bugün ve gelecek randevular için (DoctorDashboardViewModel için)
                 var today = DateTime.Today;
-                var currentAndFutureAppointments = allAppointments
-                    .Where(a => a.AppointmentDateTime >= today && !a.IsCancelled)
-                    .OrderBy(a => a.AppointmentDateTime)
+                
+                // Bugünün tarihini string olarak al ve karşılaştırma için kullan
+                var todayString = today.ToString("yyyy-MM-dd");
+                
+                // Bugünkü randevuları string karşılaştırması ile bul
+                var todayAppointments = allAppointments
+                    .Where(a => a.AppointmentDateTime.ToString("yyyy-MM-dd") == todayString && !a.IsCancelled && !a.IsCompleted)
+                    .ToList();
+                
+                // Gelecek randevuları bul
+                var upcomingAppointments = allAppointments
+                    .Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted)
+                    .ToList();
+                
+                // Geçmiş randevuları bul
+                var pastAppointments = allAppointments
+                    .Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled && !a.IsCompleted)
+                    .ToList();
+                
+                // İptal edilen randevuları bul
+                var cancelledAppointments = allAppointments
+                    .Where(a => a.IsCancelled)
+                    .ToList();
+                
+                // Tamamlanan randevuları bul
+                var completedAppointments = allAppointments
+                    .Where(a => a.IsCompleted)
                     .ToList();
 
                 // Dashboard için özet sayılar
-                ViewBag.TodayAppointmentsCount = allAppointments.Count(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted);
-                ViewBag.UpcomingAppointmentsCount = allAppointments.Count(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted);
+                ViewBag.TodayAppointmentsCount = todayAppointments.Count;
+                ViewBag.UpcomingAppointmentsCount = upcomingAppointments.Count;
                 
                 // Appointments sekmesi için tüm randevu türlerini gruplandır
-                var completedAppointments = allAppointments.Where(a => a.IsCompleted).ToList();
                 var appointmentsViewModel = new DoctorAppointmentsViewModel
                 {
-                    UpcomingAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted).ToList(),
-                    TodayAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted).ToList(),
-                    PastAppointments = allAppointments.Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled && !a.IsCompleted).ToList(),
-                    CancelledAppointments = allAppointments.Where(a => a.IsCancelled).ToList(),
+                    UpcomingAppointments = upcomingAppointments,
+                    TodayAppointments = todayAppointments,
+                    PastAppointments = pastAppointments,
+                    CancelledAppointments = cancelledAppointments,
                     CompletedAppointments = completedAppointments
                 };
                 
@@ -109,8 +132,8 @@ namespace hastane.Controllers
                 // Dashboard ana modeli
                 var dashboardViewModel = new DoctorDashboardViewModel
                 {
-                    TodayAppointments = appointmentsViewModel.TodayAppointments,
-                    UpcomingAppointments = appointmentsViewModel.UpcomingAppointments
+                    TodayAppointments = todayAppointments,
+                    UpcomingAppointments = upcomingAppointments
                 };
 
                 return View(dashboardViewModel);
@@ -155,10 +178,19 @@ namespace hastane.Controllers
 
                 // Randevuları gruplandır: Gelecek, Bugün, Geçmiş, İptal Edilenler
                 var today = DateTime.Today;
+                
+                // Bugünün tarihini string olarak al ve karşılaştırma için kullan
+                var todayString = today.ToString("yyyy-MM-dd");
+                
+                // Bugünkü randevuları string karşılaştırması ile bul
+                var todayAppointments = appointments
+                    .Where(a => a.AppointmentDateTime.ToString("yyyy-MM-dd") == todayString && !a.IsCancelled && !a.IsCompleted)
+                    .ToList();
+                
                 var viewModel = new DoctorAppointmentsViewModel
                 {
                     UpcomingAppointments = appointments.Where(a => a.AppointmentDateTime.Date > today && !a.IsCancelled && !a.IsCompleted).ToList(),
-                    TodayAppointments = appointments.Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted).ToList(),
+                    TodayAppointments = todayAppointments,
                     PastAppointments = appointments.Where(a => a.AppointmentDateTime.Date < today && !a.IsCancelled && !a.IsCompleted).ToList(),
                     CancelledAppointments = appointments.Where(a => a.IsCancelled).ToList(),
                     CompletedAppointments = completedAppointments
@@ -171,6 +203,57 @@ namespace hastane.Controllers
                 TempData["ErrorMessage"] = "Randevular yüklenirken bir hata oluştu: " + ex.Message;
                 return View(new DoctorAppointmentsViewModel());
             }
+        }
+
+        // Debug: Bugünkü randevuları kontrol etmek için
+        public async Task<IActionResult> DebugAppointments()
+        {
+            var doctorId = HttpContext.Session.GetInt32("DoctorId");
+            if (doctorId == null)
+            {
+                return RedirectToAction("DoctorLogin", "Account");
+            }
+
+            var today = DateTime.Today;
+            var allAppointments = await _context.Appointments
+                .Include(a => a.Patient)
+                .Where(a => a.DoctorId == doctorId)
+                .OrderBy(a => a.AppointmentDateTime)
+                .ToListAsync();
+
+            var todayAppointments = allAppointments
+                .Where(a => a.AppointmentDateTime.Date == today && !a.IsCancelled && !a.IsCompleted)
+                .ToList();
+
+            // Debug bilgileri
+            var debugInfo = new Dictionary<string, object>
+            {
+                { "Today", today },
+                { "TodayFormatted", today.ToString("yyyy-MM-dd") },
+                { "TodayKind", today.Kind.ToString() },
+                { "TotalAppointments", allAppointments.Count },
+                { "TodayAppointments", todayAppointments.Count }
+            };
+
+            // Tüm randevuları listele
+            var appointmentsList = allAppointments.Select(a => new
+            {
+                Id = a.Id,
+                PatientName = a.Patient?.FullName ?? "Bilinmiyor",
+                AppointmentDateTime = a.AppointmentDateTime,
+                AppointmentDateTimeFormatted = a.AppointmentDateTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                AppointmentDateOnly = a.AppointmentDateTime.Date.ToString("yyyy-MM-dd"),
+                AppointmentTimeOnly = a.AppointmentDateTime.ToString("HH:mm:ss"),
+                DateTimeKind = a.AppointmentDateTime.Kind.ToString(),
+                IsToday = a.AppointmentDateTime.Date == today,
+                IsCancelled = a.IsCancelled,
+                IsCompleted = a.IsCompleted
+            }).ToList();
+
+            ViewBag.DebugInfo = debugInfo;
+            ViewBag.Appointments = appointmentsList;
+
+            return View();
         }
 
         // Randevu detayları - AuthorizeDoctor filtresi tarafından engellenir

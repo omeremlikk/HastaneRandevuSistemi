@@ -19431,6 +19431,88 @@
           "Value": "sha256-zOzetE5pbL2I5m7I1HuIpYem1j6vlqW1u6R7MRxEz9k="
         }
       ]
+    },
+    {
+      "Route": "uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.8upfyfqgu2.png",
+      "AssetFile": "uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "241963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kM6D1+Efla86p1EcfuuJTfMuQZ3ws7kgxCn6TZsmx/c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 16:20:59 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8upfyfqgu2"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kM6D1+Efla86p1EcfuuJTfMuQZ3ws7kgxCn6TZsmx/c="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png"
+        }
+      ]
+    },
+    {
+      "Route": "uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png",
+      "AssetFile": "uploads/profiles/patient_3_18ca0e7d-836c-4082-b59a-3a3258123358.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "241963"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kM6D1+Efla86p1EcfuuJTfMuQZ3ws7kgxCn6TZsmx/c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 16:20:59 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kM6D1+Efla86p1EcfuuJTfMuQZ3ws7kgxCn6TZsmx/c="
+        }
+      ]
     }
   ]
 }
