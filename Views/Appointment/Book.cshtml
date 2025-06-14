@@ -248,33 +248,8 @@
         
         console.log(`Randevu alınacak tarih: ${appointmentDateStr} (UTC dönüşümü yapılmadan)`);
 
-        // Form verilerini topla
-        const formData = new FormData(this);
-
-        // Anti-forgery token'ı al
-        const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-        
-        // AJAX isteği gönder
-        fetch('/Appointment/Create', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'RequestVerificationToken': token
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload();
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Hata:', error);
-            alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-        });
+        // Form gönderimi
+        this.submit();
     });
 
     function updateCalendar() {

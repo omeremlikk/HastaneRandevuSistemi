@@ -1,6 +1,7 @@
 ﻿@model List<hastane.Models.Department>
 @{
     ViewData["Title"] = "Ana Sayfa";
+    var doctorCount = ViewBag.DoctorCount ?? 50;
 }
 
 <!-- Slider/Carousel Hero Section -->
@@ -371,12 +372,157 @@
         </div>
         
         <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="700">
-            <a href="#" class="btn btn-outline-primary rounded-pill px-4 py-2">
+            <a href="#" class="btn btn-outline-primary rounded-pill px-4 py-2" data-bs-toggle="modal" data-bs-target="#departmentsModal">
                 <i class="fas fa-plus-circle me-2"></i>Tüm Branşlarımız
             </a>
         </div>
     </div>
 </section>
+
+<!-- Tüm Branşlar Modal -->
+<div class="modal fade" id="departmentsModal" tabindex="-1" aria-labelledby="departmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-gradient-primary text-white p-4 border-0">
+                <h5 class="modal-title fs-4" id="departmentsModalLabel">
+                    <i class="fas fa-hospital-alt me-2"></i>Tüm Polikliniklerimiz
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-heartbeat text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Kardiyoloji</h6>
+                                <p class="text-muted small mb-0">Kalp ve damar hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-brain text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Nöroloji</h6>
+                                <p class="text-muted small mb-0">Sinir sistemi hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-bone text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Ortopedi</h6>
+                                <p class="text-muted small mb-0">Kas ve iskelet sistemi hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-eye text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Göz Hastalıkları</h6>
+                                <p class="text-muted small mb-0">Göz ve görme ile ilgili hastalıklar</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-stethoscope text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Dahiliye</h6>
+                                <p class="text-muted small mb-0">İç hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-child text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Çocuk Sağlığı</h6>
+                                <p class="text-muted small mb-0">Pediatri</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-ear text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">KBB</h6>
+                                <p class="text-muted small mb-0">Kulak, Burun ve Boğaz Hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-lungs text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Göğüs Hastalıkları</h6>
+                                <p class="text-muted small mb-0">Solunum sistemi hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-venus text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Kadın Hastalıkları ve Doğum</h6>
+                                <p class="text-muted small mb-0">Jinekoloji ve Obstetri</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-kidneys text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Üroloji</h6>
+                                <p class="text-muted small mb-0">Üriner sistem hastalıkları</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="department-item d-flex align-items-center p-3 rounded bg-light">
+                            <div class="department-icon me-3">
+                                <i class="fas fa-teeth text-primary"></i>
+                            </div>
+                            <div class="department-info">
+                                <h6 class="mb-0">Diş Hekimliği</h6>
+                                <p class="text-muted small mb-0">Ağız ve diş sağlığı</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0 pb-4 px-4">
+                <a href="/Appointment/Departments" class="btn btn-primary rounded-pill px-4">
+                    <i class="fas fa-info-circle me-2"></i>Detaylı Bilgi
+                </a>
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Neden Biz Bölümü -->
 <section class="why-us-section py-5 bg-light">
@@ -462,8 +608,6 @@
     </div>
 </section>
 
-
-
 <!-- Randevu CTA Bölümü -->
 <section class="cta-section py-5">
     <div class="container">
@@ -492,7 +636,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-user-md"></i>
                     </div>
-                    <h3 class="stat-number counter" data-count="50">50</h3>
+                    <h3 class="stat-number counter" data-count="@doctorCount">@doctorCount</h3>
                     <p class="stat-text">Uzman Doktor</p>
                 </div>
             </div>

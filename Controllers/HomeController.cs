@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using hastane.Models;
+using hastane.Data;
+using System.Linq;
 
 namespace hastane.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
@@ -22,6 +26,10 @@ public class HomeController : Controller
         {
             return RedirectToAction("Dashboard", "Doctor");
         }
+        
+        // Doktor sayısını al
+        ViewBag.DoctorCount = _context.Doctors.Count();
+        
         return View();
     }
 
