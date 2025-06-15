@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using hastane.Data;
+using hastane.Services;
 using System;
 using System.Globalization;
 
@@ -12,6 +13,12 @@ CultureInfo.DefaultThreadCurrentUICulture = turkishCulture;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// HttpClient servisini ekle (PolTahmin API için)
+builder.Services.AddHttpClient();
+
+// Flask API otomatik başlatma servisi
+builder.Services.AddHostedService<FlaskApiService>();
 
 // Oturum yönetimini ekle
 builder.Services.AddDistributedMemoryCache();
