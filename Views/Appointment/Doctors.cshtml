@@ -5,54 +5,72 @@
 
 <!-- Yeni Modern Hero Section -->
 <section class="doctors-hero position-relative overflow-hidden">
-    <!-- Arka plan deseni -->
-    <div class="hero-pattern"></div>
+    <div class="container position-relative py-5">
+        <div class="row min-vh-60 align-items-center py-5">
+            <div class="col-lg-6 order-lg-1">
+                <div class="hero-content">
+                    <div class="section-badge mb-3">
+                        <span><i class="fas fa-stethoscope"></i> Profesyonel Doktor Kadrosu</span>
+                    </div>
+                    <h1 class="display-4 fw-bold mb-4 text-white">
+                        Sağlığınız İçin<br>Uzman <span class="highlight-text">Doktorlarımız</span>
+                    </h1>
+                    <p class="lead mb-4 text-white-50">
+                        Alanında tecrübeli, uzman doktor kadromuz ile sağlığınız için en iyi hizmeti sunuyoruz. 
+                        Modern tıbbi teknolojiler ve kişiselleştirilmiş tedavi yaklaşımlarımız ile yanınızdayız.
+                    </p>
+                    <div class="d-flex gap-3 mt-5 hero-buttons">
+                        <a href="#doctors-section" class="btn btn-light btn-lg rounded-pill px-4 py-3 shadow-sm">
+                            <i class="fas fa-user-md me-2"></i>Doktorlarımızı Keşfedin
+                        </a>
+                        <a href="/Appointment/Randevu" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3">
+                            <i class="fas fa-calendar-check me-2"></i>Randevu Al
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-2">
+                <div class="hero-image-container position-relative">
+                    <img src="/img/hero-doctor.png" alt="Doktor" class="img-fluid hero-doctor-image">
+                    <div class="hero-stats-container">
+                        <div class="hero-stat-card">
+                            <div class="hero-stat-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="hero-stat-content">
+                                <h3>@Model.Count</h3>
+                                <p>Uzman Doktor</p>
+                            </div>
+                        </div>
+                        <div class="hero-stat-card">
+                            <div class="hero-stat-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="hero-stat-content">
+                                <h3>25+</h3>
+                                <p>Yıl Deneyim</p>
+                            </div>
+                        </div>
+                        <div class="hero-stat-card">
+                            <div class="hero-stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="hero-stat-content">
+                                <h3>98%</h3>
+                                <p>Hasta Memnuniyeti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Dalga şekli -->
     <div class="wave-shape">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#f8f9fa" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,218.7C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
-    </div>
-    
-    <div class="container position-relative py-5 mt-5">
-        <div class="row min-vh-60 align-items-center py-5">
-            <div class="col-lg-6 order-lg-2" data-aos="fade-left" data-aos-delay="200">
-                <div class="doctor-hero-image position-relative">
-                    <div class="floating-badge badge-experience">
-                        <span><i class="fas fa-award"></i> 25+ Yıl Deneyim</span>
-                    </div>
-                    <div class="floating-badge badge-doctors">
-                        <span><i class="fas fa-user-md"></i> @Model.Count Uzman Doktor</span>
-                    </div>
-                    <div class="floating-badge badge-satisfaction">
-                        <span><i class="fas fa-heart"></i> %98 Hasta Memnuniyeti</span>
-                    </div>
-                    <img src="/img/hero-doctor.png" alt="Doktor" class="img-fluid hero-doctor-image">
-                    <div class="img-blob-shape"></div>
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1 py-4" data-aos="fade-right">
-                <div class="section-badge mb-3" data-aos="fade-up" data-aos-delay="100">
-                    <span><i class="fas fa-stethoscope"></i> Profesyonel Doktor Kadrosu</span>
-                </div>
-                <h1 class="display-4 fw-bold mb-4 text-gradient" data-aos="fade-up" data-aos-delay="200">
-                    Sağlığınız İçin<br>Uzman <span class="highlight-text">Doktorlarımız</span>
-                </h1>
-                <p class="lead mb-4 text-secondary" data-aos="fade-up" data-aos-delay="300">
-                    Alanında tecrübeli, uzman doktor kadromuz ile sağlığınız için en iyi hizmeti sunuyoruz. 
-                    Modern tıbbi teknolojiler ve kişiselleştirilmiş tedavi yaklaşımlarımız ile yanınızdayız.
-                </p>
-                <div class="d-flex gap-3 mt-5 hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#doctors-section" class="btn btn-primary btn-lg rounded-pill px-4 py-3 shadow-primary">
-                        <i class="fas fa-user-md me-2"></i>Doktorlarımızı Keşfedin
-                    </a>
-                    <a href="/Appointment/Randevu" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3">
-                        <i class="fas fa-calendar-check me-2"></i>Randevu Al
-                    </a>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
@@ -67,18 +85,18 @@
         <!-- Başlık -->
         <div class="row mb-5">
             <div class="col-lg-6 mx-auto text-center">
-                <div class="section-badge mb-3 mx-auto d-inline-block" data-aos="fade-up">
+                <div class="section-badge mb-3 mx-auto d-inline-block">
                     <span><i class="fas fa-user-md"></i> Uzman Doktorlarımız</span>
                 </div>
-                <h2 class="section-title text-center mb-3" data-aos="fade-up" data-aos-delay="100">Deneyimli Kadromuz</h2>
-                <p class="text-secondary" data-aos="fade-up" data-aos-delay="200">Sağlığınız için titizlikle seçilmiş, alanında uzman doktorlarımızla tanışın</p>
+                <h2 class="section-title text-center mb-3">Deneyimli Kadromuz</h2>
+                <p class="text-secondary">Sağlığınız için titizlikle seçilmiş, alanında uzman doktorlarımızla tanışın</p>
             </div>
         </div>
         
         <!-- Filtreleme ve Arama -->
         <div class="row mb-5">
             <div class="col-lg-10 mx-auto">
-                <div class="doctors-filter mb-4 p-4 bg-white rounded-4 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                <div class="doctors-filter mb-4 p-4 bg-white rounded-4 shadow-sm">
                     <div class="row g-4 align-items-center">
                         <div class="col-md-4">
                             <h5 class="fw-bold mb-1">Doktor Arama</h5>
@@ -121,16 +139,16 @@
         <div class="row g-4">
             @foreach (var doctor in Model)
             {
-                <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="@(Math.Min(50, Model.IndexOf(doctor) * 25))" data-specialty="@doctor.Specialty" data-name="@doctor.Name.ToLower()">
+                <div class="col-md-6 col-lg-4 mb-4" data-specialty="@doctor.Specialty" data-name="@doctor.Name.ToLower()">
                     <div class="doctor-card modern-card h-100 position-relative bg-white overflow-hidden">
                         <!-- Doktor Görsel Bölümü -->
                         <div class="doctor-banner-container">
                             <div class="doctor-specialty-badge">
                                 <i class="fas fa-stethoscope me-1"></i>@doctor.Specialty
                             </div>
-                            <div class="doctor-image-wrapper">
-                                <img src="@doctor.ImageUrl" class="doctor-profile-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
-                            </div>
+                        </div>
+                        <div class="doctor-image-wrapper mt-n5">
+                            <img src="@doctor.ImageUrl" class="doctor-profile-image" alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
                         </div>
                         <!-- Doktor Bilgileri -->
                         <div class="doctor-content p-4">
@@ -186,7 +204,7 @@
         
         <!-- Pagination -->
         <div class="row mt-5">
-            <div class="col-12 d-flex justify-content-center" data-aos="fade-up">
+            <div class="col-12 d-flex justify-content-center">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li class="page-item disabled">
@@ -209,7 +227,7 @@
         
         <!-- Randevu Butonu - Yeni Modern Tasarım -->
         <div class="row mt-5">
-            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+            <div class="col-lg-8 mx-auto text-center">
                 <div class="card border-0 shadow-lg rounded-4 p-0 appointment-cta-card overflow-hidden">
                     <!-- Dekoratif Elementler -->
                     <div class="appointment-card-circles"></div>
@@ -280,7 +298,7 @@
                     <div class="row">
                         <div class="col-md-4 text-center mb-4 mb-md-0">
                             <img src="@doctor.ImageUrl" class="rounded-circle img-fluid mb-3" 
-                                 style="width: 200px; height: 200px; object-fit: cover; border: 3px solid var(--primary);"
+                                 style="width: 150px !important; height: 150px !important; object-fit: cover; border: 4px solid var(--primary);"
                                  alt="@doctor.Name" onerror="this.src='/img/doctors/doctor1.jpg'">
                             <div class="doctor-rating mt-2">
                                 <div class="stars mb-2">
@@ -481,4 +499,507 @@
             });
         });
     </script>
+}
+
+@section Styles {
+    <style>
+        /* Hero Bölümü İyileştirmeleri */
+        .doctors-hero {
+            background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
+            color: white;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-doctor-image {
+            max-width: 90%;
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-stats-container {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 3;
+        }
+        
+        .hero-stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-stat-card:nth-child(1) {
+            position: absolute;
+            top: 20%;
+            right: 0;
+        }
+        
+        .hero-stat-card:nth-child(2) {
+            position: absolute;
+            top: 45%;
+            left: 0;
+        }
+        
+        .hero-stat-card:nth-child(3) {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+        }
+        
+        .hero-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .hero-stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(74, 108, 247, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary);
+        }
+        
+        .hero-stat-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            color: #333;
+        }
+        
+        .hero-stat-content p {
+            font-size: 14px;
+            margin: 0;
+            color: #666;
+        }
+        
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .highlight-text {
+            position: relative;
+            display: inline-block;
+            color: white;
+        }
+        
+        .highlight-text:after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: -1;
+            border-radius: 10px;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+        
+        /* Genel Sayfa Stilleri */
+        #doctors-section {
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Doktor Kartları İçin Yeni Modern Tasarım */
+        .doctor-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            border: none;
+            background-color: #fff;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .doctor-banner-container {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
+        }
+        
+        .doctor-specialty-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255,255,255,0.9);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        
+        .doctor-image-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: -55px auto 0;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 2;
+            background-color: #fff;
+        }
+        
+        .doctor-profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .doctor-card:hover .doctor-profile-image {
+            transform: scale(1.05);
+        }
+        
+        .doctor-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .doctor-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .doctor-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .rating-score {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .doctor-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .doctor-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .doctor-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #555;
+            background-color: #f8f9fa;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        
+        .btn-details {
+            border-color: #e0e0e0;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-details:hover {
+            background-color: #f8f9fa;
+            border-color: #d0d0d0;
+        }
+        
+        /* Filtre Bölümü */
+        .doctors-filter {
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .doctors-filter:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+        
+        /* Pagination Stilleri */
+        .pagination .page-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 0 5px;
+            font-weight: 500;
+            border: none;
+            color: #555;
+            background-color: #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Modal içindeki doktor fotoğrafı */
+        .modal-body .rounded-circle {
+            width: 150px !important;
+            height: 150px !important;
+            object-fit: cover;
+            border: 5px solid var(--primary) !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Doktor Detay Modal Tasarımı */
+        .modal-content {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .modal-header.bg-gradient-primary {
+            background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 10px;
+            height: calc(100% + 10px);
+            width: 2px;
+            background-color: #e0e0e0;
+        }
+        
+        .timeline-item:last-child:before {
+            display: none;
+        }
+        
+        .work-hours {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .work-hours:hover {
+            background-color: #f0f0f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Süsleme Elemanları */
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--primary);
+            top: -100px;
+            right: -100px;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            bottom: 50px;
+            left: -50px;
+        }
+        
+        .decoration-square {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: var(--primary);
+            opacity: 0.05;
+            transform: rotate(45deg);
+            bottom: 100px;
+            right: 10%;
+            z-index: 0;
+        }
+        
+        /* AOS Animasyonlarını Devre Dışı Bırak */
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+        
+        /* Randevu CTA Kartı */
+        .appointment-cta-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .appointment-card-circles:before,
+        .appointment-card-circles:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(74, 108, 247, 0.05);
+            z-index: 0;
+        }
+        
+        .appointment-card-circles:before {
+            width: 300px;
+            height: 300px;
+            right: -150px;
+            top: -150px;
+        }
+        
+        .appointment-card-circles:after {
+            width: 200px;
+            height: 200px;
+            left: -100px;
+            bottom: -100px;
+        }
+        
+        .appointment-card-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a6cf7' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .cta-badge {
+            display: inline-block;
+            background-color: rgba(74, 108, 247, 0.1);
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+        
+        .cta-title {
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .cta-description {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .cta-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .cta-feature-item i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .btn-randevu {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
+            color: white;
+            font-weight: 600;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-randevu:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(74, 108, 247, 0.4);
+            color: white;
+        }
+        
+        .btn-randevu-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-randevu:hover .btn-randevu-icon {
+            transform: translateX(5px);
+        }
+    </style>
 }

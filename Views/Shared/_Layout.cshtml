@@ -24,6 +24,8 @@
     
     <!-- Site CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     @{
@@ -289,11 +291,12 @@
     <script>
         // AOS Animations
         AOS.init({
-            duration: 600,
-            easing: 'ease-out',
+            duration: 0,
+            easing: 'linear',
             once: true,
-            offset: 50,
-            delay: 0
+            offset: 0,
+            delay: 0,
+            disable: 'mobile'
         });
         
         // Navbar scroll efekti

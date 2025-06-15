@@ -71,7 +71,7 @@ namespace hastane.Controllers
                     TempData["ErrorMessage"] = "Doktor bilgileri bulunamadı.";
                     return RedirectToAction("DoctorLogin", "Account");
                 }
-                
+
                 ViewBag.Doctor = doctor;
                 
                 // Tüm randevuları getir (DoctorAppointmentsViewModel için)
@@ -80,7 +80,7 @@ namespace hastane.Controllers
                     .Where(a => a.DoctorId == doctorId)
                     .OrderByDescending(a => a.AppointmentDateTime)
                     .ToListAsync();
-                
+
                 // Bugün ve gelecek randevular için (DoctorDashboardViewModel için)
                 var today = DateTime.Today;
                 

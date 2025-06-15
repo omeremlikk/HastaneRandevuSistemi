@@ -6,59 +6,113 @@
 }
 
 <div class="container py-5">
-    <div class="row">
+    <!-- Başlık -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="fw-bold text-primary">Online Randevu Oluştur</h2>
+            <p class="text-muted">Aşağıdaki adımları takip ederek kolayca randevu alabilirsiniz</p>
+        </div>
+    </div>
+    
+    <div class="row g-4">
         <!-- Sol Taraf - Doktor Bilgileri -->
-        <div class="col-md-4 mb-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <img src="@(Model.Doctor?.ImageUrl)" alt="@(Model.Doctor?.Name)" 
-                         class="rounded-circle mb-3" 
-                         style="width: 120px; height: 120px; object-fit: cover;">
-                    <h4 class="mb-2">@(Model.Doctor?.Name)</h4>
-                    <p class="text-muted">@(Model.Doctor?.Specialty)</p>
-                    <hr>
-                    <div class="text-start">
-                        <h6 class="mb-3"><i class="fas fa-clock me-2"></i>Çalışma Saatleri</h6>
-                        <div class="card border-left-success mb-2">
-                            <div class="card-body py-2 d-flex justify-content-between">
-                                <span><i class="fas fa-check-circle text-success me-1"></i> Pazartesi - Cuma</span>
-                                <span class="text-primary fw-bold">09:00 - 17:00</span>
-                            </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block mb-3">
+                            <img src="@(Model.Doctor?.ImageUrl)" alt="@(Model.Doctor?.Name)" 
+                                class="rounded-circle border border-4 border-light shadow" 
+                                style="width: 140px; height: 140px; object-fit: cover;">
+                            <span class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle p-2 border border-3 border-white">
+                                <i class="fas fa-check-circle"></i>
+                            </span>
                         </div>
-                        <div class="card border-left-danger">
-                            <div class="card-body py-2 d-flex justify-content-between">
-                                <span><i class="fas fa-times-circle text-danger me-1"></i> Cumartesi - Pazar</span>
-                                <span class="text-danger fw-bold">Kapalı</span>
+                        <h3 class="fw-bold mb-1">@(Model.Doctor?.Name)</h3>
+                        <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">@(Model.Doctor?.Specialty)</span>
+                        
+                        @if (!string.IsNullOrEmpty(Model.Doctor?.Description))
+                        {
+                            <p class="text-muted mb-0">@(Model.Doctor?.Description)</p>
+                        }
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <h5 class="fw-bold mb-3"><i class="fas fa-clock text-primary me-2"></i>Çalışma Saatleri</h5>
+                    <div class="card bg-light border-0 rounded-3 mb-3">
+                        <div class="card-body py-3 px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <span class="fw-medium">Pazartesi - Cuma</span>
+                                </div>
+                                <span class="badge bg-primary rounded-pill px-3">09:00 - 17:00</span>
                             </div>
                         </div>
                     </div>
-                                    </div>
+                    <div class="card bg-light border-0 rounded-3">
+                        <div class="card-body py-3 px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-times-circle text-danger me-2"></i>
+                                    <span class="fw-medium">Cumartesi - Pazar</span>
                                 </div>
+                                <span class="badge bg-danger rounded-pill px-3">Kapalı</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Sağ Taraf - Randevu Formu -->
-        <div class="col-md-8">
-            <div class="card border-0 shadow-sm">
-                                <div class="card-body p-4">
-                    <h4 class="mb-4">Randevu Bilgileri</h4>
-                    <form asp-action="Create" method="post" id="appointmentForm">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4">
+                    <!-- İlerleme Çubuğu -->
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">
+                                <i class="fas fa-calendar-alt me-2"></i>Randevu Bilgileri
+                            </span>
+                            <span class="text-muted small">* Zorunlu alanlar</span>
+                        </div>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <form asp-action="Create" method="post" id="appointmentForm" class="needs-validation" novalidate>
                         <input type="hidden" asp-for="Appointment.DoctorId" value="@(Model.Doctor?.Id)" />
                         <input type="hidden" name="Appointment.AppointmentDateTime" id="selectedDateTime" />
 
                         <!-- Takvim -->
                         <div class="mb-4">
-                            <label class="form-label">Randevu Tarihi</label>
-                            <div class="alert alert-danger mb-2">
-                                <i class="fas fa-exclamation-triangle me-2"></i> <strong>Önemli:</strong> Hafta sonları (Cumartesi-Pazar) randevu hizmeti verilmemektedir.
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-calendar-day text-primary me-2"></i>Randevu Tarihi <span class="text-danger">*</span>
+                            </label>
+                            
+                            <div class="alert alert-warning border-0 rounded-3 mb-3" role="alert">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-exclamation-triangle fs-4 text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="alert-heading fw-bold mb-1">Önemli Bilgilendirme</h6>
+                                        <p class="mb-0 small">Hafta sonları (Cumartesi-Pazar) randevu hizmeti verilmemektedir.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="simple-calendar bg-white border rounded p-3">
+                            
+                            <div class="simple-calendar bg-white border rounded-3 p-3 shadow-sm">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <button type="button" class="btn btn-sm btn-light" id="prevMonth">
-                                        <i class="fas fa-chevron-left"></i>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="prevMonth">
+                                        <i class="fas fa-chevron-left me-1"></i> Önceki
                                     </button>
-                                    <h6 class="mb-0" id="currentMonthYear">@currentMonth</h6>
-                                    <button type="button" class="btn btn-sm btn-light" id="nextMonth">
-                                        <i class="fas fa-chevron-right"></i>
+                                    <h6 class="mb-0 fw-bold text-primary" id="currentMonthYear">@currentMonth</h6>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="nextMonth">
+                                        Sonraki <i class="fas fa-chevron-right ms-1"></i>
                                     </button>
                                 </div>
                                 <table class="table table-calendar mb-0">
@@ -80,21 +134,26 @@
                         
                         <!-- Saat Seçimi -->
                         <div class="mb-4">
-                            <label class="form-label">Randevu Saati</label>
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-clock text-primary me-2"></i>Randevu Saati <span class="text-danger">*</span>
+                            </label>
                             <div class="time-slots d-flex flex-wrap gap-2" id="timeSlots"></div>
                         </div>
                         
-                                <div class="col-12">
-                            <button type="submit" class="btn btn-primary w-100" id="submitButton" disabled>
-                            <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
-                        </button>
-                            </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3" id="submitButton" disabled>
+                                <i class="fas fa-calendar-check me-2"></i>Randevu Oluştur
+                            </button>
+                            <a href="/Appointment/Doctors" class="btn btn-outline-secondary rounded-pill">
+                                <i class="fas fa-arrow-left me-2"></i>Doktor Seçimine Geri Dön
+                            </a>
+                        </div>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <style>
 .table-calendar {
@@ -103,110 +162,122 @@
 
 .table-calendar th {
     text-align: center;
-    font-weight: 500;
-    color: #666;
+    font-weight: 600;
+    color: #495057;
     font-size: 14px;
-    padding: 5px;
+    padding: 8px;
 }
 
 .table-calendar td {
-    padding: 5px;
+    padding: 6px;
     text-align: center;
     vertical-align: middle;
-    height: 40px;
+    height: 46px;
 }
 
 .calendar-day {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s;
     font-size: 14px;
+    font-weight: 500;
 }
 
 .calendar-day:not(.disabled):hover {
     background-color: #e9ecef;
+    transform: scale(1.1);
 }
 
 .calendar-day.selected {
     background-color: var(--bs-primary);
     color: white;
+    box-shadow: 0 3px 6px rgba(0,123,255,0.3);
+    transform: scale(1.1);
 }
 
 .calendar-day.disabled {
-    color: #ccc;
+    color: #adb5bd;
     cursor: not-allowed;
 }
 
 .closed-time-slot {
-    background-color: #e74c3c; /* Görseldeki kırmızı renk */
-    color: white;
-    border-radius: 4px;
-    padding: 5px 10px;
+    background-color: #f8d7da;
+    color: #842029;
+    border-radius: 8px;
+    padding: 8px 10px;
     text-align: center;
     margin: 0 auto;
     display: inline-block;
-    font-size: 14px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     cursor: not-allowed;
     width: 100%;
-}
-
-.no-symbol {
-    font-weight: bold;
-    margin-left: 2px;
+    border: 1px solid #f5c2c7;
 }
 
 .calendar-day.today {
     border: 2px solid var(--bs-primary);
+    font-weight: bold;
 }
 
 .time-slot {
-    padding: 8px 16px;
+    padding: 10px 16px;
     border: 1px solid #dee2e6;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s;
     font-size: 14px;
-    width: 100%;
+    width: calc(25% - 8px);
     text-align: center;
+    font-weight: 500;
+    background-color: #f8f9fa;
+    margin-bottom: 8px;
 }
 
 .time-slot:not(.disabled):hover {
     border-color: var(--bs-primary);
     background-color: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
 .time-slot.selected {
     background-color: var(--bs-primary);
     color: white;
     border-color: var(--bs-primary);
+    box-shadow: 0 3px 6px rgba(0,123,255,0.3);
+    transform: translateY(-2px);
 }
 
 .time-slot.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background-color: #f8f9fa;
 }
-
-.border-left-success {
-    border-left: 4px solid #28a745;
-}
-
-.border-left-danger {
-    border-left: 4px solid #dc3545;
-}
-
-
 
 .weekend-header {
-    background-color: #e74c3c; /* Görseldeki kırmızı renk */
-    color: white;
+    background-color: #f8d7da;
+    color: #842029;
     font-weight: bold;
     position: relative;
     border-radius: 4px;
+}
+
+@@media (max-width: 767.98px) {
+    .time-slot {
+        width: calc(33.333% - 8px);
+    }
+}
+
+@@media (max-width: 575.98px) {
+    .time-slot {
+        width: calc(50% - 8px);
+    }
 }
 </style>
 
@@ -327,11 +398,11 @@
             dayDiv.className = 'calendar-day';
             dayDiv.textContent = date.getDate();
             dayDiv.addEventListener('click', () => selectDate(date));
-            
-            if (isToday) dayDiv.classList.add('today');
-            if (isSelected) dayDiv.classList.add('selected');
-            
-            td.appendChild(dayDiv);
+
+        if (isToday) dayDiv.classList.add('today');
+        if (isSelected) dayDiv.classList.add('selected');
+
+        td.appendChild(dayDiv);
         }
 
         return td;
@@ -353,6 +424,8 @@
     function updateTimeSlots() {
         if (!selectedDate) return;
 
+        timeSlots.innerHTML = '<div class="d-flex justify-content-center w-100 my-3"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Yükleniyor...</span></div></div>';
+
         const doctorId = document.querySelector('input[name="Appointment.DoctorId"]').value;
         
         // Tarih için UTC dönüşümü yapmadan direkt string olarak gönder
@@ -369,7 +442,7 @@
                 data.forEach(slot => {
                     const slotDiv = document.createElement('div');
                     slotDiv.className = `time-slot ${!slot.available ? 'disabled' : ''}`;
-                    slotDiv.textContent = slot.time;
+                    slotDiv.innerHTML = `<i class="far fa-clock me-2"></i>${slot.time}`;
                     
                     if (slot.available) {
                         slotDiv.addEventListener('click', () => selectTime(slot.time, slotDiv));
@@ -384,6 +457,7 @@
             })
             .catch(error => {
                 console.error('Saat bilgileri alınırken hata oluştu:', error);
+                timeSlots.innerHTML = '<div class="alert alert-danger w-100">Saat bilgileri alınırken bir hata oluştu. Lütfen tekrar deneyin.</div>';
             });
     }
 
@@ -395,14 +469,20 @@
     }
 
     function checkFormValidity() {
-        submitButton.disabled = !(selectedDate && selectedTime);
+        if (selectedDate && selectedTime) {
+            submitButton.disabled = false;
+            submitButton.classList.add('btn-pulse');
+        } else {
+            submitButton.disabled = true;
+            submitButton.classList.remove('btn-pulse');
+        }
     }
 
     // Ay değiştirme butonları
     document.getElementById('prevMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         updateCalendar();
-            });
+    });
             
     document.getElementById('nextMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
