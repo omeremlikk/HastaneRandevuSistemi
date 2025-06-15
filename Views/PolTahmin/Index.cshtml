@@ -1,238 +1,500 @@
 @{
-    ViewData["Title"] = "Poliklinik Tahmini";
+    ViewData["Title"] = "AI Destekli Poliklinik Tahmini";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    .pol-tahmin-container {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: calc(100vh - 100px);
-        padding: 2rem 0;
+    /* Minimal hero section - MUCH SMALLER */
+    .hero-section {
+        background: linear-gradient(135deg, #F0F8FF 0%, #E6F0FF 50%, #D6E9FF 100%);
+        padding: 1.5rem 0 1rem 0;
+        position: relative;
+        overflow: hidden;
+        margin-top: 0;
     }
     
-    .pol-tahmin-card {
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        backdrop-filter: blur(10px);
-        background: rgba(255,255,255,0.95);
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23f8f9fa'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23f8f9fa'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23f8f9fa'/%3E%3C/svg%3E");
+        background-size: cover;
+        background-repeat: no-repeat;
     }
-    
-    .tahmin-sonuc-card {
-        border-radius: 15px;
-        border: 2px solid;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        margin-bottom: 2rem;
+
+    /* Small circle decorations */
+    .hero-section .circle-decoration {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(65, 105, 225, 0.1);
+        opacity: 0.4;
+        animation: float 6s ease-in-out infinite;
     }
-    
-    .form-select-lg {
-        border-radius: 10px;
-        border: 2px solid #e9ecef;
-        font-size: 1rem;
+
+    .hero-section .circle-1 {
+        width: 40px;
+        height: 40px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
     }
-    
-    .form-select-lg:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+
+    .hero-section .circle-2 {
+        width: 50px;
+        height: 50px;
+        top: 60%;
+        right: 15%;
+        animation-delay: 2s;
     }
-    
-    .btn-tahmin {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        border: none;
-        border-radius: 25px;
-        padding: 15px 40px;
-        font-weight: 600;
-        font-size: 1.1rem;
+
+    .hero-section .circle-3 {
+        width: 35px;
+        height: 35px;
+        bottom: 20%;
+        left: 20%;
+        animation-delay: 4s;
+    }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    /* Small AI illustration */
+    .ai-brain-illustration {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ai-brain-illustration i {
+        font-size: 2rem;
+        color: #4169E1;
+        animation: brain-pulse 2s ease-in-out infinite;
+    }
+
+    .ai-brain-illustration::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px dashed rgba(65, 105, 225, 0.3);
+        border-radius: 50%;
+        animation: spin 20s linear infinite;
+    }
+
+    @@keyframes brain-pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+    }
+
+    @@keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Main content with proper spacing */
+    .main-content {
+        background: #f1f5f9;
+        padding: 1.5rem 0;
+        margin-top: 0;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Cards matching theme style */
+    .theme-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        border: 1px solid rgba(65, 105, 225, 0.1);
         transition: all 0.3s ease;
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        overflow: hidden;
+        height: 100%;
     }
-    
-    .btn-tahmin:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+
+    .theme-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(65, 105, 225, 0.15);
+        border-color: rgba(65, 105, 225, 0.2);
     }
-    
-    .icon-circle {
+
+    /* Result card with theme colors */
+    .result-card {
+        background: linear-gradient(135deg, #4169E1 0%, #2b3cf0 100%);
+        color: white;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .result-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    }
+
+    .result-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+    }
+
+    /* Form styling matching theme */
+    .form-select-theme {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        background-color: white;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-select-theme:focus {
+        border-color: #4169E1;
+        box-shadow: 0 0 0 0.2rem rgba(65, 105, 225, 0.15);
+        outline: none;
+    }
+
+    /* Button matching theme */
+    .btn-theme {
+        background: #4169E1;
+        border: none;
+        border-radius: 50px;
+        padding: 0.7rem 2rem;
+        font-weight: 500;
+        font-size: 1rem;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-theme:hover {
+        background: #3A5FCD;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(65, 105, 225, 0.2);
+        color: white;
+    }
+
+    /* Status badges */
+    .status-ai {
+        background: #28a745;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .status-rule {
+        background: #ffc107;
+        color: #212529;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Icons matching theme style */
+    .theme-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+        background: linear-gradient(135deg, #4169E1 0%, #2b3cf0 100%);
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .medical-result-icon {
         width: 100px;
         height: 100px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin: 0 auto 1rem auto;
+        background: rgba(255, 255, 255, 0.15);
+        font-size: 2.5rem;
+        color: white;
     }
-    
+
+    /* Section titles matching theme */
+    .section-title {
+        position: relative;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        color: #343a40;
+        font-size: 1.5rem;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -8px;
+        height: 3px;
+        width: 50px;
+        background: #4169E1;
+        border-radius: 3px;
+        transform: translateX(-50%);
+    }
+
+    /* Warning alert style */
+    .warning-alert {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        border: 1px solid #f39c12;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        color: #856404;
+        font-weight: 500;
+        display: none;
+        box-shadow: 0 4px 12px rgba(243, 156, 18, 0.15);
+    }
+
+    .warning-alert.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive design */
     @@media (max-width: 768px) {
-        .pol-tahmin-container {
+        .hero-section {
+            padding: 1rem 0 0.5rem 0;
+        }
+        
+        .ai-brain-illustration {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .ai-brain-illustration i {
+            font-size: 1.5rem;
+        }
+        
+        .btn-theme {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .main-content {
             padding: 1rem 0;
         }
-        
-        .icon-circle {
-            width: 80px;
-            height: 80px;
-        }
-        
-        .display-4 {
-            font-size: 2rem;
-        }
-        
-        .btn-tahmin {
-            padding: 12px 30px;
-            font-size: 1rem;
-        }
-    }
-    
-    @@media (max-width: 576px) {
-        .col-md-4 {
-            margin-bottom: 1rem;
-        }
-        
-        .display-4 {
-            font-size: 1.7rem;
-        }
-        
-        .lead {
-            font-size: 1rem;
+
+        .section-title {
+            font-size: 1.3rem;
         }
     }
 </style>
 
-<div class="pol-tahmin-container">
+<!-- Minimal Hero Section -->
+<section class="hero-section">
+    <!-- Small circle decorations -->
+    <div class="circle-decoration circle-1"></div>
+    <div class="circle-decoration circle-2"></div>
+    <div class="circle-decoration circle-3"></div>
+    
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
-                
-                <!-- Header -->
-                <div class="text-center text-white mb-5">
-                    <h1 class="display-4 fw-bold mb-3">
-                        <i class="fas fa-brain text-warning me-3"></i>
-                        AI Destekli Poliklinik Tahmini
-                    </h1>
-                    <p class="lead mb-0">Belirtilerinizi seçin, yapay zeka hangi polikliniğe başvurmanız gerektiğini tahmin etsin</p>
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="slide-badge mb-2" style="background: rgba(65, 105, 225, 0.1); color: #4169E1; padding: 0.3rem 0.8rem; border-radius: 50px; display: inline-flex; align-items: center; font-weight: 500; font-size: 0.85rem;">
+                    <i class="fas fa-robot me-2"></i>
+                    <span>Yapay Zeka Destekli</span>
                 </div>
+                <h1 class="slide-title mb-2" style="font-size: 1.6rem; font-weight: 700; color: #343a40; line-height: 1.2;">
+                    Poliklinik Tahmini
+                </h1>
+                <p class="slide-text mb-0" style="font-size: 0.9rem; color: #64748b; line-height: 1.4;">
+                    Belirtilerinizi girin, yapay zeka teknolojisi ile hangi polikliniğe başvurmanız gerektiğini öğrenin.
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <div class="ai-brain-illustration">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <!-- Hata Mesajları -->
-                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-                {
-                    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        @ViewBag.ErrorMessage
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                }
+<!-- Main Content -->
+<section class="main-content">
+    <div class="container">
+        <!-- Error Messages -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px;">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                @ViewBag.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
 
-                @if (TempData["ErrorMessage"] != null)
-                {
-                    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
-                        <i class="fas fa-exclamation-circle me-2"></i>
-                        @TempData["ErrorMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px;">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
 
-                <!-- Tahmin Sonucu (Eğer varsa - En üstte göster) -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+                
+                <!-- Result Card -->
                 @if (ViewBag.TahminSonucu != null)
                 {
                     var sonuc = ViewBag.TahminSonucu as hastane.Controllers.PolTahminController.TahminSonucu;
-                    var cardClass = sonuc.Acil ? "border-danger" : "border-success";
-                    var iconClass = sonuc.Acil ? "fas fa-exclamation-triangle text-danger" : "fas fa-check-circle text-success";
-                    var bgClass = sonuc.Acil ? "bg-danger bg-opacity-10" : "bg-success bg-opacity-10";
-
-                    <div class="tahmin-sonuc-card @cardClass @bgClass mb-4">
-                        <div class="card-body p-4">
+                    
+                    <div class="result-card">
+                        <div class="result-content">
                             <div class="text-center mb-4">
-                                <h4 class="fw-bold mb-0">
-                                    <i class="@iconClass me-2"></i>
-                                    Tahmin Sonucu
-                                </h4>
-                                @if (ViewBag.ModelKullanildi == true)
-                                {
-                                    <small class="badge bg-success">
-                                        <i class="fas fa-robot me-1"></i>
-                                        AI Model Kullanıldı
-                                    </small>
-                                }
-                                else if (ViewBag.ModelKullanildi == false)
-                                {
-                                    <small class="badge bg-warning text-dark">
-                                        <i class="fas fa-cogs me-1"></i>
-                                        Kural Tabanlı Sistem
-                                    </small>
-                                }
-                            </div>
-                            
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <h5 class="text-primary mb-3">
-                                        <i class="fas fa-hospital me-2"></i>
-                                        Önerilen Poliklinik: <strong>@sonuc.Poliklinik</strong>
-                                    </h5>
-                                    <p class="mb-3 fs-6">@sonuc.Mesaj</p>
-                                    
+                                <div class="medical-result-icon mb-3">
                                     @if (sonuc.Acil)
                                     {
-                                        <div class="alert alert-danger border-0 mb-0">
-                                            <i class="fas fa-ambulance me-2"></i>
-                                            <strong>ACİL DURUM:</strong> Hemen hastaneye başvurmanız önerilir!
-                                        </div>
+                                        <i class="fas fa-ambulance"></i>
                                     }
                                     else
                                     {
-                                        <div class="alert alert-info border-0 mb-0">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            Normal öncelikle polikliniğe başvurabilirsiniz.
-                                        </div>
+                                        <i class="fas fa-user-md"></i>
                                     }
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    <div class="icon-circle bg-white">
-                                        @if (sonuc.Acil)
-                                        {
-                                            <i class="fas fa-ambulance text-danger" style="font-size: 2.5rem;"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="fas fa-user-md text-primary" style="font-size: 2.5rem;"></i>
-                                        }
+                                <h3 class="fw-bold mb-3">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Tahmin Tamamlandı
+                                </h3>
+                                
+                                @if (ViewBag.ModelKullanildi == true)
+                                {
+                                    <div class="status-ai">
+                                        <i class="fas fa-robot me-2"></i>
+                                        AI Model Kullanıldı
                                     </div>
-                                </div>
+                                }
+                                else if (ViewBag.ModelKullanildi == false)
+                                {
+                                    <div class="status-rule">
+                                        <i class="fas fa-cogs me-2"></i>
+                                        Kural Tabanlı Sistem
+                                    </div>
+                                }
                             </div>
-
-                            <div class="text-center mt-4">
-                                <a href="@Url.Action("Randevu", "Appointment")" class="btn btn-success btn-lg px-4 rounded-pill me-3">
-                                    <i class="fas fa-calendar-plus me-2"></i>
-                                    Randevu Al
-                                </a>
-                                <button type="button" class="btn btn-outline-primary btn-lg px-4 rounded-pill" onclick="window.location.reload()">
-                                    <i class="fas fa-redo me-2"></i>
-                                    Yeniden Tahmin
-                                </button>
+                            
+                            <div class="text-center">
+                                <div class="bg-white bg-opacity-15 rounded-3 p-4 mb-4">
+                                    <h4 class="text-white mb-3">
+                                        <i class="fas fa-hospital me-2"></i>
+                                        Önerilen Poliklinik
+                                    </h4>
+                                    <h2 class="fw-bold text-warning mb-3">@sonuc.Poliklinik</h2>
+                                    <p class="mb-0 opacity-90">@sonuc.Mesaj</p>
+                                </div>
+                                
+                                @if (sonuc.Acil)
+                                {
+                                    <div class="alert alert-danger border-0 mb-4">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <strong>ACİL DURUM:</strong> Derhal hastaneye başvurmanız önerilir!
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info border-0 mb-4" style="background: rgba(255,255,255,0.1); color: white;">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        Normal öncelikle polikliniğe başvurabilirsiniz.
+                                    </div>
+                                }
+                                
+                                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                    <a href="@Url.Action("Randevu", "Appointment")" class="btn btn-light btn-lg" style="border-radius: 50px; padding: 0.7rem 2rem;">
+                                        <i class="fas fa-calendar-plus me-2"></i>
+                                        Randevu Al
+                                    </a>
+                                    <button type="button" class="btn btn-outline-light btn-lg" style="border-radius: 50px; padding: 0.7rem 2rem;" onclick="window.location.reload()">
+                                        <i class="fas fa-redo me-2"></i>
+                                        Yeniden Tahmin
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 }
 
-                <!-- Ana Form Kartı -->
-                <div class="pol-tahmin-card mb-4">
-                    <div class="card-body p-4 p-md-5">
+                <!-- Main Form Card -->
+                <div class="theme-card mb-4">
+                    <div class="card-body p-4">
                         <div class="text-center mb-4">
-                            <h5 class="text-primary mb-3">
-                                <i class="fas fa-clipboard-list me-2"></i>
-                                Belirtilerinizi Seçin
-                            </h5>
-                            <p class="text-muted small mb-0">En az 1, en fazla 3 belirti seçebilirsiniz</p>
+                            <div class="theme-icon mx-auto mb-3">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <h3 class="section-title text-center">Belirtilerinizi Seçin</h3>
+                            <p class="text-muted">En az 1, en fazla 3 belirti seçerek AI destekli poliklinik tahmini alın</p>
+                        </div>
+
+                        <!-- Warning Alert for Different Polyclinics -->
+                        <div id="polyclinicWarning" class="warning-alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <span id="warningText"></span>
                         </div>
 
                         <form asp-action="Tahmin" method="post" id="tahminForm">
-                            <div class="row g-3">
+                            <div class="row g-4 mb-4">
                                 <!-- Belirti 1 -->
-                                <div class="col-12 col-md-4">
-                                    <label for="belirti1" class="form-label fw-semibold">
-                                        <i class="fas fa-stethoscope text-danger me-1"></i>
-                                        1. Belirti <span class="text-danger">*</span>
+                                <div class="col-12 col-lg-4">
+                                    <label for="belirti1" class="form-label fw-bold d-flex align-items-center mb-3">
+                                        <span class="badge bg-danger rounded-circle me-2" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">1</span>
+                                        Birinci Belirti <span class="text-danger ms-1">*</span>
                                     </label>
-                                    <select class="form-select form-select-lg" id="belirti1" name="belirti1" required>
+                                    <select class="form-select form-select-theme" id="belirti1" name="belirti1" required>
                                         <option value="">Belirti seçin...</option>
                                         @if (ViewBag.Belirtiler != null)
                                         {
@@ -245,12 +507,12 @@
                                 </div>
 
                                 <!-- Belirti 2 -->
-                                <div class="col-12 col-md-4">
-                                    <label for="belirti2" class="form-label fw-semibold">
-                                        <i class="fas fa-stethoscope text-warning me-1"></i>
-                                        2. Belirti
+                                <div class="col-12 col-lg-4">
+                                    <label for="belirti2" class="form-label fw-bold d-flex align-items-center mb-3">
+                                        <span class="badge bg-warning rounded-circle me-2" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">2</span>
+                                        İkinci Belirti
                                     </label>
-                                    <select class="form-select form-select-lg" id="belirti2" name="belirti2">
+                                    <select class="form-select form-select-theme" id="belirti2" name="belirti2">
                                         <option value="">Belirti seçin...</option>
                                         @if (ViewBag.Belirtiler != null)
                                         {
@@ -263,12 +525,12 @@
                                 </div>
 
                                 <!-- Belirti 3 -->
-                                <div class="col-12 col-md-4">
-                                    <label for="belirti3" class="form-label fw-semibold">
-                                        <i class="fas fa-stethoscope text-info me-1"></i>
-                                        3. Belirti
+                                <div class="col-12 col-lg-4">
+                                    <label for="belirti3" class="form-label fw-bold d-flex align-items-center mb-3">
+                                        <span class="badge bg-info rounded-circle me-2" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">3</span>
+                                        Üçüncü Belirti
                                     </label>
-                                    <select class="form-select form-select-lg" id="belirti3" name="belirti3">
+                                    <select class="form-select form-select-theme" id="belirti3" name="belirti3">
                                         <option value="">Belirti seçin...</option>
                                         @if (ViewBag.Belirtiler != null)
                                         {
@@ -281,48 +543,49 @@
                                 </div>
                             </div>
 
-                            <!-- Tahmin Butonu -->
-                            <div class="text-center mt-5">
-                                <button type="submit" class="btn btn-tahmin text-white" id="tahminBtn">
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-theme" id="tahminBtn">
                                     <i class="fas fa-magic me-2"></i>
                                     <span class="btn-text">AI ile Poliklinik Tahmin Et</span>
-                                    <span class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+                                    <div class="spinner-border spinner-border-sm ms-2 d-none" role="status">
+                                        <span class="visually-hidden">Yükleniyor...</span>
+                                    </div>
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <!-- Bilgilendirme Kartı -->
-                <div class="pol-tahmin-card">
-                    <div class="card-body p-4">
-                        <h6 class="text-primary mb-3 text-center">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Önemli Bilgiler
-                        </h6>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="list-unstyled mb-0 small text-muted">
-                                    <li class="mb-2">
-                                        <i class="fas fa-check text-success me-2"></i>
-                                        Bu sistem yönlendirme amaçlıdır
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-check text-success me-2"></i>
-                                        Kesin teşhis için doktor muayenesi gereklidir
-                                    </li>
+                <!-- Info Cards -->
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="theme-card h-100">
+                            <div class="card-body p-4 text-center">
+                                <div class="theme-icon mx-auto mb-3">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary mb-3">Güvenilir Tahmin</h5>
+                                <ul class="list-unstyled text-muted mb-0">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>AI destekli tahmin sistemi</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>%97+ doğruluk oranı</li>
+                                    <li class="mb-0"><i class="fas fa-check text-success me-2"></i>Yönlendirme amaçlıdır</li>
                                 </ul>
                             </div>
-                            <div class="col-md-6">
-                                <ul class="list-unstyled mb-0 small text-muted">
-                                    <li class="mb-2">
-                                        <i class="fas fa-check text-success me-2"></i>
-                                        Acil durumlar için 112'yi arayın
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="fas fa-check text-success me-2"></i>
-                                        AI destekli tahmin sistemi
-                                    </li>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="theme-card h-100">
+                            <div class="card-body p-4 text-center">
+                                <div class="theme-icon mx-auto mb-3">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary mb-3">Önemli Uyarılar</h5>
+                                <ul class="list-unstyled text-muted mb-0">
+                                    <li class="mb-2"><i class="fas fa-info text-info me-2"></i>Kesin teşhis için doktor muayenesi gerekli</li>
+                                    <li class="mb-2"><i class="fas fa-phone text-danger me-2"></i>Acil durumlar için 112'yi arayın</li>
+                                    <li class="mb-0"><i class="fas fa-calendar text-primary me-2"></i>Randevu alarak başvurun</li>
                                 </ul>
                             </div>
                         </div>
@@ -332,10 +595,55 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 @section Scripts {
     <script>
+        // Symptom to polyclinic mapping - backend'den al
+        let symptomPolyclinicMap = {};
+        
+        // Backend'den mapping'i al
+        fetch('@Url.Action("GetSymptomPolyclinicMapping", "PolTahmin")')
+            .then(response => response.json())
+            .then(data => {
+                symptomPolyclinicMap = data;
+            })
+            .catch(error => {
+                console.warn('Symptom mapping yüklenemedi, varsayılan değerler kullanılacak:', error);
+                // Fallback mapping
+                symptomPolyclinicMap = {
+                    'Baş Ağrısı': 'Nöroloji',
+                    'Ateş': 'Dahiliye',
+                    'Öksürük': 'Göğüs Hastalıkları',
+                    'Kalp Çarpıntısı': 'Kardiyoloji',
+                    'Karın Ağrısı': 'Gastroenteroloji',
+                    'Eklem Ağrısı': 'Ortopedi',
+                    'Cilt Döküntüsü': 'Deri ve Zührevi Hastalıklar',
+                    'Göz Ağrısı': 'Göz Hastalıkları',
+                    'Kulak Ağrısı': 'Kulak Burun Boğaz',
+                    'Solunum Güçlüğü': 'Göğüs Hastalıkları',
+                    'Mide Bulantısı': 'Gastroenteroloji',
+                    'Baş Dönmesi': 'Nöroloji',
+                    'Yorgunluk': 'Dahiliye',
+                    'İdrarda Yanma': 'Üroloji',
+                    'Menstruel Bozukluk': 'Kadın Hastalıkları',
+                    'Şiddetli Baş Ağrısı': 'Nöroloji',
+                    'Felç': 'Nöroloji',
+                    'Ağır Karın Ağrısı': 'Gastroenteroloji',
+                    'Göğüs Ağrısı': 'Kardiyoloji',
+                    'Nefes Darlığı': 'Göğüs Hastalıkları',
+                    'Böbrek Ağrısı': 'Üroloji',
+                    'Kas Ağrısı': 'Ortopedi',
+                    'Deri Kızarıklığı': 'Deri ve Zührevi Hastalıklar',
+                    'Görme Bozukluğu': 'Göz Hastalıkları',
+                    'İşitme Kaybı': 'Kulak Burun Boğaz',
+                    'Sindirim Problemi': 'Gastroenteroloji',
+                    'Adet Gecikmesi': 'Kadın Hastalıkları',
+                    'Cinsel İşlev Bozukluğu': 'Üroloji'
+                };
+            });
+
+        // Form submission handling
         document.getElementById('tahminForm').addEventListener('submit', function() {
             const btn = document.getElementById('tahminBtn');
             const btnText = btn.querySelector('.btn-text');
@@ -346,7 +654,49 @@
             spinner.classList.remove('d-none');
         });
 
-        // Belirti seçiminde tekrarlama önleme
+        // Check for conflicting polyclinics
+        function checkPolyclinicConflicts() {
+            const selects = ['belirti1', 'belirti2', 'belirti3'];
+            const selectedSymptoms = [];
+            const selectedPolyclinics = new Set();
+            const warningDiv = document.getElementById('polyclinicWarning');
+            const warningText = document.getElementById('warningText');
+
+            // Get selected symptoms and their polyclinics
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                if (select.value) {
+                    const symptom = select.value;
+                    const polyclinic = symptomPolyclinicMap[symptom];
+                    
+                    if (polyclinic) {
+                        selectedSymptoms.push({ symptom, polyclinic });
+                        selectedPolyclinics.add(polyclinic);
+                    }
+                }
+            });
+
+            // If more than one polyclinic is involved, show warning
+            if (selectedPolyclinics.size > 1 && selectedSymptoms.length >= 2) {
+                let warningMessage = '<strong>DİKKAT:</strong> Seçtiğiniz belirtiler farklı polikliniklere ait olabilir:<br><br>';
+                
+                selectedSymptoms.forEach((item, index) => {
+                    warningMessage += `<strong>•</strong> ${item.symptom} → <strong>${item.polyclinic}</strong>`;
+                    if (index < selectedSymptoms.length - 1) {
+                        warningMessage += '<br>';
+                    }
+                });
+                
+                warningMessage += '<br><br><small><i class="fas fa-info-circle me-1"></i>Bu durumda AI sistemimiz belirtilerinizi analiz ederek en uygun poliklinik önerisini verecektir.</small>';
+                
+                warningText.innerHTML = warningMessage;
+                warningDiv.classList.add('show');
+            } else {
+                warningDiv.classList.remove('show');
+            }
+        }
+
+        // Prevent duplicate selections
         function updateSelectOptions() {
             const selects = ['belirti1', 'belirti2', 'belirti3'];
             const selectedValues = selects.map(id => document.getElementById(id).value).filter(val => val);
@@ -363,21 +713,26 @@
                     }
                 });
             });
+
+            // Check for polyclinic conflicts after updating options
+            checkPolyclinicConflicts();
         }
 
-        // Select değişikliklerini dinle
+        // Add event listeners
         ['belirti1', 'belirti2', 'belirti3'].forEach(id => {
             document.getElementById(id).addEventListener('change', updateSelectOptions);
         });
 
-        // Sayfa yüklendiğinde tahmin sonucuna scroll
+        // Smooth scroll to result
         @if (ViewBag.TahminSonucu != null)
         {
             <text>
             window.addEventListener('load', function() {
-                const tahminSonuc = document.querySelector('.tahmin-sonuc-card');
-                if (tahminSonuc) {
-                    tahminSonuc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const result = document.querySelector('.result-card');
+                if (result) {
+                    setTimeout(() => {
+                        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 500);
                 }
             });
             </text>

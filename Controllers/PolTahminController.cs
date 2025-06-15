@@ -40,78 +40,94 @@ namespace hastane.Controllers
         {
             try
             {
-                // Flask API'den belirtileri al
-                var belirtiler = await GetBelirtilerFromAPI();
-                
-                if (belirtiler == null)
-                {
-                    // API'den alınamazsa JSON dosyasından al
-                    belirtiler = GetBelirtilerFromJson();
-                }
-
+                var belirtiler = await GetBelirtilerAsync();
                 ViewBag.Belirtiler = belirtiler;
                 return View();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "PolTahmin/Index sayfası yüklenirken hata oluştu");
-                ViewBag.Belirtiler = new List<string>();
-                ViewBag.ErrorMessage = "Belirtiler yüklenirken bir hata oluştu.";
+                ViewBag.ErrorMessage = "Belirtiler yüklenirken bir hata oluştu: " + ex.Message;
                 return View();
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Tahmin(string belirti1, string belirti2, string belirti3)
+        public async Task<IActionResult> Tahmin(string belirti1, string belirti2 = null, string belirti3 = null)
         {
             try
             {
-                // Belirtileri temizle
-                belirti1 = belirti1?.Trim() ?? "";
-                belirti2 = belirti2?.Trim() ?? "";
-                belirti3 = belirti3?.Trim() ?? "";
+                // Belirti listesini tekrar yükle
+                var belirtiler = await GetBelirtilerAsync();
+                ViewBag.Belirtiler = belirtiler;
 
+                // Belirtileri kontrol et
                 if (string.IsNullOrEmpty(belirti1))
                 {
-                    TempData["ErrorMessage"] = "En az bir belirti seçmelisiniz!";
-                    return RedirectToAction("Index");
+                    ViewBag.ErrorMessage = "En az bir belirti seçmelisiniz.";
+                    return View("Index");
                 }
 
-                // Flask API ile tahmin yap
-                var tahminSonucu = await TahminYapAPI(belirti1, belirti2, belirti3);
-                
-                if (tahminSonucu != null)
-                {
-                    ViewBag.TahminSonucu = tahminSonucu;
-                    ViewBag.ModelKullanildi = true;
-                }
-                else
-                {
-                    // API çalışmazsa yerel yöntemle tahmin yap
-                    var belirtiler = new List<string> { belirti1, belirti2, belirti3 }
-                        .Where(b => !string.IsNullOrEmpty(b))
-                        .ToList();
-                    
-                    var yerelTahmin = TahminYap(belirtiler);
-                    ViewBag.TahminSonucu = yerelTahmin;
-                    ViewBag.ModelKullanildi = false;
-                }
+                // Seçilen belirtileri listele
+                var secilenBelirtiler = new List<string> { belirti1 };
+                if (!string.IsNullOrEmpty(belirti2)) secilenBelirtiler.Add(belirti2);
+                if (!string.IsNullOrEmpty(belirti3)) secilenBelirtiler.Add(belirti3);
 
-                // Belirtileri tekrar yükle
-                var tumBelirtiler = await GetBelirtilerFromAPI() ?? GetBelirtilerFromJson();
-                ViewBag.Belirtiler = tumBelirtiler;
-                
+                // Tahmin yap
+                var sonuc = await TahminYap(secilenBelirtiler);
+                ViewBag.TahminSonucu = sonuc;
+
                 return View("Index");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Tahmin yapılırken hata oluştu");
+                var belirtiler = await GetBelirtilerAsync();
+                ViewBag.Belirtiler = belirtiler;
                 TempData["ErrorMessage"] = "Tahmin yapılırken bir hata oluştu: " + ex.Message;
-                return RedirectToAction("Index");
+                return View("Index");
             }
         }
 
-        private async Task<List<string>> GetBelirtilerFromAPI()
+        // Belirti-Poliklinik eşleme bilgisini frontend'e sağlamak için API endpoint
+        [HttpGet]
+        public JsonResult GetSymptomPolyclinicMapping()
+        {
+            var mapping = new Dictionary<string, string>
+            {
+                // Temel belirtiler ve eşleşen poliklinikler
+                ["Baş Ağrısı"] = "Nöroloji",
+                ["Ateş"] = "Dahiliye",
+                ["Öksürük"] = "Göğüs Hastalıkları",
+                ["Kalp Çarpıntısı"] = "Kardiyoloji",
+                ["Karın Ağrısı"] = "Gastroenteroloji",
+                ["Eklem Ağrısı"] = "Ortopedi",
+                ["Cilt Döküntüsü"] = "Deri ve Zührevi Hastalıklar",
+                ["Göz Ağrısı"] = "Göz Hastalıkları",
+                ["Kulak Ağrısı"] = "Kulak Burun Boğaz",
+                ["Solunum Güçlüğü"] = "Göğüs Hastalıkları",
+                ["Mide Bulantısı"] = "Gastroenteroloji",
+                ["Baş Dönmesi"] = "Nöroloji",
+                ["Yorgunluk"] = "Dahiliye",
+                ["İdrarda Yanma"] = "Üroloji",
+                ["Menstruel Bozukluk"] = "Kadın Hastalıkları",
+                ["Şiddetli Baş Ağrısı"] = "Nöroloji",
+                ["Felç"] = "Nöroloji",
+                ["Ağır Karın Ağrısı"] = "Gastroenteroloji",
+                ["Göğüs Ağrısı"] = "Kardiyoloji",
+                ["Nefes Darlığı"] = "Göğüs Hastalıkları",
+                ["Böbrek Ağrısı"] = "Üroloji",
+                ["Kas Ağrısı"] = "Ortopedi",
+                ["Deri Kızarıklığı"] = "Deri ve Zührevi Hastalıklar",
+                ["Görme Bozukluğu"] = "Göz Hastalıkları",
+                ["İşitme Kaybı"] = "Kulak Burun Boğaz",
+                ["Sindirim Problemi"] = "Gastroenteroloji",
+                ["Adet Gecikmesi"] = "Kadın Hastalıkları",
+                ["Cinsel İşlev Bozukluğu"] = "Üroloji"
+            };
+
+            return Json(mapping);
+        }
+
+        private async Task<List<string>> GetBelirtilerAsync()
         {
             try
             {
@@ -125,7 +141,7 @@ namespace hastane.Controllers
                         PropertyNameCaseInsensitive = true
                     });
                     
-                    return apiResponse?.Belirtiler ?? new List<string>();
+                    return apiResponse?.Belirtiler ?? GetBelirtilerFromJson();
                 }
             }
             catch (Exception ex)
@@ -133,7 +149,8 @@ namespace hastane.Controllers
                 _logger.LogWarning(ex, "Flask API'den belirtiler alınırken hata oluştu");
             }
             
-            return null;
+            // API çalışmazsa JSON dosyasından al
+            return GetBelirtilerFromJson();
         }
 
         private async Task<TahminSonucu> TahminYapAPI(string belirti1, string belirti2, string belirti3)
@@ -206,8 +223,20 @@ namespace hastane.Controllers
             return new List<string>();
         }
 
-        private TahminSonucu TahminYap(List<string> belirtiler)
+        private async Task<TahminSonucu> TahminYap(List<string> belirtiler)
         {
+            // Önce Flask API ile tahmin yapmaya çalış
+            var apiTahmini = await TahminYapAPI(string.Join(",", belirtiler), "", "");
+            
+            if (apiTahmini != null)
+            {
+                ViewBag.ModelKullanildi = true;
+                return apiTahmini;
+            }
+
+            // API çalışmazsa kural tabanlı sistemle tahmin yap
+            ViewBag.ModelKullanildi = false;
+
             // Ağır belirtiler kontrolü
             foreach (var belirti in belirtiler)
             {
