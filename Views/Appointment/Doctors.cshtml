@@ -264,9 +264,8 @@
                             </div>
                         </div>
                         
-                        <a href="/Appointment/Randevu" class="btn-randevu">
-                            <span class="btn-randevu-text">Randevu Al</span>
-                            <i class="fas fa-chevron-right btn-randevu-icon"></i>
+                        <a href="/Appointment/Randevu" class="btn btn-primary btn-lg rounded-pill px-4 py-3">
+                            <i class="fas fa-calendar-check me-2"></i>Randevu Al
                         </a>
                     </div>
                 </div>
@@ -434,7 +433,6 @@
                     dayElement.click(function() {
                         $('.calendar-day').removeClass('active');
                         $(this).addClass('active');
-                        window.location.href = `/Appointment/Book/${selectedDoctorId}?date=${$(this).data('date')}`;
                     });
                 }
 
@@ -971,35 +969,6 @@
         .cta-feature-item i {
             color: var(--primary);
             font-size: 18px;
-        }
-        
-        .btn-randevu {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
-            color: white;
-            font-weight: 600;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-randevu:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(74, 108, 247, 0.4);
-            color: white;
-        }
-        
-        .btn-randevu-icon {
-            transition: all 0.3s ease;
-        }
-        
-        .btn-randevu:hover .btn-randevu-icon {
-            transform: translateX(5px);
         }
     </style>
 }

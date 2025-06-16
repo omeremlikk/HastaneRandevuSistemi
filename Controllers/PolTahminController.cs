@@ -72,7 +72,14 @@ namespace hastane.Controllers
                 if (!string.IsNullOrEmpty(belirti2)) secilenBelirtiler.Add(belirti2);
                 if (!string.IsNullOrEmpty(belirti3)) secilenBelirtiler.Add(belirti3);
 
-                // Tahmin yap
+                // veri.json'da farklı poliklinik kontrolü
+                var uyumsuzlukUyarisi = KontrolEtFarkliPolikliniklerVeriJson(secilenBelirtiler);
+                if (!string.IsNullOrEmpty(uyumsuzlukUyarisi))
+                {
+                    ViewBag.UyumsuzlukUyarisi = uyumsuzlukUyarisi;
+                }
+
+                // Tahmin yap (MODEL İLE)
                 var sonuc = await TahminYap(secilenBelirtiler);
                 ViewBag.TahminSonucu = sonuc;
 
@@ -85,46 +92,6 @@ namespace hastane.Controllers
                 TempData["ErrorMessage"] = "Tahmin yapılırken bir hata oluştu: " + ex.Message;
                 return View("Index");
             }
-        }
-
-        // Belirti-Poliklinik eşleme bilgisini frontend'e sağlamak için API endpoint
-        [HttpGet]
-        public JsonResult GetSymptomPolyclinicMapping()
-        {
-            var mapping = new Dictionary<string, string>
-            {
-                // Temel belirtiler ve eşleşen poliklinikler
-                ["Baş Ağrısı"] = "Nöroloji",
-                ["Ateş"] = "Dahiliye",
-                ["Öksürük"] = "Göğüs Hastalıkları",
-                ["Kalp Çarpıntısı"] = "Kardiyoloji",
-                ["Karın Ağrısı"] = "Gastroenteroloji",
-                ["Eklem Ağrısı"] = "Ortopedi",
-                ["Cilt Döküntüsü"] = "Deri ve Zührevi Hastalıklar",
-                ["Göz Ağrısı"] = "Göz Hastalıkları",
-                ["Kulak Ağrısı"] = "Kulak Burun Boğaz",
-                ["Solunum Güçlüğü"] = "Göğüs Hastalıkları",
-                ["Mide Bulantısı"] = "Gastroenteroloji",
-                ["Baş Dönmesi"] = "Nöroloji",
-                ["Yorgunluk"] = "Dahiliye",
-                ["İdrarda Yanma"] = "Üroloji",
-                ["Menstruel Bozukluk"] = "Kadın Hastalıkları",
-                ["Şiddetli Baş Ağrısı"] = "Nöroloji",
-                ["Felç"] = "Nöroloji",
-                ["Ağır Karın Ağrısı"] = "Gastroenteroloji",
-                ["Göğüs Ağrısı"] = "Kardiyoloji",
-                ["Nefes Darlığı"] = "Göğüs Hastalıkları",
-                ["Böbrek Ağrısı"] = "Üroloji",
-                ["Kas Ağrısı"] = "Ortopedi",
-                ["Deri Kızarıklığı"] = "Deri ve Zührevi Hastalıklar",
-                ["Görme Bozukluğu"] = "Göz Hastalıkları",
-                ["İşitme Kaybı"] = "Kulak Burun Boğaz",
-                ["Sindirim Problemi"] = "Gastroenteroloji",
-                ["Adet Gecikmesi"] = "Kadın Hastalıkları",
-                ["Cinsel İşlev Bozukluğu"] = "Üroloji"
-            };
-
-            return Json(mapping);
         }
 
         private async Task<List<string>> GetBelirtilerAsync()
@@ -274,6 +241,107 @@ namespace hastane.Controllers
                 Mesaj = "Dahiliye polikliniğine başvurmanız önerilir.", 
                 Acil = false 
             };
+        }
+
+        private string KontrolEtFarkliPolikliniklerVeriJson(List<string> belirtiler)
+        {
+            try
+            {
+                if (System.IO.File.Exists(_veriJsonPath))
+                {
+                    var json = System.IO.File.ReadAllText(_veriJsonPath, Encoding.UTF8);
+                    var poliklinikVerileri = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(json);
+                    
+                    var belirtiPoliklinikMap = new Dictionary<string, string>();
+                    var farkliPoliklinikler = new HashSet<string>();
+                    
+                    // Her belirti için hangi poliklinikte olduğunu bul
+                    foreach (var belirti in belirtiler)
+                    {
+                        foreach (var kvp in poliklinikVerileri)
+                        {
+                            var poliklinikAdi = kvp.Key;
+                            var poliklinikBelirtileri = kvp.Value;
+                            
+                            if (poliklinikBelirtileri.Contains(belirti))
+                            {
+                                belirtiPoliklinikMap[belirti] = poliklinikAdi;
+                                farkliPoliklinikler.Add(poliklinikAdi);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Eğer 2 veya daha fazla belirti var ve bunlar farklı polikliniklere aitse uyarı ver
+                    if (belirtiler.Count >= 2 && farkliPoliklinikler.Count > 1)
+                    {
+                        var uyariMesaji = new StringBuilder();
+                        uyariMesaji.AppendLine("<div class='alert alert-warning border-0 shadow-sm mb-4' role='alert' style='background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%); border-left: 4px solid #ffc107 !important;'>");
+                        uyariMesaji.AppendLine("<div class='d-flex align-items-start'>");
+                        uyariMesaji.AppendLine("<div class='flex-shrink-0'>");
+                        uyariMesaji.AppendLine("<i class='fas fa-exclamation-triangle fa-2x text-warning me-3'></i>");
+                        uyariMesaji.AppendLine("</div>");
+                        uyariMesaji.AppendLine("<div class='flex-grow-1'>");
+                        uyariMesaji.AppendLine("<h5 class='alert-heading mb-3' style='color: #856404; font-weight: 600;'>");
+                        uyariMesaji.AppendLine("<i class='fas fa-info-circle me-2'></i>DİKKAT: Girdiğiniz Belirtiler Farklı Polikliniklere Ait!");
+                        uyariMesaji.AppendLine("</h5>");
+                        
+                        uyariMesaji.AppendLine("<div class='row g-2 mb-3'>");
+                        
+                        for (int i = 0; i < belirtiler.Count; i++)
+                        {
+                            var belirti = belirtiler[i];
+                            if (belirtiPoliklinikMap.TryGetValue(belirti, out var poliklinik))
+                            {
+                                string badgeColor = i == 0 ? "danger" : (i == 1 ? "warning" : "info");
+                                
+                                uyariMesaji.AppendLine("<div class='col-12 col-md-4 mb-2'>");
+                                uyariMesaji.AppendLine("<div class='d-flex align-items-center p-2 rounded' style='background: rgba(255,255,255,0.7);'>");
+                                uyariMesaji.AppendLine($"<span class='badge bg-{badgeColor} rounded-circle me-2' style='width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 11px;'>{i + 1}</span>");
+                                uyariMesaji.AppendLine($"<small class='text-dark fw-bold'>{belirti}</small>");
+                                uyariMesaji.AppendLine("</div>");
+                                uyariMesaji.AppendLine("<div class='text-center mt-1'>");
+                                uyariMesaji.AppendLine("<i class='fas fa-arrow-down text-muted' style='font-size: 12px;'></i>");
+                                uyariMesaji.AppendLine("</div>");
+                                uyariMesaji.AppendLine("<div class='text-center'>");
+                                uyariMesaji.AppendLine($"<span class='badge bg-primary rounded-pill px-3 py-2' style='font-size: 11px; font-weight: 500;'>");
+                                uyariMesaji.AppendLine($"<i class='fas fa-hospital me-1'></i>{poliklinik}");
+                                uyariMesaji.AppendLine("</span>");
+                                uyariMesaji.AppendLine("</div>");
+                                uyariMesaji.AppendLine("</div>");
+                            }
+                        }
+                        
+                        uyariMesaji.AppendLine("</div>");
+                        
+                        uyariMesaji.AppendLine("<div class='bg-light rounded p-3 mt-3' style='border-left: 3px solid #28a745;'>");
+                        uyariMesaji.AppendLine("<div class='d-flex align-items-start'>");
+                        uyariMesaji.AppendLine("<i class='fas fa-robot text-success me-2 mt-1'></i>");
+                        uyariMesaji.AppendLine("<div>");
+                        uyariMesaji.AppendLine("<p class='mb-1' style='color: #155724; font-weight: 500; font-size: 14px;'>");
+                        uyariMesaji.AppendLine("<strong>AI Analizi Devam Ediyor:</strong>");
+                        uyariMesaji.AppendLine("</p>");
+                        uyariMesaji.AppendLine("<p class='mb-0' style='color: #155724; font-size: 13px;'>");
+                        uyariMesaji.AppendLine("Yapay zeka modelimiz tüm belirtilerinizi birlikte değerlendirerek en uygun poliklinik önerisini sunacaktır.");
+                        uyariMesaji.AppendLine("</p>");
+                        uyariMesaji.AppendLine("</div>");
+                        uyariMesaji.AppendLine("</div>");
+                        uyariMesaji.AppendLine("</div>");
+                        
+                        uyariMesaji.AppendLine("</div>");
+                        uyariMesaji.AppendLine("</div>");
+                        uyariMesaji.AppendLine("</div>");
+                        
+                        return uyariMesaji.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "veri.json'dan farklı poliklinik kontrolü yapılırken hata oluştu");
+            }
+            
+            return null;
         }
 
         public class TahminSonucu

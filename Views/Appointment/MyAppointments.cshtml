@@ -181,12 +181,12 @@
                     }
                     else
                     {
-                        <div class="alert alert-info">
-                            <div class="text-center py-4">
-                                <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
-                                <h5>Yaklaşan randevunuz bulunmamaktadır</h5>
-                                <p>Yeni bir randevu almak için aşağıdaki butona tıklayabilirsiniz</p>
+                        <div id="noAppointmentsCard" class="text-center py-5 bg-light rounded-3 d-none">
+                            <div class="mb-4">
+                                <i class="fas fa-calendar-times fa-4x text-muted"></i>
                             </div>
+                            <h3 class="mb-3">Henüz Randevunuz Yok</h3>
+                            <p>Yeni bir randevu almak için aşağıdaki butona tıklayabilirsiniz</p>
                         </div>
                     }
                 </div>
@@ -194,15 +194,6 @@
         </div>
     </div>
 
-    <!-- Yeni Randevu Butonu -->
-    <div class="row mb-5">
-        <div class="col-12 text-center">
-            <a href="/Appointment/Randevu" class="btn btn-primary btn-lg">
-                <i class="fas fa-calendar-plus me-2"></i> Yeni Randevu Al
-            </a>
-        </div>
-    </div>
-    
     <!-- Geçmiş ve Tamamlanmış Randevular -->
     <div class="row mb-3">
         <div class="col-12">

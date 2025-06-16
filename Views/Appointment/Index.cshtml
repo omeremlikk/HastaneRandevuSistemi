@@ -1,22 +1,21 @@
 @{
-    ViewData["Title"] = "Randevu Sistemi";
+    ViewData["Title"] = "Randevu";
 }
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1>Randevu Sistemi</h1>
+            <p class="lead">Doktorlarımızdan randevu almak için lütfen doktor seçiniz.</p>
+            <!-- Randevu Al butonu kaldırıldı -->
+        </div>
+    </div>
+</div>
 
 <div class="container mt-4">
     <h1 class="text-center mb-4">Randevu Sistemi</h1>
     
     <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="fas fa-calendar-check fa-4x mb-3 text-primary"></i>
-                    <h3>Randevu Al</h3>
-                    <p>Doktorlarımızdan randevu almak için tıklayın.</p>
-                    <a asp-action="Book" class="btn btn-primary">Randevu Al</a>
-                </div>
-            </div>
-        </div>
-        
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-body text-center">
@@ -27,9 +26,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="row">
+        
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-body text-center">
@@ -40,7 +37,9 @@
                 </div>
             </div>
         </div>
-        
+    </div>
+    
+    <div class="row">
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-body text-center">

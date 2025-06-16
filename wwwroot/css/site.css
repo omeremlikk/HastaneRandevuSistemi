@@ -145,10 +145,17 @@ section {
 
 /* Navbar düzenlemeleri */
 .navbar {
-  padding: 15px 0;
+  padding: 12px 0;
   transition: all 0.3s ease;
   background-color: #2563eb !important;
   z-index: 1000;
+  /* Ensure navbar is fixed at top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
 }
 
 .navbar.navbar-dark {
@@ -160,16 +167,26 @@ section {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  transition: all 0.3s ease;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
   color: white;
+  transform: translateY(-1px);
 }
 
 .navbar-brand {
   font-weight: 700;
   font-size: 1.3rem;
+  color: white !important;
+}
+
+.navbar-brand:hover {
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .navbar .container {
@@ -545,12 +562,12 @@ section {
   
   .slide-title {
     font-size: 1.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
   
   .slide-text {
     font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
   
   .btn {
@@ -970,17 +987,18 @@ section {
 /* Dropdown menüler için stil */
 .dropdown-menu {
   border-radius: 10px;
-  padding: 0.6rem;
-  min-width: 180px;
+  padding: 0.8rem;
+  min-width: 200px;
   border: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .dropdown-item {
-  padding: 0.6rem 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 6px;
   transition: var(--transition);
   font-weight: 500;
+  font-size: 1rem;
 }
 
 .dropdown-item:hover {
@@ -989,14 +1007,16 @@ section {
 }
 
 .dropdown-item i {
-  width: 20px;
+  width: 22px;
   text-align: center;
+  font-size: 1rem;
 }
 
 /* Navbar butonları */
 .navbar .btn {
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1rem;
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .navbar-scrolled .btn-light {
@@ -1163,12 +1183,23 @@ section {
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(37, 99, 235, 0.85) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 0.7rem 0;
+    padding: 0.5rem 0;
   }
   
   .navbar-brand {
     font-weight: 700;
     letter-spacing: -0.5px;
+    font-size: 0.95rem;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.5rem;
+  }
+  
+  .navbar .btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
   }
   
   .navbar-brand i {
@@ -2432,6 +2463,8 @@ section {
   color: white;
   position: relative;
   overflow: hidden;
+  margin-top: auto; /* Footer'ı en alta yapıştır */
+  z-index: 10;
 }
 
 .site-footer::before {
@@ -2624,7 +2657,7 @@ section {
   }
   
   .footer-widget-title {
-    margin-top: 15px;
+    font-size: 16px;
   }
   
   .footer-bottom-links {
@@ -2637,7 +2670,11 @@ section {
   }
   
   .col-md-6 {
-    text-align: center;
+    text-align: center !important;
+  }
+  
+  .site-footer {
+    margin-top: 3rem; /* Mobil için üst boşluğu artırıyorum */
   }
 }
 
@@ -2651,27 +2688,29 @@ section {
   }
   
   .doctor-img-container {
-    height: 200px;
+    max-width: 80%;
+    margin: 0 auto;
   }
   
   .doctor-overlay {
-    opacity: 1;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(37, 99, 235, 0.7), transparent);
+    max-width: 80%;
+    margin: 0 auto;
+    left: 10%;
   }
   
   .footer-widget-title {
-    margin-top: 20px;
+    font-size: 18px;
+    margin-bottom: 15px;
   }
   
   .footer-bottom-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
   
   .footer-contact-item {
-    align-items: center;
+    margin-bottom: 15px;
   }
   
   .back-to-top {
@@ -2679,6 +2718,10 @@ section {
     height: 40px;
     bottom: 20px;
     right: 20px;
+  }
+  
+  .site-footer {
+    margin-top: 4rem; /* Mobil için daha fazla üst boşluk */
   }
 }
 

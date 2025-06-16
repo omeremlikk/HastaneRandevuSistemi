@@ -221,4 +221,4 @@ C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\hastane.genruntimeconfig.cache
 C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\ref\hastane.dll
 C:\Users\Ömer\Desktop\hastane\bin\Debug\net9.0\PolTahmin\olusturulanveri.json
 C:\Users\Ömer\Desktop\hastane\bin\Debug\net9.0\PolTahmin\veri.json
-C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\compressed\4iwsffodhg-xrr8mmk0k7.gz
+C:\Users\Ömer\Desktop\hastane\obj\Debug\net9.0\compressed\4iwsffodhg-s2ednoakgv.gz

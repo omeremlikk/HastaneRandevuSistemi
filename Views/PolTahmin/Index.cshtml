@@ -4,10 +4,15 @@
 }
 
 <style>
+    /* Main content area fix */
+    body {
+        padding-top: 70px; /* Navbar yüksekliğine uyacak şekilde artırıldı */
+    }
+    
     /* Minimal hero section - MUCH SMALLER */
     .hero-section {
         background: linear-gradient(135deg, #F0F8FF 0%, #E6F0FF 50%, #D6E9FF 100%);
-        padding: 1.5rem 0 1rem 0;
+        padding: 2rem 0 1.5rem 0;
         position: relative;
         overflow: hidden;
         margin-top: 0;
@@ -115,13 +120,15 @@
     }
 
     /* Main content with proper spacing */
-    .main-content {
-        background: #f1f5f9;
-        padding: 1.5rem 0;
-        margin-top: 0;
-        position: relative;
-        z-index: 10;
-    }
+.main-content {
+    background: #f1f5f9;
+    padding: 2rem 0;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+    min-height: 60vh; /* Daha makul bir yükseklik */
+    padding-bottom: 2rem;
+}
 
     /* Cards matching theme style */
     .theme-card {
@@ -308,7 +315,7 @@
     /* Responsive design */
     @@media (max-width: 768px) {
         .hero-section {
-            padding: 1rem 0 0.5rem 0;
+            padding: 1.5rem 0 1rem 0;
         }
         
         .ai-brain-illustration {
@@ -327,11 +334,27 @@
 
         .main-content {
             padding: 1rem 0;
+            min-height: 60vh;
+            padding-bottom: 2rem;
         }
 
         .section-title {
             font-size: 1.3rem;
         }
+    }
+
+    /* PolTahmin sayfası için özel düzenlemeler - sadece gerekli olanlar */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Footer'ın altındaki ekstra boşluğu kaldır */
+    .site-footer {
+        margin-bottom: 0;
+    }
+
+    .footer-bottom {
+        margin-bottom: 0;
     }
 </style>
 
@@ -430,6 +453,15 @@
                             </div>
                             
                             <div class="text-center">
+                                
+                                <!-- Uyumsuzluk Uyarısı (veri.json kontrolü) -->
+                                @if (ViewBag.UyumsuzlukUyarisi != null)
+                                {
+                                    <div class="mb-4">
+                                        @Html.Raw(ViewBag.UyumsuzlukUyarisi)
+                                    </div>
+                                }
+                                
                                 <div class="bg-white bg-opacity-15 rounded-3 p-4 mb-4">
                                     <h4 class="text-white mb-3">
                                         <i class="fas fa-hospital me-2"></i>
@@ -455,10 +487,6 @@
                                 }
                                 
                                 <div class="d-flex flex-wrap gap-3 justify-content-center">
-                                    <a href="@Url.Action("Randevu", "Appointment")" class="btn btn-light btn-lg" style="border-radius: 50px; padding: 0.7rem 2rem;">
-                                        <i class="fas fa-calendar-plus me-2"></i>
-                                        Randevu Al
-                                    </a>
                                     <button type="button" class="btn btn-outline-light btn-lg" style="border-radius: 50px; padding: 0.7rem 2rem;" onclick="window.location.reload()">
                                         <i class="fas fa-redo me-2"></i>
                                         Yeniden Tahmin
@@ -480,11 +508,7 @@
                             <p class="text-muted">En az 1, en fazla 3 belirti seçerek AI destekli poliklinik tahmini alın</p>
                         </div>
 
-                        <!-- Warning Alert for Different Polyclinics -->
-                        <div id="polyclinicWarning" class="warning-alert">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            <span id="warningText"></span>
-                        </div>
+
 
                         <form asp-action="Tahmin" method="post" id="tahminForm">
                             <div class="row g-4 mb-4">
@@ -556,42 +580,6 @@
                         </form>
                     </div>
                 </div>
-
-                <!-- Info Cards -->
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="theme-card h-100">
-                            <div class="card-body p-4 text-center">
-                                <div class="theme-icon mx-auto mb-3">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <h5 class="fw-bold text-primary mb-3">Güvenilir Tahmin</h5>
-                                <ul class="list-unstyled text-muted mb-0">
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>AI destekli tahmin sistemi</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>%97+ doğruluk oranı</li>
-                                    <li class="mb-0"><i class="fas fa-check text-success me-2"></i>Yönlendirme amaçlıdır</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="theme-card h-100">
-                            <div class="card-body p-4 text-center">
-                                <div class="theme-icon mx-auto mb-3">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <h5 class="fw-bold text-primary mb-3">Önemli Uyarılar</h5>
-                                <ul class="list-unstyled text-muted mb-0">
-                                    <li class="mb-2"><i class="fas fa-info text-info me-2"></i>Kesin teşhis için doktor muayenesi gerekli</li>
-                                    <li class="mb-2"><i class="fas fa-phone text-danger me-2"></i>Acil durumlar için 112'yi arayın</li>
-                                    <li class="mb-0"><i class="fas fa-calendar text-primary me-2"></i>Randevu alarak başvurun</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
         </div>
     </div>
@@ -599,49 +587,7 @@
 
 @section Scripts {
     <script>
-        // Symptom to polyclinic mapping - backend'den al
-        let symptomPolyclinicMap = {};
-        
-        // Backend'den mapping'i al
-        fetch('@Url.Action("GetSymptomPolyclinicMapping", "PolTahmin")')
-            .then(response => response.json())
-            .then(data => {
-                symptomPolyclinicMap = data;
-            })
-            .catch(error => {
-                console.warn('Symptom mapping yüklenemedi, varsayılan değerler kullanılacak:', error);
-                // Fallback mapping
-                symptomPolyclinicMap = {
-                    'Baş Ağrısı': 'Nöroloji',
-                    'Ateş': 'Dahiliye',
-                    'Öksürük': 'Göğüs Hastalıkları',
-                    'Kalp Çarpıntısı': 'Kardiyoloji',
-                    'Karın Ağrısı': 'Gastroenteroloji',
-                    'Eklem Ağrısı': 'Ortopedi',
-                    'Cilt Döküntüsü': 'Deri ve Zührevi Hastalıklar',
-                    'Göz Ağrısı': 'Göz Hastalıkları',
-                    'Kulak Ağrısı': 'Kulak Burun Boğaz',
-                    'Solunum Güçlüğü': 'Göğüs Hastalıkları',
-                    'Mide Bulantısı': 'Gastroenteroloji',
-                    'Baş Dönmesi': 'Nöroloji',
-                    'Yorgunluk': 'Dahiliye',
-                    'İdrarda Yanma': 'Üroloji',
-                    'Menstruel Bozukluk': 'Kadın Hastalıkları',
-                    'Şiddetli Baş Ağrısı': 'Nöroloji',
-                    'Felç': 'Nöroloji',
-                    'Ağır Karın Ağrısı': 'Gastroenteroloji',
-                    'Göğüs Ağrısı': 'Kardiyoloji',
-                    'Nefes Darlığı': 'Göğüs Hastalıkları',
-                    'Böbrek Ağrısı': 'Üroloji',
-                    'Kas Ağrısı': 'Ortopedi',
-                    'Deri Kızarıklığı': 'Deri ve Zührevi Hastalıklar',
-                    'Görme Bozukluğu': 'Göz Hastalıkları',
-                    'İşitme Kaybı': 'Kulak Burun Boğaz',
-                    'Sindirim Problemi': 'Gastroenteroloji',
-                    'Adet Gecikmesi': 'Kadın Hastalıkları',
-                    'Cinsel İşlev Bozukluğu': 'Üroloji'
-                };
-            });
+
 
         // Form submission handling
         document.getElementById('tahminForm').addEventListener('submit', function() {
@@ -653,48 +599,6 @@
             btnText.textContent = 'AI Tahmin Yapıyor...';
             spinner.classList.remove('d-none');
         });
-
-        // Check for conflicting polyclinics
-        function checkPolyclinicConflicts() {
-            const selects = ['belirti1', 'belirti2', 'belirti3'];
-            const selectedSymptoms = [];
-            const selectedPolyclinics = new Set();
-            const warningDiv = document.getElementById('polyclinicWarning');
-            const warningText = document.getElementById('warningText');
-
-            // Get selected symptoms and their polyclinics
-            selects.forEach(selectId => {
-                const select = document.getElementById(selectId);
-                if (select.value) {
-                    const symptom = select.value;
-                    const polyclinic = symptomPolyclinicMap[symptom];
-                    
-                    if (polyclinic) {
-                        selectedSymptoms.push({ symptom, polyclinic });
-                        selectedPolyclinics.add(polyclinic);
-                    }
-                }
-            });
-
-            // If more than one polyclinic is involved, show warning
-            if (selectedPolyclinics.size > 1 && selectedSymptoms.length >= 2) {
-                let warningMessage = '<strong>DİKKAT:</strong> Seçtiğiniz belirtiler farklı polikliniklere ait olabilir:<br><br>';
-                
-                selectedSymptoms.forEach((item, index) => {
-                    warningMessage += `<strong>•</strong> ${item.symptom} → <strong>${item.polyclinic}</strong>`;
-                    if (index < selectedSymptoms.length - 1) {
-                        warningMessage += '<br>';
-                    }
-                });
-                
-                warningMessage += '<br><br><small><i class="fas fa-info-circle me-1"></i>Bu durumda AI sistemimiz belirtilerinizi analiz ederek en uygun poliklinik önerisini verecektir.</small>';
-                
-                warningText.innerHTML = warningMessage;
-                warningDiv.classList.add('show');
-            } else {
-                warningDiv.classList.remove('show');
-            }
-        }
 
         // Prevent duplicate selections
         function updateSelectOptions() {
@@ -713,9 +617,6 @@
                     }
                 });
             });
-
-            // Check for polyclinic conflicts after updating options
-            checkPolyclinicConflicts();
         }
 
         // Add event listeners
@@ -737,5 +638,19 @@
             });
             </text>
         }
+
+        // Fix for navbar overlap
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for the document to be fully loaded to ensure proper calculations
+            setTimeout(function() {
+                // Get the navbar height
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    const navbarHeight = navbar.offsetHeight;
+                    // Apply the padding-top to the body
+                    document.body.style.paddingTop = navbarHeight + 'px';
+                }
+            }, 100);
+        });
     </script>
 } 
