@@ -7,61 +7,84 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="success-card">
+                    <!-- Animasyonlu Başarı İkonu -->
                     <div class="success-icon-wrapper">
                         <div class="success-icon">
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check success-check"></i>
                         </div>
+                        <div class="success-ripple"></div>
                     </div>
                     
                     <div class="success-content text-center">
-                        <h1 class="success-title mb-4">Randevunuz Başarıyla Oluşturuldu!</h1>
+                        <h1 class="success-title mb-4">🎉 Randevunuz Başarıyla Oluşturuldu!</h1>
                         
-                        <div class="success-message mb-4">
-                            <p>Randevu detaylarınız e-posta adresinize gönderilecektir.</p>
-                            <p>Randevunuzdan 24 saat önce SMS ile hatırlatma alacaksınız.</p>
+                        <div class="success-message mb-5">
+                            <p class="lead">Harika! Randevunuz sistemimize kaydedildi ve artık aktif durumda.</p>
+                            <p class="text-muted">Randevunuzla ilgili tüm detayları aşağıdaki seçeneklerden takip edebilirsiniz.</p>
                         </div>
                         
-                        <div class="success-details">
-                            <div class="row mb-4">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <div class="detail-card">
-                                        <div class="detail-icon">
+                        <!-- Özellik Kartları -->
+                        <div class="feature-cards mb-5">
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="feature-card">
+                                        <div class="feature-icon">
                                             <i class="fas fa-calendar-check"></i>
                                         </div>
-                                        <div class="detail-text">
-                                            <h5>Randevu Takibi</h5>
-                                            <p>Randevularınızı "Randevularım" sayfasından takip edebilirsiniz.</p>
-                                        </div>
+                                        <h5>Randevu Takibi</h5>
+                                        <p>Randevularınızı kolayca görüntüleyin ve yönetin</p>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="detail-card">
-                                        <div class="detail-icon">
+                                <div class="col-md-4">
+                                    <div class="feature-card">
+                                        <div class="feature-icon">
                                             <i class="fas fa-clock"></i>
                                         </div>
-                                        <div class="detail-text">
-                                            <h5>Randevu Saatiniz</h5>
-                                            <p>Lütfen randevu saatinden 15 dakika önce hastanede olunuz.</p>
+                                        <h5>Zamanında Gelme</h5>
+                                        <p>Randevu saatinden 15 dakika önce hastanede olunuz</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="feature-card">
+                                        <div class="feature-icon">
+                                            <i class="fas fa-user-md"></i>
                                         </div>
+                                        <h5>Doktor Bilgileri</h5>
+                                        <p>Doktorunuzun detaylarını randevularım sayfasında görün</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Ana Butonlar -->
                         <div class="success-actions">
-                            <a href="/Appointment/MyAppointments" class="btn btn-primary btn-lg rounded-pill px-4 me-3">
+                            <a href="/Appointment/MyAppointments" class="btn btn-primary btn-lg rounded-pill px-5 me-3 btn-glow">
                                 <i class="fas fa-calendar-alt me-2"></i>Randevularım
                             </a>
-                            <a href="/Appointment/Doctors" class="btn btn-outline-primary btn-lg rounded-pill px-4">
-                                <i class="fas fa-plus-circle me-2"></i>Yeni Randevu
+                            <a href="/" class="btn btn-outline-primary btn-lg rounded-pill px-5">
+                                <i class="fas fa-home me-2"></i>Ana Sayfa
+                            </a>
+                        </div>
+                        
+                        <!-- Alt Seçenekler -->
+                        <div class="secondary-actions mt-4">
+                            <a href="/Appointment/Doctors" class="btn btn-link text-decoration-none">
+                                <i class="fas fa-plus-circle me-2"></i>Başka Bir Randevu Al
                             </a>
                         </div>
                     </div>
                     
+                    <!-- Dekoratif Elementler -->
                     <div class="success-decoration">
                         <div class="decoration-circle circle-1"></div>
                         <div class="decoration-circle circle-2"></div>
                         <div class="decoration-circle circle-3"></div>
+                        <div class="floating-element element-1">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="floating-element element-2">
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,104 +94,177 @@
 
 <style>
     .success-page {
-        background-color: #f8f9fa;
-        min-height: 80vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
         display: flex;
         align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .success-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        pointer-events: none;
     }
     
     .success-card {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-        padding: 3rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        padding: 3.5rem;
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .success-icon-wrapper {
         display: flex;
         justify-content: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        position: relative;
     }
     
     .success-icon {
-        width: 100px;
-        height: 100px;
-        background: linear-gradient(135deg, #4a6cf7, #2b3cf0);
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #4CAF50, #45a049);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
         position: relative;
-        z-index: 1;
+        z-index: 2;
+        animation: successPulse 2s ease-in-out infinite;
     }
     
-    .success-icon i {
+    .success-check {
         color: white;
-        font-size: 48px;
+        font-size: 52px;
+        animation: checkAppear 0.8s ease-out 0.5s both;
+    }
+    
+    .success-ripple {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border: 3px solid #4CAF50;
+        border-radius: 50%;
+        animation: ripple 2s linear infinite;
+        opacity: 0;
     }
     
     .success-title {
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 1.5rem;
+        font-weight: 800;
+        color: #2c3e50;
+        font-size: 2.2rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
-    .success-message {
-        color: #666;
-        font-size: 1.1rem;
-        max-width: 600px;
-        margin: 0 auto 2rem;
+    .success-message .lead {
+        font-size: 1.25rem;
+        color: #34495e;
+        font-weight: 500;
+        margin-bottom: 1rem;
     }
     
-    .detail-card {
-        background-color: #f8f9fa;
-        border-radius: 16px;
-        padding: 1.5rem;
+    .feature-cards {
+        margin: 3rem 0;
+    }
+    
+    .feature-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
         height: 100%;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: flex-start;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        text-align: center;
     }
     
-    .detail-card:hover {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        transform: translateY(-5px);
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        background: rgba(255, 255, 255, 0.95);
     }
     
-    .detail-icon {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(74, 108, 247, 0.1);
-        border-radius: 12px;
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 1rem;
-        flex-shrink: 0;
+        margin: 0 auto 1.5rem;
+        transition: all 0.3s ease;
     }
     
-    .detail-icon i {
-        color: var(--primary);
-        font-size: 24px;
+    .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
     }
     
-    .detail-text h5 {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: #333;
+    .feature-icon i {
+        color: white;
+        font-size: 28px;
     }
     
-    .detail-text p {
-        color: #666;
-        margin-bottom: 0;
+    .feature-card h5 {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .feature-card p {
+        color: #7f8c8d;
         font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 0;
     }
     
     .success-actions {
         margin-top: 3rem;
+    }
+    
+    .btn-glow {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-glow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .btn-glow:hover::before {
+        left: 100%;
+    }
+    
+    .secondary-actions a {
+        color: #7f8c8d;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .secondary-actions a:hover {
+        color: #667eea;
+        transform: translateY(-2px);
     }
     
     .success-decoration {
@@ -184,7 +280,8 @@
     .decoration-circle {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(74, 108, 247, 0.1), rgba(43, 60, 240, 0.05));
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+        animation: float 6s ease-in-out infinite;
     }
     
     .circle-1 {
@@ -192,6 +289,7 @@
         height: 300px;
         top: -150px;
         right: -100px;
+        animation-delay: 0s;
     }
     
     .circle-2 {
@@ -199,36 +297,101 @@
         height: 200px;
         bottom: -100px;
         left: -100px;
+        animation-delay: 2s;
     }
     
     .circle-3 {
-        width: 100px;
-        height: 100px;
-        bottom: 50px;
-        right: 50px;
-        background: linear-gradient(135deg, rgba(74, 108, 247, 0.05), rgba(43, 60, 240, 0.02));
+        width: 150px;
+        height: 150px;
+        bottom: 20%;
+        right: 10%;
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(69, 160, 73, 0.05));
+        animation-delay: 4s;
     }
     
-    @@media (max-width: 768px) {
+    .floating-element {
+        position: absolute;
+        color: rgba(102, 126, 234, 0.3);
+        font-size: 24px;
+        animation: floatUpDown 4s ease-in-out infinite;
+    }
+    
+    .element-1 {
+        top: 20%;
+        left: 10%;
+        animation-delay: 1s;
+    }
+    
+    .element-2 {
+        top: 70%;
+        right: 15%;
+        animation-delay: 3s;
+    }
+    
+         /* Animasyonlar */
+     @@keyframes successPulse {
+         0%, 100% { transform: scale(1); }
+         50% { transform: scale(1.05); }
+     }
+     
+     @@keyframes checkAppear {
+         0% { 
+             opacity: 0; 
+             transform: scale(0) rotate(-45deg); 
+         }
+         50% { 
+             opacity: 1; 
+             transform: scale(1.2) rotate(-45deg); 
+         }
+         100% { 
+             opacity: 1; 
+             transform: scale(1) rotate(0deg); 
+         }
+     }
+     
+     @@keyframes ripple {
+         0% {
+             transform: scale(1);
+             opacity: 0.8;
+         }
+         100% {
+             transform: scale(2);
+             opacity: 0;
+         }
+     }
+     
+     @@keyframes float {
+         0%, 100% { transform: translateY(0); }
+         50% { transform: translateY(-20px); }
+     }
+     
+     @@keyframes floatUpDown {
+         0%, 100% { transform: translateY(0) rotate(0deg); }
+         50% { transform: translateY(-15px) rotate(10deg); }
+     }
+     
+     /* Responsive */
+     @@media (max-width: 768px) {
         .success-card {
-            padding: 2rem;
+            padding: 2.5rem 1.5rem;
         }
         
         .success-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
         }
         
-        .success-icon i {
-            font-size: 36px;
+        .success-check {
+            font-size: 42px;
         }
         
         .success-title {
             font-size: 1.8rem;
         }
         
-        .success-message {
-            font-size: 1rem;
+        .feature-card {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         .success-actions .btn {
@@ -237,8 +400,23 @@
             margin-bottom: 1rem;
         }
         
-        .success-actions .btn:last-child {
-            margin-bottom: 0;
+        .success-actions .me-3 {
+            margin-right: 0 !important;
         }
     }
+    
+         @@media (max-width: 576px) {
+         .success-page {
+             padding: 2rem 0;
+         }
+         
+         .success-card {
+             padding: 2rem 1rem;
+             margin: 1rem;
+         }
+         
+         .feature-cards .col-md-4 {
+             margin-bottom: 1rem;
+         }
+     }
 </style> 

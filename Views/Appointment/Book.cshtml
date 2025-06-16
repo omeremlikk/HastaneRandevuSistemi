@@ -322,6 +322,19 @@
     border-radius: 4px;
 }
 
+.btn-secondary.time-btn {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: white !important;
+}
+
+.btn-secondary.time-btn:hover {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
 @@media (max-width: 767.98px) {
     .time-slot {
         width: calc(33.333% - 8px);
@@ -519,6 +532,12 @@
         const day = String(selectedDate.getDate()).padStart(2, '0');
         const dateStr = `${year}-${month}-${day}`;
         
+        // Bugünün tarihi ile karşılaştırma için
+        const today = new Date();
+        const isToday = selectedDate.toDateString() === today.toDateString();
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes(); // Dakika cinsinden
+        
         fetch(`/Appointment/GetAvailableSlots?doctorId=${doctorId}&date=${dateStr}`)
             .then(response => response.json())
             .then(data => {
@@ -526,14 +545,31 @@
                 
                 data.forEach(slot => {
                     const slotDiv = document.createElement('div');
-                    slotDiv.className = `time-slot ${!slot.available ? 'disabled' : ''}`;
-                    slotDiv.innerHTML = `<i class="far fa-clock me-2"></i>${slot.time}`;
                     
-                    if (slot.available) {
+                    // Geçmiş saat kontrolü
+                    let isPastTime = false;
+                    if (isToday) {
+                        const [hours, minutes] = slot.time.split(':').map(Number);
+                        const slotTime = hours * 60 + minutes; // Dakika cinsinden
+                        isPastTime = slotTime < currentTime;
+                    }
+                    
+                    // Sınıf belirleme: Öncelik sırası -> Geçmiş saat > Dolu > Müsait değil > Müsait
+                    if (isPastTime) {
+                        slotDiv.className = 'time-slot btn-secondary disabled';
+                        slotDiv.innerHTML = `<i class="fas fa-clock me-2"></i>${slot.time}`;
+                        slotDiv.title = 'Bu saat geçmiş, randevu alınamaz';
+                        slotDiv.style.opacity = '0.6';
+                    } else if (!slot.available) {
+                        slotDiv.className = 'time-slot disabled';
+                        slotDiv.innerHTML = `<i class="far fa-clock me-2"></i>${slot.time}`;
+                    } else {
+                        slotDiv.className = 'time-slot';
+                        slotDiv.innerHTML = `<i class="far fa-clock me-2"></i>${slot.time}`;
                         slotDiv.addEventListener('click', () => selectTime(slot.time, slotDiv));
                     }
                     
-                    if (selectedTime === slot.time) {
+                    if (selectedTime === slot.time && slot.available && !isPastTime) {
                         slotDiv.classList.add('selected');
                     }
                     

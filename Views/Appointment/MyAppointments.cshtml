@@ -24,31 +24,7 @@
         </div>
     }
 
-    <!-- Debug bilgileri -->
-    <div class="alert alert-info">
-        <p><strong>Debug Bilgileri:</strong></p>
-        <p>PatientId: @patientId</p>
-        <p>PatientName: @patientName</p>
-        <p>Model null mu?: @(Model == null ? "Evet" : "Hayır")</p>
-        @if (Model != null)
-        {
-            <p>Yaklaşan Randevu Sayısı: @(Model.UpcomingAppointments?.Count ?? 0)</p>
-            <p>Geçmiş Randevu Sayısı: @(Model.PastAppointments?.Count ?? 0)</p>
-        }
-        
-        @if (ViewBag.DebugInfo != null)
-        {
-            <hr />
-            <p><strong>Ek Debug Bilgileri:</strong></p>
-            <ul>
-                @foreach (var item in ViewBag.DebugInfo)
-                {
-                    <li><strong>@item.Key:</strong> @item.Value</li>
-                }
-            </ul>
-        }
-    </div>
-    
+
     <div class="row mb-3">
         <div class="col-12">
             <nav aria-label="breadcrumb">
